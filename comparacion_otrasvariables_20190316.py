@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Feb 14 12:03:14 2019
-
+ Crea las gráficas y las tablas para todas las demás variables que no son temperatura
+ En la línea 241 se descomenta para sacar las tablas, de lo contratio saca las gráficas Buscar esto &&&
 @author: edwin
 """
 
@@ -24,6 +25,22 @@ def regresion(mejor, peor, base):
     b = -peor*((-1)/(peor-mejor))
     return((base * m) + b)
     
+def angulo(uu, vv):
+    # Función echa para calcular el ángulo dependiendo de las componentes V(Norte - Sur) y U(Oéste - Este)
+    # bse_o = pd.DataFrame({'a':[1,2,3], 'b':[4,0,-5]})
+    # print(angulo(uu = bse_o.a, vv = bse_o.b))
+
+    pdb.set_trace()
+    hyp = (uu**2 + vv**2)**(1/2)
+    theta = (np.arccos(vv / hyp) * 180)/np.pi
+    theta_base = []
+    for uu_i, theta_i in zip(uu, theta):
+        if uu_i < 0:
+            theta_i = 360 - theta_i
+        theta_base.append(theta_i)
+
+    return theta_base
+
 
 
 #mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables.pickle')
@@ -87,6 +104,7 @@ for pp in ['200702', '201408', '201508', '201509']:
         
         
         resumen.vel_viento = ((resumen.u10)**2+(resumen.v10)**2)**(1/2)
+        resumen.dir_viento = ((resumen.u10)**2+(resumen.v10)**2)**(1/2)
         resumen_back = resumen
         
     #    #tabla de las alturas
@@ -238,67 +256,67 @@ for pp in ['200702', '201408', '201508', '201509']:
                         continue
         
     
-                    #Esta línea se usa para generar las tablas usadas para la comparación de los datos
-                    comparacion.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas/'+pp+'_'+str(j)[:-2]+'_'+cod_2+'_'+kk+pp_col_wrf+'.csv')
-#        
-#        
-#        
-#        
-#        
-#        
-#        
-#        
-#                    
-#                    
-#                    #Usado para poder sacar la desciación estándar de los datos más cercanos a la realidad.
-#                    #para_desv = tmp_real[(tmp_real.date > fecha_min[indice]) & (tmp_real.date < fecha_max[indice])]
-#                    #para_desv_2 = pd.merge(result, para_desv, on='date', how='inner')
-#                    #desvest_const = para_desv_2.tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
-#                    #print(desvest_const)
-#                    
-#    
-#                        
-#                    if i == 'ideam-colombia':
-#                        type_1 = '-.'
-#                        color_1 = 'gray'
-#                        if kk == 'd02':
-#                            marker_1 = 'p'
-#                        else:
-#                            marker_1 = "^"
-#                        label_1 = 'IDEAM-Colombia'
-#                    if i == 'ideam-icm':
-#                        type_1 = '--'
-#                        color_1 = 'red'
-#                        if kk == 'd02':
-#                            marker_1 = 'D'
-#                        else:
-#                            marker_1 = "^"                
-#                        label_1 = 'Optimización'
-#                        
-#                    
-#                    
-#                    if varia_1 == '_hum_2m.csv':
-#                        comparacion.humedad = (comparacion.humedad * 100)
-#                    plt.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
-#                    
-#                    
-#                    
-#        
-#            if pp_col == 'precip_1':
-#                base_precip =[]
-#                for p_ix in range(0,(len(comparacion[pp_col]))):
-#                    #print(p_ix)
-#                    base_precip.append(comparacion[pp_col][:(p_ix + 1 )].sum())
-#                
-#                comparacion[pp_col] = base_precip                    
-#            
-#            plt.plot_date(comparacion.date, comparacion[pp_col], '-', color = 'k', label = 'Estación automática')
-#            
-#            
-#            plt.legend()
-#            plt.xlabel('Fecha - Hora')
-#            plt.ylabel(var_y) 
-#            plt.xticks(rotation=90)
-#            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
-#            plt.close()
-#        
+                    ##Esta línea se usa para generar las tablas usadas para la comparación de los datos &&&
+                    #comparacion.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas/'+pp+'_'+str(j)[:-2]+'_'+cod_2+'_'+kk+pp_col_wrf+'.csv')
+        
+        
+        
+        
+        
+        
+        
+        
+                    
+                    
+                    #Usado para poder sacar la desciación estándar de los datos más cercanos a la realidad.
+                    #para_desv = tmp_real[(tmp_real.date > fecha_min[indice]) & (tmp_real.date < fecha_max[indice])]
+                    #para_desv_2 = pd.merge(result, para_desv, on='date', how='inner')
+                    #desvest_const = para_desv_2.tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
+                    #print(desvest_const)
+                    
+    
+                        
+                    if i == 'ideam-colombia':
+                        type_1 = '-.'
+                        color_1 = 'gray'
+                        if kk == 'd02':
+                            marker_1 = 'p'
+                        else:
+                            marker_1 = "^"
+                        label_1 = 'IDEAM-Colombia'
+                    if i == 'ideam-icm':
+                        type_1 = '--'
+                        color_1 = 'red'
+                        if kk == 'd02':
+                            marker_1 = 'D'
+                        else:
+                            marker_1 = "^"                
+                        label_1 = 'icm'
+                        
+                    
+                    
+                    if varia_1 == '_hum_2m.csv':
+                        comparacion.humedad = (comparacion.humedad * 100)
+                    plt.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
+                    
+                    
+                    
+        
+            if pp_col == 'precip_1':
+                base_precip =[]
+                for p_ix in range(0,(len(comparacion[pp_col]))):
+                    #print(p_ix)
+                    base_precip.append(comparacion[pp_col][:(p_ix + 1 )].sum())
+                
+                comparacion[pp_col] = base_precip                    
+            
+            plt.plot_date(comparacion.date, comparacion[pp_col], '-', color = 'k', label = 'Estación automática')
+            
+            
+            plt.legend()
+            plt.xlabel('Fecha - Hora')
+            plt.ylabel(var_y) 
+            plt.xticks(rotation=90)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
+            plt.close()
+        

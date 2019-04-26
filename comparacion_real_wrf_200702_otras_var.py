@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Feb 14 12:03:14 2019
-
+Creado para hacer los plots de las variables tales como precipitación, veocidad del viento y humedad
 @author: edwin
 """
 
@@ -12,6 +12,7 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import pdb
 
 def lista_nombres(base):
         base2 = pd.DataFrame(list(base))
@@ -30,7 +31,7 @@ def regresion(mejor, peor, base):
 ##mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_2.pickle')
 ##mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_3.pickle')
 #mejores = pd.concat([mejores1, mejores2])
-mejores = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_3.pickle')
+mejores = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables_20190316.pickle')
 
 
 for pp in ['200702', '201408', '201508', '201509']:
@@ -205,7 +206,7 @@ for pp in ['200702', '201408', '201508', '201509']:
             
             
             plt.rcParams["figure.figsize"] = (7,7.5)       
-            for i in ['ideam-colombia', 'ideam-mejor']:
+            for i in ['ideam-colombia', 'ideam-icm']:
                 print(i) 
                 
                 
@@ -249,17 +250,6 @@ for pp in ['200702', '201408', '201508', '201509']:
                     #para_desv_2 = pd.merge(result, para_desv, on='date', how='inner')
                     #desvest_const = para_desv_2.tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
                     #print(desvest_const)
-                    
-    
-                    if i == 'ideam-bogota':
-                        type_1 = ':'
-                        color_1 = 'gray'
-                        if kk == 'd02':
-                            marker_1 = 'o'
-                        else:
-                            marker_1 = "."
-                        label_1 = 'IDEAM-Bogotá'
-                        
                     if i == 'ideam-colombia':
                         type_1 = '-.'
                         color_1 = 'gray'
@@ -267,26 +257,56 @@ for pp in ['200702', '201408', '201508', '201509']:
                             marker_1 = 'p'
                         else:
                             marker_1 = "^"
-                        label_1 = 'IDEAM-Colombia'
-                    if i == 'i2deam-mejor':
-                        type_1 = '--'
-                        color_1 = 'gray'
-                        if kk == 'd02':
-                            marker_1 = 'D'
-                        else:
-                            marker_1 = "^"                
-                        label_1 = 'Optimización'
-                        
-                    if i == 'ideam-mejor':
+                        label_1 = 'ideam-colombia'
+                    if i == 'ideam-icm':
                         type_1 = '--'
                         color_1 = 'red'
                         if kk == 'd02':
-                            marker_1 = 'p'
+                            marker_1 = 'D'
                         else:
-                            marker_1 = "^"                
-                        label_1 = 'icm_pbl-5_cu-0'
+                            marker_1 = "^"
+                        label_1 = 'icm'
+                    
+    
+#                    if i == 'ideam-bogota':
+#                        type_1 = ':'
+#                        color_1 = 'gray'
+#                        if kk == 'd02':
+#                            marker_1 = 'o'
+#                        else:
+#                            marker_1 = "."
+#                        label_1 = 'IDEAM-Bogotá'
+#                        
+#                    if i == 'ideam-colombia':
+#                        type_1 = '-.'
+#                        color_1 = 'gray'
+#                        if kk == 'd02':
+#                            marker_1 = 'p'
+#                        else:
+#                            marker_1 = "^"
+#                        label_1 = 'IDEAM-Colombia'
+#                    if i == 'i2deam-mejor':
+#                        type_1 = '--'
+#                        color_1 = 'gray'
+#                        if kk == 'd02':
+#                            marker_1 = 'D'
+#                        else:
+#                            marker_1 = "^"                
+#                        label_1 = 'Optimización'
+#                        
+#                    if i == 'ideam-mejor':
+#                        type_1 = '--'
+#                        color_1 = 'red'
+#                        if kk == 'd02':
+#                            marker_1 = 'p'
+#                        else:
+#                            marker_1 = "^"                
+#                        label_1 = 'icm_pbl-5_cu-0'
                     
                     
+                    if pp_col_wrf == 'humedad':
+                        comparacion[pp_col_wrf] = comparacion[pp_col_wrf] * 100
+
                     plt.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
                     
                     
@@ -307,6 +327,6 @@ for pp in ['200702', '201408', '201508', '201509']:
             plt.xlabel('Fecha - Hora')
             plt.ylabel(var_y) 
             plt.xticks(rotation=90)
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/'+pp+'_'+str(j)[:-2]+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
             plt.close()
         

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jan 31 10:22:13 2019
@@ -12,6 +13,7 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import pdb
 
 def lista_nombres(base):
         base2 = pd.DataFrame(list(base))
@@ -23,7 +25,7 @@ def regresion(mejor, peor, base):
     b = -peor*((-1)/(peor-mejor))
     return((base * m) + b)
     
-mejores = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_2.pickle')
+mejores = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables_20190316.pickle')
 #mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_3.pickle')
 #mejores = pd.concat([mejores1, mejores2])
 
@@ -219,7 +221,7 @@ for pp in ['200702', '201408', '201508', '201509']:
         
         
         plt.rcParams["figure.figsize"] = (7,7.5)       
-        for i in ['ideam-mejor', 'ideam-colombia']:
+        for i in ['ideam-icm', 'ideam-colombia']:
             print(i) 
             
             
@@ -265,15 +267,6 @@ for pp in ['200702', '201408', '201508', '201509']:
                 print(desvest_const)
                 
 
-                if i == 'ideam-bogota':
-                    type_1 = ':'
-                    color_1 = 'gray'
-                    if kk == 'd02':
-                        marker_1 = 'o'
-                    else:
-                        marker_1 = "."
-                    label_1 = 'IDEAM-Bogotá'
-                    
                 if i == 'ideam-colombia':
                     type_1 = '-.'
                     color_1 = 'gray'
@@ -281,24 +274,16 @@ for pp in ['200702', '201408', '201508', '201509']:
                         marker_1 = 'p'
                     else:
                         marker_1 = "^"
-                    label_1 = 'IDEAM-Colombia'
-                if i == 'i2deam-mejor':
-                    type_1 = '--'
-                    color_1 = 'gray'
-                    if kk == 'd02':
-                        marker_1 = 'D'
-                    else:
-                        marker_1 = "^"                
-                    label_1 = 'Optimización'
-                    
-                if i == 'ideam-mejor':
+                    label_1 = 'ideam-colombia'
+                if i == 'ideam-icm':
                     type_1 = '--'
                     color_1 = 'red'
                     if kk == 'd02':
-                        marker_1 = 'p'
+                        marker_1 = 'D'
                     else:
-                        marker_1 = "^"                
-                    label_1 = 'icm_pbl-5_cu-0'
+                        marker_1 = "^"
+                    label_1 = 'icm'
+
                 
                 
                 plt.plot_date(comparacion.date, comparacion.T2, color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
@@ -314,6 +299,6 @@ for pp in ['200702', '201408', '201508', '201509']:
         plt.xlabel('Fecha - Hora')
         plt.ylabel('Temperatura °C') 
         plt.xticks(rotation=90)
-        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica/'+pp+'_'+str(j)[:-2]+'.png' ,dpi = 100, figsize=(20,20))
+        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_grafica/'+pp+'_'+str(j)[:-2]+'.png' ,dpi = 100, figsize=(20,20))
         plt.close()
     
