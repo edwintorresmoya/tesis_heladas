@@ -1,4 +1,6 @@
 #!/bin/bash
+export dia=`date`
+echo ${dia}
 git add --all
-git commit -m "20180920"
+git commit -m "${dia}"
 git push -u origin master
