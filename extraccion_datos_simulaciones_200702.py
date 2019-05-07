@@ -12,6 +12,7 @@ import os
 import pandas as pd
 import numpy as np
 import datetime
+import pdb
 
 def lista_nombres(base):
         base2 = pd.DataFrame(list(base))
@@ -424,7 +425,7 @@ recoleccion_minim = pd.DataFrame({'cod_1':[],
 #############Esta es la tabla con la que se realiza el diagrama de Taylor
 #
 #recep_t.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/simulacion_200702.csv')        
-
+pdb.set_trace()
 recep_t = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/simulacion_200702.csv')        
 
 os.system('spd-say "Edwin Edwin Edwin Edwin Process has ended"')
@@ -432,11 +433,11 @@ os.system('spd-say "Edwin Edwin Edwin Edwin Process has ended"')
 
 ############Resumen de los valores
 
-sin_tmp = pd.DataFrame({'a':estacion_sintmp})
-len(sin_tmp.a.unique())
-
-menor_10 = pd.DataFrame({'a':dist_menor_10})
-len(menor_10.a.unique())
+#sin_tmp = pd.DataFrame({'a':estacion_sintmp})
+#len(sin_tmp.a.unique())
+#
+#menor_10 = pd.DataFrame({'a':dist_menor_10})
+#len(menor_10.a.unique())
 
 # Total hay 31 estaciones
 #Hay 10 que se dibujaron, hay 8 que no tienen datos

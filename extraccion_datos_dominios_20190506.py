@@ -22,6 +22,7 @@ import numpy as np
 import pdb
 os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam')
 from funciones import busca_cod
+from funciones import un_busca_cod
 def lista_nombres(base):
         base2 = pd.DataFrame(list(base))
         return(base2)
@@ -477,32 +478,31 @@ n_simula = []
 for uu in range(1, (len(tabla_ej1.Simulación.unique()) + 1)): ### OJO Acá se debe cambiar el número de simulaciones + 1
     n_simula.append(str(uu))
 resultados_1 = pd.DataFrame({'Simulación':[], 'Dominio':[], 'Resolución':[], 'Valores':[]})
-for ii in n_simula:
+for ii in tabla_ej2.Código.unique():
     #print(ii)
     #print(tabla_ej1[(tabla_ej2.cond == True) & (tabla_ej2.Caso == ii)].Dominio.value_counts())
-    salida_1 = tabla_ej2[(tabla_ej2.cond == True) & (tabla_ej2.Simulación == ii)].Dominio.value_counts()#tabla_ej1
-    print(len(salida_1))
-    #salida_1 = tabla_ej2[(tabla_ej2.cond == True) & (tabla_ej2.Simulación == ii)].Dominio[0:4].value_counts()#tabla_ej1
-    resultados_2 = pd.DataFrame({'Simulación':list(np.repeat(ii, len(salida_1))),
-                  'Dominio':list(reversed(salida_1.index)), 'Resolución':list(np.repeat(np.NaN, len(salida_1))),
-                  'Valores':list(reversed(salida_1))})
+    salida_1 = tabla_ej2[(tabla_ej2.cond == True) & (tabla_ej2.Código == ii)]#tabla_ej1
+    print(len(salida_1), 'Cod', un_busca_cod(ii))
+    resultados_2 = salida_1[['Código','Simulación','Dominio']]
+
     resultados_1 = pd.concat([resultados_1, resultados_2])
 
-resultados_1 = resultados_1.sort_values(['Simulación','Dominio'], ascending=[True, True])
-print('Todas las estaciones que son superiores')
-print(resultados_1[['Simulación','Dominio','Resolución','Valores']].to_latex(index=False))
 
-resultados_1 = pd.DataFrame({'Simulación':[], 'Dominio':[], 'Resolución':[], 'Valores':[]})
-for ii in n_simula:
+print(resultados_1.groupby(['Simulación']).Dominio.value_counts())
+pdb.set_trace()
+resultados_1 = pd.DataFrame({'Código':[], 'Simulación':[], 'Dominio':[]})
+for ii in tabla_ej2.Código.unique():
     #print(ii)
     #print(tabla_ej1[(tabla_ej2.cond == True) & (tabla_ej2.Caso == ii)].Dominio.value_counts())
-    salida_1 = tabla_ej2[(tabla_ej2.cond == True) & (tabla_ej2.Simulación == ii)].Dominio[0:5].value_counts()#tabla_ej1
-    resultados_2 = pd.DataFrame({'Simulación':list(np.repeat(ii, len(salida_1))),
-                  'Dominio':list(reversed(salida_1.index)), 'Resolución':list(np.repeat(np.NaN, len(salida_1))),
-                  'Valores':list(reversed(salida_1))})
+    salida_1 = tabla_ej2[(tabla_ej2.cond == True) & (tabla_ej2.Código == ii)][0:5]#tabla_ej1
+    print(len(salida_1), 'Cod', un_busca_cod(ii))
+    resultados_2 = salida_1[['Código','Simulación','Dominio']]
+
     resultados_1 = pd.concat([resultados_1, resultados_2])
 
+print(resultados_1.groupby(['Simulación']).Dominio.value_counts())
+pdb.set_trace()
 resultados_1 = resultados_1.sort_values(['Simulación','Dominio'], ascending=[True, True])
 print('Conteo de las 5 mejores estaciones')
-print(resultados_1[['Simulación','Dominio','Resolución','Valores']].to_latex(index=False))
-print(resultados_1.Valores.sum())
+print(resultados_1.groupby(['Simulación']).Dominio.value_counts())
+print(len(resultados_1))

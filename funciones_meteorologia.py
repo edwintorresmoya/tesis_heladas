@@ -9,6 +9,10 @@ cv   = cp - Rd                      # Specific heat of dry air at constant volum
 pref = 100000.0                     # reference sea level pressure, Pa
 g    = 9.81                         # gravitational constant (m/s^2)
 
+# Bogotá está a 
+#560 Milímetros de mercurio = 74660.32 Pascales
+
+bgt = 74660.32 # Pascales
 
 def vap_pres(r,p):
     # compute water vapor pressure using mixing ratio (r, in kg/kg) and pressure (p, in Pa):
@@ -50,8 +54,35 @@ def wb(t, rh):
     # Compute wet bulb from temperature (t) in °C and relativity humidity RH%
     # https://journals.ametsoc.org/doi/pdf/10.1175/JAMC-D-11-0143.1
 
-    pdb.set_trace()
     rh = t*np.arctan(0.151977*(rh + 8.313659)**(1/2)) + np.arctan(t + rh) - np.arctan(rh - 1.676331
             ) + 0.00391838*(rh)**(3/2) * np.arctan(0.023101 * rh) - 4.686035
     return(rh)
-wb(20,50)
+print(wb(18,75))
+
+
+def dp(t, rh):
+    td =243.04*(np.log(rh/100)+((17.625*t)/(243.04+t)))/(17.625-np.log(rh/100)-((17.625*t)/(243.04+t)))
+    return(td)
+print(dp(18,75))
+
+def dp2(t, rh):
+    td2 = t - ((100-rh)/5.)
+    return(td2)
+print(dp2(18,75))
+
+
+
+def dp(t, rh):
+    t = input('Valor de la temperatura °C: ')
+    rh = input('Valor de la humedad %: ')
+    td =243.04*(np.log(rh/100)+((17.625*t)/(243.04+t)))/(17.625-np.log(rh/100)-((17.625*t)/(243.04+t)))
+    td2 = t - ((100-rh)/5.)
+    rh = t*np.arctan(0.151977*(rh + 8.313659)**(1/2)) + np.arctan(t + rh) - np.arctan(rh - 1.676331
+            ) + 0.00391838*(rh)**(3/2) * np.arctan(0.023101 * rh) - 4.686035
+    print('dewpoint 1:', td)
+    print('dewpoint 2:', td2)
+    print('wet bulb:', rh)
+#print(dp(18,75))
+
+def e_actual(td):
+    

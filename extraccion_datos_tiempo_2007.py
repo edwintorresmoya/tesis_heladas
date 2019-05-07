@@ -41,7 +41,7 @@ os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extra
 #resumen_1n = pd.concat([resumen_1, resumen_2])
 #resumen = pd.concat([resumen_1n, resumen_3])
 
-resumen1 = pd.read_pickle('extraccion_tiempo_20190214.pickle')# Extracción de los datos de la simulación 1
+resumen1 = pd.read_pickle('ext_otros_tiempos.pickle')# Extracción de los datos de la simulación 1
 #resumen2 = pd.read_pickle('ext_otros_tiempos.pickle')# Extracción de los datos de las simulaciones 2, 3, 4
 #resumen2 = resumen2[~resumen2.fecha.isnull()]
 #

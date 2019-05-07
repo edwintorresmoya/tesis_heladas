@@ -42,7 +42,7 @@ os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extra
 #resumen = pd.concat([resumen_1n, resumen_3])
 
 #resumen1 = pd.read_pickle('extraccion_tiempo_20190214.pickle')# Extracción de los datos de la simulación 1
-resumen2 = pd.read_pickle('ext_otros_tiempos.pickle')# Extracción de los datos de las simulaciones 2, 3, 4
+resumen2 = pd.read_pickle('ext_otros_tiempos2_1.pickle')# Extracción de los datos de las simulaciones 2, 3, 4
 resumen2 = resumen2[~resumen2.fecha.isnull()]
 
 condi = resumen2.fecha.str.contains('201509')
@@ -346,7 +346,7 @@ for j in resumen_back.cod.unique():#[21201200.0]:#
             
             indice = recoleccion_minim_1[recoleccion_minim_1.cod_1 == j].index[0] # Forma de obtener un valor de índice
             
-            desvest_const = tmp_real[(tmp_real.date > fecha_min[indice]) & (tmp_real.date < fecha_max[indice])].tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
+            desvest_const = comparacion[(comparacion.date > fecha_min[indice]) & (comparacion.date < fecha_max[indice])].tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
             
             position_1 = recep_t[(recep_t.tipo_1 == i) & (recep_t.cod_1 == str(j)) & (recep_t.dom_1 == str(kk))].index[0]
             
@@ -429,7 +429,7 @@ recep_t['suma_esc'] = (recep_t['r2_esc'] + recep_t['rmse_esc'])/2 # La suma se m
 
 
 ############Esta es la tabla con la que se realiza el diagrama de Taylor
-#recep_t.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/tiempo_201509.csv')        
+recep_t.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/tiempo_201509.csv')        
 
 recep_t = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/tiempo_201509.csv')        
 
@@ -444,8 +444,8 @@ tabla_ej1['cod_1'] = recep_t.cod_1.astype('str').str[:-2]
 
 tabla_ej1.tipo_1 = tabla_ej1.tipo_1.str[-2:]
 
-tabla_ej1.columns = [['Código','Simulación', 'Dominio','Pearson', 'RMSE', 'STD', '$STD_{abs}$', 
-                      '$RMSE_{esc}$', '$STD_{esc}$', '$Pearson_{esc}$', 'ET' ]]
+tabla_ej1.columns = ['Código','Simulación', 'Dominio','Pearson', 'RMSE', 'STD', '$STD_{abs}$', 
+                      '$RMSE_{esc}$', '$STD_{esc}$', '$Pearson_{esc}$', 'ET' ]
 
 
 tabla_ej2 = tabla_ej1

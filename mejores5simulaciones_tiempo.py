@@ -31,6 +31,7 @@ import pdb
 
 
 base_1 = pd.DataFrame()
+#for j in ['200702']:
 for j in ['200702', '201408', '201508', '201509']:
 #for j in ['200702', '201509', '201408']:
     #j = '200702'
@@ -70,7 +71,7 @@ for j in ['200702', '201408', '201508', '201509']:
         #print(i)
         #para_t1 = recep_t[(recep_t.cod_1 == i) & (-recep_t.r2.isnull())][['std_estandar', 'r2', 'tipo_1', 'dom_1', 'std_pura']]
         #db.set_trace()
-        para_t1 = recep_t[(recep_t.suma_esc > 0.8) & (recep_t.cod_1 == i) & (-recep_t.r2.isnull())][['std_estandar', 'r2', 'tipo_1', 'dom_1', 'std_pura']]
+        para_t1 = recep_t[(recep_t.r2 > 0.8) & (recep_t.rmse < 0.3)  & (recep_t.cod_1 == i) & (-recep_t.r2.isnull())][['std_estandar', 'r2', 'tipo_1', 'dom_1', 'std_pura']]
         
         
         

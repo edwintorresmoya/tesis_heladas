@@ -28,6 +28,7 @@ import pdb
 #21206980
 
 base_1 = pd.DataFrame()
+lista_1 = pd.DataFrame(columns = ['Codigo','caso','dominio'])
 for j in ['200702', '201408', '201508', '201509']:
 #for j in ['200702', '201509', '201408']:
     #j = '200702'
@@ -83,6 +84,11 @@ for j in ['200702', '201408', '201508', '201509']:
             
             #para_t = para_t.sort_values(['tipo_1','dom_1'])
             para_t['name'] = para_t.tipo_1 +'-'+ para_t.dom_1
+            #### Modificación hecha para buscar en cuál de las estaciones la configuración icm es la mejor
+            #for yy, dom_2 in zip(para_t.tipo_1, para_t.dom_1):
+            #    if yy == 'ideam-icm':
+            #        lista_2 = pd.DataFrame({'Codigo':[i],'caso':[j],'dominio':[dom_2]})
+            #        lista_1 = lista_1.append(lista_2)
             
             para_t['orden'] = para_t.tipo_1.str[-2:]
             
@@ -100,5 +106,5 @@ for j in ['200702', '201408', '201508', '201509']:
 
 #base_con1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/mejores5simulaciones_20190205.csv')
 
-
+print(lista_1)
 print(pd.crosstab(base_1.tipo_1, columns='count').to_latex())

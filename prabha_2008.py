@@ -1,14 +1,12 @@
 import pandas as pd
 import os
 import pdb
-from numba import jit
+#from numba import jit
 from timeit import default_timer as timer
 import numpy as np
 import matplotlib.pyplot as plt
 from funciones import un_busca_cod
 import matplotlib.dates as mdates
-#import rlcompleter
-#pdb.Pdb.complete=rlcompleter.Completer(locals()).complete
 
 #@jit
 ###Como obtener las gráficas fig 2a
@@ -457,123 +455,123 @@ import matplotlib.dates as mdates
 #tablas4a()
 
 
-#################################
-### Gráfica tipo 4
-#################################
+################################
+## Gráfica tipo 4
+################################
 
-#def grafica_casos():
-#    #### Scrip creado para hacer las gráficas de la totalidad de los datos
-#    #### La columna llamada ideam es la que tiene los valores de la estación automática Tibaitatá
-#    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4')
-#    lista = pd.DataFrame({'col_1':os.listdir()})
-#    print('hola')
-#    lista['year_1'] = lista.col_1.str[0:6]
-#    lista['var_1'] = lista.col_1.str[7:-4]
-#    for nombre, year_1, var_1 in zip(lista.col_1, lista.year_1, lista.var_1):
+def grafica_casos():
+    #### Scrip creado para hacer las gráficas de la totalidad de los datos
+    #### La columna llamada ideam es la que tiene los valores de la estación automática Tibaitatá
+    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4')
+    lista = pd.DataFrame({'col_1':os.listdir()})
+    print('hola')
+    lista['year_1'] = lista.col_1.str[0:6]
+    lista['var_1'] = lista.col_1.str[7:-4]
+    for nombre, year_1, var_1 in zip(lista.col_1, lista.year_1, lista.var_1):
+
+        base = pd.read_csv(nombre)
+        if len(base.columns[base.columns.str.contains('21206990')]) < 1:
+
+            base_ideam_i1 = base[base.columns[base.columns.str.contains('24015110_ideam_i_d01')].tolist()]
+            base_ideam_i2 = base[base.columns[base.columns.str.contains('24015110_ideam_i_d02')].tolist()]
+            base_ideam_c1 = base[base.columns[base.columns.str.contains('24015110_ideam_c_d01')].tolist()]
+            base_ideam_c2 = base[base.columns[base.columns.str.contains('24015110_ideam_c_d02')].tolist()]
+            base_otras1 = base[base.columns[~base.columns.str.contains('24015110')].tolist()]
+        else:
+
+            base_ideam_i1 = base[base.columns[base.columns.str.contains('21206990_ideam_i_d01')].tolist()]
+            base_ideam_i2 = base[base.columns[base.columns.str.contains('21206990_ideam_i_d02')].tolist()]
+            base_ideam_c1 = base[base.columns[base.columns.str.contains('21206990_ideam_c_d01')].tolist()]
+            base_ideam_c2 = base[base.columns[base.columns.str.contains('21206990_ideam_c_d02')].tolist()]
+            base_otras1 = base[base.columns[~base.columns.str.contains('21206990')].tolist()]
+
+        # Se seleccionan los valores de la columna que tengan sólo ideam-i = icm
+        base_otras = base_otras1[base_otras1.columns[base_otras1.columns.str.contains('ideam_i')].tolist()]
+
+        #base_ideam_d02_mean =  base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d02')].tolist()].mean(axis=1)
+        #base_ideam_d01_mean =  base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d01')].tolist()].mean(axis=1)
+        base_otras_d01_mean = base_otras[base_otras.columns[~base_otras.columns.str.contains('d01')].tolist()].mean(axis=1)
+        base_otras_d02_mean = base_otras[base_otras.columns[~base_otras.columns.str.contains('d02')].tolist()].mean(axis=1)
+
+        #base_ideam_d02_std = base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d02')].tolist()].std(axis=1)
+        #base_ideam_d01_std = base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d01')].tolist()].std(axis=1)
+        base_otras_d01_std = base_otras[base_otras.columns[~base_otras.columns.str.contains('d01')].tolist()].std(axis=1)
+        base_otras_d02_std = base_otras[base_otras.columns[~base_otras.columns.str.contains('d02')].tolist()].std(axis=1)
+
+        base_2 = pd.concat([base.hora, base_ideam_i1, base_ideam_i2, base_ideam_c1, base_ideam_c2, base_otras_d01_mean, base_otras_d02_mean, base_otras_d01_std, base_otras_d02_std, ], axis=1)
+
+        base_2.columns.values[1:] = ['ideam_i1', 'ideam_i2', 'ideam_c1', 'ideam_c2', 'otras_d01_mean', 'otras_d02_mean', 'otras_d01_std', 'otras_d02_std']
+
+        #base_2 = pd.concat([base.hora, base_ideam_d02_mean, base_ideam_d01_mean, base_otras_d01_mean, base_otras_d02_mean, base_ideam_d02_std, base_ideam_d01_std, base_otras_d01_std, base_otras_d02_std, ], axis=1)
+
+        #base_2.columns.values[1:] = ['ideam_d02_mean', 'ideam_d01_mean', 'otras_d01_mean', 'otras_d02_mean', 'ideam_d02_std', 'ideam_d01_std', 'otras_d01_std', 'otras_d02_std']
+
+        fecha_1 = []
+        for oo in base.hora:
+            print(oo)
+            if oo < 6:
+                fecha_1.append(pd.to_datetime(oo, format ='%H') + pd.Timedelta('1 days'))
+            else:
+                fecha_1.append(pd.to_datetime(oo, format ='%H'))
+        base_2['date_1'] = fecha_1
+        base_2 = base_2.sort_values('date_1')
+
+        fig1 = plt.figure()
+        ax1 = fig1.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas       
+        ####Se debe hacer la gráfica ya está la tabla
+
+
+
+        base_2['ix_1'] = np.arange(1, 25)
+        
+        
+        ax1.errorbar(base_2.ix_1, base_2.otras_d01_mean, yerr=base_2.otras_d01_std, linestyle='-', label = 'Grupo de estaciones d01', marker = 's', color = 'forestgreen')
+        ax1.errorbar(base_2.ix_1, base_2.otras_d02_mean, yerr=base_2.otras_d02_std, linestyle='-', label = 'Grupo de estaciones d02', marker = '^', color = 'forestgreen')
+
+        if (year_1 == '200702') & (var_1 == 'vel_vi10'):
+
+
+            ax1.errorbar(base_2.ix_1, base_2.ideam_c1, linestyle='--', label = 'La Boyera ideam-colombia d01', marker = 'D', color = 'midnightblue')
+            ax1.errorbar(base_2.ix_1, base_2.ideam_c2, linestyle='--', label = 'La Boyera ideam-colombia d02', marker = 'v', color = 'midnightblue')
+            ax1.errorbar(base_2.ix_1, base_2.ideam_i1, linestyle='-', label =  'La Boyera icm d01', marker = 's', color = 'darkorange')
+            ax1.errorbar(base_2.ix_1, base_2.ideam_i2, linestyle='-', label =  'La Boyera icm d02', marker = '^', color = 'darkorange')
+        else:
+            ax1.errorbar(base_2.ix_1, base_2.ideam_c1, linestyle='--', label = 'Tibaitatá ideam-colombia d01', marker = 'D', color = 'midnightblue')
+            ax1.errorbar(base_2.ix_1, base_2.ideam_c2, linestyle='--', label = 'Tibaitatá ideam-colombia d02', marker = 'v', color = 'midnightblue')
+            ax1.errorbar(base_2.ix_1, base_2.ideam_i1, linestyle='-', label = 'Tibaitatá icm d01', marker = 's', color = 'darkorange')
+            ax1.errorbar(base_2.ix_1, base_2.ideam_i2, linestyle='-', label = 'Tibaitatá icm d02', marker = '^', color = 'darkorange')
+        #ax1.errorbar(base_2.ix_1, base_2.ideam_d01_mean, yerr=base_2.ideam_d01_std, linestyle='-', label = 'Tiba estaciones d01', marker = 's', color = 'black')
+        #ax1.errorbar(base_2.ix_1, base_2.ideam_d02_mean, yerr=base_2.ideam_d02_std, linestyle='-', label = 'Tiba estaciones d02', marker = '^', color = 'black')
+#                if caso[-3:] == 'd01':
+#                    mar_1 = 's'
+#                else:
+#                    mar_1 = '^'
+#                    
+#                if caso[6:-4] == 'icm':
+#                    col_2 = 'black'
+#                else:
+#                    col_2 = 'dimgrey'
 #
-#        base = pd.read_csv(nombre)
-#        if len(base.columns[base.columns.str.contains('21206990')]) < 1:
-#
-#            base_ideam_i1 = base[base.columns[base.columns.str.contains('24015110_ideam_i_d01')].tolist()]
-#            base_ideam_i2 = base[base.columns[base.columns.str.contains('24015110_ideam_i_d02')].tolist()]
-#            base_ideam_c1 = base[base.columns[base.columns.str.contains('24015110_ideam_c_d01')].tolist()]
-#            base_ideam_c2 = base[base.columns[base.columns.str.contains('24015110_ideam_c_d02')].tolist()]
-#            base_otras1 = base[base.columns[~base.columns.str.contains('24015110')].tolist()]
-#        else:
-#
-#            base_ideam_i1 = base[base.columns[base.columns.str.contains('21206990_ideam_i_d01')].tolist()]
-#            base_ideam_i2 = base[base.columns[base.columns.str.contains('21206990_ideam_i_d02')].tolist()]
-#            base_ideam_c1 = base[base.columns[base.columns.str.contains('21206990_ideam_c_d01')].tolist()]
-#            base_ideam_c2 = base[base.columns[base.columns.str.contains('21206990_ideam_c_d02')].tolist()]
-#            base_otras1 = base[base.columns[~base.columns.str.contains('21206990')].tolist()]
-#
-#        # Se seleccionan los valores de la columna que tengan sólo ideam-i = icm
-#        base_otras = base_otras1[base_otras1.columns[base_otras1.columns.str.contains('ideam_i')].tolist()]
-#
-#        #base_ideam_d02_mean =  base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d02')].tolist()].mean(axis=1)
-#        #base_ideam_d01_mean =  base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d01')].tolist()].mean(axis=1)
-#        base_otras_d01_mean = base_otras[base_otras.columns[~base_otras.columns.str.contains('d01')].tolist()].mean(axis=1)
-#        base_otras_d02_mean = base_otras[base_otras.columns[~base_otras.columns.str.contains('d02')].tolist()].mean(axis=1)
-#
-#        #base_ideam_d02_std = base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d02')].tolist()].std(axis=1)
-#        #base_ideam_d01_std = base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d01')].tolist()].std(axis=1)
-#        base_otras_d01_std = base_otras[base_otras.columns[~base_otras.columns.str.contains('d01')].tolist()].std(axis=1)
-#        base_otras_d02_std = base_otras[base_otras.columns[~base_otras.columns.str.contains('d02')].tolist()].std(axis=1)
-#
-#        base_2 = pd.concat([base.hora, base_ideam_i1, base_ideam_i2, base_ideam_c1, base_ideam_c2, base_otras_d01_mean, base_otras_d02_mean, base_otras_d01_std, base_otras_d02_std, ], axis=1)
-#
-#        base_2.columns.values[1:] = ['ideam_i1', 'ideam_i2', 'ideam_c1', 'ideam_c2', 'otras_d01_mean', 'otras_d02_mean', 'otras_d01_std', 'otras_d02_std']
-#
-#        #base_2 = pd.concat([base.hora, base_ideam_d02_mean, base_ideam_d01_mean, base_otras_d01_mean, base_otras_d02_mean, base_ideam_d02_std, base_ideam_d01_std, base_otras_d01_std, base_otras_d02_std, ], axis=1)
-#
-#        #base_2.columns.values[1:] = ['ideam_d02_mean', 'ideam_d01_mean', 'otras_d01_mean', 'otras_d02_mean', 'ideam_d02_std', 'ideam_d01_std', 'otras_d01_std', 'otras_d02_std']
-#
-#        fecha_1 = []
-#        for oo in base.hora:
-#            print(oo)
-#            if oo < 6:
-#                fecha_1.append(pd.to_datetime(oo, format ='%H') + pd.Timedelta('1 days'))
-#            else:
-#                fecha_1.append(pd.to_datetime(oo, format ='%H'))
-#        base_2['date_1'] = fecha_1
-#        base_2 = base_2.sort_values('date_1')
-#
-#        fig1 = plt.figure()
-#        ax1 = fig1.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas       
-#        ####Se debe hacer la gráfica ya está la tabla
-#
-#
-#
-#        base_2['ix_1'] = np.arange(1, 25)
-#        
-#        
-#        ax1.errorbar(base_2.ix_1, base_2.otras_d01_mean, yerr=base_2.otras_d01_std, linestyle='-', label = 'Grupo de estaciones d01', marker = 's', color = 'dimgrey')
-#        ax1.errorbar(base_2.ix_1, base_2.otras_d02_mean, yerr=base_2.otras_d02_std, linestyle='-', label = 'Grupo de estaciones d02', marker = '^', color = 'dimgrey')
-#
-#        if (year_1 == '200702') & (var_1 == 'vel_vi10'):
-#
-#
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_c1, linestyle='--', label = 'La Boyera ideam-colombia d01', marker = 'D', color = 'dimgray')
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_c2, linestyle='--', label = 'La Boyera ideam-colombia d02', marker = 'v', color = 'dimgray')
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_i1, linestyle='-', label =  'La Boyera icm d01', marker = 's', color = 'black')
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_i2, linestyle='-', label =  'La Boyera icm d02', marker = '^', color = 'black')
-#        else:
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_c1, linestyle='--', label = 'Tibaitatá ideam-colombia d01', marker = 'D', color = 'dimgray')
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_c2, linestyle='--', label = 'Tibaitatá ideam-colombia d02', marker = 'v', color = 'dimgray')
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_i1, linestyle='-', label = 'Tibaitatá icm d01', marker = 's', color = 'black')
-#            ax1.errorbar(base_2.ix_1, base_2.ideam_i2, linestyle='-', label = 'Tibaitatá icm d02', marker = '^', color = 'black')
-#        #ax1.errorbar(base_2.ix_1, base_2.ideam_d01_mean, yerr=base_2.ideam_d01_std, linestyle='-', label = 'Tiba estaciones d01', marker = 's', color = 'black')
-#        #ax1.errorbar(base_2.ix_1, base_2.ideam_d02_mean, yerr=base_2.ideam_d02_std, linestyle='-', label = 'Tiba estaciones d02', marker = '^', color = 'black')
-##                if caso[-3:] == 'd01':
-##                    mar_1 = 's'
-##                else:
-##                    mar_1 = '^'
-##                    
-##                if caso[6:-4] == 'icm':
-##                    col_2 = 'black'
-##                else:
-##                    col_2 = 'dimgrey'
-##
-##                if ll[9:16] == 'ideam-c':
-##                    wrf = 'ideam_c'
-##                else:
-##                    wrf = 'ideam_i'
-#        ax1.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
-#        #ax1.xaxis.set_major_formatter(mdates.DateFormatter("%H"))
-#
-#        ax1.hlines(y = 0, xmin = base_2.ix_1.min(), xmax = base_2.ix_1.max(), linestyle = ':', color = 'silver')
-#        ax1.xaxis.set_ticks(np.arange(1, 25, 1))
-#        ax1.set_xticklabels(base_2.hora.tolist(), rotation = 90)
-#        ax1.set_xlabel('Hora')
-#        if var_1 == 'vel_vi10':
-#            unidades = r'$ms^{-1}$'
-#        else:
-#            unidades = '°C'
-#
-#        ax1.set_ylabel('MBE('+unidades+')')
-#        fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica4abcd_final/'+nombre[:-4]+'.png')
-#
-#grafica_casos()
+#                if ll[9:16] == 'ideam-c':
+#                    wrf = 'ideam_c'
+#                else:
+#                    wrf = 'ideam_i'
+        ax1.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+        #ax1.xaxis.set_major_formatter(mdates.DateFormatter("%H"))
+
+        ax1.hlines(y = 0, xmin = base_2.ix_1.min(), xmax = base_2.ix_1.max(), linestyle = ':', color = 'silver')
+        ax1.xaxis.set_ticks(np.arange(1, 25, 1))
+        ax1.set_xticklabels(base_2.hora.tolist(), rotation = 90)
+        ax1.set_xlabel('Hora')
+        if var_1 == 'vel_vi10':
+            unidades = r'$ms^{-1}$'
+        else:
+            unidades = '°C'
+
+        ax1.set_ylabel('MBE('+unidades+')')
+        fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica4abcd_final/'+nombre[:-4]+'.png')
+
+grafica_casos()
 
 
 
@@ -704,85 +702,85 @@ import matplotlib.dates as mdates
 
 
 
-def tablas_variables():
-    # Usado para sacar las tablas unidas que se van a plotear que serían iguales a las gráficas 4 del artículo
-
-    start = timer()
-    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas')
-    lista_archivos = pd.DataFrame({'col_1':os.listdir()})
-    lista_tmp = lista_archivos[lista_archivos.col_1.str.contains('.csv')]
-    lista_tmp['year_1'] = lista_tmp.col_1.str[0:6]
-    lista_tmp['cod'] = lista_tmp.col_1.str[7:15]
-    lista_tmp['wrf'] = lista_tmp.col_1.str[16:23]
-    lista_tmp['dom'] = lista_tmp.col_1.str[24:27]
-    #lista_tmp['tipo'] = lista_tmp.col_1.str[27:-4]
-
-
-    ##Usado para sacar las fechas para los plots
-
-    for year_1 in lista_tmp.year_1.unique().tolist():
-        for col, tipo in zip(['Td', 'wb', 'vel_vi10'],#datos reales
-                ['dewpoint', 'wetbulb', 'vel_viento']):#Datos modelados
-            base_v = pd.DataFrame({'hora':np.arange(0,23).tolist()})
-            for cod in lista_tmp.cod.unique().tolist():
-
-                # Filtro para que no cree gráficas vacias
-                archivo1 = year_1 + '_' + cod + '_ideam_i'+'_d01'+ tipo + '.csv'
-                # 200702_21206790_ideam_c_d01dewpoint.csv
-                if(archivo1 not in lista_tmp.col_1.tolist()):
-                    print('salto')
-                    continue
-
-                #fig1 = plt.figure()
-                #ax1 = fig1.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
-
-                for wrf in lista_tmp.wrf.unique().tolist():
-                    for dom in lista_tmp.dom.unique().tolist():
-                        archivo = year_1 + '_' + cod + '_' +wrf+'_'+dom+ tipo + '.csv'
-                        # 200702_21206790_ideam_c_d01dewpoint.csv
-                        if(archivo not in lista_tmp.col_1.tolist()):
-                            print('salto')
-                            continue
-                        print(archivo)
-                        #Leer los archivos
-                        base = pd.read_csv(archivo)
-                        if len(base) < 10:
-                            continue
-                        
-                        print(archivo)
-        
-        
-                        if dom == 'd01':
-                            mar_1 = 's'
-                        else:
-                            mar_1 = '^'
-                            
-                        if wrf == 'ideam_c':
-                            col_2 = 'black'
-                            modelacion = 'ideam_colombia_'
-                        else:
-                            col_2 = 'dimgrey'
-                            modelacion = 'ideam_icm_'
-            
-                        #fig2 = plt.figure()
-                        #ax2 = fig2.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
-                        #fig3 = plt.figure()
-                        #ax3 = fig3.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
-                        #fig4 = plt.figure()
-                        #ax4 = fig4.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
-                        ##Usado para sacar los valores que de icm y de Colombia
-                        #lista_loop = base.columns[base.columns.str.contains('ideam')]
-                        #lista_loop_2 = lista_loop[lista_loop.str.contains('icm') | lista_loop.str.contains('colombia')]
-                        base.date = pd.to_datetime(base.date)
-                        base['hora'] = base.date.dt.hour
-                        base['frec'] = 1
-                        ###MBE
-                        base['tmp_mbe'] = base[tipo] - base[col]
-                        base_mbe = base.groupby('hora').sum()[['frec', 'tmp_mbe']].reset_index()
-                        base_mbe['plot_mbe'] = base_mbe.tmp_mbe / base_mbe.frec
-                        base_mbe.columns.values[3] = cod+'_'+wrf+'_'+dom
-                        base_v = pd.merge(base_mbe[['hora', cod+'_'+wrf+'_'+dom]], base_v, on='hora', how='outer')
-            base_v.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4/'+year_1+'_'+col+'.csv')            
-tablas_variables()
+#def tablas_variables():
+#    # Usado para sacar las tablas unidas que se van a plotear que serían iguales a las gráficas 4 del artículo
+#
+#    start = timer()
+#    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas')
+#    lista_archivos = pd.DataFrame({'col_1':os.listdir()})
+#    lista_tmp = lista_archivos[lista_archivos.col_1.str.contains('.csv')]
+#    lista_tmp['year_1'] = lista_tmp.col_1.str[0:6]
+#    lista_tmp['cod'] = lista_tmp.col_1.str[7:15]
+#    lista_tmp['wrf'] = lista_tmp.col_1.str[16:23]
+#    lista_tmp['dom'] = lista_tmp.col_1.str[24:27]
+#    #lista_tmp['tipo'] = lista_tmp.col_1.str[27:-4]
+#
+#
+#    ##Usado para sacar las fechas para los plots
+#
+#    for year_1 in lista_tmp.year_1.unique().tolist():
+#        for col, tipo in zip(['Td', 'wb', 'vel_vi10'],#datos reales
+#                ['dewpoint', 'wetbulb', 'vel_viento']):#Datos modelados
+#            base_v = pd.DataFrame({'hora':np.arange(0,23).tolist()})
+#            for cod in lista_tmp.cod.unique().tolist():
+#
+#                # Filtro para que no cree gráficas vacias
+#                archivo1 = year_1 + '_' + cod + '_ideam_i'+'_d01'+ tipo + '.csv'
+#                # 200702_21206790_ideam_c_d01dewpoint.csv
+#                if(archivo1 not in lista_tmp.col_1.tolist()):
+#                    print('salto')
+#                    continue
+#
+#                #fig1 = plt.figure()
+#                #ax1 = fig1.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+#
+#                for wrf in lista_tmp.wrf.unique().tolist():
+#                    for dom in lista_tmp.dom.unique().tolist():
+#                        archivo = year_1 + '_' + cod + '_' +wrf+'_'+dom+ tipo + '.csv'
+#                        # 200702_21206790_ideam_c_d01dewpoint.csv
+#                        if(archivo not in lista_tmp.col_1.tolist()):
+#                            print('salto')
+#                            continue
+#                        print(archivo)
+#                        #Leer los archivos
+#                        base = pd.read_csv(archivo)
+#                        if len(base) < 10:
+#                            continue
+#                        
+#                        print(archivo)
+#        
+#        
+#                        if dom == 'd01':
+#                            mar_1 = 's'
+#                        else:
+#                            mar_1 = '^'
+#                            
+#                        if wrf == 'ideam_c':
+#                            col_2 = 'black'
+#                            modelacion = 'ideam_colombia_'
+#                        else:
+#                            col_2 = 'dimgrey'
+#                            modelacion = 'ideam_icm_'
+#            
+#                        #fig2 = plt.figure()
+#                        #ax2 = fig2.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+#                        #fig3 = plt.figure()
+#                        #ax3 = fig3.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+#                        #fig4 = plt.figure()
+#                        #ax4 = fig4.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+#                        ##Usado para sacar los valores que de icm y de Colombia
+#                        #lista_loop = base.columns[base.columns.str.contains('ideam')]
+#                        #lista_loop_2 = lista_loop[lista_loop.str.contains('icm') | lista_loop.str.contains('colombia')]
+#                        base.date = pd.to_datetime(base.date)
+#                        base['hora'] = base.date.dt.hour
+#                        base['frec'] = 1
+#                        ###MBE
+#                        base['tmp_mbe'] = base[tipo] - base[col]
+#                        base_mbe = base.groupby('hora').sum()[['frec', 'tmp_mbe']].reset_index()
+#                        base_mbe['plot_mbe'] = base_mbe.tmp_mbe / base_mbe.frec
+#                        base_mbe.columns.values[3] = cod+'_'+wrf+'_'+dom
+#                        base_v = pd.merge(base_mbe[['hora', cod+'_'+wrf+'_'+dom]], base_v, on='hora', how='outer')
+#            base_v.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4/'+year_1+'_'+col+'.csv')            
+#tablas_variables()
 
 
