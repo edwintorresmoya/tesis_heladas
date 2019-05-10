@@ -17,6 +17,10 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pdb
+os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam')
+from funciones import busca_cod
+from funciones import un_busca_cod
+
     
 #recep_t = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/simulacion_200702.csv')       
 #recep_t = recep_t.sort_values('suma_esc', ascending=False)
@@ -39,7 +43,7 @@ for j in ['200702', '201408', '201508', '201509']:
     #j = '201508'
     #j = '201408'
     j = str(j)
-    print(j)
+    #print(j)
     
     
 
@@ -77,9 +81,13 @@ for j in ['200702', '201408', '201508', '201509']:
         
         for coun, uu in enumerate([0]): #enumerate(range(0, (len(para_t1) //5) +2)):
             #coun = 0; uu = 0
-            print(coun, uu)
+            #print(coun, uu)
             para_t = para_t1.iloc[(5*uu):((5*uu)+ 5),:]
             #print(para_t)
+
+            ###Usado para poder sacar las tablas para la profe
+            if len(recep_t[(recep_t.cod_1 == i) & (-recep_t.r2.isnull())]) > 10:
+                print(j, '&', un_busca_cod(i), '&',len(para_t))
             
             #para_t = para_t.sort_values(['tipo_1','dom_1'])
             para_t['name'] = para_t.tipo_1 +'-'+ para_t.dom_1

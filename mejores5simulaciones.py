@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jan 17 08:52:18 2019
-Extracción de los mejores resultados de las simulaciones
+Extracción de los mejores resultados de las simulaciones para cada uno de los casos
 @author: edwin
 
 Se va sólo a buscar para el caso 200702 y luego se va a probar con las demás
