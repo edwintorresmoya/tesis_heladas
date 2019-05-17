@@ -1,0 +1,131 @@
+\documentclass[11pt]{book}
+\raggedbottom % Esta función es para que se reduzcan los espacios entre los párrafos.
+\usepackage[utf8]{inputenc} % Usado par la recepción de las tildes
+\usepackage{fullpage}
+\usepackage{gensymb}%Sacar nuevo símbolos
+\usepackage{apacite} % Citar con APA
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\usepackage{csvsimple}%To read the documents in csv
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}%Usado para crear suplots
+\graphicspath{ {graph/} }%Ubicación de las gráficas
+\def\celc{$^{\circ}$C}%Código para el grados celsius
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}%Usado para crear suplots
+
+\usepackage{float}%Control de los nombres debajo de la gráfica
+\usepackage{pdflscape}%Lanscape
+\usepackage{lscape}%Lanscape
+\usepackage{longtable} % usada para crear grandes tablas
+\usepackage[usenames, dvipsnames]{color} %Uso del color
+\usepackage{booktabs} % para tomar las tablas desde python
+\usepackage{multirow}
+\usepackage{ulem} % para hacer tachaduras
+\usepackage[draft]{todonotes}
+% Para tablas grandes
+\usepackage{longtable}
+\usepackage{lipsum}
+\usepackage{comment}% Usado para comentar
+%Para el loop de las gráficas
+\usepackage{relsize}
+\usepackage[T1]{fontenc} % usado para poder usar el símbolo de < >
+\usepackage{upgreek}
+\usepackage[none]{hyphenat} % para evitar el corte de las palabras
+
+\usepackage{appendix} % Usado para los anexos
+\renewcommand{\appendixname}{Anexos}
+\renewcommand{\appendixtocname}{Anexos}
+\renewcommand{\appendixpagename}{Anexos}
+
+
+\renewcommand{\tablename}{\textbf{Tabla}}
+\renewcommand{\figurename}{\textbf{Figura}}
+\renewcommand{\listtablename}{Lista de Tablas}
+\renewcommand{\listfigurename}{Lista de Figuras}
+\renewcommand{\contentsname}{Contenido}
+
+
+%\usepackage[spanish]{babel}
+\usepackage[spanish,es-tabla]{babel} % para cambiar cuadro por tabla
+%\usepackage[draft]{article}
+
+
+
+\begin{document}
+\sloppy  % para que no se corten las palabras 
+\include{HojaTitulo} % Portada
+
+
+\tableofcontents
+\newpage
+
+%\include{Introduccion} 
+%\include{primer}
+%\include{segundo}
+%\include{tercer}
+%\include{cuarto}
+\include{quinto_final}
+%
+%
+%\include{anexoestaciones_autom_y_conv_usadas} % primer Segundo
+%\include{anexogra_mensual_eventos_sb} % Segundo pero tiene problemas porque %son %muchos archivos
+%\include{anexoresumen_control_calidad_est_con2} % Segundo
+%\include{anexoseries_tiempo_temperatura} % Tercero
+%\textit{
+%\include{anexonamelist-input-wps} % Tercero
+%}
+%\include{anexoresultado_comparaciones_entre_estadisticos} % Tercero
+%\include{anexodiagramas_taylor_div_estaciones} % Tercero
+%\include{anexocorreccion_altura} % Tercero
+%\include{anexodiag_taylor_estaciones_aut_val} % Tercero
+%\texttt{
+%\include{anexonamelist_mejor_parametrizacion} % Cuarto
+%}
+%\include{anexoresultados_comparaciones_estadisticos_tiempos} % Cuarto
+%\include{anexograficas_taylor_tiempos_4casos} % Cuarto
+
+
+%\include{anexograficas_temperatura} %%Quinto
+%\include{anexograficas_otras_variables_wrf} %%Quinto
+
+
+%\include{anexograficas_taylor_200702} % Gráficas de todas las estaciones
+%\include{anexograficas_dea5} % gráficas hechas para la profe Astrid
+%\include{anexo_casos_total} % Graficas de todos los diagramas de Taylor 
+%\include{anexo_graficas_series_vs_referencia} % Anexo de las graficas de todas las simulaciones vs la temperatura de referencia
+
+
+
+
+%\include{otros}
+%\include{subinfo}
+%\include{anexo1_II}
+%\include{anexo2_g_rad_III}
+%\include{anexo2_cc_conve_V}
+%{anexo2_gra_val}
+
+%\texttt{
+%\include{anexo3_namelist_IV}
+%}
+%\include{anexo3_seritiem2007_VII} % Este
+%\include{anexo3_correccion_alturaVI} % Este
+%\include{anexo3_ta_dominios_VIII} %este
+%\include{anexo3_taylor_X} %este
+%\include{anexo3_taylor_tiempo}
+%\include{anexo3_tabla_tiempos_IX}
+%\include{anexo3_taylordea5_XI}
+
+%\texttt{•}
+%\include{anexo4_XII_namelistinput_mejorparame}
+%}
+%\include{anexograficas_taylor_tiempos_4casos_total}
+%\include{anexo4_XIII_taylor_tiempos}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{apalike}
+
+\bibliography{biblio}%Nombre del archivo que tiene las citas
+
+\end{document}

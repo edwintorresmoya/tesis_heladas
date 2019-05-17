@@ -1,0 +1,667 @@
+%Actividad: Realizar una revisión bibliográfica sobre modelos físicos regionales de pronóstico del tiempo usados para el pronóstico de las temperaturas máxima y mínima.
+
+\chapter{Capítulo 1}
+\section{Introducción}
+
+La papa (\textit{Solanum tuberosum} L.) es el tercer cultivo de mayor importancia en el mundo después del arroz y el trigo. La producción global excede las 300 millones de toneladas, por esta razón el cultivo de la papa es de gran importancia en términos de seguridad alimentaria \citep{birch2012crops}.\\
+
+La temperatura óptima para el crecimiento y desarrollo del cultivo de papa se encuentra en un rango entre 14 y 22\celc \ , cuando las temperaturas del aire están por fuera de estos rangos el rendimiento puede decrecer dependiendo del estado fenológico en el que se encuentre \citep{Hijmans2003}. La temperatura del aire es considerada como el factor meteorológico sobre el que menos se tiene control y que afecta significativamente el crecimiento y rendimiento de los cultivos de papa \citep{hancock2014physiological}. Respecto al efecto del calentamiento global en la producción de papa, se ha predicho una disminución entre el 18 y 32\% para el año 2050 \citep{hijmans2003effect}. \\
+
+El cultivo de la papa en Colombia es uno de los cultivos más importantes, en el 2017 el Fondo Nacional de Fomento de la Papa (Fedepapa) aseguró que la producción nacional en el 2017 fue de 2.7 millones de toneladas de las  cuales el 90\% de la papa que se produce en Colombia y el 10\% es importada \citep{Portafolio2017}. Una de las zonas de mayor importancia para la producción de papa es el Altiplano Cundiboyacence. Según \citet{Barrientos2014} e \citet{IDEAM2009} el cambio climático en la zona se ha manifestado con un incremento de la temperatura media y ampliación del rango de mínimos y máximos. Este tipo de cambios probablemente conllevará a reducir la productividad \citep{Hatfield2015}.\\
+
+\section{Generalidades del cultivo de papa}
+
+\subsection{Estadística agrícola del cultivo de papa en Colombia}
+
+El \citet{DANE2002} reportó que el principal departamento en producción de papa en Colombia es Cundinamarca, seguido por Boyacá, Nariño y Antioquia, estos departamentos suman el 85\% de la producción total del país. En el 2014 Cundinamarca se ubicó como el departamento con mayor área sembrada de papa en Colombia con 163358 hectáreas (ha), correspondientes al 38.4\% del total del área sembrada \citep{MADR2014}. En el primer período de 2017, Cundinamarca fue el mayor productor del cultivo de papa, debido a que tiene la mayor área sembrada, área cosechada, producción y rendimiento de papa, seguido por Boyacá, Nariño y Antioquia como se muestra el la Tabla \ref{table:1}, la cual fue realizada con la información proveniente del enlace \textcolor{blue}{ \href{https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Papa-Area-Producci-n-Y-Rendimien/pnsj-t3kh}{Cadena Productiva Papa-Área Producción Y Rendimiento}} \citep{madr2017}.\\
+
+Basado en la anterior información, Cundinamarca es el departamento con mayor importancia en la producción de papa. Según los datos de \citet{madr2017} el área de siembra y  el área cosechada poseen un comportamiento similar a través de los años con algunas diferencias (ver Figura \ref{gra:papa_cund_1}), en el 2007 se presenta una diferencia entre los valores de área sembrada y de área cosechada en Cundinamarca. En el departamento de Cundinamarca las áreas de siembra y cosecha han variado en el tiempo y han presentado 4 períodos de altos valores en el 2006,  2010, 2011, 2013 y uno recientemente en el 2017. La producción  presentó un aumento entre el segundo semestre del año 2008 y el primer semestre del año  2010, seguido por una disminución hasta el segundo semestre del año 2013 (ver Figura \ref{gra:papa_cund_2}). A partir del segundo semestre del año 2014 se presentó un aumento casi continuo, comportamiento similar al presentado en el rendimiento. Al parecer las tendencias son al alza con respecto a los valores de área, producción y rendimiento. En cuanto a la producción de papa en Cundinamarca se registró una alta producción para el año 2010 y luego la producción cayó, actualmente se encuentra con una tendencia al aumento. El rendimiento presenta un comportamiento similar al presentado por la producción, ya que para el año 2010 se presentó una alza seguido de un decrecimiento en el rendimiento, para finalmente presentar un aumento (ver Figura \ref{gra:papa_cund_3}). %No entiendo por qué la profe lo quiere quitar, ¿dado el caso de eliminarlo tendría que eliminar la Figura?
+
+
+\begin{table}[H] % el H mayúscula significa que el archivo debe ir en ese lugar, de lo contrario la tabla se baja
+\begin{center}
+	\caption{Estadística agrícola del cultivo de papa en el primer semestre del 2017 para los principales departamentos productores. Fuente \citep{madr2017}.}
+    \label{table:1}
+	\begin{tabular}{cccccccccc}
+Departamento&Área Sembrada(ha)&Área Cosechada(ha)&Producción(t)&Rendimiento(t/ha)&\\
+\hline
+Cundinamarca&32036&32034&812218&20.8&\\
+Boyacá&25975&25971&462780&14.49&\\
+Nariño&20391&20391&357156&14.75&\\
+Antioquia&3515&3504&77618&17.25&\\
+Santander&3409&3409&55823&15.87&\\
+Cauca&1826&1819&43940&12.21&\\
+Norte de Santander&1650&1545&34707&20.53&\\
+Tolima&1235&1158&18830&18.09&\\
+Caldas&487&487&6892&16.46&\\
+Valle del Cauca&247&228&3249&14.3&\\
+Putumayo&29&29&287&10.07&\\
+Huila&20&20&106&5.23&\\
+Meta&1&1&17&17.6&\\
+Quindío&1&1&7&6.5&\\
+		\end{tabular}
+		
+\end{center}
+
+\end{table}
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}[normla]{0.65\textwidth}
+		\includegraphics[draft=false, scale=0.55]{papa_cund_png_1.png}	
+% * <etorresm@unal.edu.co> 2018-08-30T20:47:37.838Z:
+%
+% ^.
+% * <etorresm@unal.edu.co> 2018-08-30T20:47:36.502Z:
+%
+% ^.
+% * <etorresm@unal.edu.co> 2018-08-30T20:47:35.509Z:
+%
+% > draft=false
+%
+% ^.
+		\caption{Área sembrada en Cundinamarca.}
+		\label{gra:papa_cund_1}	
+		\end{subfigure}
+		~
+		\begin{subfigure}[normla]{0.65\textwidth}
+		\includegraphics[draft=false, scale=0.55]{papa_cund_png_2.png}	
+		\caption{Producción de papa en Cundinamarca.}
+		\label{gra:papa_cund_2}	
+		\end{subfigure}
+		~
+		\begin{subfigure}[normla]{0.65\textwidth}
+		\includegraphics[draft=false, scale=0.55]{papa_cund_png_3.png}	
+		\caption{Rendimiento en Cundinamarca.}
+		\label{gra:papa_cund_3}	
+		\end{subfigure}
+
+	\end{center}
+	
+	\caption{Valores semestrales de área sembrada, área cosechada, producción y promedio del rendimiento del cultivo de papa para Cundinamarca desde el segundo semestre de 2006 al primer semestre de 2017, basado en datos de \citet{madr2017}}.
+	 \label{gra:papa_cund}
+\end{figure}
+
+
+\subsection{Área de estudio}
+
+%Se realizó una tabla que resume los rendimientos de cada municipio esta tabla la pueden encontrar en la tabla llamada \texttt{tab\_pivot.csv}.
+
+Gran parte de los municipios de Cundinamarca que son productores de papa hacen parte de la Sabana de Bogotá. La Sabana de Bogotá se ubica en la parte central de la cordillera Oriental de Colombia y se ubica a una altura promedio de 2500 metros sobre el nivel del mar (msnm). Constituye una provincia geomorfológica en la cual se diferencian dos zonas: una zona plana, ubicada hacia la parte central del área, y otra zona de relieve montañoso que alcanza alturas hasta de 3700 msnm \citep{hermelin2007entorno}.\\
+
+En la Figura \ref{gra:areas} se muestra el área de estudio delimitada con la línea azul. Las áreas en color verde y punteadas corresponden a las áreas de páramo definidas por \citet{Cortes-Duque2013}, las áreas azules corresponden a los embalses y los puntos corresponden a las estaciones del Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) las cuales se encuentran el la tabla del Anexo \ref{anexo:estaciones_autom_y_conv_usadas}. El área de estudio cuenta con 162 estaciones meteorológicas convencionales y 31  estaciones meteorológicas automáticas.\\ % La delimitación de los páramos no solo obedece a un criterio de altura sino a un trabajo completo dirigido por el IAvH %\citet{Cortes-Duque2013}
+
+
+Basado en la información suministrada por el \citet{madr2017} correspondiente al período 2006 a 2017, se espacializaron los valores de áreas promedio de siembra de papa (Figura \ref{subfig:a1}). En la Figura \ref{subfig:a1} podemos observar que el municipio con mayor producción es Tausa, seguido de Villapinzón, Zipaquirá, Sesquilé, Chocontá, Carmen de Carupa, San Cayetano y Une. Para hacer un estimado de la participación del cultivo de papa en cada uno de los municipios se tomó el área promedio de producción de cada municipio, se dividió entre el área total del municipio y se multiplicó por 100 para calcular el porcentaje de área sembrada. En la Figura \ref{subfig:a2}, se ve que Tausa es el municipio con mayor participación del cultivo de papa, seguido por Villapinzón, Chocontá, Sesquilé, Zipaquirá, Cogua, Susa, San Cayetano, Sibaté, Une y Funza. Es importante resaltar que Tausa es el municipio más importante en producción de papa, pero la mayor parte de su terreno se encuentra dentro del Páramo de Guerrero y en otra gran área está el Embalse del Neusa, como se puede observar en la Figura \ref{subfig:a1}, por esta razón el área de estudio no cubre este municipio (ver Figura \ref{gra:areas}).
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[draft=false, scale=0.2]{municipios_paramos.png}
+		\label{gra:areas_paramo}
+	\end{center}
+    	\caption{Área de estudio}
+	\label{gra:areas}
+\end{figure}
+	
+%%%%%%%%%%%% 
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.3]{promedio.png}
+		\caption{Áreas promedio de siembra en cada municipio de Cundinamarca en hectáreas.}
+		\label{subfig:a1}
+		\end{subfigure}
+		~
+				\begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.3]{papa-area.png}
+		\caption{Relación entre área con cultivo de papa y área total del municipio en porcentaje (\%)}
+		\label{subfig:a2}
+		\end{subfigure}
+
+	\end{center}
+	\caption{Mapas de las áreas de producción de papa, hecho a partir de la información del \citet{madr2017}}
+	\label{gra:areas_promedio}	
+\end{figure}
+
+
+\subsection{Comportamiento de los precios}
+
+La oferta de la papa está condicionada por diferentes factores tales como las condiciones climáticas de la zona, los precios del período anterior, tecnología de producción, costos de producción y el ataque de plagas y enfermedades \citep{Barrientos2014}. La papa se produce principalmente en dos períodos del año en el centro del país y tiene las características de una producción discontinua, ya que presentan un comportamiento de bajadas y subidas atribuido al teorema de la telaraña \citep{BarrientosF.2011, Ezekiel1938}:\\
+
+%\citep{Cortes-Duque2013}
+
+``El precio elevado de un producto en el año `$n$' estimula a los agricultores a que aumenten masivamente la superficie cultivada en el año `$n+1$'. Esto produce una caída de los precios en el año `$n+2$' y, posteriormente, una reducción de la superficie cultivada en el año `$n+3$'" tomado de \citet{Cartay1999}.\\
+
+%En la Figura \ref{gra:papa_precio} podemos observar la alta variación de los precios a través del año y una variación en las áreas sembradas.\\ %% http://lema.rae.es/dpd/srv/search?key=periodo
+
+
+%Las heladas provocan una disminución en la producción de papa, pero la demanda continúa igual, por esta razón los precios aumentan. Por esta razón se tomaron los datos históricos de las áreas sembradas y los precios y se ubicaron en un solo gráfico, ver gráfico \ref{gra:papa_precio}. Adicionabrotaciónlmente se realizaron estas Figuras para poder observar si existía alguna periodicidad de las áreas o los precios.\\
+
+
+%\begin{figure}[H]
+%	\begin{center}
+%	\includegraphics[draft=false, scale=.5]{papa_cund_2.png}
+%	\caption{Figura del área sembrada en Cundinamarca y el precio por kilogramo de papa en Bogotá, fuente \citep{madr2017, Agronet2018},}
+%	 \label{gra:papa_precio}
+%\end{center}
+%end{figure}
+
+
+\section{Temperatura del aire en la Sabana de Bogotá} %Temperaturas extremas y su relación con la papa}
+%
+\citet{Ruiz2012} afirman que en los últimos 40 años, la temperatura del aire en Bogotá ha aumentado entre 1 y 2\celc \ . Se esperaría que este fenómeno no esté localizado solamente en Bogotá sino en toda la Sabana de Bogotá. Por esta razón, se tomaron todos los valores de temperatura media diarios reportados por las estaciones convencionales del IDEAM de la zona de estudio. Con estos valores se realizó un histograma para cada año y adicionalmente se representó el promedio de ese año con una línea, ver Figura \ref{graph:evol_tmp_sabana}.\\
+
+En el año 1971 la temperatura del aire promedio diaria fue de 12.54\celc \  \ como lo indica la Figura \ref{graph:histo_tiempo_1971}. En el año 2016 se obtuvo una temperatura promedio para la Sabana de Bogotá de 13.88\celc \ , ver Figura \ref{graph:histo_tiempo_2016}. A través de los años se ve un aumento en la temperatura del aire diaria promedio, ver Figura \ref{graph:histo_tiempo}. En promedio, desde el año 1971 hasta el 2016 se ha presentado un aumento de la temperatura del aire medio diario de 1.34\celc \  (Figura \ref{graph:histo_tiempo}).\\
+
+
+% La temperatura promedio para la Sabana de Bogotá en el año de 1971 era de 12.54\celc \ . En la Figura \ref{graph:evol_tmp_sabana} podemos observar el cambio en la temperatura promedio de la temperatura del aire, la Figura comienza desde el año 1971 con un color azul aguamarina y finaliza en el 2016 con un color naranja, los colores van cambiando a través de los años de fríos a cálidos. En la Figura podemos observar cómo las líneas azules se encuentran a la izquierda, ya que el valor promedio de temperatura para el año 1971 fue de 12.54\celc \  y para el año 2016 el color corresponde a las líneas de colores naranja y rojo y la temperatura promedio de la zona fue de 13.74\celc \ . La Figura \ref{graph:histo_tiempo_2016} es el histograma correspondiente al año 2016 y sirve de referencia para poder observar en comparación con la Figura \ref{graph:histo_tiempo} y ver el aumento de la temperatura promedio de la Sabana de Bogotá.
+
+%%%Voy acá en la revisión, tengo que cambiar la posición de los labels
+
+\begin{figure}[H]
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=false, scale=0.6]{grafica_tiempo_1971.png}
+		
+		\caption{Histograma y promedio de la temperatura del aire en el año 1971}		
+		\label{graph:histo_tiempo_1971}
+		
+	\end{center}
+	\end{subfigure}
+
+		
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=false, scale=0.6]{grafica_tiempo_2016.png}
+		
+		\caption{Histograma y promedio de la temperatura del aire en el año 2016}		
+		\label{graph:histo_tiempo_2016}
+		
+	\end{center}
+	\end{subfigure}
+    
+    \begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=false, scale=0.6]{grafica_tiempo.png}
+		
+		\caption{Histogramas de la temperatura del aire a través del tiempo y promedios para cada año en el período 1971 a 2016.}		
+		\label{graph:histo_tiempo}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Histogramas de la temperatura promedio del aire en la Sabana de Bogotá y promedios, basado en datos de las estaciones convencionales del IDEAM, pertenecientes al área de estudio. Creada a partir de datos desde el año 1971, iniciando con un colores azul aguamarina y finaliza en el 2016 con un color naranja donde se puede observar el aumento de los valores de temperatura.}		
+	\label{graph:evol_tmp_sabana} 
+		
+\end{figure}
+
+\section{Temperatura y su relación con el cultivo de papa}
+
+\subsection{Altas temperaturas y su efecto fisiológico en plantas}
+
+Las altas temperaturas producen estrés en las plantas, esto se produce cuando la temperatura es lo suficientemente alta como para causar un daño en los tejidos de las plantas e influenciar substancialmente en el crecimiento y en el metabolismo de las plantas. Cada especie posee un rango de termo-sensibilidad en el cual se puede desarrollar de una forma óptima. Sin embargo, un aumento en la temperatura fuera de este rango afectará las plantas en su morfología, fisiología, bioquímica y aún a nivel molecular. Un evento de estrés por calor en las plantas puede producir quemazón en las hojas, ramas y tallos, senescencia y abscisión, inhibición del crecimiento de tallos y raíces, aborto de yemas, reducción del rendimiento, entre otras \citep{Pareek1997}. Como consecuencia, del efecto de la alta temperatura sobre las plantas se producirán especies reactivas de oxígeno, las cuales inducirán un estrés oxidativo en las membranas lipídicas, desnaturalización de las proteínas, produciendo daños en los ácidos nucleicos y la clorofila, fuga de electrolitos y por último muerte celular \citep{Khan2015}.
+
+\subsection{Bajas temperaturas y su efecto fisiológico en plantas}
+
+Las temperaturas más bajas en la Sabana de Bogotá se presentan cuando hay una helada. Las heladas en el mundo son principalmente de dos tipos: la helada advectiva y la helada radiativa.\\
+
+Una helada advectiva es producida por las masas de aire frío que se depositan en un área, remplazando el aire que estaba a una temperatura mayor, generalmente se presentan en latitudes medias y latitudes altas. Este tipo de  heladas están asociadas a condiciones nubladas, vientos moderados a fuertes y no se evidencia una inversión en la tropósfera. A menudo las temperaturas caen bajo cero y se mantienen bajas todo el día \citep{Prabha2008a, IDEAM2012a}. Por ejemplo, \citet{Prabha2008a} define una helada advectiva como noches en la que la velocidad del viento excede los 2 $m\ s^{-1}$ y existen temperaturas bajo 0\celc \.\\
+
+Una helada radiativa es producida bajo condiciones de cielo despejado donde la pérdida de calor de las plantas y del suelo es mayor que el calor recibido durante el día, por esta razón la temperatura desciende y cae por debajo de 0\celc. Está caracterizada por cielos despejados, vientos con baja velocidad, inversiones de temperatura, bajas temperaturas de punto de rocío y temperaturas menores a 0\celc \   \citep{Halley2003, IDEAM2012a}. Existen dos subcategorías de heladas radiatívas la helada blanca y la helada negra. La helada blanca sucede cuando hay temperaturas por debajo de 0\celc \  y el vapor de agua se condensa sobre la superficie de las hojas, entonces se forma una película de hielo sobre las hojas que se llama comúnmente escarcha. Cuando la humedad es muy alta es más probable que se forme una superficie de hielo sobre las hojas y por tanto se forme una helada blanca. Una helada negra sucede cuando la temperatura cae bajo 0\celc \ y no se forma hielo sobre la superficie. En el momento de la formación de escarcha sobre las hojas libera energía, debido al cambio de estado, por esta razón la helada blanca produce menos daño que la helada negra \citep{Snyder2010}.\\
+
+Cuando las temperaturas son lo suficientemente bajas se puede producir la formación de hielo. La formación de hielo produce daño en las plantas. Hay poca o nula evidencia acerca de los efectos de la duración de heladas sobre las plantas. Esto podría significar que los efectos dañinos para las plantas no dependen de la duración del evento sino de la temperatura que se alcance. Cuando la tasa de enfriamiento de la temperatura del aire es muy rápida, se produce un mayor efecto en las plantas \citep{Snyder2010}. Según \citet{Snyder2005} se pueden presentar dos tipos de congelamiento en la planta:
+
+\begin{enumerate}
+\item Formación de los cristales dentro del protoplasma (congelamiento intracelular)
+\item Formación de cristales dentro de la planta pero fuera del protoplasma (congelamiento extracelular)
+\end{enumerate}
+
+En las plantas, cuando la temperatura es menor a 0\celc \  y existen sustancias que actúen como nucleador heterogéneo, el agua se congelará, esto por lo general sucede en las cavidades extracelulares en las cuales el agua se congelará primero. Caso contrario ocurre dentro de las células ya que su contenido de solutos es alto y esto las protege de la congelación. Si las condiciones de temperatura se mantienen o la temperatura desciende, entonces la presión de vapor del hielo será más baja que la presión de vapor del agua en estado líquido. Como resultado, el agua líquida dentro de la célula pasará a través de la membrana semipermeable y se depositará en los cristales de hielo fuera de la célula. Cuando se presenta un congelamiento en los tejidos de las plantas, las células van muriendo debido a la fuga de agua de las células en dirección a las masas de hielo extraceluar \citep{levitt2012chilling, pearce2001plant}.
+
+%Las moléculas de agua se unen para formar un núcleo estable de hielo (nucleación homogénea), o puede ser catalizado por otra sustancia (nucleación heteogénea). Una nucleación homogénea es muy poco probable a temperaturas sobre 0\celc \ , en contraste en un clima húmedo una nucleación heterogénea es difícil de evitar \citep{pearce2001plant}. 
+
+Si una célula de una planta no tiene un nucleador hetereogéneo, la temperatura a la cual se congelaría es de -40\celc \ . En general, el hielo es usualmente extracelular en las hojas congeladas \citep{pearce2001plant}. Algunas de las sustancias que pueden actuar como un nucleador heterogéneo según \citet{pearce2001plant} son:
+\begin{enumerate}
+\item Bacterias nucleadoras del hielo \textit{Ice nucleation-active} (INA). \textit{Pseudomonas syringae y Erwinia herbicola}.
+\item Otras moléculas y estructuras biológicas.
+\item Residuos orgánicos o inorgánicos.
+\end{enumerate}
+
+%Uno de los daños más frecuentes en las plantas es causado por el congelamiento de las plantas. 
+
+\subsection{Las temperaturas extremas y el cultivo de papa}
+
+Las respuestas de las plantas de papa a temperaturas extremas dependen del estado fenológico en el cual se encuentren. Según \citet{Hatfield2008} en el cultivo de papa en las fases de brotación y emergencia la temperatura del aire debe estar en el rango 4-16\celc\ y la temperatura óptima para el desarrollo después de la emergencia es de 16-20\celsius. Es en la etapa de emergencia cuando las plantas son más susceptibles a daños por temperaturas extremas.\\
+
+La incidencia de las temperaturas extremas sobre los cultivos de papa tiene impacto en la producción. Por ejemplo, valores de temperatura en el suelo sobre 25\celc \  reducen la emergencia de las plantas, el número de plantas que nacen y el número de tallos por planta \citep{birch2012crops, sale1979growth}. Cuando la temperatura del aire es superior a 27\celc \  en los primeros estados de desarrollo, se produce una disminución de la cantidad de hojas en las plantas de papa \citep{birch2012crops, sale1979growth}. Cuando las temperaturas exceden los 29\celc \  se reduce el área foliar y el peso húmedo, esto detiene la producción de los tubérculos \citep{prange1990reduction}. Estos casos de altas temperaturas en la Sabana de Bogotá están relacionados con temporadas secas, cielos despejados y fuertes vientos \citep{IDEAM2017c}.\\
+
+Como ejemplo tenemos la temporada de heladas que se presentaron en 1995 en las planicies del Altiplano Cundiboyacense,  Nariño y Antioquia; causaron la destrucción de cerca del 70\% de la cosecha de papa. Esto representó una pérdida aproximada de 56000 millones de pesos \citep{Romero1996}. Por otra parte, el primero y segundo día de febrero del 2007 se presentaron temperaturas de -4.7\celc \  en los municipios de Mosquera, Sopó, Tenjo, Subachoque, Funza, Sesquilé y Nemocón; este fenómeno afectó cerca de 7500 hectáreas de papa \citep{ElTiempo2007}.\\
+
+%Una de las adaptaciones de las plantas durante períodos fríos es el endurecimiento. El endurecimiento está más relacionado con el aumento de contenido de solutos en los tejidos de las plantas que impiden el congelamiento de los tejidos disminuyendo la temperatura de congelamiento \citep{Snyder2010}.\\
+
+
+%Por otro lado las bajas temperaturas producen estrés en las plantas, cuando el agua ya sea en la superficie de las hojas o dentro de las plantas se congela a este fenómeno lo llamamos helada \citep{Snyder2010}.\\
+
+%Por esta razón \citet{Hijmans2003} propone que el cultivo de papa no puede estar por fuera de el rango entre 0\celc \  y 20\celc \  porque presentaría daños en la planta que se verían reflejado en la producción, ya que según  
+
+%Para el cultivo de papa el rango óptimo de temperatura del aire está entre 20\celc \  y 0\celc \  \citep{Hijmans2003}, 
+
+%Es importante notar que estas zonas siempre han sido de vocación agropecuaria algunos de estos tienen un mayor costo que otros. Y según \citep{Castro-Romero2014}, esto depende de la calidad de servicios ecosistémicos de las fincas, pero estos servicios ecosistémicos no son infinitos, es más rápidamente tienen a deteriorarse, como es el caso de la materia orgánica. %% Ojo usar esto.
+
+\section{Comportamiento de las temperaturas extremas en la Sabana de Bogotá}
+
+Para realizar este análisis se usaron los datos de las estaciones convencionales y automáticas. Basado en la información obtenida de la red HYDRAS para las estaciones automáticas se realizó la Tabla \ref{tab:hydras_inicio_fin} la cuál contiene las fechas de inicio y finalización de los datos válidos.\\
+
+\begin{table}[h]
+\centering
+\caption{Fecha de inicio y finalización de la variable temperatura del aire de las estaciones automáticas de la red HYDRAS. Algunas estaciones no poseen valores válidos de temperatura estos son representados con un NaT.}
+\label{tab:hydras_inicio_fin}
+\begin{tabular}{lrlll}
+
+\toprule
+{} &       Código &                   Nombre &              Inicio &                 Fin \\
+\midrule
+1  &  35025080 &       PNN CHINGAZA AUTOM & 1996-01-24 08:00:00 & 2018-02-22 00:00:00 \\
+2  &  35075080 &   PMO RABANAL AUTOMATICA & 1998-06-02 03:32:00 & 2018-02-22 00:00:00 \\
+3  &  35085080 &         LA CAPILLA AUTOM & 2000-01-01 00:00:16 & 2018-02-21 23:08:00 \\
+4  &  21206990 &     TIBAITATA AUTOMATICA & 2000-01-01 00:00:22 & 2018-02-22 00:00:00 \\
+5  &  21206940 &           CIUDAD BOLIVAR & 2000-01-01 17:12:52 & 2014-07-22 03:02:00 \\
+6  &  35035130 &             PMO CHINGAZA & 2000-01-01 23:37:48 & 2018-02-22 00:00:00 \\
+7  &  21206920 &  VILLA TERESA AUTOMATICA & 2000-01-20 17:22:04 & 2018-02-22 00:00:00 \\
+8  &  21205012 &            UNIV NACIONAL & 2003-05-20 17:42:00 & 2018-02-21 23:05:00 \\
+9  &  21206930 &             PMO GUERRERO & 2004-04-02 10:44:52 & 2018-02-21 23:09:00 \\
+10 &  21206790 &        HDA STA ANA AUTOM & 2005-02-08 02:00:00 & 2018-02-21 23:02:00 \\
+11 &  23125170 &       SAN CAYETANO AUTOM & 2005-02-09 01:07:00 & 2018-02-22 00:00:00 \\
+12 &  35075070 &     CHINAVITA AUTOMATICA & 2005-02-13 09:00:00 & 2018-02-22 00:00:00 \\
+13 &  35027510 &           CALOSTROS BAJO & 2005-02-20 23:28:00 & 2018-02-22 00:00:00 \\
+14 &  21206980 &       STA CRUZ DE SIECHA & 2005-04-21 17:59:00 & 2018-02-22 00:00:00 \\
+15 &  21206950 &          PMO GUACHENEQUE & 2005-06-21 12:00:00 & 2018-02-22 00:00:00 \\
+16 &  24015110 &     LA BOYERA AUTOMATICA & 2005-06-28 12:00:00 & 2018-02-22 00:00:00 \\
+17 &  21195160 &         SUBIA AUTOMATICA & 2006-07-30 12:01:00 & 2012-06-12 19:43:00 \\
+18 &  21206960 &             IDEAM BOGOTA & 2008-06-15 10:00:00 & 2018-02-21 23:26:00 \\
+19 &  35025090 &       BOSQUE INTERVENIDO & 2009-04-28 03:00:00 & 2018-02-22 00:00:00 \\
+20 &  21206600 &         NUEVA GENERACION & 2010-01-06 00:30:00 & 2018-02-21 23:01:00 \\
+21 &  21201200 &  ESC LA UNION AUTOMATICA & 2010-06-11 15:30:00 & 2016-08-01 13:20:00 \\
+22 &  21205791 &           APTO EL DORADO & 2014-08-29 10:03:00 & 2018-02-21 23:06:00 \\
+23 &  21201580 &     PASQUILLA AUTOMATICA &                 NaT &                 NaT \\
+24 &  21202270 &   PLUVIOMETRO AUTOMATICO &                 NaT &                 NaT \\
+25 &  21202271 &       PLUVIOMETRO AUTOMA &                 NaT &                 NaT \\
+26 &  21206710 &   SAN JOAQUIN AUTOMATICA &                 NaT &                 NaT \\
+27 &  21209920 &         STA ROSITA AUTOM &                 NaT &                 NaT \\
+28 &  26127010 &             EL ALAMBRADO &                 NaT &                 NaT \\
+29 &  35025100 &           CALOSTROS BAJO &                 NaT &                 NaT \\
+30 &  35027001 &          PLAZA DE FERIAS &                 NaT &                 NaT \\
+31 &  35027002 &      PARQUE RAFAEL NUÑEZ &                 NaT &                 NaT \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Es importante notar que no todas las estaciones automáticas cuentan con datos de temperatura y los registros de las estaciones no comienzan en los mismos períodos de tiempo, ver Tabla \ref{tab:hydras_inicio_fin}. Además no todas las estaciones automáticas poseen datos de temperatura del aire, las estaciones sin datos de temperatura fueron marcadas con NaT. Se evidencia que nueve estaciones no poseen datos de temperatura del aire. Dos de las 22 estaciones reportan datos antes del año 2000. Tres de las 22 estaciones con datos no presentan datos para el año 2018.\\
+
+Las temperaturas extremas del aire son aquellos valores que se encuentran fuera del rango entre 0\celc \  y 20\celc \ , ya que según \citet{Hijmans2003} las plantas de papa fuera de este rango presentan afectaciones.\\
+
+Las Figuras \ref{graph:tmp_bajo0} y \ref{graph:tmp_sobre20} muestran todos los valores diarios máximos y mínimos de la temperatura del aire de las estaciones convencionales que están por fuera del rango entre 0 y 20\celc \  y los años en los cuales se presentó cada valor. En la Figura \ref{graph:tmp_bajo0} se puede observar que aproximadamente desde el 2009 ha ido disminuyendo el número de casos de bajas temperaturas y los valores de la temperatura han sido cada vez menos negativos. Para el caso de las temperaturas sobre 20\celc \ Figura\ref{graph:tmp_sobre20} se observa un aumento continuo de los eventos y en el 2003 se observa un incremento en los valores de temperatura.
+
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=false, scale=0.7]{tmp_debajo0.png}
+		
+		\caption{Valores mínimos diarios de temperatura bajo 0\celc \  y año del evento. Los valores fueron registrados por las estaciones convencionales del IDEAM.}		
+		\label{graph:tmp_bajo0}
+		
+	\end{center}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=false, scale=0.7]{tmp_sobre20.png}
+		
+		\caption{Valores máximos diarios de temperatura sobre 20\celc \  y año del evento. Los valores fueron registrados por las estaciones convencionales del IDEAM.}		
+		\label{graph:tmp_sobre20}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Valores diarios de temperatura del aire para las estaciones convencionales de la Sabana de Bogotá y que están fuera del rango comprendido entre 0 y 20\celc. }		
+	\label{graph:limites}
+
+\end{figure}
+
+La figura \ref{graph:tmp_bajo_meses} muestra la distribución de las temperaturas mínimas bajo cero en los diferentes meses del año usando la información de las estaciones convencionales. Se han registrado temperaturas bajo cero en todos los meses del año, pero con mayor frecuencia en los meses de diciembre, enero y febrero. Por otra parte, las temperaturas sobre 20\celc \  se presentan durante todos los meses del año pero con mayor frecuencia entre diciembre y abril (Figura \ref{graph:tmp_sobre_meses}).
+
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+    		\caption{Frecuencia mensual de la temperatura mínima del aire bajo 0\celc \ }
+	\includegraphics[draft=false, scale=0.7]{frec_bajas_tmp.png}
+		
+
+		\label{graph:tmp_bajo_meses}
+		
+	\end{center}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+    \caption{Frecuencia mensual de la temperatura máxima del aire sobre 20\celc \ }
+	\includegraphics[draft=false, scale=0.7]{frec_altas_tmp.png}
+		
+		
+		\label{graph:tmp_sobre_meses}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Frecuencia de ocurrencia de las temperaturas (a) mínimas diarias bajo 0\celc \  y (b) de las temperaturas sobre 20\celc \ de cada una de las 162 estaciones convencionales ubicadas en la Sabana de Bogotá en función de los meses del año.}
+	\label{graph:tmp_meses}
+
+\end{figure}
+%Frecuencia de ocurrencia de valores de temperatura de cada una de las estaciones ubicadas en la Sabana de Bogotá bajo 0\celc \  en función de los meses del año
+
+
+
+La Figura \ref{graph:tmp_hora} muestra la distribución horaria de la temperatura que está por fuera del rango 0 a 20\celc \ . Para este análisis se usó información de la estación automática Tibaitatá perteneciente a la red HYDRAS del IDEAM. Ya que fue necesario realizar una comparación entre las estaciones convencionales y las estaciones automáticas y esta estación posee ambos tipos de estación, además la estación convencional posee datos diurnos horarios que fueron facilitados por Agrosavia. Como se puede observar en la Figura \ref{graph:tmp_bajo_hora} la mayoría de eventos con temperatura bajo 0\celc \  se presentan entre las 0 horas y las 7 horas, presentando la mayor frecuencia a las 5 de la mañana. Para las horas en las que se presenta la mayor cantidad de eventos con temperaturas sobre 20\celc \ , podemos decir que se producen entre las 8 y las 17 horas teniendo la mayor frecuencia a las 12 horas (ver Figura \ref{graph:tmp_sobre_hora}).
+
+
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=false, scale=0.7]{hora_heladas.png}
+		
+		\caption{Ocurrencia de temperaturas bajo 0\celc \  en las diferentes horas del día. Hora local.}		
+		\label{graph:tmp_bajo_hora}
+		
+	\end{center}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=false, scale=0.7]{hora_tmp_altas.png}
+		
+		\caption{Frecuencia de ocurrencia de temperaturas sobre 20\celc \  a en las diferentes horas del día. Hora local.}		
+		\label{graph:tmp_sobre_hora}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Frecuencia de ocurrencia de las temperaturas horarias bajo 0\celc \  y sobre 20\celc.}		
+	\label{graph:tmp_hora}
+
+\end{figure}
+
+
+\section{Comparación entre datos de una estación automática y una convencional en el evento de helada presentado en Febrero del 2007}
+
+%%%acá voy
+
+Las estaciones meteorológicas automáticas están tomando el lugar de las observaciones con las estaciones convencionales. Pero es claro que las estaciones meteorológicas automáticas necesitan de un periodo de observaciones en paralelo y todos los datos debe recibir un control de calidad para asegurar una homogeneidad en los datos \citep{Ying2004}, ya que en los análisis futuros la información provendrá solo de las estaciones automáticas.\\
+
+Las estaciones convencionales poseen varios problemas uno de ellos es el alto costo que genera tener un operario registrando los datos, las estaciones convencionales presentan errores de transposición de los números (ejemplo: 12 es registrado por 21) o la transposición de máximos y mínimos.\\
+
+Las estaciones automáticas también poseen problemas tales como el no registro de los datos, saltos en las series, sensores que presentan los mismos registros, valores atípicos de la variable, entre otros.  Los sensores de las estaciones automáticas permanecen en el campo hasta que se reportan problemas o el sensor cumple su tiempo útil. El tiempo de vida útil se establece en base de la experiencia de la red \citep{Shafer2000}.
+
+Los errores pueden ser producidos por un ruido electrónico en las medidas, comunicaciones defectuosas, degradación del sensor, golpe de un rayo o cambios de los registros en los días \citep{Menne2001}.
+
+La estación Tibaitatá genera datos de temperatura a dos metros. Para cada una de estas variable existen valores máximos, mínimos y promedios ver en la Figura \ref{subfig:b9} en esta figura se gráfico primero los valores promedio de temperatura, luego los valores de temperaturas máximas y para finalizar las temperaturas mínimas. Adicionalmente se realizó una figura donde se ubicó primero la temperatura mínima, seguido de la temperatura máxima y para finalizar la temperatura promedio, ver Figura \ref{subfig:b10}.
+
+
+\begin{figure}[H]
+	\centering
+			\begin{subfigure}[b]{0.4\textwidth}
+
+			\includegraphics[draft=false, scale=0.5]{grafica_info_4/prom_fondo.pdf}
+			\caption{Temperatura del aire en el siguiente orden promedio, máxima y mínima.}
+			\label{subfig:b9}
+
+			\end{subfigure}
+			%% % Simbolo usado para poner las Figuras una frente a la ootra
+			\begin{subfigure}[b]{0.4\textwidth}
+
+			\includegraphics[draft=false, scale=0.5]{grafica_info_4/prom_frente.pdf}
+		\caption{Figura de la temperatura del aire en el siguiente orden mínima, máxima y promedio.}
+			\label{subfig:b10}
+
+			\end{subfigure}			
+
+		
+		\caption{Gráfico de las temperaturas máximas, mínimas y promedio para la estación Tibaitatá, desde el cinco de febrero hasta el siete de febrero del 2007.}
+		\label{gra:conv_vali}
+	
+\end{figure}
+
+En la Figura \ref{subfig:b9} se puede observar que las temperaturas máximas y mínimas no coinciden con los valores máximos y mínimos de la variable temperatura del aire, este patrón se repite en las diferentes estaciones analizadas. Existen lapsos de tiempo en los cuáles no se registran valores de temperatura. Según la Figura \ref{subfig:b10} la variable que posee la mayor cantidad de datos es la de temperatura promedio, sin embargo existen ciertos valores que son reportados por la temperatura máxima y mínima los cuales no son registrados en la temperatura promedio. Por esta razón si se quiere obtener la mejor serie de tiempo de temperatura se deben unir las temperatura máxima, mínima y promedio. Es importante notar que en ciertos momentos se puede obtener valores de temperatura promedio y valores máximos o mínimos al mismo tiempo. Basado en la experiencia de este trabajo cuando se presenten dos valores y uno de ellos es la temperatura promedio es preferible tomar la temperatura promedio, ya que las temperatura máxima y mínima suelen tener más errores que la promedio.\\
+
+
+A partir de los datos de la estación convencional se quiso determinar cuánto es la diferencia entre la temperatura a dos metros y la temperatura sobre el suelo, ya que la altura de las plantas oscila entre cero y 80 centímetros aproximadamente, dependiendo del estado fenológico en el que se encuentre. Por esta razón se usaron los datos de la estación convencional Tibaitatá, facilitados por Agrosavia esta estación posee termómetros a diferentes alturas 5, 10, 50, 100 y 200 centímetros. Estos termómetros nos permiten hacer un análisis con respecto al perfil de temperatura, ya que los valores de temperatura que normalmente se usan en las estaciones se encuentra reportada a 2 metros, obedeciendo la normatividad de la \citet{WMO2010}. Por esta razón se tomaron los valores mínimos de estos termómetros y se promediaron, se obtuvo la Tabla \ref{tabla_minimas_convencional}. En la Tabla \ref{tabla_minimas_convencional} se puede observar que las temperaturas más bajas se encuentran a menor altura y podemos concluir que hay una diferencia de 2.8 \celsius entre el termómetro a 5 y 200 cm. Si en el sensor de temperatura a dos metros de altura presenta una temperatura de 0\celsius entonces, podemos pensar que la temperatura a 5 cm puede llegar a ser de -2.8\celsius.\\
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{l|l}
+\textbf{Promedio de la variable} & \textbf{\celc} \\ \hline
+Temperatura a 5 cm               & 4.4         \\
+Temperatura a 10 cm              & 5.1         \\
+Temperatura a 50 cm              & 5.9         \\
+Temperatura a 100 cm             & 6.7         \\
+Temperatura a 200 cm             & 7.2        
+\end{tabular}
+\caption{Tabla resumen de las temperaturas mínimas reportados por la estación convencional}
+\label{tabla_minimas_convencional}
+\end{table}
+
+%Los datos de la Tabla \ref{tabla_minimas_convencional} es una herramienta útil para poder determinar cuál es la diferencia entre las temperaturas a dos metros y a una altura menor. Todas las estaciones automáticas y convencionales generan resultados de la temperatura a dos metros, con los valores de la Tabla \ref{tabla_minimas_convencional} se puede hacer una aproximación de la diferencia de temperatura que se puede presentar a otras alturas. Por ejemplo en el caso que se presenten temperaturas de 0\celc en un termómetro a dos metros y la papa está en un estado fenológico temprano y tiene una altura de 10 cm, esperaríamos que la temperatura a la altura de la planta sea aún menor, cercano a -2.1\celc.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Comparación entre una estación convencional y una automática}
+\label{convencional_vs_automática}
+
+Se realizó una comparación entre los valores de las estaciones convencionales y la estación automática de Tibaitatá, ver Figura \ref{subfig:b1}. La estación convencional y la estación automática se encuentran a cinco metros de distancia en el Centro de Investigación Tibaitatá de Agrosavia, coordenadas (4.688693, -74.205595). Se realizó una Figura de los datos de temperatura a dos metros mínimos y máximos que reporta la estación convencional y los datos de temperatura a dos metros que reporta la estación automática  entre las fechas 29 de enero de 2007 al 7 de febrero de 2007. Esta Figura se realizó para un período en el cuál se registraron altas y bajas temperaturas en la zona de estudio. Es importante resaltar que los valores de las estaciones convencionales son valores diarios, razón por la cuál los valores de máximas y mínima temperatura son ubicadas a las cero horas del día de estudio.
+
+ \begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=false, scale=0.3]{grafica_info_4/conv_vs_auto_2007.pdf}
+		\caption{Comparación de las temperaturas del aire a dos metros registrado por la Estación Convencional Tibatitatá (tmp\_2m) y las temperaturas del aire máxima (Máxima-conv) y temperatura del aire mínima (Mínima-conv) a dos metros reportada por la estación convencional Tibaitatá, para las fechas entre 29 de enero de 2007 al 7 de febrero de 2007.}
+		\label{subfig:b1}
+	\end{center}
+\end{figure}
+
+ En la Figura \ref{subfig:b1}, se puede observar que los valores de temperaturas mínimas de la estación convencional coinciden con los puntos más bajos de la estación automática en la mayoría de los casos y nunca el valor de la estación automática es menor que el valor de la estación convencional. Pero para el caso de las temperaturas altas podemos ver que en la mayoría de los casos los valores de la estación automática exceden los valores de la estación convencional. Esto quiere decir que los valores máximos de temperatura de las estaciones convencionales son mayores a los valores registrados por las estaciones convencionales.\\
+ 
+ Es importante resaltar que los valores reportados por las estaciones convencionales son registrados basado en dos tipos de termómetros, para las temperaturas medias se usa un termómetro de mercurio y para las temperaturas mínimas se usa un termómetro de alcohol \citep{augter2013vergleich} (Figura \ref{gra:convencional_2}). Por otro lado en las estaciones automáticas la recolección de los datos se realiza mediante sensores (termocuplas) las cuales permiten un seguimiento más rápido de las condiciones atmosféricas que facilitan una rápida toma de decisiones \citep{Soares2017}.
+ 
+% La temperatura promedio en las estaciones convencionales es calculada con la siguiente fórmula:
+%
+%\begin{equation}\label{fx:promedio}
+%T_{promedio} = \frac{T_{I} + T_{II} +T_{II}}{4}
+%\end{equation}
+
+%donde $T_{I}$ es la temperatura observada a las 6:00, $T_{II}$ temperatura observada a las 12:00 y $T_{III}$ temperatura observada a las 18:00. Esta es una adaptación de la fórmula propuesta por \citet{kamtz1831lehrbuch}.\\
+
+
+
+El funcionamiento de las estaciones automáticas y convencionales es diferente. Este fenómeno se ha presentado en otras investigaciones, por ejemplo \citet{auchmann2012physics} pantea una investigación para determinar si hay diferencias entre las estaciones automáticas y las estaciones convencionales, donde concluye que la diferencia entre los valores de temperatura radica en los tipos de abrigos meteorológicos usados. Por ejemplo \citet{augter2013vergleich} concluye que el cambio en el tipo de estaciones solo provoca pequeños cambios en la variable presión atmosférica y la temperatura, pero que no presentaron inhomogeneidades, la precipitación es ligeramente diferente, pero la mayor incertidumbre es reflejada en los sensores de lectura manual tales como la medición de humedad y brillo solar \citep{augter2013vergleich}. Pero otros autores como \citet{kamtz1831lehrbuch} han reportado diferencias en los valores de las mediciones, al igual que \citet{lacombe2010results} y \citep{kaspar2016climate} quienes aseveran que en ciertos casos la temperatura registrada por la estación automática registra valores más altos.\\
+
+Los abrigos meteorológicos de las estaciones convencionales son basados en las modificaciones hechas por la Real Sociedad Meteorológica en 1884 (Figura \ref{gra:convencional_1}) y los sensores de las estaciones automáticas son operadas en Abrigos Laminares del tipo "LAM 630" (Figura \ref{gra:autom_1}).
+
+\begin{figure}[H]
+	
+	\begin{subfigure}[normla]{0.4\textwidth}
+	\centering
+	\includegraphics[draft=false, scale=0.05]{grafica_info_4/abrigo_convencional.jpg}
+		
+		\caption{Abrigo meteorológico de una estación convencional}		
+		\label{gra:convencional_1}
+		
+	\end{subfigure}
+~
+	\begin{subfigure}[normla]{0.4\textwidth}
+	\centering
+	\includegraphics[draft=false, scale=0.3]{grafica_info_4/abrigo_convencional_2.png}
+		
+	\caption{Termómetros dentro de un abrigo meteorológico convencional.}		
+	\label{gra:convencional_2}
+		
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%		
+	\begin{subfigure}[normla]{0.4\textwidth}
+	\centering
+	\includegraphics[draft=false, scale=0.05]{grafica_info_4/abrigo_automatica_1.jpg}
+		
+		\caption{Estación automática.}		
+		\label{gra:autom_1}
+		
+	\end{subfigure}
+~
+	\begin{subfigure}[normla]{0.4\textwidth}
+	\centering
+	\includegraphics[draft=false, scale=0.7]{grafica_info_4/abrigo_automatica_2.png}
+		
+		\caption{Detalle del abrigo meteorológico de una estación automática.}		
+		\label{gra:autom_2}
+		
+	\end{subfigure}	
+	
+	
+	\caption{Abrigos meteorológicos de una estación convencional y una estación automática ubicadas en el centro de investigación de Agrosavia, Tibaitata en Mosquera.}		
+	\label{graph:evol_tmp_sabana} 
+		
+\end{figure}
+
+El aumento de la temperatura en las estaciones automáticas es generado por el efecto de la radiación y la posición del sensor dentro del abrigo \citep{kaspar2016climate}. En caso de alta radiación y baja velocidad del viento se ha demostrado que el abrigo meteorológico LAM 630 registra valores de temperatura más alto en comparación con la garita de termómetro tipo Stevenson \citep{lacombe2010results, kaspar2016climate}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Caracterización de las heladas y altas temperaturas}
+\label{area_caracterizacion_heladas_extremas}
+
+Para analizar el comportamiento de las heladas y las altas temperaturas se tomaron todos los datos de la Estación Automática Tibaitatá y se graficaron diariamente, con el objetivo de observar el comportamiento diario de la temperatura (Figura \ref{gra:sin_filtro}). Para hacer una caracterización de las heladas se graficaron los días que se habían presentado heladas (Figura \ref{gra:helada}). Adicionalmente los días en los que se presentaron altas temperaturas también fueron graficadas (Figura \ref{gra:altas}).
+
+%En varios textos se dice que la temperatura en los días de heladas cambia muy rápidamente. Para poder visualizar la forma como cambia la temperatura se realizaron las siguientes Figuras, las cuales son la representación de las diferentes temperaturas en el día, después del control de datos.
+
+\begin{figure}[H]
+\begin{subfigure}[b]{0.5\textwidth}
+\begin{center}
+\caption{Comportamiento horario de la temperatura horaria para la estación Tibaitatá.}
+\includegraphics[draft=false, scale=0.4]{c_tmp/21206990_1.png}
+\label{gra:sin_filtro}
+        \end{center}
+\end{subfigure}
+~
+%\begin{subfigure}[b]{0.5\textwidth}
+%\begin{center}
+%\includegraphics[draft=false, scale=0.4]{c_tmp/21206990_4.png}
+%\caption{Antes de la helada}
+%\label{gra:antes_helada}
+%\end{center}    
+%\end{subfigure}
+%~
+\begin{subfigure}[b]{0.5\textwidth}
+\begin{center}
+\caption{Comportamiento horario de la temperatura horaria para la estación Tibaitatá en los días de heladas.}
+\includegraphics[draft=false, scale=0.4]{c_tmp/21206990_3.png}
+\label{gra:helada}
+\end{center}    
+\end{subfigure}
+~
+%\begin{subfigure}[b]{0.5\textwidth}
+%\begin{center}
+%\includegraphics[draft=false, scale=0.4]{c_tmp/21206990_6.png}
+%\caption{Antes de las altas temperaturas}
+%\label{gra:antes_altas}
+%\end{center}    
+%\end{subfigure}
+%~
+\centering
+\begin{subfigure}[b]{0.5\textwidth}
+\begin{center}
+\caption{Comportamiento horario de la temperatura horaria para la estación Tibaitatá en los días de altas temperaturas.}
+\includegraphics[draft=false, scale=0.4]{c_tmp/21206990_5.png}
+\label{gra:altas}
+\end{center}    
+\end{subfigure}
+~
+
+\caption{Comportamiento horario de la temperatura del aire de estación Tibaitatá código 21205990 con heladas y con altas temperaturas. Se les ajustó una línea de tendencia para poder observar los cambios en los comportamientos.}
+\end{figure}  
+
+En la Figura \ref{gra:sin_filtro} podemos observar un aumento de la temperatura a partir de las 6 am Hora Local (HL), se resgistran los valores máximos entre las 12 m. y 1 p.m. HL y luego de esto se observa un descenso de la temperatura. Las horas más frias se registran antes del amanecer, cerca a las 5 a.m. HL.\\
+
+Cuando hay heladas podemos observar que el comportamiento de la temperatura varía (Figura \ref{gra:helada}), ya que se presenta el aumento de la temperatura a la misma hora que en la Figura \ref{gra:sin_filtro}, pero posteriormente la tasa de aumento de la temperatura es mayor. Y las temperaturas que se alcanzan algunas de ellas sobrepasan los 25\celsius. Posterior a este rápido aumento se presenta una rápida disminución de la temperatura. Se puede observar que se presentan registros de temperatura iguales o menores a 0\celsius desde las 9 a.m. HL.\\
+
+Para el caso de las temperaturas altas podemos observar que hay unos valores que se encuentran sobre 30\celsius es muy probable que estos valores sean valores atípicos (Figura \ref{gra:altas}). Se puede observar que el comportamiento es similar a la Figura \ref{gra:helada} porque hay un aumento y un descenso rápido de temperatura. En la Figura \ref{gra:altas} podemos observar que existen registros de altas temperaturas desde las 9 am HL.\\
+
+Estos resultados concuerdan con lo que se nombra en la investigación de \citep{Gomez2014} en el cual el modelo usado tiene en cuenta la rapidez como la temperatura desciende para de esta manera poder realizar la predicción de una helada.
+
+%\end{comment}  
+
+\section{Modelos usados para el pronóstico y simulación de la temperatura del aire}
+
+Como se explicó anteriormente, la temperatura del aire tiene un rol central en el crecimiento y desarrollo de los cultivos, ya que influye sobre las tasas de crecimiento de las plantas, pero los extremos de temperatura del aire pueden generar daños en las plantas \citep{wheeler2000}. Por esta razón es importante realizar un pronóstico de estos eventos extremos, ya que son capaces de generar serios daños a los cultivos.\\
+
+Una de las formas para determinar las temperaturas extremas es la utilización de modelos empíricos. \citet{Gomez2014} realizó un estudio sobre las heladas y su efecto en pasturas en el Valle de Ubaté y Chiquinquirá para el período del 2006 y 2007 para generar un pronóstico de las heladas del siguiente día a partir del día presente y se basó en la fórmula de \citet{Allen1957} y el estudio de \citet{Snyder2010}. Además, caracterizó el comportamiento de las heladas en la Sabana de Bogotá y reportó que en las épocas secas hay mayor probabilidad de heladas. El área de estudio comprendió un total del 216.907 ha, de las cuáles \citet{Gomez2014} encontró que 2.442 (1.13\%) hectáreas tienen una alta exposición frente a las heladas. Otro de los resultados de este estudio fue que las estimaciones realizadas por el modelo no fueron precisas, ya que en 5 de cada 14 oportunidades se subestimó la temperatura y en las demás ocasiones se sobrestimó.\\
+
+El balance de energía del suelo fue usado por \citet{Rosenzweig2014} con el objetivo de establecer el rango de incertidumbres del cambio climático en la producción de alimentos en el mundo. En este estudio fue necesario realizar una estimación de la temperatura, por esta razón se usaron los modelos de agroecoistema, los cuales usan el balance de energía para poder hacer una aproximación de la temperatura del aire. Como resultado se obtuvo que hay una alta incertidumbre en la modelación del dióxido de carbono, nitrógeno y las altas temperaturas y su efecto sobre la producción agrícola.\\
+
+Otro estudio que usa un balance energético fue el de \citet{Rossi2002}, hecho para la región al norte de Italia llamada Emilia Romagna. En esta zona, las heladas causan grandes pérdidas en los cultivos. El tipo de helada que afecta esta zona es principalmente de tipo advectivo, pero también hay presencia de heladas radiativas. Como resultado se encontró que en las heladas radiativas existe una gran estratificación del aire, haciendo más complejo el proceso de parametrización del intercambio de calor en la atmósfera que predice los perfiles de temperatura en la atmósfera. La caracterización de la estabilidad de la atmósfera es un elemento esencial en la predicción de la temperatura interna de los tejidos y brotes localizados en las partes productivas de los cultivos.\\
+
+Los sistemas de información geoFigura (SIG) también han sido usados para la predicción de bajas temperaturas, ya que las mas bajas temperaturas son encontradas en los valles durante un evento de radiación de tipo advectivo \citep{Halley2003, Blennow1998}. \citet{Halley2003} realizó un estudio para el Norte de Tasmania, ya que desde 1992 la incidencia de heladas ha presentado un incremento y se ha visto afectada la producción de vino. Como resultado, se mostró que el modelo implementado logró explicar las heladas en un 61\% de la zona de estudio, pero se resalta que este modelo no cuantificó los flujos de radiación de onda larga, lo cual produce un sesgo.\\
+
+El uso de redes neuronales también ha mostrado buenos resultados en la modelación de las heladas como en el caso de \citet{Smith2007} quien como resultado muestra que las predicciones fueron útiles incluso cuando las condiciones iniciales no son las mejores, pero cuando el horizonte de pronóstico aumenta incrementa los errores del pronóstico. \citet{Abhishek2012} concluyen que el proceso es demandante de recursos computacionales y que mediante este método se puede hacer predicción de otras variables meteorológicas tales como humedad, velocidad del viento, entre otros.\\
+
+Para subsanar algunas de las falencias mencionadas anteriormente, en algunas investigaciones se han usado modelos regionales para el pronóstico de las heladas tal como lo hizo \citet{prabha2008evaluation} quienes usaron el modelo \textit{Weather Research and Forecasting Model} (WRF) para poder determinar  si la información de mesoescala puede ser una guía para la protección de los cultivos y poder generar información que ayude a reducir los efectos de las bajas temperaturas sobre los cultivos de arándano y durazno. Este estudio analizó heladas advectivas y radiativas en la zona del Sur de Georgia, E.E.U.U. en los años 2006 y 2007. En este estudio se tuvieron en cuenta las variables temperatura y velocidad del viento. \citet{prabha2008evaluation} concluyeron que el modelo, después de calibrado, permitió realizar un pronóstico de razonable precisión con respecto a las variaciones de la temperatura. El modelo WRF se usa actualmente en Colombia y es usado actualmente por el IDEAM para el pronóstico del tiempo en Colombia como lo reportan varios autores \citep{Arango2011, Mejia2012, Ruiz2014}.\\
+
+
+%Para el pronóstico de las variaciones diarias de temperatura se han usado diferentes métodos por ejemplo, métodos empíricos \citep{Allen1957a, Kangieser1959}, métodos de balance de energía del suelo \citep{Rosenzweig2014a, Rossi2002} métodos basados en los sistemas de información geoFigura \citep{Halley2003} y métodos basados en redes neuronales \citep{Smith2007}. Una de las problemáticas de estos métodos es que no se tienen en cuenta los aspectos físicos y dinámicos de la atmósfera y su evolución temporal \citep{Prabha2008a}.\\
+
+Una de las problemáticas de algunos modelos nombrados anteriormente (modelos empíricos, modelos de balance d energía, SIG  y redes neuronales) no tienen en cuenta aspectos dinámicos y físicos de la atmósfera y su evolución \citep{Prabha2008a}. Por esta razón y por el uso que se le ha dado en Colombia el modelo WRF se convierte en el modelo más interesante para la evaluación de las heladas. Basado en toda la información recopilada se creo una tabla para resumir las fortalezas y las limitaciones de cada uno de los modelos, ver Tabla \ref{tab:fort_deb_mod}.
+
+
+
+\begin{table}[H]
+\caption{Resumen de las ventajas y desventajas de los modelos usados para el pronóstico de temperaturas del aire}
+\resizebox{\textwidth}{!}{\begin{tabular}{p{5cm}| p{5cm} p{5cm} p{5cm}}
+Modelo                                        & Fortaleza                                                  & Limitación                            &Fuente                                                   \\ \hline
+\multirow{2}{*}{Modelos empíricos}            & Fácil aplicación                                                               & Baja precisión en la predicción de la temperatura del aire       & \citep{Gomez2014, Allen1957, Snyder2010}                   \\
+                                              & Se pueden hacer modificaciones al modelo de manera sencilla                     & Los modelos son creados para determinadas condiciones     &                                                                              \\ \hline
+\multirow{2}{*}{Balance de energía del suelo} & Fácil aplicación siempre y cuando se tengan los valores de todas las variables                & Alta incertidumbre                                        & \citep{evett2011water,Rosenzweig2014, Rossi2002}          \\
+                                              &                                                                                & Las variables no son fáciles de calcular                  &                                                                              \\ \hline
+Sistemas de información geoFigura            & Predice muy bien las bajas temperaturas en los valles         & No  tiene en cuenta los flujos de radiación de onda larga & \citep{evett2011water, Halley2003, Blennow1998}              \\ \hline
+Redes neuronales                              & Buenas predicciones en un corto horizonte de pronóstico (6 horas) & Pronóstico a un horizonte muy corto                       & \citep{Smith2007}                                           \\ \hline
+Modelo \textit{Weather Research and Forecasting Model} (WRF)                   & Buenas predicciones en un horizonte de 2 días                                      & Alto gasto computacional                                  & \citep{prabha2008evaluation, Arango2011, Mejia2012, Ruiz2014} \\
+                                              &                                                                                & Es necesario tener una alta capacidad de almacenamiento  &                                                                              \\ \hline
+
+
+\end{tabular}}
+
+\label{tab:fort_deb_mod}
+\end{table}
+
+En la Tabla \ref{tab:fort_deb_mod} podemos observar que algunos modelos presentan ciertas fortalezas y debilidades, pero dependiendo de las necesidades del usuario se debe realizar una valoración de cada uno de ellos para tomar las mejores decisiones.
+
+
+\section{Conclusiones}
+
+%El cultivo de papa es un cultivo de gran importancia en el país. El consumo interno del país es abastecido casi en su mayoría por la producción interna. Este cultivo es seriamente afectado por muchos factores agroclimáticos y dos de los más importantes son las temperatura extremas. 
+Cundinamarca es el departamento con mayor producción en el país y la Sabana de Bogotá es la zona de Cundinamarca que más influencia tiene en la producción de papa y por sus condiciones topoFiguras es altamente susceptible a heladas.\\
+
+Los meses con mayor probabilidad de heladas son diciembre, enero y febrero; y la hora en la que más se presentan bajas temperaturas es a las 5 am. Las temperaturas más altas se presentan en la mayoría de los meses pero principalmente entre los meses de diciembre y abril y la hora en la que más se presentan es a las 12 m.m.\\
+
+Basado en los registros de las estaciones convencionales del IDEAM desde 1971 hasta 2016, se evidenció un aumento de la temperatura de 1.34\celc \ . Adicionalmente, se evidencian cambios en la frecuencia de las bajas y las altas temperaturas, ya que la frecuencia de las bajas temperaturas ha estado disminuyendo y las altas temperaturas han presentado un aumento en los valores registrados.\\
+
+Existe una gran variedad de modelos de pronóstico del tiempo usados para el pronóstico de las temperaturas del aire, pero cada uno de ellos posee fortalezas y debilidades. Para escoger el mejor modelo se deberá tener en cuenta las necesidades y la capacidad de cómputo que se posea.\\
+

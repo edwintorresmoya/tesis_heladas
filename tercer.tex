@@ -1,0 +1,935 @@
+%%Me hace falta las correcciones de la página 6 del pdf
+%%Llegué hasta la 16 del informe3v01Noviembre
+\chapter{Capítulo 3}
+
+
+
+%\textbf{Actividad: Escoger un modelo regional de pronóstico atmosférico y su configuración, que sean útiles para pronósticos de temperaturas máxima y mínima en la Sabana de Bogotá a partir de distintas parametrizaciones y de configuraciones del modelo y del cálculo de distintos estadísticos que evalúen el desempeño.}\\
+
+\section{Escogencia del modelo de pronóstico}
+
+El modelo WRF es un sistema de cálculo numérico para simular la atmósfera que fue diseñado para cumplir objetivos de investigación y pronóstico, este modelo sirve en un amplio rango de escalas espaciales, desde decenas de metros hasta miles de kilómetros. Los usuarios de este modelo pueden producir simulaciones basadas en condiciones atmosféricas reales o condiciones idealizadas \citep{Pielke2002}. WRF es capaz de realizar una reducción de escala de un modelo de pronóstico global como el Global Forecast System (GFS). La reducción de escala toma las condiciones del modelo global y aumenta la resolución de los resultados del modelo teniendo en cuenta las características de la zona de estudio \citep{Sene2010}.\\
+
+El modelo WRF tiene una aproximación no-hidrostática, esto quiere decir que tiene en cuenta la ecuación del momentum en la dirección vertical $(w)$, en comparación con el modelo hidrostático el cual no lo tiene en cuenta. Los modelos no-hidrostáticos son usados para el pronóstico de fenómenos de mesoescala o escalas menores \citep{Pielke2002, Sene2010} ya que tienen en cuenta los movimientos verticales del viento \citep{ArmentaPorras2013}.\\
+%. El modelo hidrostático supone una homogeneidad en la columna de aire y está dado por la densidad y la gravedad \citep{Pielke2002, Sene2010}.
+
+El modelo WRF es un modelo muy usado alrededor del mundo gracias a los buenos resultados obtenidos, como lo reporta \citet{Jimenez2014}, quien evaluó el modelo en condiciones de precipitaciones extremas obteniendo como resultado que el modelo presenta diferencias en los resultados dependiendo de la ubicación con respecto a la altura sobre el nivel del mar, presentando mejores resultados en zonas bajas. En el ámbito internacional, el modelo WRF se ha usado en varios países como es el caso de Perú, \citet{Saavedra2016} realizó un trabajo de modelación de fenómenos meteorológicos de mesoescala, que se presentan en el Valle de Cajamarca, Perú. Como resultado se obtuvo que la modelación reproduce de buena forma el ciclo diario de las temperaturas del aire a dos metros, pero las temperaturas mínimas del aire a dos metros fueron sobrestimadas en las partes altas de la zona de estudio, y subestimó la tasa de enfriamiento en el fondo de los valles, generando una mayor temperatura modelada, respecto a los valores reportados por estaciones ubicadas en las laderas. La parametrización usada en el esquema de capa límite planetaria fue la de \textit{Yonsei University} \citep{Hong2006}.\\
+
+\citet{Fernandez2011} realizaron un estudio sobre la ciudad de Mendoza, Argentina con tres dominios espaciales de 36, 12 y 4 km donde se tuvieron en cuenta las condiciones orográficas para la delimitación de los mismos. Se usó el esquema de capa límite planetaria de \textit{Yonsei University} (YSU; \citep{Hong2006}. Como resultado, se encontró que los valores máximos a dos metros de altura tanto de temperatura como de humedad a son predichos correctamente.\\
+
+\citet{Corrales2015} usó el modelo WRF para realizar un pronóstico de las temperaturas en México usando un único dominio y la parametrización \textit{Mellor-Yamada-Janic} (MYJ; \citep{Janjic1994} para la capa límite planetaria. Como resultado, obtuvo que hay algunas zonas donde el modelo es confiable para la predicción de las temperatura, lo cual ayudar a puede prevenir daños por heladas en un horizonte de pronóstico de 5 días.\\
+
+\citet{Hu2010} usaron el modelo WRF para modelar las temperaturas en el centro de Estados Unidos, en los estados de Texas, Lousiana y parte de Arkansas. Ellos probaron las  parametrizaciones YSU, MYJ de capa límite (PLB) y encontraron que la parametrización MYJ produce temperaturas más altas de lo esperado y YSU produce mejores resultados simulando la temperatura a dos metros.\\
+
+\citet{Parra2012} realizó un estudio para Ecuador donde la finalidad era simular la meteorología de un año completo de todo el país. Para esto, usaron el modelo WRF con 2 dominios y con la parametrización MYJ, obtuvieron como resultado que las temperaturas simuladas con la parametrización MYJ son coherentes con los fenómenos observados en estaciones en superficie.\\
+
+
+A partir de los estudios mencionados anteriormente, se evidencia la necesidad de probar varias parametrizaciones e intentar lograr la mejor combinación de ellas. Para el caso de Colombia, \citet{Uribe2012} escogió 10 eventos de duración de un día. Se probaron dos parametrizaciones diferentes de la convección de cúmulus, con dos diferentes resoluciones espaciales y dos diferentes horizontes de pronóstico con la finalidad de encontrar la mejor combinación. Como resultado encontró que la parametrización por el método de Kain-Fritsch \citep{JohnS2004} con una resolución de 20 km presentó la mayor subestimación para la precipitación, mientras que la parametrización de Morrison \citep{Morrison2009} presenta los mejores resultados. Y al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.\\
+
+En Colombia, el Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) ha implementado el modelo WRF desde el año 2007 para la predicción del tiempo atmosférico convirtiéndose en una herramienta muy importante para esta entidad \citep{Arango2011}. \citet{Mejia2012} realizaron validaciones del modelo WRF para la Sabana de Bogotá para la variable precipitación mediante una comparación con estaciones meteorológicas convencionales. El objetivo fue comparar e identificar con cuales de las condiciones iniciales y de frontera proveniente de los dos modelos numéricos GFS \citep{NOAA2016} y MM5 WRF lograba identificar de manera aceptable los patrones de precipitación. Los límites de la rejilla están entre las longitudes 65\degree W y 85\degree W y las latitudes 5\degree S y 15\degree N, con una resolución espacial de 20 km. Se encontró que el modelo WRF alimentado con los datos del modelo GFS presentó los mejores resultados. Este estudio presenta una metodología útil para la validación de modelos y la determinación del mejor modelo.\\
+
+%Estos estudios fueron realizados en diferentes cultivos como \citet{prabha2008} que usó el cultivo de durazno, \citep{Gomez2014} quien realizó su estudio en pasturas, \citep{Saavedra2016} quien estudio en una zona productora de papa y maíz.\\
+
+%Es importante resaltar que el modelo toma como referencia datos del suelo. Pero según \citet{Castro-Romero2014} en la Región Andina se presentan cambios por el uso del paisaje que dejan como resultado tan solo el 31\% de los bosques naturales y una degradación del 53\% en arbustales secos. Se estima que para el año 1998 el 69\% de los bosques andinos habían sido talados. Uno de estos sucede en Suesca - Cundinamarca \citet{Castro-Romero2014} reporta que debido al uso agropecuario intensivo que se le ha dado a los suelos es posible observar zonas desprovistas de cobertura vegetal y de suelo con estados muy avanzados de degradación, lo cual imposibilita su posible recuperación en años próximos. Ya que los ecosistemas se usan de una forma extractiva como,lo menciona \citet{Ernesto}, uno de los ecosistemas más importantes de Colombia el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente \citep{Ernesto} cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$. Estos cambios nos hacen reflexionar acerca de la importancia del mantenimiento de los suelos y que se deben hacer ajustes periódicos a los modelos ya que con estos estudios se demuestra que el suelo es dinámico.
+
+%Un modelo de mesoescala es un modelo numérico de predicción del tiempo atmosférico, que se usa para hacer una predicción a escala de kilómetros y horas, basado en la dinámica atmosférica \citep{Uribe2012}.\\
+%####
+
+Basado en esta información dada en los parámetros anteriores se decidió usar el modelo regional del tiempo atmosférico WRF, ya que es un modelo que cumple con los requerimientos para este estudio y en el país se ha usado este modelo con resultados satisfactorios como los obtenidos por \citet{Mejia2012,Arango2011,Arango2014,Ruiz2014,Uribe2012,Rojas2011,ArmentaPorras2013}.\\
+
+\iffalse
+Los pasos a seguir para realizar una modelación con el modelo WRF consiste en:
+\begin{enumerate}
+\item Compilar el WPS
+\item Compilar el WRF
+\item Determinar el área de estudio
+\item Selección de los dominios del modelo WRF para la inicializacion del modelo
+\item Selección de las parametrizaciones que se van a emplear
+\item Descargar los datos que van a alimentar el modelo
+\item Realizar el pre-proceso con el WPS
+\item Realizar el proceso de modelación con el WRF
+\item Realización del pos-proceso con python3.6
+
+
+\end{enumerate}
+\fi
+
+\section{Selección de un período de estudio para escoger la configuración dominio-subdominio del WRF}
+
+El período escogido es el comprendido entre el 1 de febrero del año 2007 a las 00 UTC hasta el 5 de febrero del año 2007 a las 00 UTC. Para estas fechas se presentó un evento de helada en la Sabana de Bogotá y fue uno de los más severos de los últimos 15 años, ver Figura \ref{fig:tmp_autom_tibaitata_1}. Las heladas comenzaron a presentarse desde el 2 de febrero de 2007 a las 10 horas UTC.
+En la Figura \ref{fig:tmp_autom_tibaitata_1} se puede observar que la temperatura más baja para el período de tiempo comprendido entre el 1 de enero de 2005 y el 31 de diciembre del 2017 se presentó a comienzos del 2007, esta fecha corresponde al 4 de febrero y la temperatura fue de -4.7 \celc.
+\begin{figure}[H]
+    \centering
+    \includegraphics[draft=false, scale=0.6]{graph/grafica_minimas_tmp_tibaitata.png}
+    \caption{Valores de temperatura para la estación Tibaitatá automática para el período de tiempo comprendido entre el 1 de enero de 2005 y el 31 de diciembre del 2017. La línea negra horizontal corresponde a la temperatura mínima registrada en esta estación, que es -4.7 \celc.}
+    \label{fig:tmp_autom_tibaitata_1}
+\end{figure}
+
+La mayor cantidad de heladas en la zona Andina coincide con la primera época seca del año, entre los meses de diciembre y febrero \citep{IDEAM2012a}. Se seleccionó este caso porque el 4 de febrero de 2007 se presentó una de las temperaturas más bajas registradas para la Sabana de Bogotá. Un par de días antes de esta fecha, el 1 y 2 de febrero del 2007, se presentaron temperaturas de -4.7\celc \ en los municipios de Mosquera, Sopó, Tenjo, Subachoque, Funza, Sesquilé y Nemocón. Este evento afectó cerca de 7500 hectáreas de papa \citep{ElTiempo2007}. En la Tabla \ref{table:caso1} se evidencian los registros de las temperaturas máximas y mínimas de algunas estaciones convencionales para el 4 de febrero y el valor reportado por la estación automática Tibaitatá. Según la estación automática Tibaitatá, la helada tuvo una duración de 5 horas comenzando a las 2 a.m. y finalizando a las 7 a.m. (Figura \ref{fig:tmp_autom_tibaitata}). Adicionalmente, en el mismo día se presentó un evento con temperaturas sobre 20\celc\ que duró 5 horas, iniciando a las 11 a.m. y finalizando a las 4 p.m. El valor más alto registrado para esta estación en el período 31 de enero a 4 de febrero de 2007 fue de 26.3\celc\ (ver Figura \ref{gra:tmp_tiba_2007_tibaitata}).
+
+\begin{table}[H]
+\centering
+\caption{Temperaturas máximas diarias y mínimas diarias de las estaciones convencionales que registraron temperatura sobre 20\celsius\ o debajo de 0\celsius\ o ambas y temperaturas máxima diaria y mínima diaria registradas para la estación automática Tibaitatá, para el caso 1 correspondiente al día 4 de febrero del 2007.}
+\begin{tabular}{p{2cm}p{2cm}lll}
+Temperatura bajo 0\celc & Temperaturas sobre 20\celc\ & Código   & Nombre de la estación & Municipio \\ \hline
+
+
+-7.0    &       & 21205880 & Flores Chibcha        & Madrid    \\
+ & 21.6 &  21205700 &     Guasca &       Guasca \\
+ -7.4 & & 21205920 & SUASUQUE              & Sopó      \\
+ & 22.0 &  21205790 &        Apto El Dorado &  Bogotá D.C. \\
+ & 22.2 &  21206230 &         Vegas Las Hda &  Bogotá D.C. \\
+ & 22.5 &  21205770 &     Base Aérea Madrid &       Madrid \\
+-8.8 & 23.8 &  21205980 &       Providencia Gja &        Tenjo \\
+ & 23.8 &  21206260 &     C. Univ .Agrop-UDCA &  Bogotá D.C. \\
+ & 24.0 &  21206210 &    Flores Colombianas &        Funza \\
+ & 24.2 &  21206660 &    Col Santiago Pérez &  Bogotá D.C. \\
+-4.6 & 24.8 &  21205420 &  Tibaitatá &     Mosquera \\
+-4.7 & 26.3 &  21206990 &  Tibaitatá [Automática]&     Mosquera \\
+\end{tabular}
+
+\label{table:caso1}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[draft=false, scale=0.5]{casos_altos_bajas/grafica_minimas_tmp_tibaitata_helada.png}
+    \caption{Valores de temperatura para la estación Tibaitatá automática para las fechas entre el 3 y el 5 de febrero de 2007. Las líneas verticales discontinuas corresponden a la temperatura de 0\celc\ en las horas 2 y 7 am del 4 de febrero del 2007. Las líneas verticales de puntos corresponden a una temperatura de 20\celc\ en las horas 11 am y las 4 pm.}
+    \label{fig:tmp_autom_tibaitata}
+\end{figure}
+
+En la Figura \ref{gra:tmp_tiba_2007} podemos observar que entre los días 31 de enero de 2007 y 5 de febrero de 2007, en las estaciones Hda Santa Ana (Figura \ref{gra:tmp_tiba_2007_sta_ana}), Pmo Guerrero (Figura \ref{gra:tmp_tiba_2007_Pmo_guerrero}) y Tibaitatá Automática (Figura \ref{gra:tmp_tiba_2007_tibaitata}) se presentaron temperaturas por debajo de 0\celc\ y para las estaciones Tibaitatá Automática (Figura \ref{gra:tmp_tiba_2007_tibaitata}), Chinavita (Figura \ref{gra:tmp_tiba_2007_chinavita}) y La Capilla Automática (Figura \ref{gra:tmp_tiba_2007_capilla}) se presentaron temperaturas sobre 25\celc. En el período de estudio sólo en la estación Tibaitatá se presentaron tanto altas como bajas temperaturas. Se presentaron tres días con bajas temperaturas y cuatro días con altas temperaturas.\\
+
+Algunas estaciones presentaron altas temperaturas pero sobre un umbral más bajos sobre 20\celsius\, y no presentaron temperaturas por debajo de 0\celsius, como las estaciones Estación Subia Automática (ura \ref{gra:tmp_tiba_2007_subia}), Estación Ciudad Bolivar (Figura \ref{gra:tmp_tiba_2007_cuidad_bolivar}) y Estación La Boyera Automática (Figura \ref{gra:tmp_tiba_2007_la_boyera}). Las altas temperaturas se encuentran asociadas a cielos despejados.\\
+
+\begin{figure}[H]
+
+    \centering
+
+
+\begin{subfigure}[normla]{0.4\textwidth}
+\subcaption{Estación Subia Automática}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/21195160.png}
+\label{gra:tmp_tiba_2007_subia}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación Hda Sta Ana Automática}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/21206790.png}
+\label{gra:tmp_tiba_2007_sta_ana}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación Pmo Guerrero}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/21206930.png}
+\label{gra:tmp_tiba_2007_Pmo_guerrero}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación Ciudad Bolivar}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/21206940.png}
+\label{gra:tmp_tiba_2007_cuidad_bolivar}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación Pmo Guacheneque}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/21206950.png}
+\label{gra:tmp_tiba_2007_pmo_guacheneque}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación Sta Cruz De Siecha}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/21206980.png}
+\label{gra:tmp_tiba_2007_cruz_siecha}
+\end{subfigure}
+~
+\end{figure}
+           
+\begin{figure}[H]\ContinuedFloat
+\centering
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación Tibaitatá Automática}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/21206990.png}
+\label{gra:tmp_tiba_2007_tibaitata}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación La Boyera Automática}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/24015110.png}
+\label{gra:tmp_tiba_2007_la_boyera}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación Chinavita Automática}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/35075070.png}
+\label{gra:tmp_tiba_2007_chinavita}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Estación La Capilla Automática}
+\includegraphics[draft=false, scale=0.25]{grafica_altas_bajas/35085080.png}
+\label{gra:tmp_tiba_2007_capilla}
+\end{subfigure}
+~
+    
+    
+    \caption{Temperatura registrada por diferentes estaciones automáticas entre los días 31 de enero de 2007 y 5 de febrero de 2007, hora local. La línea horizontal azul corresponde a 0\celc, la línea roja más oscura corresponde a la temperatura a 20\celc y la línea roja clara corresponde a 25\celc.}
+    \label{gra:tmp_tiba_2007}
+\end{figure}
+
+
+
+Por otro lado hubo estaciones que no presentaron temperaturas extremas, como las estaciones Estación Pmo Guacheneque (Figura \ref{gra:tmp_tiba_2007_pmo_guacheneque}) y Estación Sta Cruz De Siecha (Figura \ref{gra:tmp_tiba_2007_cruz_siecha}). En estas estaciones es probable que las condiciones meteorológicas no fueran favorables para que se presente los fenómenos de altas y bajas temperaturas.\\
+
+En la Tabla \ref{table:caso1} se evidencia que de las 162 estaciones convencionales, hay más estaciones (11) con valores sobre 20\celc\ que estaciones con valores de temperatura por debajo de 0\celc (4). Para el caso de la estación convencional Tibaitatá se presentaron temperaturas mínimas de -4.6\celc\ y en el mismo día presentaron valores de temperatura de 24.8\celc, esto implica un cambio de temperatura de 29\celc\ en un mismo día. Los cambios extremos de temperatura afectan a los cultivos ya que pueden ocasionar esterilidad, abortos en granos cuajados y disminución en los períodos de llenado como lo señala \citet{Hatfield2015}.\\
+
+Las estación Tibaitatá automáticas y Tibaitatá convencional, se encuentran ubicadas a escasos metros una de la otra. Como se observa la diferencia entre las temperaturas mínimas es baja comparada con la deferencia entre las temperaturas máximas. Esto es explicado en los artículos de \citet{lacombe2010results, kaspar2016climate} y nombrado anteriormente, (sección \ref{convencional_vs_automática}).
+
+\section{Corrección por altura}
+
+Se realizó una corrección de los valores de temperatura simulada por el modelo WRF basado en la altura real de las estaciones del IDEAM. Cada estación del IDEAM tiene un valor asociado de altura (Ver Tabla \ref{tab:alturas_ideam_alos_2} columna $ Altura\ IDEAM$) , pero algunos de estos no concuerdan con la realidad. Un ejemplo de esto es el caso de la estación llamada Pmo (Páramo) Guacheneque. El IDEAM reporta una altura de 2300 msnm pero según el modelo digital de elevación (DEM) ALOS-PALSAR creado por \citet{ASFDAAC2007}, la ubicación de la estación tiene una elevación de 3288 msnm. Por otra parte, según el Distrito Regional de Manejo Integrado generado por \citet{Corpochivor2011}, el área de este páramo está entre los 3000 y los 3500 msnm. De modo que el modelo de ALOS-PALSAR presenta una mejor aproximación a la altura de la zona donde se encuentra la estación, ver Tabla \ref{tab:alturas_ideam_alos_2}. Razón por la cual no se tomaron los valores de altura sugeridos por el IDEAM; en cambio se usó la altura brindada por el DEM de ALOS-PALSAR para cada una de las ubicaciones de las estaciones, estos valores de altura serán usados como la altura de referencia para las estaciones. Usando la ubicación de cada una de las estaciones se realizó una extracción de los valores de altura presentes en los archivos netCDF generados por el modelo WRF. La forma como se realiza la extracción de los valores de altura se encuentra en el código \textit{ext\_simulaciones\_200702.py} que fue creado a partir de la información del siguiente enlace \textcolor{blue}{\href{http://www.openwfm.org/wiki/How_to_interpret_WRF_variables}{link}}, donde se explica que la altura del terreno se calcula a partir de las alturas geopotenciales, la cual toma los valores de los archivos NetCDF generados por el WRF.\\
+
+\begin{table}[H]
+\centering
+\caption{Alturas reportadas para las estaciones automáticas según el IDEAM y según el DEM de ALOS-PALSAR.}
+\label{tab:alturas_ideam_alos_2}
+\begin{tabular}{llrr}
+\toprule
+{} &                    Nombre &  Altura IDEAM (m) &  Altura ALOS-PALSAR (m) \\
+\midrule
+1    &         Subia Automatica  &      2075 &     2080 \\
+2  &   Esc La Union Automatica &      3320 &     3393 \\
+3  &     Pasquilla Automatica  &      3000 &     2982 \\
+4  &   Pluviometro Automatico  &      2685 &     2632 \\
+5  &       Pluviometro Automa  &      2685 &     2632 \\
+6  &            Univ Nacional  &      2556 &     2579 \\
+7  &           Apto El Dorado  &      2547 &     2567 \\
+8  &         Nueva Generacion  &      2590 &     2574 \\
+9  &   San Joaquin Automatica  &       757 &      679 \\
+10 &        Hda Sta Ana Autom  &      2572 &     2590 \\
+11 &  Villa Teresa Automatica  &      3624 &     3423 \\
+12 &             Pmo Guerrero  &      3257 &     3253 \\
+13 &           Ciudad Bolivar  &      2687 &     2837 \\
+14 &          Pmo Guacheneque  &      2300 &     3288 \\
+15 &             Ideam Bogota  &      2646 &     2679 \\
+16 &       Sta Cruz De Siecha  &      3100 &     3194 \\
+17 &     Tibaitata Automatica  &      2543 &     2560 \\
+18 &        Sta Rosita Autom   &      2618 &     2887 \\
+19 &      San Cayetano Autom   &      2807 &     3103 \\
+20 &     La Boyera Automatica  &      2610 &     2640 \\
+21 &           El Alambrado    &       151 &     3240 \\
+22 &      Pnn Chingaza Autom   &      3205 &     3205 \\
+23 &     Bosque Intervenido    &      2944 &     2919 \\
+24 &           Calostros Bajo  &      2943 &     3421 \\
+25 &          Plaza De Ferias  &      1670 &     1677 \\
+26 &      Parque Rafael Nuñez  &      1671 &     1686 \\
+27 &         Calostros Bajo    &      2943 &     3421 \\
+28 &             Pmo Chingaza  &      3863 &     3856 \\
+29 &     Chinavita Automatica  &      2012 &     1938 \\
+30 &  Pmo Rabanal Automatica   &      3398 &     3379 \\
+31 &         La Capilla Autom  &      1917 &     1903 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+Los valores modelados fueron corregidos teniendo en cuenta la diferencia de altura ($\Delta A$) entre la altura de los datos modelados provenientes de  las salidas del modelo WRF ($A_{wrf}$) y la altura real ($A_{real}$), como lo sugiere \citet{Pabon-Caicedo2001}. Se calcula la diferencia entre los resultados del modelo y la altura real; se multiplica por un factor de 6.5\celc\ por cada 1000 metros (ver Ecuación \ref{correccion_altura}). El resultado de esta operación se le suma a los valores de temperatura modelados. Las tablas de las correcciones de las alturas se encuentran en el Anexo \ref{anexo:correccion_altura}.
+
+\begin{equation} \label{correccion_altura}
+\Delta A = (A_{wrf} - A_{real}) \times 0.0065 \frac{^{\circ}C}{m}
+\end{equation}
+ 
+
+Para la comparación de los resultados obtenidos con WRF y los valores reales de las estaciones automáticas, se ajustó la metodología usada en el diagrama de Taylor. El diagrama de Taylor \citep{taylor2001summarizing} fue creado para la comparación de diferentes modelos basado en la comparación de los datos reales con los datos modelados. El diagrama de Taylor usa tres estadísticos, correlación de Pearson (Ecuación \ref{pearson_coef}), error cuadrado medio (Ecuación \ref{rmse_eq_1}) y desviación estándar (Ecuación \ref{sd_eq}).\\
+
+\begin{equation}\label{pearson_coef}
+\rho =\frac{\mathlarger{\sum_{i=1}^n} (x_i-\bar{x}) (x'_i-\bar{x'})}{\mathlarger{\sqrt{\sum_{i=1}^n (x_i-\bar{x})^2 (x'_i-\bar{x'})^2}}}
+\end{equation}
+
+\begin{equation}\label{rmse_eq_1}
+RMSE =\frac{\sqrt{\sum_{i=1}^n (x_i-x'_i)^2}}{n}
+\end{equation}
+
+\begin{equation}\label{sd_eq}
+sd_{x'} =\mathlarger{\sqrt{\frac{\mathlarger{\sum_{i=1}^n} (x'_i-\bar{x'}_i)^2}{n-1}}}
+\end{equation}
+
+En el diagrama de Taylor el coeficiente de Pearson está asociado al ángulo azimutal, este valor está entre -1 y 1, representado en rojo en la Figura \ref{fig_explicacion_taylor}. El error cuadrado medio está representado como la distancia entre los modelos a evaluar y la referencia que se encuentra simbolizada por una estrella, los valores van desde 0 hasta infinito, se encuentra representado por una línea concéntrica gris cuyo centro es la estrella roja. La desviación estándar que es proporcional a la distancia radial desde el origen, se encuentra representado por líneas azules, estos valores pueden ir desde cero hasta infinito \citep{taylor_diag_2018}.\\
+
+\begin{figure}[h]
+    \centering
+	\label{fig_explicacion_taylor}
+	\includegraphics[draft=false, scale=0.45]{graph/explicacion_taylor.png}
+	\caption{Ejemplo de un diagrama de Taylor.}
+\end{figure}
+
+La metodología propuesta por \citet{taylor2001summarizing} es una buena forma para escoger un modelo, sin embargo, por ser un método gráfico deja de ser útil cuando la cantidad de modelos es grande o cuando la diferencia entre modelos es pequeña. Por esta razón para la selección de los mejores resultados se usará la correlación de Pearson y una versión del cuadrado medio del error, llamado error cuadrado medio normalizado (NRMSE) (Ecuación \ref{rmse_eq}), ya que este estadístico permite realizar la comparación de grupos de datos o modelos con diferentes escalas.\\
+
+\begin{equation}\label{rmse_eq}
+NRMSE =\frac{\sqrt{\frac{\sum_{i=1}^n (x_i-x'_i)^2}{n}}}{x'_{i(max)} - x'_{i(min)}}
+\end{equation}
+
+En la Figura \ref{gra:taylor_total_a} se muestran los diagramas de Taylor para las temperaturas simuladas para las ubicaciones correspondientes a las estaciones Sta Cruz De Siecha y Hda Sta Ana Automática, los demás diagramas se encuentran en el Anexo \ref{anexo:diag_taylor_estaciones_aut_val}. En la Figura \ref{subfig:taylor_11} se puede apreciar dispersión de las diferentes simulaciones evaluadas, pero es complejo cual de estos tiene el mejor comportamiento y en la Figura \ref{subfig:taylor_22} podemos observar que sólo se puede observar un punto en el cuál todos las simulaciones convergen y se hace imposible determinar cuál de éstas presenta la mejor opción. A partir de las Figuras \ref{subfig:taylor_11} y \ref{subfig:taylor_22} se concluye que es necesario usar una metodología que facilite la escogencia de los mejores resultados.\\
+
+
+
+
+%\begin{equation}\label{sd_eq}
+%sd_x =\mathlarger{\sqrt{\frac{\mathlarger{\sum_{i=1}^n} (x_i-\bar{x}_i)^2}{n-1}}}
+%\end{equation}
+%
+%\begin{equation} \label{std_abs}
+%    {STD}_{abs} = |sd_{x} - sd_{x'}|
+%\end{equation}
+
+Donde $n$ es el número de datos, $x$ corresponde a los registros de las estaciones automáticas, $x'$ corresponde a los datos modelados.\\
+
+
+\begin{figure}[H]
+	\begin{center}
+	\begin{subfigure}[normla]{0.4\textwidth}
+	\caption{Estación Sta Cruz De Siecha código 21206980.}
+	\includegraphics[draft=false, scale=0.45]{taylor/taylor_21206980.png}
+	\label{subfig:taylor_11}
+	\end{subfigure}
+		~
+    \begin{subfigure}[normla]{0.4\textwidth}
+    \caption{Estación Hda Sta Ana Automática código 21206790.}
+	\includegraphics[draft=false, scale=0.45]{taylor/taylor_21206790.png}
+	\label{subfig:taylor_22}
+	\end{subfigure}
+		~
+			\end{center}
+	\caption{Diagramas de Taylor que comparan la temperatura observada en 2 estaciones con los datos provenientes de los datos simulados en cada dominio o subdominio de las nueve simulaciones hechas con el modelo WRF. El período simulado fue entre el 3 de febrero de 2007 a las 18 UTC hasta el 5 de febrero de 2007 a las 00 UTC.}
+	\label{gra:taylor_total_a}	
+\end{figure}
+
+
+%\subsection{Cuantificación de las }
+%Se realizaron tres regresiones lineares donde el objetivo fue escalar todos los valores obtenidos de uno a cero, siendo uno los mejores resultados y cero los peores resultados. 
+
+%Los valores del coeficiente de correlación de Pearson nunca dieron negativos en ninguna combinación.\\
+
+%Las regresiones se realizaron usando los valores máximos y mínimos del coeficiente de Pearson. Se halló el valor mínimo del coeficiente de correlación de Pearson y a este valor 
+
+%Por esta razón se propone hacer uso de regresiones lineares para poder escalar todos los índices y realizar un solo índice que permita una fácil comparación entre todos los resultados. Para este fin se tomaron todos los valores de Pearson generados para cada una de las estaciones se buscó el menor valor y el mayor valor a estos valores se les realizó una regresión linear entre cero y uno, respectivamente. Para el error medio cuadrático se buscaron los valores más altos y los más bajos y se ajustaron a una regresión linear entre 0 y 1, respectivamente. Para las desviaciones estándar se sacó el valor absoluto de la diferencia entre la desviación estándar de la referencia menos la desviación estándar de las simulaciones, para estos valores se buscó el mayor valor y el menor valor y se realizó una desviación estándar entre 0 y 1, respectivamente. Como se puede observar se busca que los mejores valores correspondan a los valores más altos, cercanos a 1 y las simulaciones que menos similitud presentan corresponderán a valores bajos, cercanos a 0. Posteriormente estos valores se suman y se dividen entre 3.
+
+%Para determinar cuál es el mejor de los resultados se realizó lo siguiente
+
+
+\section{Análisis de las condiciones meteorológicas del 4 de febrero de 2007}
+
+De acuerdo con el análisis de superficie (Figura \ref{fig:carta1}) se puede observar que el día 31 de enero de 2007 sobre Colombia no había ningún sistema de alta o baja presión, la zona de convergencia intertropical (ZCIT) se hallaba a la altura de las costas del pacífico colombiano (latitud: 4\degree N), adicionalmente podemos observar que la nubosidad se ubicó en el sur de Colombia. El día 2 de febrero no se observa desplazamiento de la ZCIT de las costas del pacífico colombiano (latitud: 4\degree N), no se ve ningún sistema de presión sobre Colombia, pero sí se puede ver que la nubosidad se encuentra al sur del país (Figura \ref{fig:carta2}). El día 3 de febrero se observa que la ZCIT se ha movido en dirección sur ya que se encuentra a la altura de Ecuador, adicionalmente se observa una acumulación de nubosidad en la parte sur del país (Figura \ref{fig:carta3}). Y el día 4 de febrero se presentó un sistema de baja presión sobre Colombia y la nubosidad continuó presentándose sobre la parte sur del país (Figura \ref{fig:carta4}).\\
+
+Basado en este análisis podemos concluir que para las fechas de estudio no hubo cobertura nubosa en el centro del país, donde se encuentra la zona de estudio, puesto que la nubosidad se concentraba en el sur del país, lo que implica que en estas fechas se tuvieron cielos despejados sobre la Sabana de Bogotá.
+
+\begin{figure}[H]
+	\centering
+		\begin{subfigure}[normla]{0.9\textwidth}
+		\caption{Análisis de superficie para el día 31 de enero de 2007, hora 02:46 UTC.}
+	\includegraphics[draft=false, scale=0.4]{cartas/2007/07013102QPAA99.png}
+		\label{fig:carta1}
+		\end{subfigure}
+\end{figure}
+           
+\begin{figure}[H]\ContinuedFloat
+		\centering
+				\begin{subfigure}[normla]{0.9\textwidth}
+		\caption{Análisis de superficie para el día 2 de febrero de 2007, hora 02:47 UTC.}
+	\includegraphics[draft=false, scale=0.4]{cartas/2007/07020202QPAA99.png}
+		\label{fig:carta2}
+		\end{subfigure}
+
+    \centering
+    \begin{subfigure}[normla]{0.9\textwidth}
+		\caption{Análisis de superficie para el día 3 de febrero de 2007, hora 02:56 UTC.}
+	\includegraphics[draft=false, scale=0.4]{cartas/2007/07020303QPAA99.png}
+		\label{fig:carta3}
+		\end{subfigure}
+\end{figure}
+           
+\begin{figure}[H]\ContinuedFloat
+\centering
+			\begin{subfigure}[normla]{0.9\textwidth}
+		\caption{Análisis de superficie para el día 4 de febrero de 2007, hora 02:38 UTC.}
+	\includegraphics[draft=false, scale=0.4]{cartas/2007/07020402QPAA99.png}
+		\label{fig:carta4}
+		\end{subfigure}
+		
+	
+	\caption{Análisis de superficie para el 31 de enero (a), 2 (b), 3 (b) y 4 (c) de febrero de 2007 .}
+	\label{fig:carta_total}	
+\end{figure}
+
+En las imágenes satelitales del GOES 12 del 4 de febrero de 2007 (Figura \ref{fig:goes_total}) se puede observar la baja presencia de nubes para este día. En la imagen infrarroja se observa de nuevo la situación vista anteriormente en el análisis de superficie, ya que se puede ver que en el centro del país no hay cobertura nubosa y se presenta una alta cobertura en la zona sur del país. Las temperaturas extremas están asociadas con noches y mañanas despejadas, como se puede observar en las imágenes.
+
+\begin{figure}[H]
+    \begin{subfigure}[normla]{0.5\textwidth}
+\caption{Radiación infrarroja de onda corta.}
+\includegraphics[draft=false,     scale=0.23]{{goes/2007/goes12.2007.034.001515.BAND_02}.jpg}
+\label{fig:goes2}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.5\textwidth}
+\caption{Vapor de agua}
+\includegraphics[draft=false,     scale=0.23]{{goes/2007/goes12.2007.034.001515.BAND_03}.jpg}
+\label{fig:goes3}
+\end{subfigure}
+    ~
+\centering
+\begin{subfigure}[normla]{0.3\textwidth}
+\caption{Radiación infrarroja de onda larga.}
+\includegraphics[draft=false,         scale=0.21]{{goes/2007/goes12.2007.035.034515.BAND_04}.jpg}
+\label{fig:goes4}
+\end{subfigure}
+    
+    	
+    \caption{Imágenes del GOES 12: canal 2 (a), canal 3 (b) y canal 4(c). Para el día 4 de febrero de 2007 a las 00 UTC (3 de febrero de 2007 a las 19:00 HL).}
+    \label{fig:goes_total}	
+\end{figure}
+
+Por otro lado, los radiosondeos para estas fechas muestran una gran inversión térmica, desde el nivel de superficie 750 hPa hasta los 500 hPa (Figura \ref{fig:radiosondeo}). La temperatura a los 753 hPa fue -0.7 con una humedad relativa de 96\%, y a mayor altura (500 hPa) se evidencia una gran disminución en la humedad la cuál fue del 2\%. La inversión térmica que se presenta impide la mezcla de la masa de aire con una de mayor temperatura, esto favorece que la baja temperatura se mantenga.\\
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[draft=false, scale=0.5]{radiosondeos/radio_sondeo_20070204.png}
+    \caption{Radiosondeo del 4 de febrero de 2007. a las 7 am HL. Tomado de la \textcolor{blue}{\href{http://weather.uwyo.edu/cgi-bin/sounding?region=samer&TYPE=GIF\%3ASKEWT&YEAR=2007&MONTH=02&FROM=0412&TO=0412&STNM=80222}{Universidad de Wyoming.}}} 
+    \label{fig:radiosondeo}
+\end{figure}
+
+En este estudio se usaron los datos del modelo GFS, por esta razón se quiso evaluar cuáles fueron las condiciones meteorológicas que presenta el modelo para la fecha de interés. Por esta razón se realizó una gráfica que incluye las variables presión atmosférica (Variable llamada \textit{Mean sea level pressure} dentro de los archivos grib de GFS) y componentes del viento en U y V a 10 metros extraídas de análisis del modelo GFS (Variables llamadas \textit{10 metre U wind component} y \textit{10 metre U wind component}, respectivamente, dentro de los archivos grib de GFS) (Figura \ref{fig:gfs_noaa}). En esta gráfica podemos ver cómo los vientos confluyen sobre la parte más oriental del continente suramericano formando la zona de convergencia intertropical (ZCIT), adicionalmente se observan dos sistemas de alta y baja presión entre las latitudes 30\degree N y 40\degree N y las longitudes 50\degree W y la latitud 20\degree W, los cuales coinciden con lo visto en la Figura \ref{fig:goes4}. Por lo tanto, podemos concluir que, a nivel sinóptico, el modelo GFS está representando las condiciones de cielo despejado para el centro del país, donde se encuentra el área de estudio para estas fechas.
+
+\begin{figure}
+    
+    \centering
+    \includegraphics[draft=false, scale=0.4]{graph/gfs_noaa.png}
+    \caption{Carta de superficie generada a partír de los datos del GFS. Para el día 4 de febrero de 2007 00 UTC.}
+    \label{fig:gfs_noaa}
+\end{figure}
+
+
+\section{Períodos de registro de las estaciones meteorológicas automáticas.}
+
+Se seleccionaron todas las estaciones meteorológicas automáticas que se encontraban dentro del área de estudio (área marcada con rojo en los mapas mostrados en la Figura \ref{gra:areas}). Las estaciones meteorológicas automáticas tienen diferentes períodos de registro para la variable temperatura. Las fechas de inicio y finalización de registro para las estaciones automáticas seleccionadas para esta parte del estudio se encuentran en la Tabla \ref{tab:inicio_final_hydras}, en algunos casos la fecha de estudio no posee registro para alguna de las estaciones, por esta razón no se van a tener en cuenta ciertas estaciones.
+
+\begin{table}[H]
+\centering
+\caption{Fechas de inicio y finalización de los registros de las 31 estaciones automáticas de la red HYDRAS usadas. Las estaciones que no tienen datos de temperatura para ningún período tienen un NaT.}
+\label{tab:inicio_final_hydras}
+\begin{tabular}{lrlll}
+\toprule
+{} &       Código &                   Nombre &              Inicio &                 Finalización \\
+\midrule
+1  &  35025080 &       PNN CHingaza Autom & 1996-01-24 08:00:00 & 2018-02-22 00:00:00 \\
+2  &  35075080 &   Pmo Rabanal Automática & 1998-06-02 03:32:00 & 2018-02-22 00:00:00 \\
+3  &  35085080 &         La Capilla Autom & 2000-01-01 00:00:16 & 2018-02-21 23:08:00 \\
+4  &  21206990 &     Tibaitatá Automática & 2000-01-01 00:00:22 & 2018-02-22 00:00:00 \\
+5  &  21206940 &           Ciudad Bolivar & 2000-01-01 17:12:52 & 2014-07-22 03:02:00 \\
+6  &  35035130 &             Pmo Chingaza & 2000-01-01 23:37:48 & 2018-02-22 00:00:00 \\
+7  &  21206920 &  Villa Teresa Automática & 2000-01-20 17:22:04 & 2018-02-22 00:00:00 \\
+8  &  21205012 &            Univ Nacional & 2003-05-20 17:42:00 & 2018-02-21 23:05:00 \\
+9  &  21206930 &             Pmo Guerrero & 2004-04-02 10:44:52 & 2018-02-21 23:09:00 \\
+10 &  21206790 &        Hda Sta Ana Autom & 2005-02-08 02:00:00 & 2018-02-21 23:02:00 \\
+11 &  23125170 &       San Cayetano Autom & 2005-02-09 01:07:00 & 2018-02-22 00:00:00 \\
+12 &  35075070 &     Chinativa Automática & 2005-02-13 09:00:00 & 2018-02-22 00:00:00 \\
+13 &  35027510 &           Calostros Bajo & 2005-02-20 23:28:00 & 2018-02-22 00:00:00 \\
+14 &  21206980 &       Sta Cruz De Siecha & 2005-04-21 17:59:00 & 2018-02-22 00:00:00 \\
+15 &  21206950 &          Pmo Guacheneque & 2005-06-21 12:00:00 & 2018-02-22 00:00:00 \\
+16 &  24015110 &     La Boyera Automática & 2005-06-28 12:00:00 & 2018-02-22 00:00:00 \\
+17 &  21195160 &         Súbia Automática & 2006-07-30 12:01:00 & 2012-06-12 19:43:00 \\
+18 &  21206960 &             IDEAM Bogotá & 2008-06-15 10:00:00 & 2018-02-21 23:26:00 \\
+19 &  35025090 &       Bosque Intervenido & 2009-04-28 03:00:00 & 2018-02-22 00:00:00 \\
+20 &  21206600 &         Nueva Generación & 2010-01-06 00:30:00 & 2018-02-21 23:01:00 \\
+21 &  21201200 &  Esc La Unión Automática & 2010-06-11 15:30:00 & 2016-08-01 13:20:00 \\
+22 &  21205791 &           Apto El Dorado & 2014-08-29 10:03:00 & 2018-02-21 23:06:00 \\
+23 &  21201580 &     Pasquilla Automática &                 NaT &                 NaT \\
+24 &  21202270 &   Pluviómetro Automático &                 NaT &                 NaT \\
+25 &  21202271 &       Pluviómetro Automática&                 NaT &                 NaT \\
+26 &  21206710 &   San Joaquin Automática &                 NaT &                 NaT \\
+27 &  21209920 &         Sta Rosita Automática &                 NaT &                 NaT \\
+28 &  26127010 &             El Alambrado &                 NaT &                 NaT \\
+29 &  35025100 &           Calostros Bajo &                 NaT &                 NaT \\
+30 &  35027001 &          Plaza De Ferias &                 NaT &                 NaT \\
+31 &  35027002 &      Parque Rafael Núñez &                 NaT &                 NaT \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+Para evaluar las simulaciones que definirán la configuración dominio-subdominio del modelo WRF, se va a tener en cuenta el período de estudio comprendido entre el 31 de enero y el 5 de febrero de 2007. En la Tabla \ref{tab:inicio_final_hydras} se evidencia que 9 estaciones no tienen datos de temperatura válidos y 5 estaciones tienen un inicio de registro de datos después de la fecha de interés. Por estas dos razones se descarta el uso de 14 estaciones.\\
+
+%Es importante notar que para esta parte del estudio, además de que algunas de las estaciones seleccionadas no tienen los datos de temperatura correspondientes al período de estudio también hay otras estaciones con registros cuyos valores no pasaron satisfactoriamente el proceso de validación, ver Tabla \ref{tab:inicio_final_hydras}.\\
+
+Entre el 31 de enero y el 4 de febrero de 2007, se presentaron heladas. Por ejemplo, en la Estación Tibaitatá Automática se presentaron valores de temperatura por debajo de 0\celc. También se presentaron temperaturas sobre los 25\celc\ para el período de analizado, ver Figura \ref{graph:tiba}. Las demás series de tiempo pertenecientes a diferentes estaciones con datos válidos se pueden observar en el Anexo \ref{anexo:series_tiempo_temperatura}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[draft=false, scale=0.4]{automaticas_periodos/21206990.png}
+\caption{Valores de temperatura para la Estación Tibaitatá Automática entre el 31 de enero y el 05 de febrero de 2007. La línea horizontal interrumpida corresponde a la temperatura de 0\celsius\ y la línea horizontal de puntos representa la temperatura de 20\celsius,}
+\label{graph:tiba}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Estado de las estaciones automáticas para el período entre el 31 de enero y el 05 de febrero de 2007. ``Datos válidos'' corresponden a las estaciones que poseen los suficientes datos para ser comparadas con los resultados de simulaciones hechas con el modelo WRF; ``Datos no válidos'' corresponden a una estación que no posee datos de temperatura válidos para ser comparados, ``Fuera de rango'' corresponde a una estación que no tienen valores de temperatura para el período de estudio.}
+\label{tab:estado_hydras}
+\begin{tabular}{lrr}
+\toprule
+{} &       Nombre de la estación & Estado\\
+\midrule
+1  &       PNN Chingaza Automática  & Datos no válidos\\
+2  &   Pmo Rabanal Automática  & Datos no válidos\\
+3  &         La Capilla Automática  & Datos válidos\\
+4  &     Tibaitatá Automática  & Datos válidos\\
+5  &           Ciudad Bolivar  & Datos válidos\\
+6  &             Pmo Chingaza  & Datos no válidos\\
+7  &  Villa Teresa Automática  & Datos no válidos\\
+8  &            Univ Nacional  & Datos no válidos\\
+9  &             Pmo Guerrero  & Datos válidos\\
+10 &        Hda Sta Ana Automática  & Datos válidos\\
+11 &       San Cayetano Automática  & Datos no válidos\\
+12 &     Chinavita Automática  & Datos válidos\\
+13 &           Calostros Bajo  & Datos no válidos\\
+14 &       Sta Cruz De Siecha  & Datos válidos\\
+15 &          Pmo Guacheneque  & Datos válidos\\
+16 &     La Boyera Automática  & Datos válidos\\
+17 &         Subia Automática  & Datos válidos\\
+18 &             IDEAM Bogotá  & Fuera de rango\\
+19 &       Bosque Intervenido  & Fuera de rango\\
+20 &         Nueva Generación  & Fuera de rango\\
+21 &  Esc La Unión Automática  & Fuera de rango\\
+22 &           Apto El Dorado  & Fuera de rango\\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+ Como se puede observar en la Tabla \ref{tab:estado_hydras} sólo 10 estaciones tienen datos que pueden servir para realizar una  comparación con los datos simulados. De modo que para todos los análisis venideros referentes a el período entre el 31 de enero y el 05 de febrero de 2007 se usarán 10 estaciones automáticas, ya que son las que poseen datos válidos.
+
+
+%\begin{table}[H]
+%\centering
+%\caption{Tabla de las estaciones con su paisaje asociado, precipitación promedio mensual y la %desviación estándar de la temperatura.}
+%\label{tab:condiciones_estaciones}
+%\begin{tabular}{lrr}
+%\toprule
+%id & Nombre & Ubicación & Precipitación promedio anual (mm)& Altura & Desviación estándar\\
+%\midrule
+%1  &  PNN Chingaza Automática  &    Ladera Montaña       & 1078  &  3205   &      \\
+%2  &   Pmo Rabanal Automática  &    Ladera Montaña       & 979   &  3379   &   \\
+%3  &    La Capilla Automática  &    Ladera Pendiente     & 776   &  1903   &   6\\
+%4  &     Tibaitatá Automática  &    Valle                & 189   &  2560   &   12.5\\
+%5  &           Ciudad Bolivar  &    Cima de una montaña  & 534   &  2837   &   6.8\\
+%6  &             Pmo Chingaza  &    Cima de una montaña  & 2342  &  3863   &      \\
+%7  &  Villa Teresa Automática  &    Ladera               & 1023  &  3423   &      \\
+%8  &            Univ Nacional  &    Valle                & 635   &  2579   &   \\
+%9  &             Pmo Guerrero  &    Ladera               & 828   &  3253   &   7\\
+%10 &   Hda Sta Ana Automática  &    Valle                & 427   &  2590   &   12\\
+%11 &  San Cayetano Automática  &    Ladera               & 783   &  3103   &   \\
+%12 &     Chinavita Automática  &    Ladera               & 1332  &  1938   & 7.5     \\
+%13 &           Calostros Bajo  &    Ladera               & 1569  &  3421   &      \\
+%14 &       Sta Cruz De Siecha  &    Valle                & 1207  &  3194   &   4.8   \\
+%15 &          Pmo Guacheneque  &    Valle                & 995   &  3288   &   3.2\\
+%16 &     La Boyera Automática  &    Valle al lado del río& 781   &  2640   &   9\\
+%17 &         Subia Automática  &    Valle                & 932   &  2080   &   5.7\\
+%18 &             IDEAM Bogotá  &    Valle                & 618   &  2679   &   \\
+%19 &       Bosque Intervenido  &    Ladera Montaña       & 737   &  2919   &   \\
+%20 &         Nueva Generación  &    Valle                & 1784  &  2574   &      \\
+%21 &  Esc La Unión Automática  &    Valle intermontano   & 709   &  3393   &   \\
+%22 &           Apto El Dorado  &    Valle                & 543   &  2567   &   \\
+%23 &     Pasquilla Automática  &    Valle                & 300   &  2982   &   \\
+%24 &   Pluviómetro Automático  &    Valle                & NaN   &  2632   &   \\
+%25 &    Pluviómetro Automática &    Valle                & NaN   &  2632   &   \\
+%26 &   San Joaquin Automática  &    Valle                & NaN   &   679   &   \\
+%27 &    Sta Rosita Automática  &    Al lado de laguna    & NaN   &  2887   &   \\
+%28 &             El Alambrado  &    Ladera Montaña       & NaN   &  3240   &   \\
+%29 &           Calostros Bajo  &    Ladera Montaña       & 1569  &  3421   &      \\
+%30 &          Plaza De Ferias  &    Valle                & NaN   &  1677   &   \\
+%31 &      Parque Rafael Núñez  &    Valle                & NaN   &  1686   &   \\
+%
+%
+%\bottomrule
+%\end{tabular}
+%\end{table}
+
+
+\section{Búsqueda de la mejor combinación dominio-subdominios de anidamiento.}
+
+Para proveer condiciones iniciales y de frontera al modelo WRF, se utilizaron los datos provenientes del análisis del modelo GFS con una resolución de 0.5$^{\circ}$, que corresponde a una resolución aproximada de 55 km. Los datos poseen 24 niveles de resolución vertical y son producidos cada 6 horas.\\
+
+La ubicación de los dominios es importante ya que se debe evitar al máximo ubicar sus fronteras en la mitad de las montañas \citep{Skamarock2008}, pero debido a la complejidad del relieve colombiano, con tres cordilleras, esta tarea resulta compleja. La Sabana de Bogotá se encuentra en un Valle sobre la Cordillera Oriental, por esta razón algunos de los dominios que se van a tener en cuenta más adelante comprenden desde el valle entre la Cordillera Oriental y la Cordillera Central hasta una parte de la llanura del Orinoco.\\
+
+
+
+
+\subsection{Parametrizaciones usadas}
+
+Los esquemas de parametrización utilizados para la búsqueda de la mejor combinación dominio-subdominio de anidamiento se basaron en la configuración usada por el IDEAM para realizar el pronóstico del tiempo en Colombia, esta configuración ha sido una construcción del IDEAM basado en su experiencia, adicionalmente fue evaluada por \citet{ArmentaPorras2013} en su tesis de maestría. Los esquemas usados en esta configuración son:\\
+
+
+Esquema de microfísica (mp\_physics) \textit{WRF Single–moment 3–class and 5–class Schemes}, opción 3. Esta parametrización procesa la formación de las gotas y cristales de hielo, su crecimiento y su posterior descenso al final del paso de tiempo. En esta parametrización toda el agua se condesa primero como agua en una nube, con pequeñas gotas. Luego, comienza un proceso llamado autoconversión, este proceso implica la formación de partículas por la agregación de muchas pequeñas gotas de la nube por la acción de nucleación que ejercen las sales. Las nubes pueden persistir por un largo período de tiempo sin precipitar \citep{Ghosh1998}. El esquema utiliza una relación de diagnóstico para la concentración de hielo basada en el contenido de masa de hielo, no en la temperatura \citep{ArmentaPorras2013}.\\
+
+Esquema de capa límite planetaria (bl\_pbl\_physics) \textit{Yonsei University Scheme (YSU)}, opción 1. Esta parametrización actúa en la parte más baja de la atmósfera y su comportamiento está directamente influenciado por el contacto con la superficie planetaria. En esta capa la velocidad del viento, temperatura, humedad y otras variables presentan fluctuaciones rápidas. El esquema YSU es un esquema de primer orden no local, con un término de contragradiente en la ecuación de difusión \citep{Hu2010}.\\
+
+Esquema de cúmulus (cu\_physics) \textit{Kain–Fritsch Scheme}, opción 1. Es un esquema de parametrización que es responsable de los efectos de las nubes convectivas. Es un intento de representar los flujos verticales de las corrientes ascendentes y descendentes no resueltas y los movimientos de compensación fuera de la nube \citep{ArmentaPorras2013}.\\
+
+Esquema de radiación de onda corta (ra\_sw\_physics) \textit{RRTM Shortwave Scheme}, opción 1. Hace referencia a toda la energía que es recibida en el espectro de rango de luz visible, una parte de la radiación ultravioleta y una parte del infrarrojo cercano. Esta parametrización tiene en cuenta la interacción de onda larga con el vapor de agua, ozono, $CO_2$ y las nubes; además tiene en cuenta el albedo de las nubes \citep{Armstrong2000}.\\
+
+Esquema de radiación de onda corta (ra\_lw\_physics) \textit{Dudhia Longwave Scheme}, opción 1. La radiación de onda larga es la energía radiativa emitida desde la tierra y su atmósfera hacia el espacio en forma de energía térmica, el rango de logitud de onda está entre los $4\ \mu m$ y los $100\ \mu m$. El esquema usado es un esquema que tiene en cuenta múltiples bandas y gases traza \citep{ArmentaPorras2013}.\\
+
+Esquema de suelo (sf\_surface\_physics) \textit{1–layer Thermal Diffusion Scheme}, opción 1. Es un esquema que usa la información del esquema de superficie, esquema de radiación y precipitación del esquema de microfísica y el esquema de cúmulos para proveer flujos de calor y humedad en el suelo \citep{Skamarock2008}. Estos flujos tienen interacción con el esquema de capa límite planetaria \citep{shuman1978numerical}. \\
+
+Esquema de superficie (sf\_sfclay\_physics) \textit{1–Revised MM5 Scheme}, opción 1. Es un esquema usado para calcular la velocidad de fricción y los coeficientes de intercambio que permiten el cálculo del calor en la superficie y los flujos de humedad entre el esquema de suelo y el esquema de capa límite planetaria \citep{Skamarock2008}.
+\begin{comment}
+%%%%% Esto no se ve es sólo como guía
+
+  &physics
+  mp_physics               = 3,     3,     3,
+  ra_lw_physics            = 1,     1,     1,
+  ra_sw_physics            = 1,     1,     1,
+  radt                     = 30,   30,    30,
+  sf_sfclay_physics        = 1,     1,     1,
+  sf_surface_physics       = 1,     1,     1,
+  bl_pbl_physics           = 1,     1,     1,
+  bldt                     = 0,     0,     0,
+  cu_physics               = 1,     1,     0,
+  cudt                     = 5,     5,     5,
+  isfflx                   = 1,
+  ifsnow                   = 0,
+  icloud                   = 1,
+  surface_input_source     = 1,
+  num_soil_layers          = 4,
+  num_land_cat             = 24,
+  sf_urban_physics         = 0,
+  mp_zero_out              = 0,
+  maxiens                  = 1,
+  maxens                   = 3,
+  maxens2                  = 3,
+  maxens3                  = 16,
+  ensdim                   = 144,
+  /
+\end{comment}
+
+
+
+\subsection{Anidamientos}
+
+Cuando se inicializa un modelo como el WRF se selecciona un dominio parental el cual posee un área y una resolución específica, si se desea obtener una resolución mas fina que la resolución inicial se debe hacer un anidamiento (\textit{nesting}). Un anidamiento consiste en generar subdominios con una resolución más fina, este anidamiento debe estar embebido dentro del dominio parental. El anidamiento permite obtener una alta resolución en áreas específicas \citep{Werner2017}.\\
+
+Si el subdominio se encuentra embebido en el dominio parental, entonces el subdominio será alimentado por las condiciones de frontera del dominio parental. Se debe hacer un anidamiento cuando se desea simular fenómenos localizados, tales como temperaturas extremas en un área determinada. Existen dos tipos de anidamientos, ambos son alimentados por las condiciones de frontera del dominio parental, pero una configuración dentro del WRF (\texttt{feedback = 1}), usada en esta investigación, realiza una retroalimentación desde los datos secundarios hacia los datos del dominio parental \citep{Werner2017}, esto implica que los valores del dominio parental son modificados a partír de los resultados obtenidos en los subdominios; de esta forma mejora los resultados en los dominios parentales.\\
+
+Los subdominios dentro de un dominio parental no se deben sobreponer parcialmente. La distancia mínima a la cuál se debe colocar un subdominio es a una distancia de 4 celdas del dominio parental \citep{Werner2017}. Para cada subdominio se recomienda una resolución tres veces más fina que la del dominio parental, ya que de esta forma resulta más eficiente el proceso de reducción de escala \citep{Werner2017}.\\
+
+Se realizaron nueve simulaciones. La primera simulación corresponde a tres dominios (un dominio parental y dos subdominios; d01, d02 y d03) los cuales fueron evaluados con resoluciones de 36, 12 y 4 km, respectivamente (ver Figura \ref{subfig:dom3}). En la segunda simulación se evaluaron tres dominios (un dominio parental y dos subdominios; d01, d02 y d03), los cuales fueron evaluados con resoluciones de 18, 6 y 2 km, respectivamente, (ver Figura \ref{subfig:dom3}). La tercera simulación se evaluó con dos dominios (un dominio parental y un subdominio; d01, d02) con una resolución de 10 y 3.33 km, respectivamente (ver Figura \ref{subfig:dom2}). En la cuarta simulación se evaluaron dos dominios (un dominio parental y un subdominio; d01, d02) con una resolución de 10 y 3.33 km, respectivamente; en comparación con la tercera simulación éste posee unos límites más amplios como se puede ver en la Figura \ref{subfig:dom3.1}. En la quinta simulación se evaluaron dos dominios (un dominio parental y un subdominio; d01, d02) con una resolución de 12 y 4 km, respectivamente (Figura \ref{subfig:dom3.1}). En la sexta simulación se evaluaron dos dominios (un dominio parental y un subdominio; d01, d02) con una resolución de 15 y 5 km, respectivamente (Figura \ref{subfig:dom3.1}). En la séptima simulación se evaluaron dos dominios (un dominio parental y un subdominio; d01, d02) con una resolución de 18 y 6 km, respectivamente (Figura \ref{subfig:dom3.1}). En la octava simulación se evaluaron tres dominios (un dominio parental y dos subdominios; d01, d02 y d03) con una resolución de 12, 4 y 1.33 km, respectivamente (Figura \ref{subfig:dom4}). Y en la novena simulación se evaluaron tres dominios (un dominio parental y dos subdominios; d01, d02y d03) con una resolución de 10, 3.3 y 1.11 km, respectivamente (Figura \ref{subfig:dom4}).\
+
+
+
+
+
+
+%{dominios_osm.png}
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}[normla]{0.4\textwidth}
+		\caption{Ubicación de tres dominios (un dominio parental y dos subdominios anidados)}
+	\includegraphics[draft=false, scale=0.2]{dominios_osm.png}
+		\label{subfig:dom3}
+		\end{subfigure}
+		\vspace{1\baselineskip}
+		~
+		\begin{subfigure}[normla]{0.4\textwidth}
+		\caption{Ubicación con dos dominios (un dominio parental y un subdominio anidado)}
+	\includegraphics[draft=false, scale=0.2]{dominios_osm2.png}
+		\label{subfig:dom2}
+		\end{subfigure}
+		~
+    	\begin{subfigure}[normla]{0.4\textwidth}
+		\caption{Ubicación con dos dominios (un dominio parental y un subdominio anidado) y extensión de área más grande.}
+	\includegraphics[draft=false, scale=0.2]{graph/dos_dom_grandes.png}
+		\label{subfig:dom3.1}
+		\end{subfigure}
+		~
+		\begin{subfigure}[normla]{0.4\textwidth}
+		\caption{Ubicación con tres dominios (un dominio parental y dos subdominios anidados) y extensión de área más grande.}
+	    \includegraphics[draft=false, scale=0.2]{graph/tres_dom_grandes.png}
+		\label{subfig:dom4}
+		\end{subfigure}      
+		~	
+
+	
+	
+
+	\end{center}
+	\caption{Ubicación de los diferentes dominios y subdominios que se usaron para realizar cada una de las simulaciones evaluadas. El  polígono rojo corresponde al área de estudio y los recuadros de color corresponden a  los subdominios.}
+	\label{gra:areas}	
+\end{figure}
+
+Con estas ubicaciones de las combinaciones dominio parental-subdominios se intentó buscar la mejor configuración posible, teniendo en cuenta las recomendaciones de las proporciones que se deben tener entre los dominios parentales y sus subdominios.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Las salidas de las simulaciones son cada hora, con la finalidad de ser comparadas con los datos horarios de las estaciones automáticas HYDRAS. Para cada una de las simulaciones hechas con WRF se usaron 5 núcleos (\texttt{cores; Intel(R) Xeon(R) CPU E5620 @ 2.40GHz}) y 14 gigabytes de RAM. El tiempo empleado para la realización de cada simulación se encuentra en la Tabla \ref{tabla:dominios_1}. La versión usada del WRF es la 3.9.1.1 distribuida desde el 28 de agosto de 2017.
+
+\begin{table}[H]
+\caption{Simulaciones hechas para escoger la mejor combinación dominio parental-subdominios. Días = d y horas = h.}
+\label{tabla:dominios_1}
+\begin{center}
+\begin{tabular}{c|p{5cm}p{2cm}cc}
+Simulación & Combinación dominio parental-subdominios     & Resoluciones en km & Tiempo de cómputo & Figura  \\ \hline
+1    & d01-d02-d03 & 36-12-4    & 77h & Figura \ref{subfig:dom3}\\ %(3d-5h)
+2    & d01-d02-d03 & 18-6-2     & 164h& Figura \ref{subfig:dom3}\\ %(6d-20h)
+3    & d01-d02     & 10-3.33     & 9h & Figura \ref{subfig:dom2}\\
+4    & d01-d02     & 10-3.33     & 10.5h & Figura \ref{subfig:dom3.1}\\
+5    & d01-d02     & 12-4     & 10.5h    & Figura \ref{subfig:dom3.1}   \\
+6    & d01-d02     & 15-5    & 10.5h     & Figura \ref{subfig:dom3.1}  \\
+7    & d01-d02     & 18-6     & 8.5h     & Figura \ref{subfig:dom3.1}  \\
+8    & d01-d02-d03 & 12-4-1.33   & 17.5h &Figura \ref{subfig:dom4}\\
+9    & d01-d02-d03 & 10-3.3-1.1  & 40 h &Figura \ref{subfig:dom4}
+\end{tabular}
+\end{center}
+
+\end{table}
+
+Se observa en la Tabla \ref{tabla:dominios_1} que la simulación 2 es la que más toma tiempo y la simulación 3 es la que menos toma tiempo. Si se comparan la simulación 1 con la 2 podemos observar que la diferencia entre las dos corresponde a diferencias de resolución, pero estas diferencias de resolución implican un aumento del doble de tiempo, ya que pasó de 3 días y 5 horas a 6 días y 20 horas. Respecto a las simulaciones 3 y 4 se nota que el aumento en el área produce un aumento en el tiempo de cómputo de una hora y media. Las simulaciones cuatro, cinco, seis y siete poseen los mismos tamaños de dominio-subdominio, pero la diferencia entre ellos son las resoluciones, entre más fina sea la resolución más tiempo de máquina es necesario. Si comparamos las simulaciones 1, 2, 8 y 9, que poseen 3 dominios (un dominio parental y dos subdominios) vemos que las simulaciones que poseen una resolución más fina gastan un menor tiempo, debido a que en el momento de realizar las simulaciones 1, 2 y 3 las máquinas estaban realizando otros trabajos, pero cuando se realizaron las simulaciones 8 y 9 las máquinas tenían dedicación exclusiva a este trabajo. Anexo \ref{anexo:namelist-input-wps} se encuentra las \textit{namelist.wps} y \textit{namelist.input} para cada una de las nueve simulaciones.
+
+
+
+
+\subsection{Cuantificación de los mejores resultados.}
+Con la finalidad de tener un método cuantitativo de clasificación del desempeño de las simulaciones frente a los datos reales se generó un índice basado en los estadísticos coeficiente de correlación de Pearson y el error cuadrático medio normalizado (NRMSE), llamado $ET$ (Ecuación \ref{fx_et}). Los estadísticos fueron calculados para cada combinación observaciones en estación-simulación. Se realizó una regresión linear de los estadísticos, con la finalidad de poder hacer una comparación entre los estadísticos.\\
+
+Se usaron 10 estaciones y se realizaron 9 simulaciones. Para cada una de las 90 posibles combinaciones se realizó el siguiente cálculo. Para mostrar un ejemplo se creó la Tabla \ref{tabla:ejemplo_dominios}, los demás resultados se encuentran en el Anexo \ref{anexo:resultado_comparaciones_entre_estadisticos}.\\
+
+El coeficiente de correlación de Pearson ($\rho$; Ecuación.\ref{pearson_coef}) puede dar resultados entre -1 y 1. Para los resultados analizados no se obtuvieron resultados negativos, entonces los mejores resultados son los valores cercanos a 1 y los resultados menos deseados son los cercanos a 0. Por esta razón al valor más alto de $\rho$ se le asignará el valor de 1 y a el menor valor se le asignará el valor de 0.\\
+
+Se tomó el valor mínimo del coeficiente de correlación de Pearson presente en la columna $Pearson$, en la Tabla \ref{tabla:ejemplo_dominios} el valor es de 0.9355 a este valor en la columna $Pearson_{esc}$ se le asignó un valor de 0 y para el mayor valor del coeficiente de Pearson 0.9732 se le asignó un valor de 1. A partir de estos dos valores se calculó la pendiente teniendo en cuenta la formula $m = \frac{y_2 - y_1}{x_2 - x_1}$, donde $y_1 = 0, x_1 = 0.9355, y_2 = 1, x_2 = 0.9732$ por lo tanto $m = 26.5251$. La Ecuación de la recta es $y = mx + b$, entonces remplazamos y obtenemos que $b = -24.8143$, de esta forma se obtiene la ecuación con la que se van a calcular los datos de la columna $Pearson_{esc}$: $y = 26.5251x - 24.8143$.\\
+
+Si tomamos el valor de la columna $Pearson$ de la tercera fila de la Tabla \ref{tabla:ejemplo_dominios} es de 0.9446. Usando la ecuación $y = 26.5251 (0.9446) - 24.8143$ obtenemos $y = 0.2414$ este valor correspondería a la fila 3 de la columna Pearson-esc. Todos los valores de la tabla fueron calculados con todas sus cifras, pero luego se realizó una aproximación a tres decimales.\\
+
+Para el error cuadrático medio normalizado (NRMSE; Ecuación \ref{rmse_eq}) se realizó un proceso similar, pero es importante notar que los mejores resultados son los que están más cerca a 0 y los resultados con menor desempeño son valores positivos que pueden llegar hasta infinito. Por esta razón el valor mínimo del $NRMSE$ que es de 0.3274 se le asignó el valor de 1 en la columna $NRMSE_{esc}$ y para el valor máximo del $NRMSE$ que es de 0.9180 se le asignó el valor de 0 en la columna de $NRMSE_{esc}$, esto quiere decir que $y_1 =1, x_1 = 0.3274, y_2 = 0$ y $x_2 = 0.9180$.\\
+
+%Para la desviación estándar se calculó la desviación estándar del modelo (sd) (Eq. \ref{sd_eq1}) y a los valores observados de temperatura del aire (Eq. \ref{sd_eq}), estos valores fueron restados y se les calculó el valor absoluto, estos datos están en la columna $STD_{abs}$ (Eq. \ref{std_{abs}}) de la Tabla \ref{tabla:ejemplo_dominios}. Los mejores resultados de la columna $STD_abs$ son aquellos cercanos a 0 y los resultados con menor desempeño son los valores positivos que pueden llegar hasta infinito. Por esta razón el valor mínimo de la $STD_{abs}$ 2.0088 se le asignó en la columna $STD_{esc}$ el valor de 1 y para el mayor valor de la columna $STD_{abs}$ 2.5282 se le asignó en la columna $STD_{esc}$ el valor de 0, esto quiere decir que $y_1 = 1, x_1 = 0.7565, y_2 = 0$ y $x_2 = 1.7257$.\\
+
+
+Posteriormente se procedió a realizar la suma de los valores escalados $Pearson_{esc}$ y $NRMSE_{esc}$ y se dividió entre 2; el resultado de esta suma se encuentra en la columna $ET$ (Ecuación \ref{fx_et}). El grupo de resultados que tenga el mayor valor en la columna $ET$ será el que presente mayor similitud a los datos reales. En el ejemplo, para la estación Chinavita Automática es la simulación 6 dominio 2 la que presenta los mejores resultados.\\
+
+\begin{equation} \label{fx_et}
+    ET = \mathlarger{\frac{{NRMSE}_{esc} + Pearson_{esc}}{2}}
+\end{equation}
+
+
+\newpage
+\begin{landscape}
+
+
+\begin{longtable}{rrrrrrrrrrr}
+\caption{Ejemplo de los resultados obtenidos de las comparaciones entre las diferentes simulaciones. * Corresponde al mayor valor en la columna $Pearson$, ** corresponde al menor valor de la columna $Pearson$ y los valores subrayados fueron usados como ejemplo.}
+\label{tabla:ejemplo_dominios}\\
+\hline
+   Nombre & Simulación & Dominio &  Pearson &     NRMSE &  $NRMSE_{esc}$ &  $Pearson_{esc}$ &      ET \\
+   
+\\ \midrule % Ojo acá me presentó un error.
+\endhead
+\midrule
+\multicolumn{3}{r}{{Continúa en la siguiente página.}} \\
+\midrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+
+Chinavita Automatica  &          1 &     d01 &   0.9654 &  0.8305 &   0.1481 &   0.7950 &  0.4715 \\
+Chinavita Automatica  &          1 &     d02 &   0.9646 &  0.5980 &   0.5418 &   0.7714 &  0.6566 \\
+Chinavita Automatica  &          1 &     d03 &   0.9549 &  0.3896 &   0.8947 &   0.5143 &  0.7045 \\
+Chinavita Automatica  &          2 &     d01 &   0.9694 &  0.8115 &   0.1802 &   0.9002 &  0.5402 \\
+Chinavita Automatica  &          2 &     d02 &   0.9662* &  0.9180 &  \textbf{0.0000} &   0.8141 &  0.4071 \\
+Chinavita Automatica  &          2 &     d03 &   0.9507 &  0.4956 &   0.7152 &   0.4039 &  0.5596 \\
+Chinavita Automatica  &          3 &     d01 &   0.9663 &  0.8022 &   0.1961 &   0.8180 &  0.5071 \\
+Chinavita Automatica  &          3 &     d02 &   0.9622 &  0.4598 &   0.7759 &   0.7098 &  0.7428 \\
+Chinavita Automatica  &          4 &     d01 &   0.9683 &  0.6330 &   0.4826 &   0.8702 &  0.6764 \\
+Chinavita Automatica  &          4 &     d02 &   0.9547 &  0.3947 &   0.8860 &   0.5103 &  0.6982 \\
+Chinavita Automatica  &          5 &     d01 &   0.9653 &  0.4724 &   0.7545 &   0.7924 &  0.7734 \\
+Chinavita Automatica  &          5 &     d02 &   0.9644 &  0.5354 &   0.6478 &   0.7677 &  0.7078 \\
+Chinavita Automatica  &          6 &     d01 &   0.9682 &  0.5470 &   0.6281 &   0.8672 &  0.7477 \\
+Chinavita Automatica  &          6 &     d02 &   0.9732 &  0.5014 &   0.7054 &   \textbf{1.0000} &  \underline{0.8527} \\
+Chinavita Automatica  &          7 &     d01 &   0.9690 &  0.7563 &   0.2738 &   0.8896 &  0.5817 \\
+Chinavita Automatica  &          7 &     d02 &   0.9622 &  0.4988 &   0.7097 &   0.7087 &  0.7092 \\
+Chinavita Automatica  &          8 &     d01 &   0.9679 &  0.8120 &   0.1795 &   0.8603 &  0.5199 \\
+Chinavita Automatica  &          8 &     d02 &   0.9515 &  0.3401 &   0.9785 &   0.4236 &  0.7010 \\
+Chinavita Automatica  &          8 &     d03 &   0.9509 &  0.3383 &   0.9817 &   0.4074 &  0.6945 \\
+Chinavita Automatica  &          9 &     d01 &   0.9500 &  0.4243 &   0.8360 &   0.3857 &  0.6108 \\
+Chinavita Automatica  &          9 &     d02 &   0.9373 &  0.3747 &   0.9199 &   0.0482 &  0.4840 \\
+Chinavita Automatica  &          9 &     d03 &   0.9355** &  0.3274 &   \textbf{1.0000} &   \textbf{0.0000} &  0.5000 \\
+
+\end{longtable}
+
+
+\end{landscape}
+
+En la Tabla \ref{tabla:ejemplo_dominios} se puede observar que el mayor resultado de la columna $ET$ es de 0.8527 y este valor es el resultado de la simulación 6 dominio 2 la cuál presentó el más alto valor de $\rho$ y un valor que no es el peor ni el mejor valor de $NRMSE$.\\
+
+Para evaluar la mejor simulación, se marcaron los valores que tuvieran un coeficiente de Pearson en la columna  $Pearson$ superior a 0.8 y valores inferiores a 0.3 en la columna $NRMSE$ como lo sugiere \citet{Agua2016}. Se realizó una tabla de frecuencia de los resultados (Tabla \ref{tabla:resultado_dom_sum_dom}).\\
+
+
+%\begin{table}[H]
+%\centering
+%\caption{Tabla de frecuencia de las simulaciones y dominios que presentaron valores en la suma mayores a 0.8 para la estación Chinavita %Automática.}
+%\label{tabla:resultado_dom_sum_dom_capilla}
+%\begin{tabular}{llrr}
+%\toprule
+%   Simulación & Dominio &   Valores \\
+%\midrule
+%
+%         6 &     d02 &    1.0 \\
+%         
+%
+%\bottomrule
+%\end{tabular}
+%\end{table}
+
+%En la Tabla \ref{tabla:resultado_dom_sum_dom_capilla} podemos observar que sólo una simulación en el dominio 2 presentó valores superiores a 0.8 en la columna $ET$. Este ejemplo se realizó sólo con una estación, por esta razón no se puede obtener un valor superior a 1. Las tablas de los resultados totales se encuentran en el Anexo \ref{anexo:resultado_comparaciones_entre_estadisticos}. Y la tabla de frecuencia de los valores superiores a 0.8 es la Tabla \ref{tabla:resultado_dom_sum_dom}.
+
+%Tabla generada para la evaluación de los modelos
+
+\begin{table}[H]
+\centering
+\caption{Tabla de frecuencia de las simulaciones y dominios que presentaron valores superiores a 0.8 en la columna $Pearson$ e inferiores a 0.3  en la columna $NRMSE$. La combinación simulación-dominio ideal tendría un valor de frecuencia igual al numero de estaciones evaluadas, en este caso son 10, ya que es el número de estaciones automáticas con datos válidos para el 24 de febrero de 2007 (ver Tabla \ref{tab:estado_hydras}).}
+\label{tabla:resultado_dom_sum_dom} % Extraído de extraccion_datos_dominios_20190506.py
+\begin{tabular}{llrr}
+\toprule
+   Simulación & Dominio &   Frecuencia \\
+\midrule
+%         1 &     d02 &    3.0 \\
+%         1 &     d03 &    1.0 \\
+%         2 &     d01 &    2.0 \\
+%         2 &     d02 &    5.0 \\
+%         2 &     d03 &    2.0 \\
+%         3 &     d01 &    3.0 \\
+%         3 &     d02 &    3.0 \\
+%         4 &     d01 &    1.0 \\
+%         4 &     d02 &    4.0 \\
+%         5 &     d01 &    3.0 \\
+%         5 &     d02 &    2.0 \\
+%         6 &     d01 &    3.0 \\
+%         6 &     d02 &    4.0 \\
+%         7 &     d01 &    4.0 \\
+%         7 &     d02 &    3.0 \\
+%         8 &     d01 &    3.0 \\
+%         8 &     d02 &    2.0 \\
+%         8 &     d03 &    2.0 \\
+%         9 &     d01 &    2.0 \\
+1   &   d01 &      3 \\
+1   &   d02 &      6 \\
+1   &   d03 &      7 \\
+2   &   d01 &      2 \\
+2   &   d02 &      5 \\
+2   &   d03 &      6 \\
+3   &   d01 &      7 \\
+3   &   d02 &      6 \\
+4   &   d01 &      6 \\
+4   &   d02 &      7 \\
+5   &   d01 &      6 \\
+5   &   d02 &      7 \\
+6   &   d01 &      3 \\
+6   &   d02 &      7 \\
+7   &   d01 &      3 \\
+7   &   d02 &      6 \\
+8   &   d01 &      6 \\
+8   &   d02 &      5 \\
+8   &   d03 &      6 \\
+9   &   d01 &      5 \\
+9   &   d02 &      6 \\
+9   &   d03 &      9 \\
+
+
+ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+En la Tabla \ref{tabla:resultado_dom_sum_dom} se observa que la simulación 9 con en el dominio d03 presenta los mejores resultados, esta simulación tarda 40 horas, por esta razón se descarta su uso, ver Tabla \ref{tabla:dominios_1}. Los siguientes mejores resultados los presentan las simulación 1 dominio 3, simulación 3 dominio 1, simulación 4 dominio 2, simulación 5 dominio 2 y simulación 6 dominio 2. Es importante notar que para algunas simulaciones los mejores resultados se obtienen de diferentes dominios, no precisamente en los dominios de mayor resolución.\\ 
+
+Como se puede observar en la tabla \ref{tabla:resultado_dom_sum_dom} se presentan empates con una frecuencia de siete, para poder determinar con mayor facilidad cuál de las combinaciones simulación-dominio presentó mejor comportamiento se ordenaron las combinaciones de mejores a peores resultados basados en el índice $ET$ y se realizó una tabla de frecuencia de los cinco mejores resultados para cada estación, (ver Tabla \ref{tab:estado_hydras}). En este paso se usaron 10 estaciones, como se evaluaron los 5 mejores resultados en cada una de las estaciones la suma de la columna Valores debería ser igual a 50, pero la suma da como resultado 41. La razón para que los valores sean inferiores a lo esperado es que los resultados para algunas estaciones no superaron los filtros propuestos.\\
+
+Se realizó una tabla con las estaciones evaluadas, en esta tabla en la columna Valores el máximo valor es 5, pero cuando los resultados de la estación no superaron los filtros entonces aparecen valores menores, como es el caso de la estación Chinavita Automática y la estación Hda Sta Ana Autom las cuales tuvieron valores de 0 y 5, respectivamente, ver Tabla \ref{Tabla_mejores_5_dominio}.\\
+
+\begin{table}[]
+\centering
+\caption{Conteo de las mejores cinco simulaciones para 10 estaciones. La simulación ideal tendría un valor de frecuencia igual a 5.}
+\begin{tabular}{ll}
+Estación &  Valores \\ \hline
+Tibaitata Automatica & 5 \\
+Pmo Guerrero & 5\\
+Ciudad Bolivar & 5\\
+Subia Automatica & 5 \\
+La Boyera Automatica & 5\\
+Pmo Guacheneque & 5\\
+Sta Cruz De Siecha & 5\\
+Chinavita Automatica & 0 \\
+La Capilla Autom & 5 \\
+Hda Sta Ana Autom & 1\\
+\end{tabular}
+\label{Tabla_mejores_5_dominio}
+\end{table}
+
+
+
+\begin{table}[H] % Extraído de la función extraccion_datos_dominios_20190506.py
+\centering
+\caption{Conteo de las mejores nueve simulaciones para 10 estaciones. El máximo valor que se puede obtener para cada simulación es 10, ya que se evaluaron 10 estaciones.}
+\begin{tabular}{lll}
+Simulación & Dominio & Frecuencia \\ \hline
+1   &  d02 &  2 \\
+1   &  d03 &  1 \\
+2   &  d01 &  2 \\
+2   &  d02 &  5 \\
+2   &  d03 &  2 \\
+3   &  d01 &  3 \\
+4   &  d02 &  4 \\
+4   &  d01 &  1 \\
+5   &  d01 &  3 \\
+5   &  d02 &  1 \\
+6   &  d01 &  2 \\
+6   &  d02 &  1 \\
+7   &  d01 &  3 \\
+7   &  d02 &  2 \\
+8   &  d01 &  2 \\
+8   &  d02 &  1 \\
+8   &  d03 &  2 \\
+9   &  d01 &  2 \\
+9   &  d02 &  1 \\
+9   &  d03 &  1 \\
+
+
+\end{tabular}
+\label{Tabla_resum_dom}
+\end{table}
+
+En la Tabla \ref{Tabla_mejores_5_dominio}{Tabla_resum_dom} se evaluaron 10 estaciones y se tomaron los 5 mejores resultados para cada una de las estaciones se esperaría que la suma de la columna frecuencia fuera de 50, pero para las estaciones Chinativa Automática no hubo simulaciones que superaran los filtros y para la estación Hda Sta Ana Autom sólo hubo un caso que logró superar los filtros como se evidencia en la Tabla \ref{Tabla_mejores_5_dominio}. En la Tabla \ref{Tabla_resum_dom} se observa que la mejor simulacion es la simulación 2 dominio 2, pero esta simulacion 2 consume 164 horas (ver Tabla \ref{tabla:dominios_1}). Por lo tanto esta simulación no sera de gran utilidad si estos resultados se quieren usar para hacer pronósticos. La simulación que presenta buenos resultados según los resultados de las Tablas \ref{tabla:dominios_1}, \ref{tabla:resultado_dom_sum_dom} y \ref{Tabla_resum_dom} es la simulación 4 ya que presenta un consumo de máquina aceptable, presenta buenos resultados teniendo en cuenta las diferentes simulaciones y a nivel de los cinco mejores resultados.\\
+
+La simulación 4 tiene una reducción de escala de un factor de 5 entre las resoluciones de los datos GFS y del dominio parental. La reducción de escala es un aspecto de gran importancia, como se menciona en el trabajo de \citet{Corrales2015} quienes realizaron una reducción de escala con un factor de 5, \citet{Parra2012} en sus investigación también usó un factor de 5 y \citep{ArmentaPorras2013} también usó una reducción de escala de 5.  Basado en estos trabajos podemos decir que la reducción de escala hecha a través de la simulación 4 ha es apta y proporciona buenos resultados.\\
+
+
+%Basado en los resultados obtenidos previamente se observa que a medida que se inicia la modelación mas cerca a la fecha de interés, los resultados son mejores. Adicionalmente se observa que si se inicia el modelo en el mismo momento que sucede el fenómeno los resultados no son los mejores, esto se evidenció con los resultados de la simulación 16, pues esta no obtuvo los mejores resultados en la Tabla \ref{tabla:resultado_tiempo} y \ref{tabla_frecuencia_tiempos}.\\
+
+%La simulación 14 presentó buenos resultados en Tablas \ref{tabla:resultado_tiempo} y 
+%\ref{tabla_frecuencia_tiempos}, por esta razón el modelo se iniciará 12 horas antes del fenómeno de estudio. Es importante resaltar que estudios como los de \citet{Skamarock2008} y \citep{Arango2011} nombran que es necesario tomar un tener un momento de \textit{spin-up} y lo recomendado es de 12 horas.
+
+\section{Conclusiones}
+
+La escogencia de WRF como modelo de la atmósfer es aceptada porque WRF es un modelo regional de pronóstico de tiempo atmosférico que presenta buenas características para la realización de estudios de la temperatura, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.\\
+
+La mejor combinación simulación-dominio-resolución corresponde a la Simulación 4. Ya que esta simulación fue una de las que mejor representó la temperatura del aire  y se realizó en un tiempo de máquina promedio que sería aceptable para realizar pronósticos con 12 horas de anticipación a eventos de temperaturas mínimas y máximas.\\
+
+%En la mayoría de los casos cuando la desviación estándar con la cuál se compara es superior a seis se presenta poca variabilidad en las series simuladas con el modelo WRF.\\
+
+%El mejor momento para realizar el inicio de las modelaciones es a las XXXXX horas antes de los eventos de temperaturas ya que de esta manera aseguramos la mayor cantidad de aciertod, como de vio con la .\\
+
+%Las variaciones realizadas en el modelo con respecto a los límites y las resoluciones evidencian cambios leves en las simulaciones evaluadas.
+
+

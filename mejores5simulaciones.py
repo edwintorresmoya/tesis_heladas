@@ -17,6 +17,10 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pdb
+os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam')
+from funciones import busca_cod
+from funciones import un_busca_cod
+
     
 #recep_t = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/simulacion_200702.csv')       
 #recep_t = recep_t.sort_values('suma_esc', ascending=False)
@@ -51,7 +55,7 @@ for j in ['200702', '201509', '201408', '201508']:
             if (i in [21206980.0, 35025080.0, 35035130.0]): # Se descarta estas estaciones porque los datos de la estación ya que posee pocos valores. 
                 # /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas_temp_simulaciones <-- Acá están las gráficas
                 # /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica <-- Acá están las gráficas
-                print('Caso 2')
+                #print('Caso 2')
                 continue
         
         #if (j == '201508'):
@@ -73,8 +77,11 @@ for j in ['200702', '201509', '201408', '201508']:
         
         for coun, uu in enumerate([0]): #enumerate(range(0, (len(para_t1) //5) +2)):
             #coun = 0; uu = 0
-            print(coun, uu)
+            #print(coun, uu)
             para_t = para_t1.iloc[(5*uu):((5*uu)+ 5),:]
+            if len(recep_t[(recep_t.cod_1 == i) & (-recep_t.r2.isnull())]) > 10:
+                print(j, '&', un_busca_cod(i), '&',len(para_t), '\\\\')
+
             #print(para_t)
             
             #para_t = para_t.sort_values(['tipo_1','dom_1'])
@@ -100,4 +107,4 @@ for j in ['200702', '201509', '201408', '201508']:
 
 #base_con1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/mejores5simulaciones_condicional.csv')
 
-print(pd.crosstab(base_1.tipo_1, columns='count').to_latex())
+#print(pd.crosstab(base_1.tipo_1, columns='count').to_latex())

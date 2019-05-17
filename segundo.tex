@@ -1,0 +1,668 @@
+\chapter{Capítulo 2}
+%Actividad: Solicitar y realizar un control de calidad a la información meteorológica procedente de las estaciones en la Sabana de Bogotá pertenecientes a la red nacional de estaciones de monitoreo de la atmósfera administrada por el IDEAM.\\
+
+\section{Control de calidad de la información de las estaciones meteorológicas}
+
+Los datos del modelo se van a comparar con los datos de las estaciones convencionales ya que las estacinoes convencionales poseen datos horarios y esto permite una mejor comparación y ajuste. La información utilizada es proveniente de las estaciones convencionales y automáticas pertenecientes a la red nacional administrada por el Instituto de Hidrología, Meteorología y Estudios Ambientales de Colombia (IDEAM). La información recolectada a través de estaciones convencionales es medida directamente por un observador en horas específicas del día, en cambio las estaciones automáticas se tienen registros en tiempo real horarios, reportados en la plataforma HYDRAS.\\
+
+%Se usaron los datos provenientes de las estaciones meteorológicas del IDEAM. La información usada proviene de estaciones convencionales y estaciones automáticas. En las estaciones convencionales una persona se encarga de tomar datos entre una y doce veces por día y las estaciones automáticas son estaciones automatizadas que reportan datos horarios al IDEAM, a través de la red HYDRAS.\\
+
+Los datos de las estaciones automáticas y convencionales según el IDEAM tienen un proceso de control de calidad \citep{Torres2005}, pero se realizó un análisis exploratorio a los datos de esta institución y se encontraron algunas inconsistencia en los datos. Por esta razón se decidió realizar un proceso de control de calidad sobre los datos. El control de calidad se realizó usando el el software python 3.6.\\
+
+Un no dato corresponde a un dato que no fue registrado o fue registrado incorrectamente y estará representado por las letras NaN.
+
+\subsection{Control de calidad de la información de las estaciones convencionales}
+
+Se solicitaron los datos de la red de estaciones convencionales del IDEAM desde el registro más antiguo hasta el registro más cercano a diciembre del 2017 de todas las estaciones presentes en Cundinamarca y Bogotá en formato tr5, ya que el formato tr5 posee un registro diario de la información, el formato tr8 no.\\
+
+El formato tr5 es una matriz de datos que están separados por espacios, la explicación del uso de estos datos fueron brindados por el IDEAM y un documento llamado "Manejo de los archivos de texto del banco de datos" \citep{pedraza2015} con base en este documento se creó un código que permite facilitar la labor de interpretación de los datos, código llamado \texttt{pre\_procesamiento\_ideam.py}.\\
+
+El código \texttt{pre\_procesamiento\_ideam.py} lee los datos y los organiza como lo sugiere \citet{pedraza2015}, adicionalmente, agrega la georreferenciación de las estaciones basada en el \textit{Shapefile} que proporciona el IDEAM en su página de Internet en la sección  \textcolor{blue}{ \href{http://www.ideam.gov.co/solicitud-de-informacion}{Solicitud de información}} \textcolor{blue}{ \href{institucional.ideam.gov.co/jsp/info/institucional/publicaciones/CATALOGO_ESTACIONES_IDEAM_V10_AGOSTO2017.zip}{Catálogo Shape del IDEAM}}.\\
+
+
+\subsubsection{Control de calidad de los datos de las estaciones convencionales}
+
+Se analizaron los datos de las 162 estaciones convencionales del Anexo \ref{anexo:estaciones_autom_y_conv_usadas},  que se encuentran dentro del polígono en la Figura \ref{gra:areas}. Los valores que no pasan las pruebas no son tenidos en cuenta para el análisis posterior. Los pasos realizados para la validación fueron los siguientes:\\
+
+% Gráfica de las estaciones y las ubicaciones
+
+%\begin{figure}[H]
+%	\begin{center}
+%		\includegraphics[draft=false, scale=0.2]{municipios_paramos.png}
+%		
+%		\label{gra:areas_paramo}
+%	\end{center}
+%    	\caption{Área de estudio}
+%	\label{gra:areas}
+%\end{figure}
+%
+\begin{enumerate}
+
+
+	\item Conteo de no valores.\\
+	Para cada estación convencional se calcularon el número de no-valores.
+    
+    \item Prueba de límites fijos.\\
+	Se realizó una prueba de rango con la finalidad de determinar cuáles datos se salen de estos límites como lo sugiere \citet{estevez2011}. Los valores de temperatura ($T$), deben estar entre -30 y 50\celc. Esta prueba fue superada por todos los datos de todas las estaciones convencionales.
+
+
+	\item Detección de saltos.\\
+	Se usó la metodología propuesta por \citet{vickers1997} quienes proponen usar el promedio móvil (ver Ecuación \ref{eq:prom-mobil}) y la desviación estándar móvil (ver Ecuación \ref{eq:desv-mobil}). Donde el valor $T_i$ no puede ser superior al promedio móvil mas o menos 2.5 veces la desviación estándar móvil (ver Ecuación \ref{eq:Saltos}).
+
+	
+%	El valor de la temperatura en la posición i-ésima debe ser superior al promedio móvil en la posición i-ésima menos dos veces y medio el valor de la desviación estándar móvil en la posición i-ésima, y el valor i-ésimo de la temperatura no debe superar el valor promedio móvil en la posición i-ésima más dos veces y medio el valor de la desviación estándar móvil en la posición i-ésima, como lo indica la ecuación \ref{eq:Saltos}, de lo contrario el dato será marcado como sospechoso.
+	
+\begin{equation}\label{eq:prom-mobil}
+    x_{mob} = \frac{\sum\limits_{n=i-k}^{i+k} T_{n}}{2k + 1}
+\end{equation}
+
+\begin{equation}\label{eq:desv-mobil}
+s_{mob} = \sqrt[2]{\frac{\sum\limits_{n=i-k}^{i+k} (T_{n} - x_{mob})^2}{2k}} 
+\end{equation}
+ 
+\begin{equation}\label{eq:Saltos}
+	     x_{mob} - (2.5\cdot{s_{mob}}) < T_{i} < x_{mob} + (2.5\cdot{s_{mob}}) 
+\end{equation}
+
+%%% Gráfica de los saltos anuales
+
+
+% \item Prueba de discontinuidad.\\
+% Se realizó basado en el artículo de \citet{roggero2012} quien usa la desviación estándar como una medida de homogeneidad dentro de la serie de tiempo, teniendo en cuenta que las variables aquí medidas corresponden a un valor diario, por lo tanto podemos pensar en que se deben presentar ciertos valores de homogeneidad.\\
+
+% Se construyó una serie de valores de temperatura ejemplo para poder validar la metodología. El ejemplo consistió en crear 400 datos artificiales de temperatura con un promedio $a$ y una desviación estándar $b$ con una distribución normal, a partir del dato 401 generar datos con un promedio $c;\ c > a$ y una desviación estándar $b$ con una distribución normal y a partir del dato 450 hasta el dato 1050 los datos tienen un promedio $a$ y una desviación estándar $b$, ver Figura \ref{subfig:discontinuidad} puntos azules. Cada 11 datos consecutivos se les calculó la desviación estándar estos pueden ser observados en la Figura \ref{subfig:discontinuidad} como puntos de color naranja. A los valores de desviación estándar obtenidos se les calculó el promedio y la desviación estándar; estos dos valores se sumaron y están representados por la linea azul en la Figura \ref{subfig:discontinuidad}.
+
+
+% En este ejemplo se puede ver como en ciertos momentos la desviación estándar supera el límite y luego cuando los datos vuelven a la normalidad se presenta otro pico en la desviación estándar, en estos casos los datos que superen la línea azul, los datos serán marcados como sospechosos.
+
+
+
+\end{enumerate}
+
+\subsubsection{Visualización del control de calidad de las estaciones convencionales.}
+
+Las estaciones convencionales diariamente miden temperaturas máxima, mínima y promedio. Para los 3 tipos de temperatura se aplicó el control de calidad generando como resultado un diagnóstico del estado de cada una de las estaciones.\\
+
+Para poder visualizar más fácilmente el control de calidad de los datos se construyeron varias gráficas como se puede ver en la Figura \ref{gra:faltantes_saltos}.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.4]{validacion_convencionales/21205420_1_1.png}
+		\caption{Conteo de no valores anuales.}
+		\label{subfig:f1}
+		\end{subfigure}
+		~
+    \begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.4]{validacion_convencionales/21205420_1_2.png}
+		\caption{Conteo de no valores mensuales.}
+		\label{subfig:f2}
+		\end{subfigure}
+		
+    \begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.4]{validacion_convencionales/21205420_1_3.png}
+		\caption{Conteo de saltos anuales.}
+		\label{subfig:f3}
+		\end{subfigure}
+		~
+    \begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.4]{validacion_convencionales/21205420_1_4.png}
+		\caption{Conteo de saltos mensuales.}
+		\label{subfig:f4}
+		\end{subfigure}
+
+	
+	\caption{Visualización del control de calidad hecho a los valores de temperaturas diarias promedio de la estación convencional Tibaitatá. Se encuentran los datos faltantes anuales y mensuales y el conteo de los saltos anuales y mensuales.}
+	%La subfigura a corresponde a los datos faltantes anuales, la subfigura b corresponde a los datos faltantes mensualmente, la subfigura c corresponde a los saltos anuales y la subgráfica d corresponde a los saltos que se presentan mensualmente.
+	\label{gra:faltantes_saltos}	
+\end{figure}
+
+%Se realizaron figuras similares a la Figura \ref{gra:faltantes_saltos} y se encuentran en el Anexo \ref{anexo:gra_mensual_eventos_sb}.
+En este caso para la estación Tibaitatá en la Figura \ref{subfig:f1} vemos que es una estación que desde 1980 tiene casi la totalidad de sus datos de temperatura. En los años 1996 y 2014 se presentó una disminución en la toma de registros de los datos. Con respecto a el conteo de no valores mensuales podemos observar que en la Figura \ref{subfig:f2} todos los meses poseen la misma cantidad de no valores. Con respecto a los saltos presentados a través de todos los años Figura \ref{subfig:f3} vemos que el máximo valor fué de 4 y se presentó 3 veces, este es un valor bajo de fallas. En el gráfico de los saltos mensuales vemos que la mayor cantidad de saltos se presentan en el mes de julio pero los valores continúan siendo bajos. En general las estaciones de la zona presentan un buen comportamiento, el fallo más común son los no valores. No se encontró una relación entre los no valores y los saltos y los meses. Un resumen de cada una de las estaciones se encuentra Anexo \ref{anexo:resumen_control_calidad_est_con2}.
+
+%% Está creado el script para la adición de todas las imágenes que ya están echas generador_graficas_latex.py
+\subsection{Control de calidad de las estaciones automáticas de la red HYDRAS}
+
+La validación de las estaciones automáticas de la red HYDRAS fue diferente a la validación de las estaciones convencionales ya que estas estaciones toman datos horarios. Para realizar este trabajo se realizó el control de calidad de las estaciones automáticas dentro del polígono que se muestra en la Figura \ref{gra:areas}.
+
+\subsubsection{Descarga de los datos}
+Para la descarga de los datos se realizó un código llamado \texttt{descarga\_IDEAM\_hydras.py}, este código permite la descarga de los archivos de la red de estaciones del IDEAM siempre y cuando se tenga el número SID que es facilitado por la entidad, mediante un usuario y una contraseña.
+
+\subsubsection{Control de calidad de la temperatura del aire}
+
+Se realizó un preprocesamiento de la información proveniente de la red HYDRAS. La finalidad del preprocesamiento es generar archivos homogéneos y de esta forma facilitar la validación de los datos. El preprocesamiento consistió la generación de archivos homogéneos en cuanto a forma de las variables horarias de temperaturas mínimas, máxima, y media, humedad y rapidez del viento de una misma estación, con la finalidad de generar un grupo de archivos que permita una fácil manipulación.\\
+
+La plataforma HYDRAS presenta la temperatura de tres formas diferentes las cuales son: "Temp Max Aire 2m", "Temp Min Aire 2m" y "Temp Aire 2m", las cuales hacen referencia a las temperaturas máximas, mínimas y promedio, respectivamente. Estas variables se unieron dándole prioridad a la temperatura promedio por ejemplo: si en un mismo momento se presentan datos provenientes de "Temp Max Aire 2m" y de "Temp Aire 2m" solo se tomará el valor de "Temp Aire 2m". La forma como se realizó el control de calidad fue el siguiente:
+
+
+\begin{enumerate}
+\item Conteo de no valores (No datos).\\
+	Para cada estación automática se calculó el número de no-valores.
+
+\item Prueba de límites fijos (P. Rango).\\
+Lo siguiente fue realizar una prueba de rango similar a la usada en el primer paso de la validación de las estaciones convencionales, propuesta por \citet{estevez2011}, para quienes las temperaturas $T$ en grados Celsius no deben ser menores a -20\celc\ ni mayores a 40\celc. Los rangos de la temperatura fueron modificados teniendo en cuenta las temperaturas extremas registrados por las estaciones convencionales de modo que se sumó 10\celc\ al límite superior y se le restó 10\celc\ al límite inferior. Así el rango de no validez de los valores de temperatura es $-30$\celc $< T < 50$\celc.\\
+
+\item Detección de saltos (P. Saltos).\\
+Para la detección de los saltos se usó una metodología similar usada para la detección de saltos en las estaciones convencionales (ver Ecuación \ref{eq:Saltos}), metodología propuesta por \citet{vickers1997}.
+
+Se usó una ecuación similar a la Ecuación \ref{eq:Saltos}. En este caso el factor de 2.5 es cambiado por 1 para ser más selectivo en el filtro, ver ecuación \ref{eq:Saltos_aut2}.
+
+\begin{equation}\label{eq:Saltos_aut2}
+	     x_{mob} - (1\cdot{s_{mob}}) < T_{i} < x_{mob} + (1\cdot{s_{mob}}) 
+\end{equation}
+
+\item Prueba de paso (P. Paso).\\
+Según \citet{estevez2011} en dos datos consecutivos  de temperatura del aire con una hora de diferencia no puede presentarse una diferencia de 4\celc\ en valor absoluto. Datos que superen esta diferencia deberán ser marcados como valores sospechosos.\\
+
+\item Prueba de variación (P. Variación).\\
+
+Se realizó una prueba para evaluar si el sensor no presenta variación por un lapso de tiempo de 10 horas. Cuando el sensor de temperatura no presente variación en los datos de temperatura, estos deben ser marcados como sospechosos. Para esto se evalúa que la desviación estándar de una ventana de 10 horas debe ser superior a 0.01. Esta prueba  se basó en \citet{zahumensky2004} y \citet{Shafer2000} quienes proponen que si la desviación estándar de ciertas variables cae por debajo de un límite, estos datos se deben reportar como sospechosos. Esto porque, es probable que el sensor esté reportando el mismo valor (ver Ecuación \ref{eq:desv_est}).
+
+
+
+\begin{center}
+\begin{equation}\label{eq:desv_est}
+	s_{mob} > 0.001
+\end{equation}
+\end{center}
+
+\item Límites con error (Límites)\\
+
+Se realizó un análisis de los datos detalladamente y se evidenció que en muchas de las estaciones se presentaron valores de temperatura entre 0\celc y 0.4\celc en horas del medio día. Por esta razón se decidió eliminar todos los valores de temperatura que se encuentran entre estos dos límites.
+
+\newpage
+\begin{landscape}
+
+
+
+\begin{longtable}{p{5cm}rrrrrrr}
+
+
+\caption{Porcentaje de valores que no superaron cada una de las pruebas de control de calidad y el total de los datos analizados para el control de calidad de los valores de temperatura del aire de las estaciones automáticas de la zona de estudio. Conteo de No valores (No. Datos), prueba de límites fijos (P. Rango), prueba de paso (P. Paso), prueba de variación (P. Variación), prueba de saltos (P. Saltos) y límites con error (Límites).}
+\label{tab:cc_tmp}\\
+\hline
+
+                  Nombre &  No. Datos &  P. Rango (\%) &  P. Paso (\%)&  P. Variación (\%)&  P. Saltos (\%)&  Límites &Total datos \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{{Continúa en la siguiente página}} \\
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+        SUBIA AUTOMATICA &        0.0 &      0.02 &           0.85 &     0.03 &      18.40 &          0.01 &       110033 \\
+ ESC LA UNION AUTOMATICA &        0.0 &      0.00 &           0.14 &     0.02 &      20.44 &          0.00 &       378885 \\
+    PASQUILLA AUTOMATICA &        0.0 &    100.00 &           0.00 &    99.99 &       0.00 &          0.00 &        72784 \\
+           UNIV NACIONAL &        0.0 &      7.39 &           9.41 &     0.22 &      16.13 &          0.10 &       136701 \\
+    LA BOYERA AUTOMATICA &        0.0 &      2.02 &           5.25 &     0.09 &      13.66 &          0.42 &       247084 \\
+      PNN CHINGAZA AUTOM &        0.0 &      1.04 &          11.54 &     0.22 &      19.64 &          4.83 &       209566 \\
+      BOSQUE INTERVENIDO &        0.0 &      0.00 &           1.56 &     0.69 &      13.93 &          0.00 &       109860 \\
+          APTO EL DORADO &        0.0 &      0.00 &           0.68 &     0.03 &      14.47 &          0.00 &        78636 \\
+       HDA STA ANA AUTOM &        0.0 &      4.72 &          10.49 &     0.16 &      15.52 &          0.72 &       265428 \\
+            PMO GUERRERO &        0.0 &      2.54 &           7.21 &     0.13 &      16.47 &          1.02 &       257602 \\
+         PMO GUACHENEQUE &        0.0 &      5.79 &           7.46 &     0.14 &      20.06 &          0.15 &       265070 \\
+            IDEAM BOGOTA &        0.0 &      1.57 &           3.36 &     0.01 &      15.79 &          0.11 &       227182 \\
+      STA CRUZ DE SIECHA &        0.0 &      1.46 &           5.88 &     1.38 &      18.16 &          1.40 &       254552 \\
+    TIBAITATA AUTOMATICA &        0.0 &      9.53 &          25.13 &     0.11 &      18.35 &          6.70 &       314116 \\
+      SAN CAYETANO AUTOM &        0.0 &      0.86 &           3.79 &     0.06 &      20.03 &          0.67 &       189971 \\
+            PMO CHINGAZA &        0.0 &      7.47 &           7.05 &     0.11 &      19.98 &          0.29 &       120632 \\
+    CHINAVITA AUTOMATICA &        0.0 &      4.07 &          24.96 &     0.66 &      16.11 &          9.71 &       280902 \\
+  PMO RABANAL AUTOMATICA &        0.0 &      5.39 &          11.33 &     1.67 &      18.14 &          4.69 &       253532 \\
+        NUEVA GENERACION &        0.0 &      0.59 &           2.75 &     4.75 &      13.96 &          6.49 &        96604 \\
+        SUBIA AUTOMATICA &        0.0 &      0.02 &           0.85 &     0.03 &      18.40 &          0.01 &       110033 \\
+ ESC LA UNION AUTOMATICA &        0.0 &      0.00 &           0.14 &     0.02 &      20.44 &          0.00 &       378885 \\
+    PASQUILLA AUTOMATICA &        0.0 &    100.00 &           0.00 &    99.99 &       0.00 &          0.00 &        72784 \\
+           UNIV NACIONAL &        0.0 &      7.39 &           9.41 &     0.22 &      16.13 &          0.10 &       136701 \\
+    LA BOYERA AUTOMATICA &        0.0 &      2.02 &           5.25 &     0.09 &      13.66 &          0.42 &       247084 \\
+      PNN CHINGAZA AUTOM &        0.0 &      1.04 &          11.54 &     0.22 &      19.64 &          4.83 &       209566 \\
+      BOSQUE INTERVENIDO &        0.0 &      0.00 &           1.56 &     0.69 &      13.93 &          0.00 &       109860 \\
+          APTO EL DORADO &        0.0 &      0.00 &           0.68 &     0.03 &      14.47 &          0.00 &        78636 \\
+       HDA STA ANA AUTOM &        0.0 &      4.72 &          10.49 &     0.16 &      15.52 &          0.72 &       265428 \\
+            PMO GUERRERO &        0.0 &      2.54 &           7.21 &     0.13 &      16.47 &          1.02 &       257602 \\
+         PMO GUACHENEQUE &        0.0 &      5.79 &           7.46 &     0.14 &      20.06 &          0.15 &       265070 \\
+            IDEAM BOGOTA &        0.0 &      1.57 &           3.36 &     0.01 &      15.79 &          0.11 &       227182 \\
+      STA CRUZ DE SIECHA &        0.0 &      1.46 &           5.88 &     1.38 &      18.16 &          1.40 &       254552 \\
+    TIBAITATA AUTOMATICA &        0.0 &      9.53 &          25.13 &     0.11 &      18.35 &          6.70 &       314116 \\
+      SAN CAYETANO AUTOM &        0.0 &      0.86 &           3.79 &     0.06 &      20.03 &          0.67 &       189971 \\
+            PMO CHINGAZA &        0.0 &      7.47 &           7.05 &     0.11 &      19.98 &          0.29 &       120632 \\
+    CHINAVITA AUTOMATICA &        0.0 &      4.07 &          24.96 &     0.66 &      16.11 &          9.71 &       280902 \\
+  PMO RABANAL AUTOMATICA &        0.0 &      5.39 &          11.33 &     1.67 &      18.14 &          4.69 &       253532 \\
+        NUEVA GENERACION &        0.0 &      0.59 &           2.75 &     4.75 &      13.96 &          6.49 &        96604 \\
+ VILLA TERESA AUTOMATICA &        0.0 &      4.35 &           8.61 &     0.04 &      21.05 &          0.03 &       243016 \\
+          CIUDAD BOLIVAR &        0.0 &      8.19 &          16.18 &     0.02 &      17.34 &          1.30 &       229394 \\
+          CALOSTROS BAJO &        0.0 &     13.03 &          25.15 &     0.15 &      17.04 &          0.42 &       151190 \\
+        LA CAPILLA AUTOM &        0.0 &      3.35 &           7.67 &     0.46 &      16.15 &          0.97 &       256730 \\
+\end{longtable}
+\end{landscape}
+
+En la Tabla \ref{tab:cc_tmp} podemos observar que para las estaciones analizadas hay un bajo porcentaje de no valores, los porcentajes de valores fuera de rango son menores al 10\% bajos excepto en las estaciónes PASQUILLA AUTOMATICA y CALOSTROS BAJO. En la estación PASQUILLA AUTOMATICA el valor es del 100\% por esta razón esta estación no se usará para los análisis, adicionalmete presenta un alto porcentaje de valores que no superan la prueba de variación, esto quiere decir que es probable que el sensor se encuentre averiado y esté reportando los mismos valores. En los valores de la prueba de paso podemos observar que hay una mayor cantidad de valores que no pasan esta prueba. En la prueba de variación vemos que se presentan valores entre 10 a 25\%, esto quiere decir que hay una proporción similar de datos que no cumplen esta prueba.
+
+\end{enumerate}
+
+\subsubsection{Control de calidad de la humedad}
+
+Para el control de calidad de la humedad relativa se realizaron los siguientes pasos.\\
+
+\begin{enumerate}
+\item Identificación de los no valores (No datos).\\
+\item Prueba de paso (P. Diferencia). Se marcaron como datos sospechosos aquellos datos consecutivos cuya diferencia es mayor a 45\%, siguiendo los criterios de \citet{estevez2011}.\\
+\item Prueba de límites fijos (P. Rango).
+Se marcaron como sospechosos los valores de humedad relativa que son menores a 0.8\% y superiores a 100\%, siguiendo los criterios de \citet{estevez2011}.
+
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+\caption{Porcentaje de valores que no superaron cada una de las pruebas de control de calidad y el total de los datos analizados para el control de calidad de los valores de humedad relativa de las estaciones automáticas de la zona de estudio. Conteo de no valores (No datos), prueba de paso (P. Diferencia) y prueba de límites (P. Rango).}
+\label{tabla:val_humedad}
+
+\begin{tabular}{p{5cm}rrrr}
+\toprule
+      Nombre &  No datos (\%) &  P. Diferencia (\%) &  P. Rango (\%) & Total datos \\
+\midrule
+         SUBIA AUTOMATICA &      5.18 &           0.13 &      0.23 &         42187 \\
+ ESC LA UNION AUTOMATICA &     29.07 &           0.01 &      0.02 &        389065 \\
+    PASQUILLA AUTOMATICA &      0.00 &           0.00 &    100.00 &         72728 \\
+           UNIV NACIONAL &      1.48 &           0.05 &      0.01 &         49439 \\
+    LA BOYERA AUTOMATICA &      7.71 &           0.08 &      0.02 &         96263 \\
+      PNN CHINGAZA AUTOM &      5.07 &           0.38 &     14.68 &         76796 \\
+      BOSQUE INTERVENIDO &      0.45 &           0.65 &      7.18 &         45222 \\
+          APTO EL DORADO &      0.73 &           0.01 &      0.00 &         30407 \\
+       HDA STA ANA AUTOM &      4.22 &           4.21 &      3.73 &        101293 \\
+            PMO GUERRERO &      3.44 &           0.08 &      0.25 &         96298 \\
+         PMO GUACHENEQUE &      1.08 &           0.38 &      2.27 &         97235 \\
+            IDEAM BOGOTA &      2.65 &           0.11 &      0.03 &         70847 \\
+      STA CRUZ DE SIECHA &      6.89 &           0.21 &      0.11 &         97204 \\
+    TIBAITATA AUTOMATICA &      5.35 &           2.03 &      3.95 &        106805 \\
+      SAN CAYETANO AUTOM &      9.24 &           0.05 &      0.16 &         76799 \\
+            PMO CHINGAZA &     22.37 &           3.23 &      8.40 &         51623 \\
+    CHINAVITA AUTOMATICA &     12.00 &           0.08 &      0.20 &        104087 \\
+  PMO RABANAL AUTOMATICA &      4.25 &           1.17 &      9.14 &         90622 \\
+        NUEVA GENERACION &      0.96 &           2.34 &     12.05 &         52663 \\
+ VILLA TERESA AUTOMATICA &      3.17 &           0.75 &      2.18 &         87711 \\
+          CIUDAD BOLIVAR &      3.69 &           0.01 &      0.01 &         32543 \\
+          CALOSTROS BAJO &      6.86 &           0.09 &     26.68 &         71950 \\
+        LA CAPILLA AUTOM &      2.26 &           7.97 &      6.40 &         96145 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+En la Tabla \ref{tabla:val_humedad} podemos observar que tres estaciones tienen No datos en más del 10\% de sus datos, esto implica que en esta estaciones no se se encuentren todas las fechas de análisis. Las estaciones presentaron buenos resultados con respecto a la prueba de diferencia ya que ninguna estación falló en más del diez porciento. En las pruebas de rango se observa que la estación PASQUILLA AUTOMATICA posee los valores fuera de rango en un 100\%, esta estación también presentó falencias en cuanto a la variable de temperatura al igual que la estación CALOSTROS BAJO.
+
+\subsubsection{Control de calidad de la precipitación}
+
+En la plataforma HYDRAS hay dos variables de precipitación una llamada "Precipitación instantánea 10 min" y otra llamada "Precipitación acumulada diaria". Se realizó una entrevista con un funcionario del IDEAM encargado de la automatización de las estaciones y él asevera que las estaciones toman los valores de precipitación del día desde las 7 a.m hasta las 7 a.m. del siguiente día (Villareal, 2018; comunicación personal). En este estudio se va a realizar una comparación de los datos de las estaciones automáticas con los datos generados por un modelo, estos datos vienen horarios. Razón por la cuál se escogió trabajar con la variable "Precipitación instantánea 10 min".
+
+
+%El modelo de pronóstico del tiempo fue configurado para generar resultados cada hora, por esta razón se decidió escoger la variable de precipitación que emite valores cada hora, es decir se descartó la variable de precipitación horaria. Los pasos de la validación fueron los siguientes:
+
+Para el control de calidad de la precipitación instantánea cada 10 minutos se realizaron los siguientes pasos:
+
+\begin{enumerate}
+\item Identificación de los no valores (No datos).\\
+Se marcaron los no-valores.
+\item Prueba de limites (P Rango).\\
+Se marcaron como sospechosos los valores que son menores que 0 mm y superiores a 120 mm \citep{estevez2011}.
+
+\end{enumerate}
+
+
+\begin{table}[H]
+\begin{center}
+
+
+\caption{Porcentaje de valores que no superaron cada una de las pruebas de control de calidad y el total de los datos analizados para el control de calidad de los valores de precipitación diezminutal de las estaciones automáticas de la zona de estudio. Conteo de los no valores (No datos), prueba de límites (P. Rango).}
+\label{tabla:val_precipitacion}
+\begin{tabular}{lrrr}
+\toprule
+      Nombre &  No datos (\%) &  P. Rango (\%) & Total datos \\
+\midrule
+         SUBIA AUTOMATICA &      5.37 &      0.00 &        253275 \\
+ ESC LA UNION AUTOMATICA &      1.04 &      0.00 &        514372 \\
+    PASQUILLA AUTOMATICA &      0.00 &      0.00 &         73007 \\
+           UNIV NACIONAL &      1.47 &      0.01 &        296639 \\
+    LA BOYERA AUTOMATICA &      8.04 &      1.14 &        577583 \\
+      PNN CHINGAZA AUTOM &      1.67 &      0.05 &        441383 \\
+      BOSQUE INTERVENIDO &      0.30 &      0.00 &        291415 \\
+          APTO EL DORADO &      0.72 &      0.00 &        182447 \\
+       HDA STA ANA AUTOM &      3.76 &      1.15 &        600981 \\
+            PMO GUERRERO &      3.40 &      0.91 &        579799 \\
+         PMO GUACHENEQUE &      5.51 &      0.00 &        609366 \\
+            IDEAM BOGOTA &      2.94 &      0.01 &        442367 \\
+      STA CRUZ DE SIECHA &      7.05 &      0.12 &        582126 \\
+    TIBAITATA AUTOMATICA &      4.65 &      0.00 &        632398 \\
+      SAN CAYETANO AUTOM &     21.44 &      0.01 &        531215 \\
+            PMO CHINGAZA &      6.87 &      1.00 &        583055 \\
+    CHINAVITA AUTOMATICA &     12.71 &      0.00 &        624527 \\
+  PMO RABANAL AUTOMATICA &      4.12 &      0.00 &        543501 \\
+        NUEVA GENERACION &      2.01 &      2.83 &        194150 \\
+ VILLA TERESA AUTOMATICA &      5.79 &      1.32 &        530238 \\
+          CIUDAD BOLIVAR &      0.02 &      0.71 &        471866 \\
+          CALOSTROS BAJO &      1.59 &      0.07 &        431428 \\
+        LA CAPILLA AUTOM &      1.91 &      0.65 &        559971 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+En la tabla \ref{tabla:val_precipitacion} podemos observar que las estaciones SAN CAYETANO AUTOM y CHINAVITA AUTOMATICA presentaron no valores en más del 10\% de los dato, esto implica que es probable que las fechas que se analizarán puede que no se encuentren. Ninguno de las estaciones automáticas posee más del 10\% de no datos fuera del rango, esto implica que esta variable está registando buenos valores.
+
+%validación de la Radiación
+
+\subsubsection{Control de calidad de la radiación directa}
+
+\begin{enumerate}
+\item Identificación de no valores. (No datos).\\
+
+
+\item Prueba de límites absolutos. (P Rango).\\
+Los valores analizados no pueden ser menores a 0 $W/m^2$ ni superiores a 1500 $W/m^2$ \citep{estevez2011}. El valor de 1500 $W/m^2$ es bastante menor a la constante solar la cual es de 1366 $W/m^2$ la cuál corresponde a el máximo valor obtenido en el tope de la atmósfera.
+
+\item Prueba de limites relativos (P. Cielo despejado).\\
+La radiación nunca puede ser mayor a los valores de la radiación extraterrestre o radiación con cielo despejado, la función para su estimación es usada y explicada en  \citet{Allen1994}.\\
+
+\centering 
+\begin{equation}
+    Q_s = S(1-\alpha)(\frac{\bar{d}}{d})^2cos(\zeta)\tau_s
+\end{equation}
+
+Donde $S$ es la constante solar, $\alpha$ es el albedo, $d$ es la distancia de la tierra hasta el sol, $\bar{d}$ es la distancia promedio de la tierra al sol y $\tau_s$ es la transmisividad de la atmósfera de la atmósfera.\\
+
+El factor $cos(\zeta)$ puede ser calculado a partír de:
+
+\begin{equation}
+    cos(\zeta) = sin(\psi)sin(\delta) + cos(\psi)cos(\delta)cos(h)
+\end{equation}
+
+Donde
+
+\begin{equation}
+    \delta = 23.45 · \frac{\pi}{180}cos(\frac{2\pi(d - d_{solst})}{d_{year}})
+\end{equation}
+
+Donde $d$ es el día juliano, $d_{solst}$ es el día del del solsticio (173) y $d_{year}$ es el número de días en el año (365.25).\\
+
+Adicionalmente, $h$ es la hora local definido por:
+
+\begin{equation}
+    h = \frac{(t_{utc}-12)\pi}{12} + \frac{\lambda\pi}{180}
+\end{equation}
+
+Dónde $\lambda$ es la longitud y $t_{UTC}$ es el tiempo en UTC (en horas).\\
+
+Los resultados de la función varían dependiendo de la latitud, longitud y fecha del año, para su estimación se usó el paquete \textcolor{blue}{ \href{http://pvlib-python.readthedocs.io/en/latest/index.html}{pvlib-python}}. Los valores que exceden la radiación con cielo despejado fueron marcados como sospechosos. 
+
+\item Prueba de paso (P. Diferencia). Se marcaron como datos sospechosos aquellos datos consecutivos cuya diferencia es mayor a 55 $W/m^2$, siguiendo los criterios de \citet{estevez2011}.\\
+
+
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+\caption{Porcentaje de valores que no superaron cada una de las pruebas de control de calidad y el total de los datos analizados para el control de calidad de los valores de radiación de las estaciones automáticas de la zona de estudio. Conteo de los no valores (No. datos), prueba de rango (P. Rango), prueba de limites relativos (P. Cielo despejado), prueba de paso (P. Diferencia).}
+\begin{tabular}{p{3cm}rrp{3cm}p{3cm}r}
+\toprule
+      Nombre &  No. datos (\%) &  P. Rango (\%) &  P. Cielo despejado (\%) &  P. Diferencia (\%) & Total datos \\
+\midrule
+         SUBIA AUTOMATICA &       5.51 &      0.40 &                5.95 &           0.84 &         42187 \\
+           UNIV NACIONAL &       1.60 &      3.43 &                6.99 &           0.25 &         49463 \\
+    LA BOYERA AUTOMATICA &       7.75 &     10.60 &               15.12 &           0.25 &         96239 \\
+          APTO EL DORADO &       0.72 &      0.00 &               34.00 &           0.28 &         30407 \\
+       HDA STA ANA AUTOM &       4.45 &     15.79 &               15.53 &           1.37 &         98798 \\
+            IDEAM BOGOTA &       3.45 &      5.48 &                7.52 &           0.38 &         73175 \\
+      STA CRUZ DE SIECHA &       7.04 &     28.34 &               11.75 &           0.51 &         99672 \\
+    TIBAITATA AUTOMATICA &       4.49 &     16.85 &                9.05 &           0.22 &        105260 \\
+      SAN CAYETANO AUTOM &      17.68 &     23.50 &               13.53 &           0.17 &         94415 \\
+    CHINAVITA AUTOMATICA &       3.37 &      3.50 &               28.40 &           2.43 &         88063 \\
+        NUEVA GENERACION &       0.88 &      1.05 &                4.03 &           0.22 &         52979 \\
+ VILLA TERESA AUTOMATICA &       2.69 &     19.83 &               40.18 &           6.69 &         90744 \\
+          CIUDAD BOLIVAR &       0.12 &     28.48 &               18.19 &           6.63 &         81024 \\
+        LA CAPILLA AUTOM &       1.40 &     31.25 &               19.04 &          16.33 &        103284 \\
+\bottomrule
+\end{tabular}		
+		\label{tabla:val_radiacion}
+\end{center}
+\end{table}
+
+En la tabla \ref{tabla:val_radiacion} podemos observar que en el conteo de los no datos la estación que presenta valores superiores a 10\% es la estación SAN CAYETANO AUTOM la cuál también presentó problemas en los valores de precipitación, esto implica que ésta estación tuvo fallas en varios sensores. Con respecto a el porcentaje de las estaciones que estuvieron fuera del rango fueron más de la mitad, esto quiere decir que los sensores están dando valores que no corresponden a la realidad en una buen parte de los registros y lo mismo sucedió con la prueba de cielo despejado. La prueba de paso sólo en la estación LA CAPILLA AUTOM presentó valores supériores a 10\%.
+
+\subsubsection{Control de calidad de la rapidez del viento}
+
+Velocidad
+
+\begin{enumerate}
+\item Identificación de no valores. (No datos).\\
+Se marcaron los no valores
+
+\item Prueba de límites (P. Rango).\\
+Los valores analizados no pueden ser menores a 0 $m/s$ ni superiores a 60.3 $m/s$, basado en \citet{estevez2011}.
+
+\item Prueba de paso. (P. Diferencia).\\
+Se marcaron como datos sospechosos aquellos datos consecutivos cuya diferencia es mayor a 10 $m/s$, siguiendo los criterios de \citet{estevez2011}.
+
+\item Prueba de variación. (P. Variación).\\
+
+Se realizó una prueba para evaluar si el sensor no presenta variación por un lapso de tiempo de 10 horas. Cuando el sensor de velocidad del viento no presente variación en los datos de rapidez del viento , estos deben ser marcados como sospechosos.
+
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+\caption{Porcentaje de valores que no superaron cada una de las pruebas de control de calidad y el total de los datos analizados para el control de calidad de los valores de rapidez del viento de las estaciones automáticas de la zona de estudio. Conteo de los no valores (No datos), prueba de límites (P. Rango), prueba de paso (P. Diferencia) y prueba de variación (P. Variación).}
+
+\begin{tabular}{p{3cm}rrrrr}
+\toprule
+      Nombre &  No datos  (\%)&  P. Rango  (\%)&  P. Diferencia  (\%)&  P. Variación  (\%)& Total datos \\
+\midrule
+        SUBIA AUTOMATICA &      34.65 &      0.00 &           0.01 &          6.34 &        253275 \\
+           UNIV NACIONAL &      12.44 &      0.05 &           0.08 &          2.66 &        296639 \\
+    LA BOYERA AUTOMATICA &      13.39 &      0.01 &           1.73 &          2.17 &        577583 \\
+      PNN CHINGAZA AUTOM &      10.61 &      0.24 &           0.23 &          1.71 &        456455 \\
+      BOSQUE INTERVENIDO &      17.75 &      0.00 &           0.00 &          4.43 &        271543 \\
+          APTO EL DORADO &       0.73 &      0.00 &           0.00 &          0.06 &        182447 \\
+       HDA STA ANA AUTOM &       1.71 &      0.05 &           0.05 &          0.94 &        335182 \\
+            PMO GUERRERO &       7.69 &      1.25 &           1.74 &          2.64 &        389119 \\
+         PMO GUACHENEQUE &      14.57 &      2.15 &           2.83 &          2.01 &        335288 \\
+            IDEAM BOGOTA &       3.66 &      0.15 &           0.18 &          0.60 &        424943 \\
+      STA CRUZ DE SIECHA &      29.34 &      0.62 &           0.88 &          1.79 &        554206 \\
+    TIBAITATA AUTOMATICA &      15.63 &      0.97 &           2.14 &          1.07 &        386397 \\
+      SAN CAYETANO AUTOM &      28.99 &      0.00 &           0.01 &          1.69 &        314783 \\
+            PMO CHINGAZA &       7.81 &      0.00 &           0.01 &          1.81 &        346319 \\
+    CHINAVITA AUTOMATICA &      17.71 &      1.97 &           3.40 &          2.44 &        567578 \\
+  PMO RABANAL AUTOMATICA &      14.31 &      1.58 &           1.42 &          2.26 &        545127 \\
+        NUEVA GENERACION &       2.25 &      0.12 &           0.76 &          3.20 &        186294 \\
+ VILLA TERESA AUTOMATICA &      20.84 &      0.02 &           0.03 &          8.19 &        454729 \\
+          CIUDAD BOLIVAR &       9.53 &      0.01 &           0.01 &          3.22 &        242805 \\
+        LA CAPILLA AUTOM &      12.42 &      0.98 &           1.43 &          0.47 &        336067 \\
+\bottomrule
+\end{tabular}		
+		\label{tabla:val_vel_viento}
+\end{center}
+\end{table}
+
+En la tabla \ref{tabla:val_vel_viento} en el conteo de los no valores observamos que 13 de las 19 estaciones poseen no valores en más del 10\% de los valores. Las estaciones presentaron fallas en menos del 10\% para las pruebas prueba de límites, prueba de paso y prueba de variación. Esta es una variable que presentó buenos resultados.
+
+\subsubsection{Control de calidad de la dirección del viento}
+
+Para el control de calidad de la velocidad del viento se realizaron los siguientes pasos:
+
+\begin{enumerate}
+\item Identificación de no valores (No datos).\\
+
+\item Prueba de límites (P. Rango)\\
+Los valores analizados no pueden ser menores a 0$^{\circ}$ ni superiores a 360$^{\circ}$.
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+\caption{Porcentaje de valores que no superaron cada una de las pruebas de control de calidad y el total de los datos analizados para el control de calidad de los valores de dirección del viento de las estaciones automáticas de la zona de estudio. Conteo de los no valores (No. datos) y prueba de límites (P. Rango).}
+
+\begin{tabular}{lrrr}
+\toprule
+      Nombre &  No. datos  (\%)&  P. Rango  (\%)& Total datos \\
+\midrule
+         SUBIA AUTOMATICA &      34.66 &      0.00 &        253275 \\
+           UNIV NACIONAL &      12.59 &      3.61 &        296639 \\
+    LA BOYERA AUTOMATICA &      16.40 &      1.59 &        598319 \\
+      PNN CHINGAZA AUTOM &      28.28 &      0.01 &        471959 \\
+      BOSQUE INTERVENIDO &      17.75 &      0.00 &        271543 \\
+          APTO EL DORADO &       0.73 &      0.00 &        182447 \\
+       HDA STA ANA AUTOM &      44.41 &      0.02 &        592578 \\
+            PMO GUERRERO &       9.09 &      0.17 &        389719 \\
+         PMO GUACHENEQUE &      53.48 &      0.45 &        612787 \\
+            IDEAM BOGOTA &       5.17 &      0.00 &        431567 \\
+      STA CRUZ DE SIECHA &      31.92 &      5.61 &        574398 \\
+    TIBAITATA AUTOMATICA &      16.39 &      0.06 &        386711 \\
+      SAN CAYETANO AUTOM &      57.65 &      0.03 &        527759 \\
+            PMO CHINGAZA &       7.83 &      0.00 &        346319 \\
+    CHINAVITA AUTOMATICA &      53.26 &      0.02 &        623491 \\
+  PMO RABANAL AUTOMATICA &      15.53 &      0.98 &        548729 \\
+        NUEVA GENERACION &       2.47 &      0.05 &        186648 \\
+ VILLA TERESA AUTOMATICA &      20.87 &      0.00 &        454739 \\
+          CIUDAD BOLIVAR &      30.14 &      1.03 &        243487 \\
+        LA CAPILLA AUTOM &      47.15 &      1.30 &        551054 \\
+\bottomrule
+\end{tabular}
+		\label{tabla:val_vel_viento}
+\end{center}
+\end{table}
+
+En la Tabla \ref{tabla:val_vel_viento} 15 estaciones presentan no valores en más del 10\% y 3 estaciones presentan no valores en más del 50\% de los datos, estos son los valores más altos registrados de no valores teniendo en cuenta que se analizaron 20 estaciones. En la prueba de rango ninguna de las estaciones presentó valores superiores al 10\%. Esta es una de las variables que más ha tenido problemas ya que los registros están incompletos.
+
+
+\subsubsection{Ajustes de control de calidad de las estaciones automáticas}
+
+Se realizó el control de calidad de la temperatura del aire y los datos que se marcaron como sospechosos no fueron tomados en cuenta a partir de este punto. 
+
+Algunas de las estaciones luego de haber realizado el control de calidad de los datos continúan presentando algunos datos que pueden ser errados. Por esta razón se recomienda posteriormente a el proceso de control de calidad realizar una visualización de los datos con el control de calidad. Se realizó un resumen de los datos sospechosos observados después de la validación (Tabla \ref{tab:res_tab_autom}).
+
+\begin{table}[H]
+
+\caption{Tabla resumen del control de calidad de las estaciones automáticas}
+\label{tab:res_tab_autom}
+\begin{tabular}{lllp{2cm}lp{3cm}}
+   & Código   & Nombre                  & Datos sospechosos & Fechas      & Observación                                 \\ \hline
+1  & 35025080 & PNN CHINGAZA AUTOM      & X                 & 2008        & Un pico de altas temperaturas               \\ \hline
+2  & 35075080 & PMO RABANAL AUTOMATICA  &                   &             &                                             \\ \hline
+3  & 35085080 & LA CAPILLA AUTOM        & x                 & 2001 – 2004 & No variación                                \\ \hline
+4  & 21206990 & TIBAITATA AUTOMATICA    & X                 & 2017, 2018  & Altas temperaturas en pocos datos           \\ \hline
+5  & 21206940 & CIUDAD BOLIVAR          & X                 & 2010        & Altas temperaturas                          \\ \hline
+6  & 35035130 & PMO CHINGAZA            & X                 & 2014        & Altas temperaturas                          \\ \hline
+7  & 21206920 & VILLA TERESA AUTOMATICA &                   &             &                                             \\ \hline
+8  & 21205012 & UNIV NACIONAL           & X                 & 2013, 2017  & Altas y bajas temperaturas anómalas         \\ \hline
+9  & 21206930 & PMO GUERRERO            &                   &             &                                             \\ \hline
+10 & 21206790 & HDA STA ANA AUTOM       & X                 & 2015        & Altas temperaturas                          \\ \hline
+11 & 23125170 & SAN CAYETANO AUTOM      &                   &             &                                             \\ \hline
+12 & 35075070 & CHINAVITA AUTOMATICA    & X                 & 2008 – 2013 & No variación                                \\ \hline
+13 & 35027510 & CALOSTROS BAJO          &                   &             &                                             \\ \hline
+14 & 21206980 & STA CRUZ DE SIECHA      & X                 & 2015        & No variación                                \\ \hline
+15 & 21206950 & PMO GUACHENEQUE         &                   &             &                                             \\ \hline
+16 & 24015110 & LA BOYERA AUTOMATICA    &                   &             &                                             \\ \hline
+17 & 21195160 & SUBIA AUTOMATICA        &                   &             &                                             \\ \hline
+18 & 21206960 & IDEAM BOGOTA            & X                 & 2013, 2014  & Altas y bajas temperaturas anómalas         \\ \hline
+19 & 35025090 & BOSQUE INTERVENIDO      &                   &             &                                             \\ \hline
+20 & 21206600 & NUEVA GENERACION        & X                 & 2010, 2013  & Sensor pegado y picos de altas temperaturas \\ \hline
+21 & 21201200 & ESC LA UNION AUTOMATICA &                   &             &                                             \\ \hline
+22 & 21205791 & APTO EL DORADO          &                   &             &                                            
+\end{tabular}
+\end{table}
+\begin{comment}
+
+
+\begin{enumerate}
+
+
+\item 21195160 Subia Automática. Presenta homogeneidad en los datos. No hay datos bajo 0\celc hay unos pocos datos sobre 25\celc. Se deben eliminar los datos que sean superiores a 3.5 veces la desviación estándar más el promedio.
+
+
+\item 21201200 Esc La Unión Automática. Presenta cambios extraños hasta antes del 2012, es posible que se halla realizado un emplazamiento. Los valores en general después del 2012 mejoran. No hay datos por debajo de 0 ni por encima de 25\celc. Ubicada en Bogotá. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+\item 21201580 Pasquilla Automática estación que no presenta datos.
+
+\item 21205012 Univ Nacional. Presenta varios picos de datos en la temperatura para el año 2004, 2013 y 2017. Posee datos bajo 0 y sobre 25\celc.
+
+\item 21205791 Apto el Dorado. Presenta homogeneidad en los datos. No presenta datos bajo 0\celc y hay datos sobre 25\celc. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+\item 21206600 Nueva Generación. Presenta un pico de altas temperaturas en el año 2013 y en el 2010 el registró continuamente 0\celc. Se deben eliminar los datos que sean superiores a 3 veces la desviación estándar más el promedio y los valores que sean 3 veces la desviación estándar menos el promedio.
+
+\item 21206790 Hacienda Santa Ana Automática, Nemocón. Presenta un pico de temperatura en fechas cercanas al 2016 y un pico de temperaturas bajas en el 2010, presenta homogeneidad. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+\item 21206920 Villa Teresa Automática. Presenta varios picos, pero los valores de estos picos no están fuera de los rangos propuestos por \citep{estevez2011}. Esta estación presenta datos de temperatura de buena calidad.
+
+\item 21206930 PMO Guerrero. Estación que presenta buenos datos, se considera que no es necesario realizar la corrección de los datos.
+
+\item 21206940 Ciudad Bolívar, presenta homogeneidad aunque existe un pico en el año 2010. Se presentan algunos valores atípicos. Se deben eliminar los datos que sean superiores a 3.5 veces la desviación estándar más el promedio y los valores que sean 3.5 veces la desviación estándar menos el promedio.
+
+\item 21206950 Pmo Guacheneque. Presenta una buena homogeneidad, pero existen algunos datos fuera de los rangos, en especial valores inferiores a -20\celc. Exiten algunos picos pero parecen dentro de lo normal. No se recomienda aplicar filtro por desviación estándar.
+
+\item 21206960 IDEAM Bogotá. Estación que presenta unos picos para el 2013 y 2014. Es una estación con homogeneidad marcada. No hay datos debajo de 0\celc ni superiores a 25\celc. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+\item 21206980 Sta cruz de Siecha. Es una estación que presenta una alta homogeneidad. Hay valores debajo de 0\celc y valores sobre 25\celc. No aplicar el filtro de la desviación estándar.
+
+\item 21206990 Tibaitata Automática. Estación con gran homogeneidad presenta valores atípicos, valores sobre 25\celc y valores sobre 30\celc, además de valores por debajo de 0\celc. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+
+
+\item 23125170 San Pablo de Borbur. Es una serie que presenta muchos vacíos, pero presenta un buen comportamiento. Existen algunos casos de datos atípicos. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+\item 24015110 La Boyera. Estación con buen comportamiento no se considera necesario realizar otra corrección.
+
+\item 35025080 PNN Chingaza la Calera. Estación con un largo periodo de tiempo sin datos. Existen dos periodos de tiempo con datos, al inicio del segundo periodo de datos se registran altas temperaturas. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+\item 35025090 Bosque Intervenido. Estación con algunos lapsos de tiempo faltante, pero con una buena homogeneidad. Yo no haría cambio alguno.
+
+\item 35025090 Calostros Bajos. Estación con algunos periodos de tiempo con datos faltantes, pero con una buena homogeneidad. No es necesario aplicar otro filtro.
+
+\item 35035130 Calostro Bajo. Estación con algunos periodos de tiempo con datos faltantes.
+
+\item 35075070 Chinavita Fusavita. Estación con un buen comportamiento, presenta algunos datos atípicos. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+\item 35075080 PMO  Rabanál Boyacá, Ventaquemada. Estación en la que existe un período sin datos.
+
+\item 35085080 La capilla La Unión. Estación con buen comportamiento, un período de tiempo sin datos en el año 2012. Se deben eliminar los datos que sean superiores a 4 veces la desviación estándar más el promedio y los valores que sean 4 veces la desviación estándar menos el promedio.
+
+
+En la Tabla \ref{tab:res_tab_autom} podemos observar que aún quedaron valores de temperatura del aire con problemas, pero muchos de los datos no validos fueron eliminados y se obtuvo una mejor serie de datos, la cuál se presta para hacer análisis. Además hay unas estaciones que luego de el control de calidad no presentan datos sospechosos. Es importante notar que sólo la estación UNIV NACIONAL presenta datos sospechosos en los últimos años (2017), esto implica que la calidad de los datos luego ha venido mejorando. Los datos atípicos pueden ser eliminados fácilmente, pero antes de eliminarlos se debe hacer un análisis estación por estación teniendo en cuenta la zona, temporadas del año y años ENSO, ya que los datos sospechosos pueden ser datos extremos y si se eliminan sería un error.
+\end{enumerate}
+\end{comment}
+Un ejemplo de la limpieza de datos es la que se realizó en la estación Tibaitatá. Esta estación presentaba temperaturas que alcanzaban los 6000\celc y los -6000\celc (Fig. \ref{subfig:c1}), pero luego de la corrección se pudo observar una mejora en sus datos (Fig. \ref{subfig:c2}).
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{0.5\textwidth}
+	\begin{center}
+	\caption{Valores sin filtros}
+    \includegraphics[draft=false, scale=0.5]{autom_validadas/21206990v.png}
+
+	
+	\label{subfig:c1}
+		\end{center}
+	\end{subfigure}
+	~
+		\begin{subfigure}[b]{0.5\textwidth}
+	\begin{center}
+    \caption{Valores con filtros y desviaciones estándar}
+		\includegraphics[draft=false, scale=0.5]{autom_validadas/21206990.png}
+
+	
+	\label{subfig:c2}
+	\end{center}	
+	\end{subfigure}
+	
+	
+	
+	%% las demás gráficas están en /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas
+\end{figure}
+\subsection{Resultados}
+
+
+Existen varios métodos para el control de calidad de los datos meteorológicos, muchos de ellos se pueden aplicar, en su mayoría, en lugares con diferentes latitudes, pero éstos no son optimizados regionalmente, como lo resalta \citet{espinar2012controlling}. Las condiciones del clima de una región específica es influenciada por factores de escalas mayores y locales. Para lograr una descripción confiable del clima es necesario tener datos sobre periodos de tiempo lo suficientemente largos que aseguren el registro de diferentes oscilaciones climáticas \citep{kaspar2016climate}. Anteriormente la mayoría de las estaciones eran de tipo convencional. Últimamente se ha presentado un cambio paulatino en la forma de recolección de la información, ya que se ha cambiado de estaciones convencionales a estaciones automáticas.\\
+
+Es necesario realizar un control de calidad de las estaciones meteorológicas, especialmente en las estaciones automáticas. Las estaciones automáticas de la red HYDRAS presentan gran cantidad de errores, pero son una gran herramienta para la investigación ya que ofrecen datos horarios útiles para poder observar fenómenos de escalas de tiempo cortas. El protocolo y los códigos acá realizados se pueden convertir en una guía para el análisis de este tipo de datos ya que existe una gran cantidad de información en la red HYDRAS.\\
+
+Posteriormente al control de calidad de los datos, estos ya están aptos para su uso y para ser usados en próximos análisis.

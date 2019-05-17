@@ -1,0 +1,1758 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comparación entre datos de una estación automática y una convencional en el evento de helada presentado en Febrero del 2007}
+
+%%%acá voy
+
+Las estaciones meteorológicas automáticas están tomando el lugar de las observaciones con las estaciones convencionales. Pero es claro que las estaciones meteorológicas automáticas necesitan de un periodo de observaciones en paralelo y todos los datos debe recibir un control de calidad para asegurar una homogeneidad en los datos \citep{Ying2004}, ya que en los análisis futuros la información provendrá solo de las estaciones automáticas.
+
+Las estaciones automáticas Los sensores permanecen en el campo hasta que se reportan problemas o el sensor cumple su tiempo útil. El tiempo de vida útil se establece en base de la experiencia de la red \citep{Shafer2000}.
+
+El promedio y la desviación estándar no debe superar ciertos límites de lo contrario los datos serán tomadon como sospechosos \citep{Shafer2000}.
+
+La rutina de persistencia consiste en evaluar los datos cada 24 horas, si la diferencia excede los límites entonces será marcada como sospechosa \citep{Shafer2000}. Este test es útil para encontrar los momentos cuando el sensor no varía (se queda pegado).
+
+Las inhomogeneidades en las series climáticas pueden ser causadas por cambios en la instrumentación, prácticas de observación, el método para realizar el cálculo la temperatura media de la estación y condiciones medioambientales que rodean la estación de observación \citep{Menne2001}.
+
+Los errores pueden ser producidos por un ruido electrónico en las medidas, comunicaciones defectuosas, degradación del sensor, golpe de un rayo o cambios de los registros en los días \citep{Menne2001}.
+
+Uno de los errores que se presentan es el de la transposición de los números (ejemplo: 12 es registrado por 21) o la transposición de máximos y mínimos.
+
+A nivel espacial cuando las mediciones exceden 2 desviaciones estándar serán marcadas como sospechosas y si el dato excede tres desviaciones estándar será marcada como un dato erróneo.
+
+Se realizaron dos gráficas de las temperaturas del aire medidas a 2 metros y a 10 centímetros. La primera gráfica nos muestra los valores correspondientes a los datos registrados en 6 variables de HYDRAS. Los valores máximos de temperatura a 2 metros corresponden al color rojo, los valores de temperatura máxima corresponden al color azul y los valores de temperatura mínima corresponden al color verde. Para el caso de las temperaturas a 10 centímetros del suelo los valores de temperatura tienen color fucsia, los valores de temperatura máxima tienen color morado y los valores de temperatura mínima tienen un color café.
+
+La primera gráfica \ref{subfig:b9} se graficó primero los valores de promedio, seguido de valores máximos y mínimos. Lo primero que se nota es que los valores de temperatura a 2 metros las tres variables coinciden en los mismos puntos, esto quiere decir que se están tomando con un mismo sensor pero se están guardando en variables diferentes. Además notamos que los valores de temperatura máxima en algunos casos no coincide con el valor máximo y lo mismo sucede con los valores mínimos. Y este comportamiento también se ve en la temperatura del suelo.
+
+La segunda gráfica \ref{subfig:b10} se graficó cambiando el orden de las variables en este caso se graficó primero los valores máximos, mínimos y de la totalidad de la temperatura. Esto implica que la última línea corresponda a los valores de la totalidad de la temperatura, pero se pueden ver algunos puntos, esto implica que la variable de la totalidad de la temperatura tiene espacios vacíos cuyos datos son guardados en otras variables.
+
+Los valores mínimos de las estaciones no se reportan cada hora, pero los valores de la variable llamada promedio se reportan cada hora.
+
+\begin{figure}[H]
+	\centering
+			\begin{subfigure}[b]{0.3\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.1]{temp_hydr_2.png}
+			\caption{Gráfica de las temperaturas de HYDRAS detalle}
+			\label{subfig:b9}
+
+			\end{subfigure}
+			%% % Simbolo usado para poner las gráficas una frente a la ootra
+			\begin{subfigure}[b]{0.3\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.1]{temp_hydr_1.png}
+		\caption{Gráfica de las temperaturas de HYDRAS datos faltantes}
+			\label{subfig:b10}
+
+			\end{subfigure}			
+
+		
+		\caption{Gráfico de la comparación entre variables de HYDRAS}
+		\label{gra:conv_vali}
+	
+\end{figure}
+
+
+
+La helada más fuerte que se ha presentado en los últimos 20 años en la Sabana de Bogotá, ha sido la helada presentada entre el 29 de febrero del 2007 y el 8 de febrero del 2007. Se tomó esta fecha para realizar una comparación entre una estación automática y una estación convencional para estas fechas. Como resultado se obtuvo la figura \ref{subfig:b1}. En esta figura podemos encontrar la estación automática está reportando tres tipos de valores: máximos (tmp\_2m\_max), mínimos (tmp\_2m\_min) y promedio (tmp\_2m). Pero los valores más altos de temperatura no están siendo reportados en la variable de valores máximos, ya que esta está siendo reportada en la variable de temperaturas promedio. \textbf{Los datos de temperatura se almacenan en dos variables, pero el criterio de almacenamiento en una u otra variable depende más del tiempo que de ser valores máximos o mínimos.}\\
+
+
+La estación automática HYDRAS reporta varios valores de temperatura tales como: temperatura a 2 metros, temperatura máxima a dos metros, temperatura mínima a dos metros, temperatura a 10 cm, temperatura máxima a 10 cm, temperatura mínima a 10 cm, temperatura a 10 cm bajo el suelo, temperatura a 30 cm bajo el suelo y temperatura a 50 centímetros bajo el suelo.\\
+
+Las condiciones ambientales afectan el perfil de temperatura del suelo. La distribución de temperatura en el suelo se ve afectada por la estructura y las condiciones físicas del suelo, cobertura del suelo, la interacción con el clima, determinado por la temperatura del aire, viento, radiación solar, humedad del aire y precipitación. Las variaciones sobre el suelo pueden afectar las oscilaciones de temperatura hasta aproximadamente un metro. La temperatura por debajo de  un metro de profundidad usualmente no se ve afectada por cambios de los ciclos diurnos de la temperatura del aire y la radiación solar \citep{florides2005}.
+
+Todas suelos poseen una capacidad diferente de transferencia de calor por ejemplo \citet{florides2005} dice que las rocas que son ricas en cuarzo poseen una graa conductividad térmica, pero en comparación las suelos que son ricos en arcilla y materia orgánica poseen menor capacidad de conductividad térmica. \textcolor{blue}{ \href{http://ces.iisc.ernet.in/hpg/envis/Remote/section994.htm}{CEP}} \citep{CES2000}.
+
+La razón física para el retraso de las ondas de la temperatura es debido a que a cierta profundidad cierta cantidad de temperatura es absorbida o libreada a través de la propagación de la temperatura a través del camino de la propagación del la temperatura como lo muestra \citet{hillel2013} en su libro. Donde muestra una gráfica idealizada de la variación idealizada de la temperatura a través del perfil 
+
+\begin{figure}[H]
+	\begin{center}
+\includegraphics[draft=true, scale=.5]{temp_prof.png}
+	\caption{Variación idealizada de la temperatura del suelo en diferentes tiempo para diferentes profundidades}
+	 \label{gra:tmp_soil}
+	\end{center}
+\end{figure}
+
+realizar una comparación de los valores de temperatura reportado por los sensores a diferentes alturas, podemos observar que hay diferencias marcadas. Los sensores que reportan las más bajas temperaturas ordenados de menor a mayor temperatura son el sensor ubicado a 2 metros, 10 cm, 30 cm y 50 cm. Los sensores que reportan las más altas temperaturas ordenadas de mayor a menor temperatura son: sensor a 10 cm, 2 m, 30 cm y 50 cm.
+
+Uno de los aspectos a resaltar de esta comparación es que se realizó una comparación con las estaciones convencionales. Y podemos ver que los valores de temperaturas mínimas del termómetro de mínimas de la estación convencional coinciden con los puntos más bajos de la estación automática y nunca el valor de la estación automática es menor que el valor de la estación convencional. Pero para el caso de las temperaturas altas podemos ver que en la mayoría de los casos los valores de la estación automática exceden los valores de la estación convencional.
+
+ 
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=true, scale=0.3]{conv_hyd_2007.png}
+		\caption{Comparación de las temperaturas registradas por la estación convencional y la estación automática}
+		\label{subfig:b1}
+	\end{center}
+\end{figure}
+
+En CORPOICA Tibaitatá se encuentra una estación convencional del IDEAM que tiene la capacidad de registrar los valores de temperatura a diferentes niveles de altura como lo podemos observar en la gráfica \ref{grafica_dif_alt_suelo} donde en los años 2007 y 2012 gráficas \ref{suelo_2007} y \ref{suelo_2012}, respectivamente se observa una diferencia entre los valores de la estación automática HYDRAS y la estación convencional.
+
+El promedio de las temperaturas mínimas para esta estación convencional se encuentra en la tabla \ref{tabla_minimas_convencional}. Donde en el conjunto de gráficas \ref{grafica_dif_alt_suelo} podemos ver que en la mayoría de los casos se presenta un orden de menor a mayor de la siguiente forma: 5 centímetros, 10 centímetros, 50 centímetros, 1 metro y 2 metros (Mínima convencional). Si calculamos la diferencia entre los promedios de las temperaturas a 2 metros y 5 centímetros podemos concluir que hay una diferencia de 2.8 \celc. Pero se nota que hay una diferencia con respecto al año 2017 ya que el los ordenes tienden a cambiar, y se presenta un mejor ajuste entre las temperaturas mínimas a 10 cm de ambas estaciones gráfica \ref{suelo_2017}.
+
+
+
+\begin{figure}[H]
+	
+			
+			\begin{subfigure}[b]{\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.2]{comparacion_tmp_del_suelo_2007.png}
+			\caption{Detalle de la comparación de la estación automática HYDRAS contra la estación convencional en diferentes alturas para el año 2007}
+			\label{suelo_2007}
+
+			\end{subfigure}
+	
+
+			%% % Simbolo usado para poner las gráficas una frente a la ootra
+			
+			\begin{subfigure}[b]{\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.2]{comparacion_tmp_del_suelo_2012.png}
+		\caption{Detalle de la comparación de la estación automática HYDRAS contra la estación convencional en diferentes alturas para el año 2012}
+			\label{suelo_2012}
+
+			\end{subfigure}		
+			
+			\begin{subfigure}[b]{\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.2]{comparacion_tmp_del_suelo_2017.png}
+		\caption{Detalle de la comparación de la estación automática HYDRAS contra la estación convencional en diferentes alturas para el año 2017}
+			\label{suelo_2017}
+
+			\end{subfigure}			
+
+		
+		\caption{Gráfico de diferentes años donde se comparan la estación automática de la red HYDRAS y la estación convencional}
+		\label{grafica_dif_alt_suelo}
+	
+\end{figure}
+
+
+
+
+%%% Tabla de los valores mínimos
+
+\begin{table}[]
+\centering
+
+\begin{tabular}{l|l}
+\textbf{Promedio de la variable} & \textbf{\celc} \\ \hline
+Temperatura a 5 cm               & 4.4         \\
+Temperatura a 10 cm              & 5.1         \\
+Temperatura a 50 cm              & 5.9         \\
+Temperatura a 100 cm             & 6.7         \\
+Temperatura a 200 cm             & 7.2        
+\end{tabular}
+\caption{Tabla resumen de las temperaturas mínimas reportados por la estación convencional}
+\label{tabla_minimas_convencional}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{útiles para la comparación entre una estación convencional y una automática}
+
+El funcionamiento de las estaciones automáticas y convencionales es diferente. Por esta razón se han realizado estudios, donde el objetivo es determinar si hay una diferencia entre las estaciones automáticas y las estaciones convencionales \citep{auchmann2012physics}. Por ejemplo \citet{augter2013vergleich} concluye que el cambio en las observaciones solo provoca pequeños cambios para la presión atmosférica y la temperatura y no se presentaron inhomogeneidades, la precipitación es ligeramente diferente, pero la mayor incertidumbre es reflejada en los sensores de lectura manual tales como la medición de la humedad y el brillo solar \citep{augter2013vergleich}. Pero otros autores como \citet{kamtz1831lehrbuch} han reportado diferencias en los valores de las mediciones, al igual que \citet{lacombe2010results} y \citep{kaspar2016climate} quienes aseveran que en ciertos casos la temperatura registrada por la estación convencional registra valores más altos.\\
+
+Una de las ventajas de las estaciones automáticas es que la recolección de los datos mediante estos sensores permite un seguimiento más rápido de las condiciones atmosféricas para la toma de decisiones de importancia agrícola \citep{Soares2017}.
+
+La temperatura promedio es calculada con la siguiente fórmula:
+
+\begin{equation}\label{fx:promedio}
+T_{promedio} = \frac{T_{I} + T_{II} +T_{II}}{4}
+\end{equation}
+
+donde $T_{I}$ es la temperatura observada a las 6:00, $T_{II}$ temperatura observada a las 12:00 y $T_{III}$ temperatura observada a las 18:00. Esta es una adaptación de la fórmula propuesta por \citet{kamtz1831lehrbuch}.
+
+Los valores reportados por las estaciones convencionales son registrados basado en dos tipos de termómetros, para las temperaturas medias se usa un termómetro de mercurio y para las temperaturas mínimas se usa un termómetro de alcohol \citep{augter2013vergleich}. 
+
+Los abrigos meteorológicos de las estaciones convencionales son basados en las modificaciones hechas por la Real Sociedad Meteorológica en 1884 y los sensores de las estaciones automáticas son operadas en Abrigos Laminares del tipo "LAM 630".
+
+Las estaciones automáticas en comparación con las estaciones convencionales, en general midieron valores por debajo de lo normal \citet{kamtz1831lehrbuch}.
+
+En caso de alta radiación y baja velocidad del viento se ha demostrado que el abrigo meteorológico LAM 630 registra valores de temperatura más alto en comparación con la garita de termómetro tipo Stevenson \citep{lacombe2010results, kaspar2016climate}.
+
+El aumento de la temperatura es en parte generado por el efecto de la radiación y la posición del sensor dentro del abrigo. De acuerdo con \citet{kaspar2016climate} el sensor se debe ubicar en una posición que evite la radiación directa en el atardecer, ya que en el estudio realizado se ve que no hay sesgo de la temperatura en el verano.
+
+Como conclusiones \citet{kaspar2016climate} dice que el cambio en la tecnología no introduce un incremento artificial de la temperatura media. Pero el efecto de las temperaturas extremas diarias se vio afectado por el uso del abrigo LAM 630.
+
+Existe la necesidad de actualizar los sensores ya que desde 1989 que no se hace una actualización \citep{lacombe2010results}. El lugar de la comparación se realizó en un lugar que presentó temperaturas de 45 \celc. 
+
+La ventilación de los sensores dan resultados erróneos \citep{lacombe2010results}
+
+Algunas de las estaciones evaluadas por \citet{Soares2017} presentaron valores de temperatura máxima superiores en las estaciones automáticas en comparación de las estaciones convencionales. Los mejores ajustes de datos de las estaciones automáticas y convencionales se presentaron para la variable de precipitación, un ajuste intermedio se presentó para la humedad relativa y un bajo ajuste se presentó para la velocidad del viento.
+
+El proceso final de la limpieza y calidad de los datos es el juzgamiento de los datos por parte de un experto \citep{Estevez2008}
+
+\cite{Estevez2008} nombra varios pasos para la realización de la validación:
+
+\begin{enumerate}
+\item Validación de la estructura, se comprueba que todos los datos estén en la misma forma y dado el caso que no coincidan las fechas estos datos deben ser eliminados
+
+\item Validación según los límites, esta parte de la evaluación tiene en cuenta ciertos rangos para los cuales los datos no deben exceder.
+
+\item Validación de límites flexibles
+
+\item Validación de la coherencia temporal del dato, usada para chequear el exceso de variación de los datos. Donde se compara entreo dos o más observaciones consecutivas.
+
+\item Validación de la coherencia interna, es usado para la verificación de la coherencia entre variables. También es usado para comparar los valores máximos de alguna variable con respecto a los valores del mismo día.
+
+\item Validación de la coherencia temporal de la serie, se usa un periodo de 24 horas y se evalúa el promedio y la desviación estándar, si dichos valores son inferiores a un valor, entonces todos los datos serán reportados como sospechosos. Ya que se espera que los datos estén "pegados".
+
+\item Validación de la coherencia espacial, esta prueba hace referencia a que los valores de estaciones cercanas deben reportar valores similares de lo contrario serán marcados como sospechosos.
+
+\item Inspección visual, para hacer esta revisión es muy útil realizar una representación temporal de las distintas variables en varios niveles de agregación. Para la precipitación y la irradiación resulta muy útil el método de doble masa.
+
+\end{enumerate}
+
+Algunos datos fueron registrados como erróneos y esto se debe a el mantenimiento periódico que se les realiza a las estaciones \citep{Estevez2008}.
+
+La validación de estos datos permitió tomar decisiones tales como la sustitución de sensores o la depuración de registros fuera de rango antes de ser empleados \citep{Estevez2008}.
+
+\citep{Graybeal2004b} propone que para el caso de la humedad la diferencia entre dos valores consecutivos no debe superar los 20\celc. $|T_0 - T_{-1}| > 20^{\circ}C$
+ 
+Existen muchas formas para la determinación de los outliers, pero la determinación de los límites a los cuales se maneja es un concepto subjetivo \citet{Graybeal2004b}.
+
+La temperatura del aire más extrema que se halla presentado fue en Libya en septiembre de 1922 y fue de 57.8\celc \citep{Kubecka2001}
+
+Debido a los datos meteorológicos obtenidos de las estaciones meteorológicas automáticas, los modelos que usan estos datos han presentado resultados cuestionables \citep{Meek1994}.
+
+No se pudo usar el la prueba de la consistencia en la humedad relativa, ya que en la humedad relativa es muy común que la humedad alcance el 100\% y se mantenga en estos valores.
+
+Los valores extremos de precipitación en Colombia según \citet{Arango2014} se han presentado los mas bajos valores en la Guajira con 500 mm/anuales o menos y los más altos valores en la Región Pacífica con más de 9000 mm/año.
+
+Debido a las condiciones orográficas las precipitaciones en el país varían demasiado \citep{Arango2014}. La precipitación posee en general un régimen bimodal, para la mayor parte de la región Andina y de la región Caribe.
+
+La temperatura en la región andina presenta una distribución bimodal
+
+Existen varios límites para la precipitación, \citet{Estevez2011} propone 120 mm/h, \citet{Feng2004} propone 1812.8 mm/día.\\
+
+Entrevista con Jaime Andrés Villareal Rojas el día 20180618 funcionario encargado de la automatización de las estaciones Hydras:
+
+\begin{enumerate}
+\item Ellos han notado la diferencia entre las temperaturas de una estación automática y una estación convencional.
+\item Existen varios tipos de sensores, ya que ellos no pueden comprar sensores a una sola marca porque eso no es legal.
+\item Hasta ahora se van a comenzar las labores de calibración a los sensores porque hasta el momento se instalan los sensores y sólo cuando el sensor presenta datos extraños se procede a realizar el cambio de los mismos, ahora se va a hacer mantenimiento cada 6 meses y se hará calibración de los sensores cada año.
+\item Yo tenía dudas con respecto a la forma como se toman los datos, pero me aclararon que los sensores son capaces de tomar la información de todas las variables al mismo tiempo.
+\item Las variables acumuladas como por ejemplo la precipitación se toma de 7 am hasta el siguiente día a las 7 am.
+\item Es importante para el análisis de la temperatura incluir las 3 temperaturas máximas, mínimas y horarias; ya que las máximas y mínimas registran valores que en algunos casos no se encuentran en la variable horaria.
+
+\end{enumerate}
+
+Buscar la justificación para los límites de la temperatura ya que usé -20\celc y 40\celc. La posible justificación es que las temperaturas mínimas registradas por las estaciones bajan hasta -10\celc entonces le damos una tolerancia de 10\celc más y lo mismo para las temperaturas máximas.
+
+A la velocidad del viento no se le puede hacer el control para los valores pegados ya que hay muchos momentos que la velocidad no cambia.
+
+En el modelo WRF la variable SWDOWN es igual a GHI. Global Horizontal Irradiance is the total solar radiation incident on a horizontal surface. It is the sum of Direct Normal Irradiance (DNI), Diffuse Horizontal Irradiance (DHI), and ground-reflected radiation.
+
+La radiación reportada por los sensores de las estaciones HYDRAS corresponde al rango visible, por esta razón se usará la variable (SWDOWN DOWNWARD SHORT WAVE FLUX AT GROUND SURFACE W m-2) que corresponde a GHI.
+
+Los parámetros para la validación de la dirección del viento se tomaron de \citep{Shafer2000a, DeGaetano1996} donde los rangos para la dirección fueron 0-360 y la diferencia de los datos no debía exceder 360?
+
+Si la velocidad es 0 puede registrar una dirección diferente de 0 dirección. Esto se debe a que el sensor de rapidez del viento puede captar la velocidad del viento, pero si la velocidad del viento no supera cierto humbral entonces la velocidad no se registrará en la plataforma. Como ejemplo si la rapidez fue de 0.000001 el sensor de velocidad en la plataforma registrará 0, pero si la velocidad es de 0.9, entonces el sensor registrará 1.
+
+\subsection{Comparación de los resultados de los resultados obtenidos con diferentes dominios y resoluciones}
+
+Se crearon 3 dominios con las coordenadas de la tabla \ref{tabla_coordenadas_dominios}. Para cada uno de los dominios se cambiaron las resoluciones, teniendo en cuenta que cada nuevo dominio debe tener una tercera parte de la resolución del dominio que lo contiene. Se probaron 
+
+\begin{center}
+
+\begin{table}[H]
+\begin{tabular}{lll}
+Punto & Latitud & Longitud \\ \hline
+1A    & 3.19    & -75.72   \\
+1B    & 6.72    & -72.01   \\
+2A    & 3.61    & -75.32   \\
+2B    & 6.28    & -72.37   \\
+3A    & 4.01    & -74.92   \\
+3B    & 5.61    & -73.01  
+\end{tabular}
+\caption{Coordenadas de los dominios.}
+\label{tabla_coordenadas_dominios}
+\end{table}
+\end{center}
+
+
+\section{Determinación de las fechas de estudio}%Código busqueda_fechas.py
+
+Los pixeles usados son de 108.8 km de ancho
+
+Se usó la estación automática de Tibaitatá de la red HYDRAS. La fecha más antigua usada para el análisis depende de la disponibilidad de datos de la estación automática, esta fecha corresponde al 2007 ya que los datos anteriores no presentaron buenos resultados en la validación de los mismos. Esta estación reporta la temperatura a 2 metros en tres variables temperatura máxima, temperatura mínima y temperatura cada hora. El conjunto de datos de las temperaturas máximas y mínimas se encuentra en su mayoría representado por las temperaturas horarias. Solo en algunos casos las temperaturas máximas y temperaturas mínimas no están dentro de las temperaturas totales. Por esta razón los datos de las temperaturas máximas y mínimas que no se encuentran dentro de las temperaturas horarias fueron adicionados y se creó una nueva variable de temperatura que reúne las temperaturas horarias más los valores adicionales de temperatura máxima y mínima.\\
+
+En el periodo de estudio no se presentaron casos de altas temperaturas en momentos asociados con el fenómeno el niño.\\
+
+Se determinaron las fechas y horas en las cuales la temperatura estuvo bajo 0\celc y sobre 25\celc en la estación automática de Tibaitatá, adicionalmente se buscaron los periodos de El Niño, la Niña y los periodos más largos en horas; como resultado se obtuvo las siguientes fechas, en todos los casos se encuentra reportada la estación convencional de Tibaitatá ya para poder comparar los datos obtenidos con la estación automática:
+
+\begin{itemize}
+\item{Caso 1}%Este caso corresponde al mas largo, fuerte y está en el último mes de un periodo el niño ggweather.com/enso/oni.html
+
+El primer caso de estudio se encuentra entre las fechas 31 de enero del 2007 hasta el 5 de febrero del 2007 que corresponde a los meses más frecuentes de heladas, en temporada reportada bajo la influencia del El Niño. Se seleccionó este caso porque presentó una de las temperaturas más bajas para el día 4 de febrero del 2007 ver tabla \ref{table:caso1}. Según la estación automática la helada tuvo una duración de 5 horas comenzando a las 2 a.m. y finalizando a las 7 a.m., esto la convierte en la helada más larga para nuestro periodo de estudio.
+
+En el periodo estudiado 2007-2016 no se presentaron heladas en fechas asociadas con el fenómeno La Niña.
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+-8.8           & 21205980 & PROVIDENCIA GJA       & Tenjo     \\
+-7.4           & 21205920 & SUASUQUE              & Sopó      \\
+-7.0           & 21205880 & FLORES CHIBCHA        & Madrid    \\
+-4.6           & 21205420 & TIBAITATÁ             & Mosquera  \\
+-4.7           & 21205420 & TIBAITATÁ [Automática]& Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más bajas para el caso 1 del día 4 de febrero del 2007}
+\label{table:caso1}
+\end{table}
+
+
+
+\item{Caso 2}%Mes no común en un niño (el periodo del 2015 fue niño todo)
+
+La segunda fecha seleccionada corresponde a una helada presentada en meses atípicos del año, en temporada reportada bajo la influencia del El Niño. La cuál se encuentra en el periodo correspondiente al 29 de agosto del 2014 hasta el 2 de septiembre del 2014. Para esta fecha seleccionada la helada sólo fue registrada por la estación convencional de Tibaitatá ver tabla \ref{table:caso2}. La helada se presentó el día 30 de agosto del 2017.
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+-1           & 21205420 & TIBAITATÁ             & Mosquera \\
+-1.0         & 21205420 & TIBAITATÁ[Automática] & Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más bajas para el caso 2 del día 30 de agosto del 2014}
+\label{table:caso2}
+\end{table}
+
+\textit{En el periodo de estudio no se presentaron altas temperaturas en fenómenos de la NIÑA}
+
+\item{Caso 3}
+
+\textit{Se creó una carpeta en agrometeo llamada /home/agrometeo/wrf/resultados/zona\_201508, para procesar el wps y los archivos usados se descargaron en Downloads}
+
+La cuarta fecha seleccionada corresponde a una alta temperatura presentada en el mes de agosto en una temporada de fenómeno El Niño. Se seleccionó este caso porque se presentó en un mes poco habitual. La cuál se encuentra en el periodo correspondiente al 24 de agosto del 2015 hasta el 28 de agosto del 2015. Según las estaciones convencionales para estas fechas en la zona de estudio no se presentaron temperaturas sobre 25\celc, razón por la cuál se usaron como nuevo límite para las convencionales un valor de 20\celc y se obtuvo la siguiente tabla \ref{table:caso3}. El valor de la estación convencional no superó los 20\celc. El periodo de duración de este evento fue de una hora, iniciando a las 9 am y finalizando a las 10 am.
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+22.0           & 21206620 & COL H DURAN DUSAN   & Bogotá \\
+20.1           & 21205980 & PROVIDENCIA GJA   & Tenjo \\
+19.6           & 21205420 & TIBAITATÁ   & Mosquera \\
+26.0         & 21205420 & TIBAITATÁ[Automática] & Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más altas para el caso del día 27 de agosto del 2015}
+\label{table:caso3}
+
+
+\end{table}
+
+
+
+\item{Caso 4}
+
+
+\textit{Se creó una carpeta en agrometeo llamada /home/agrometeo/wrf/resultados/zona\_201509, para procesar el wps y los archivos usados se descargaron en Downloads}
+
+La tercera fecha seleccionada corresponde a una alta temperatura presentada en el mes de septiembre en una temporada de fenómeno El Niño. Se seleccionó este caso ya que fue uno de los que presentó mas horas sobre 25\celc, según la estación automática el tiempo sobre 25\celc fue de . La cuál se encuentra en el periodo correspondiente al 06 de septiembre del 2015 hasta el 09 de septiembre del 2015. Según las estaciones convencionales para estas fechas en la zona de estudio no se presentaron temperaturas sobre 25\celc, razón por la cuál se usaron como nuevo límite para las convencionales un valor de 20\celc y se obtuvo la siguiente tabla \ref{table:caso4}. Las temperaturas sobre 25\celc comenzó a las 10:33 y finalizó a las 15:21, duró casi 5 horas.\\
+
+El día 20150907 no estaba disponible en los datos del GFS, por esta razón no se usaron estos datos. Pero si estaban los datos del día analizado que corresponde al 20150908.
+%ftp://nomads.ncdc.noaa.gov/GFS/analysis_only/201509/20150907/
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+21.6           & 21206260 & C.UNIV-AGROP-UDCA   & Bogotá \\
+21.6           & 21205980 & PROVIDENCIA GJA   & Tenjo \\
+20.8           & 21206560 & INEM KENNEDY     & Bogotá \\
+20.8           & 21205420 & TIBAITATÁ   & Mosquera \\
+26.7         & 21205420 & TIBAITATÁ[Automática] & Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más altas para el caso 4 del día 08 de septiembre del 2015}
+\label{table:caso4}
+
+
+
+\end{table}
+
+
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lecturas del páramo}
+
+La inicialización de los modelos juega un papel importante en el pronóstico de los eventos, por ejemplo \citet{Uribe2012} encontró que para un horizonte de pronóstico de 36 horas se deben descartar las primeras 12 horas para evitar el efecto de \textit{spin-up}.
+
+Según \citep{Uribe2012} el anidamiento no mejora la influencia de la predicción, lo cual traduce en una perdida de tiempo para la predicción de lluvias en Colombia.
+
+Según \citep{Uribe2012} la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación.
+
+Al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.
+
+
+
+\subsection{Prioridades de restauración ecológica}
+
+
+
+
+Según el enfoque de \citep{Castro-Romero2014} cuando un suelo en una zona pierde atributos como el contenido de materia orgánica y la diversidad de especies de artropofauna, el suelo se degrada. Y esta degradación es considerada como una perdida paulatina de capital natural, que produce que sus habitantes perciban menos beneficios por los servicios ecosistémicos y una disminución en la calidad de vida de sus pobladores. Esto hace que las actividades agropecuarias sean más difíciles y costosas.
+Estas teorías se basan en estudios previos de \citet{daily1997nature} y \citet{westman1977much}.
+
+Las comunidades que producen algún tipo de degradación en los territorios no son conscientes de los costos del daño producido \citep{westman1977much}. Y estos daños se ven relfejados en la disminución de los ingresos netos de las cosechas \citep{Castro-Romero2014}.
+
+\citet{Castro-Romero2014} estableció que la calidad del suelo se debe tener en cuenta los atributos químicos, físicos y biológicos.
+
+El índice de los procesos denudativos del suelo se consolidan como la suma de la erosión, solifluxión, deslizamientos y desplomes \citep{Castro-Romero2014}. %Solifluxión: se produce cuando un material sólido fluye como si fuera un líquido viscoso.
+
+
+
+Una de las conclusiones de \citep{Castro-Romero2014} es que los suelos con la menor valoración económica son aquellas como de mayor prioridad para la restauración. Del mismo modo \citep{Castro-Romero2014} encontró que las prioridades más bajas de restauración se presentan en aquellas unidades que mostraron las mejores condiciones de conservación y calidad del suelo.
+
+\subsubsection{Emergía}
+
+Uno de los resultados más importantes del estudio de \citep{Ernesto} es que el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente este autor cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$.
+
+La emergía es la cantidad de energía requerida para producir algo, teniendo en cuenta la conservación y pérdida de energía que resulta de las leyes de la termodinámica. Entre más trabajo es realizado para producir algo, más energía debe ser transformada para la realización de ese trabajo y una alta emergía será almacenada en el producto. Emergía es una medida del trabajo medioambiental que es necesario para la producción de un bien o un servicio. Esta medida es sin embargo la suma de los flujos de energía requeridos para la producción de algo, expresada en base a las unidades de energía solar Joules \citep{lei2014ecological}.
+
+"La emergía solar de un trozo de madera corresponde a la energía disponible que utilizó un ecosistema para producirlo, osea, la cantidad de Julios solares que se utilizaron para su elaboración" Frase ejemplo tomada de \citep{Castro-Romero2014}.
+
+La transformicidad solar es la emergía solar requerida para conformar una unidad de energía de un servicio o producto, es decir, la relación entre la emergía de un servicio o un producto, es decir, la relación entre la emergía y una cantidad libre de un producto o servicio, por ello su unidad es $\frac{sej}{J}$.
+
+\citep{Castro-Romero2014} realizó los cálculos de la emergía para la minería y la agricultura, teniendo en cuenta la cantidad de combustibles y los insumos usados en cada proceso. Tomaron los mapas de suelo del IGAC realizados en el 2000.
+
+Realizaron un cálculo de la evapotranspiración a partir de Thornwaite realizado en 1966.
+
+Realizaron una estimación de la escorrentía. 
+
+En el estudio se muestra que se requiere $2.44e5 sej$
+
+La emergía libre está dada en términos de la lluvia y el suelo.
+
+La agricultura y la ganadería usa la energía gratuita del sol y la lluvia para producir ingresos. Pero en la ganadería se enfoca en un organismo consumidor.
+
+La ganadería en su mayor parte depende en un 42\% de fuentes no renovables, frente a lo cual \citet{Castro-Romero2014} afirma que cuestiona la sostenibilidad en periodos de tiempo en los cuales la pérdida de materia orgánica del suelo impida su desarrollo.
+
+La leche producida y vendida contiene más emergía que el dinero que recibe.
+
+El sistema de ceba es el menos provechoso de los 3 sistemas ganaderos evaluados.
+
+El páramo es movido mayormente por fuentes externas a este como lo son los combustibles e insumos materiales
+
+El suelo es la mayor fuente de emergía
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Avances búsqueda parametrizaciones WRF}
+
+
+Se creó una carpeta llamada \texttt{zona\_est\_20180320} en esta carpeta se va a ejecutar el WPS que será usado para probar las combinaciones se ejecutará desde un día antes y un día después de las fechas que se usarán en el WRF, ya que, en el WRF se usarán las fechas \texttt{20070201-20070204}. El centro del dominio será en el município de Tocancipá estas serán las coordenadas \texttt{-73.96740787376062087 4.9704810067620171} en las variables correspondientes a \texttt{ref\_lat, ref\_lon, truelat1, stand\_lon}. Y se tomarán los datos proporcionados por el IDEAM para la Vtable. Sólo se usó un dominio para llegar a una resolución de 2 kilómetros con el WRF, una copia quedó dentro de la carpeta llamada resultados.\\
+
+Al final se crearon los archivos netCDF para las fechas seleccionadas. 
+
+Para la comparación de los mejores modelos se usó el diagrama de Taylor a partír de un código obtenido del repositorio de \textcolor{blue}{ \href{https://gist.github.com/ycopin/3342888}{ycopin}}. En este código se usó lo propuesto por \citet{barnston1992} quien calcula el cuadrado medio del error a partir del la desviación estándar y el coeficiente de correlación.
+
+\begin{equation}\label{eq:rms}
+	     RMS = \sqrt{1-r^{2}}SD_{y}
+\end{equation}
+
+Para poder compara las temperaturas a 2 metros se unieron todas las temperaturas (máximas, mínimas y promedio) conla finalidad de solo usar un valor. Se priorizaron las variables de la variable llamada promedio sobre las demás esto se encuentra en el código llamado \texttt{Procesamiento\_wrf.py}
+
+\begin{enumerate}
+
+\item El IDEAM facilitó las namelist.* y la versión que están usando
+\item Se instaló el WRFV3.9.1.1 en la máquina agrometeo
+\item Se realizó una corrida con los datos del GFS para un periodo de 2016-12-28 00:00 - 2017-01-01 18:00 (4 días). Esta corrida tomó 12 horas y 30 minutos y se usaron 152 GB. Se realizaron 64 simulaciones. (265 días).
+
+\end{enumerate}
+
+\subsection{Resultado de las modelaciones con el WRF}
+
+Se probaron cada una de las parametrizaciones físicas del modelo, (sin combinatoria). Este proceso comenzó el 20180404 y terminó el 20180412, se demoró un total de 8 días.
+\subsection{Literatura sobre las parametrizaciones}
+
+La comprensión de los procesos físicos que rigen las masas de aire frío y su adecuada representación en un modelo de predicción numérico (por sus siglas en inglés \textit{numerical weather prediction} (NWP)) son necesarios para una predicción adecauada de las temperaturas de la superficie y los escenarios de heladas \citep{prabha2008}.\\
+
+
+
+Le balance de energía y la capa límite (bpl) se ha demostrado que pronostica erroneamente las tasas de enfriamiento y las altas temperaturas en la presencia de heladas advectivas \citep{heinemann1988}. El pronóstico de las heladas con la ayuda de moedlos de predicción enfrenta un reto debido la interacción no linear de los componetnes del balance hídrico, el cual puede causar pronósticos imprecisos \citep{gutowski2003}.\\
+
+El estado del arte del WRF se definió como una colección de varios modelos de predicción numericos en la arquitectura de un solo software con dos modelos de pronóstico dos formas de pronóstico de solucionar que son el \textit{Advanced Reseach WRF} por sus siglas en inglés (ARW) y el \textit{Nonhydrostatic Mesoscale Model} por sus siglas en inglés (NMM). El ARW ha sido desarrollado y administrado por \textit{NCAR's Mesoscale and Microscalo Meteorology Laboratory}. El núcleo del NMM fue desarrollado por \textit{National Centers for Envoronmental Prediction} y es actualmente usado en el sistema \textit{Hurricane WRF} (HWRF).
+
+La correcta parametrizaión va a depender de varios factores como lo nombra \citet{prabha2008evaluation} tales como: seleccionar correctamente la resolución, el poder computacional, condiciones iniciales, resolución del terreno, datos del uso del suelo y las parametrizaciones físicas a usar.
+
+Para la verificación de la predicción de estos modelos es necesario comparar con las estaciones para de esta manera verificar los resultados (Validar??).
+
+Uno de los primeros pasos que se deben desarrollar en esta metodología es la caracterización climática de la zona. \citet{prabha2008evaluation} realizaron una caracterización para cada una de las estaciones por 13 años.
+
+\citet{prabha2008evaluation} define el índice de congelamiento como la integral de la temperatura del aire cuando esta se encuentra bajo 0\celc.\\
+
+\citet{prabha2008evaluation} Usan dos índices para evaluar
+
+El índice de congelamiento es definido como el numero de grados día por un periodo específico de tiempo \citep{frauenfeld2007northern}. El índice que propone \citet{frauenfeld2007northern} es definido como la suma de los valores de temperatura bajo 0\celc como:
+
+\begin{equation}\label{eq:frost_index}
+    \int_{t_0}^{t_n} T dt,\quad Para T \leq 0^{\circ}C
+\end{equation}
+
+donde $T$ corresponde al valore de la temperatura, integrado desde $t_0$ hasta el tiempo $t_n$. son el comienzo y final de los diferentes tiempos, $T$ es el valor de la temperatura y $dt$ es el cambio en el tiempo.
+
+Existen dos tipos de heladas la radiativa y la advectiva \citep{snyder2005frost} grandes incusiones de aire frío, vientos atmósferas que se encuentran a temperaturas bajo 0\celc 
+
+Caracterización de una helada radiativa cielos despejados, vientos en calma, inversión de temperatura, bajas temperaturas de punto de rocío y temperaturas que caen por debajo de 0\celc.
+
+El tope de la inversión es variable ya que depende de la topografía y las condiciones climáticas, pero generalmente tiene un rango de 9 a 60 m \citep{snyder2005frost}.
+
+En las noches despejadas más calor es irradiado fuera de la superficie en comparación con el que fue recibido durante el día. La temperatura cae rápidamente cerca de la superficie de radiación causando una inversión.
+
+Según la gráfica de inversión de temperatura la inversión se nota a una altura de 3 o 5 metros. 
+
+Para la protección de las heladas radiativas son más efectivos los métodos "Energy-intensive"
+
+Dentro de las heladas radiativas hay dos categorías:
+
+La helada blanca (hoar frost): Sucede cuando el vapor de agua depositado en la superficie forma una cobertura blanquecina de hielo y es comúnmente llamada "escarcha".
+
+Helada negra (black): Ocurre cuando la temperatura cae bajo 0\celc y no hay formación de hielo en la superficie. Si la humedad es suficientemente baja, entonces la superficie no alcanzará el punto de congelamiento y no se formará hielo. Cuando la humedad es alta, hay una más alta probabilidad de una helada blanca. Se produce calor cuando se pasa de líquido a sólido, por esta razón la helada blanca es menos lesiva en comparación un una helada negra.
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=true, scale=0.6]{latent.png}
+		\caption{Gráfica de calor latente}
+		\label{subfig:cal_lat}	
+	\end{center}
+
+\end{figure}
+
+Una clara seña de que estamos presenciando una helada cae en unas pocas horas antes de del amaneces, cuando la energía neta de radiación de la superficie cambia rápidamente de positiva a negativa. Este cambio se da principalmente porque la radiación solar decrece desde su valor más alto al medio día a 0 en el atardecer.
+
+La densidad del flujo de calor en el suelo está determinada por 
+
+\begin{equation}\label{eq:frost_index}
+    G = -\lambda(\frac{\partial T}{\partial z})
+\end{equation}
+
+tomado de \citep{sauer2002soil}
+
+Helada por advección\\
+Masas de aire frío llegan a una área a remplazar el aire cálido que estaba presente antes de que el tiempo cambiara.
+
+\begin{enumerate}
+\item Condiciones nubladas
+\item Vientos desde moderados hasta fuertes según \citet{prabha2008evaluation} son vientos con velocidades superiores a 2 $m/s$.
+\item Sin inversión térmica
+\item Baja humedad
+\item Las temperaturas caen bajo 0\celc y permanecen de esta misma forma todo el día.
+\item La mayoría de estos eventos ocurren en climas Mediterráneos y tienden a ser más comunes en las costas.
+\item La mayoría de los eventos
+\end{enumerate}
+Este tipo de heladas son difíciles de combatir, es por esto que es la mayoría de los métodos de protección funcionan mejor en la presencia de una inversión. En algunos casos la helada por advección puede generar una helada radiativa.\\
+
+Clasificación de métodos de protección
+
+Existen varias clasificaciones como los métodos pasivos que son más preventivos como métodos biológicos, o técnicas ecológicas incluyendo prácticas como un alistamiento previo a la presencia de las heladas.
+
+Los métodos activos son métodos que son basados en el uso intensivo de energía. Algunos ejemplos son calentadores, riego, máquinas de viento.\\
+
+Entre las latitudes entre los trópicos de Cancer y Capricornio existen grandes áreas con temperaturas bajo cero. Pero aún en estas zonas a veces se presentan daños en lugares con grandes alturas.\\
+
+Es menos probable que ocurra una helada cuando:
+\begin{enumerate}
+\item El terreno se encuentra en un área donde el viento sopla
+\item El terreno se encuentra cerca a una masa de agua
+\end{enumerate}
+
+El humo no ofrece ningún tipo de protección a los cultivos \citep{itier1987influence}\\
+
+Los daños causados en las plantas son debido al congelamiento del agua extra celular dentro de las plantas 
+
+Las ubicaciones bajas presentan problemas de bajas temperaturas. Pero en algunas ocasiones se pueden presentar daños en algunos sitios, esto es debido al tipo de suelo.\\
+
+Un suelo seco arenoso transfiere mejor el calor que un suelo seco y arcilloso y ambos transfieren y almacenan mejor la temperatura que un suelo orgánico.
+
+La transferencia de calor del agua es tres veces mayor que la del suelo. Los suelos húmedos tienen mayor capacidad de conductividad en comparación con un suelo seco.
+
+Obstáculos que inhiban el drenaje de las masas de aire frío.\\
+
+La fertilización puede ser una forma para evitar ele efecto de las heladas en el cultivo
+
+El riego es uno de los mecanismos más económicos para el control de las heladas.\\
+
+La inundación de los suelos puede proveer protección de los cultivos entre 2 a 3\celc. Existe una relación entre la lamina de agua que se debe aplicar para evitar la helada de esa noche y la temperatura máxima registrada en el día.\\
+
+Una de las formas de protección es realizar un pronóstico de las heladas
+
+\subsubsection{Parámetros usado por Prabha en lso dos artículos \citep{prabha2008} y \citep{prabha2008evaluation}}
+
+
+En el artículo \citet{prabha2008} podemos destacar varios aspectos:
+
+\begin{enumerate}
+\item Lo primero que se estudió fueron las condiciones iniciales
+\item Capa límite planetaria
+\item Superficie del terreno
+\end{enumerate}
+
+Se realizó una comparación contra la red de estaciones automáticas de la zona. En este estudio se manejaron 40 niveles de presión y se acomodaron 15 niveles en la PBL. (Grid resolution en el artículo)
+
+
+La configuración de modelo fue la siguiente:
+
+\begin{itemize}
+\item WSM3 en microfísica \texttt{mp\_physics = 3: "WRF Single-Moment (WSM) 3-class simple ice scheme: A simple efficient scheme with ice and snow processes suitable for mesoscale grid sizes."}
+\item La parametrización de cúmulos es la Kain-Fritsch \texttt{cu\_physics = 1: "Kain-Fritsch (new Eta) scheme: deep and shallow sub-grid scheme using a mass flux approach with downdrafts and CAPE removal time scale"}
+
+\item La parametrización usada para la radiación de onda larga corresponde a RRTM \texttt{ra\_lw\_physics = 1: "RRTM scheme: Rapid Radiative Transfer Model. An accurate scheme using look-up tables for efficiency. Accounts for multiple bands, trace gases, and microphysics species. This scheme has been preliminarily tested for WRF-NMM."}
+
+\item La parametrización usada para la radiación de onda corta corresponde a RRTM \texttt{•}
+\end{itemize}
+
+
+El experimento consistió en probar diferentes, capas límites planetarias, condiciones iniciales y diferes esquemas de suelo.:
+
+Condiciones iniciales
+\begin{itemize}
+\item NAM = Grilla de 12 km. North American Regional Reanalysis
+\item NARR grilla de 36 km. North American Mesosclase
+\end{itemize}
+
+Parameterizaciones de capa límite \texttt{bl\_pbl\_physics}
+\begin{itemize}
+\item MYJ = 2. \texttt{Mellor-Yamada-Janjic (Eta) TKE scheme}
+\item YSU = 1. \texttt{YSU scheme}
+\end{itemize}
+
+Parametrizaciones del terreno \texttt{sf\_surface\_physics}
+\begin{itemize}
+
+\item SLAB = 1 \texttt{"Thermal Diffusion scheme: soil temperature only scheme, using five layers."}
+
+\item Noah = 2. \texttt{"Noah Land-Surface Model: Unified NCEP/NCAR/AFWA scheme with soil temperature and moisture in four layers, fractional snow cover and frozen soil physics. This scheme has been preliminarily tested for WRF-NMM."}
+
+
+\item RUC = 3. \texttt{"RUC Land-Surface Model: Rapid Update Cycle operational scheme with soil temperature and moisture in six layers, multi-layer snow and frozen soil physics. This scheme has been preliminarily tested for WRF-NMM."}
+
+
+
+\end{itemize}
+
+
+
+\subsubsection{Revisión de literatura relacionada}
+
+
+Existen diferencias micrometeorológicas, como por ejemplo el echo que existan diferencias de 1\celc en 100 metros.
+
+La máxima temperatura que puede soportar un tuberculo de papa es -0.8\celc\\
+
+
+La capa de aire que toca el suelo se llama vientos catabático o vientos de drenaje. Son causados por el enfriamiento del aire, adyacente al suelo y descienden gracias a la influencia de la gravedad \citep{Stull1988pbl}.
+
+El estudio de la capa límite planetaria contiene el estudio de la micrometeorología \citep{Stull1988pbl}.
+
+Para el estudio de la micrometeorología \citet{Stull1988pbl} los clasifica en 3:
+
+\begin{enumerate}
+\item Métodos estocásticos
+\item Teoría de similitud
+\item Clasificación fenomenológica
+\end{enumerate}
+
+
+
+
+\subsection{Mecanismos de transferencia de energía}
+
+Cuando la energía pasa a través del suelo por conducción se llama densidad de flujo de calor.\\
+La protección de una helada consiste en tratar de reducir o remplazar la pérdida del contenido de calor sensible del aire y de las plantas.
+
+
+
+Cuando el agua se congela la mayoría de las moléculas hacen enlaces con el nitrógeno para formar una estructura cristalina. 
+
+\begin{table}[H]
+\centering
+
+\label{tabla_conductividad}
+\begin{tabular}{@{}llll@{}}
+\multicolumn{4}{l}{Conductividad termica de los suelos $W m^{-1}\cdot^{\circ}C^{-1} $} \\ \midrule
+\multicolumn{1}{l|}{}         & Orgánicos  & Arcillosos & Arenosos \\ \midrule
+\multicolumn{1}{l|}{Secos}    & 0.1        & 0.25       & 0.3      \\
+\multicolumn{1}{l|}{Húmedos}  & 0.5        & 1.6        & 2.4     
+
+\end{tabular}
+\caption{Tabla de conductividad de suelos}
+\end{table}
+
+
+%%%Pagina de las tablas
+\newpage
+\begin{landscape}
+\section{Tabla resumen de los códigos}
+
+\begin{table}[ht]
+\centering
+
+\resizebox{\textwidth}{!}{\begin{tabular}{lll}
+Nombre del código             & Función                                                                                                                                                      & Fecha    \\ \hline
+pandas                        & Base de entrenamiento en pandas                                                                                                                              & 20180130 \\
+pre\_procesamieto\_ideam.py   & Función que toma los datos en tr5 y cambia las columnas (pivot)                                                                                              & 20180131 \\
+matplot\_lib.py               & Base de entrenamiento en matplotlib                                                                                                                          & 20180214 \\
+pre-procesamiento-hydras.py   & Función para unir las bases de datos con todas sus variables con un mismo código                                                                             & 20180215 \\
+manejo\_ideam\_diarias.py     & Base para manejar los datos en tr5 con la finalidad de determinar la cantidad de datos faltantes de una sola estación, Tibaitatá principalmente              & 20180216 \\
+missin\_data.py               & Código para realizar los plots de las estaciones convecionales cuando se reportan NA oinconsistencias son guardados como gráficas resúmen                    & 20180217 \\
+vickers\_mahrt.py             & Base de entrenamiento para las validaciones de los datos de las estaciones automáticas                                                                       & 20180222 \\
+descarga\_IDEAM\_hydras.py    & Código para la descarga de los datos de la red HYDRAS                                                                                                        & 20180223 \\
+bases\_dane\_papa.py          & Código usado para procesar la información del DANE. Usado para la creación de las tablas de estadística usados en el documento y en las gráficas municipales & 20180305 \\
+nuevo\_preprocesam\_hydras.py & Código creado para 1 eliminar las bases por variable y 2 eliminar las bases por años. Poner la información de cada estación en una sola forma.               & 20180307 \\
+automatizacion\_graph.py      & Grafica donde se comparan los valores de la estación convencional y la estación automática. Es la versión mejorada y automatizada                            & 20180313 \\
+automatizacion\_graph.py      & Código usado para la automatización de las gráficas donde se compara la estación automática y la estación convencional.                                      & 20180313 \\
+extraccion.py                 & Código usado para la extracción de los datos de la modelación del WRF, primera versión. No está muy bien                                                     & 20180321 \\
+extraccion\_2.py              & Código usado para la extracción de datos del WRF versión mejorada y modificada                                                                               & 20180304 \\
+validacion\_tmps.py           & Validación de los datos de temperatura de las estaciones HYDRAS, con sus gráficas                                                                            & 20180331 \\
+validacion\_20180522.py           & Modificación del código antiguo de validación, se mejoró SPIKES y sólo se procesa información a 2m, que son unidas en una sola variable & 20180522 \\
+Procesamiento\_wrf.py         & Código para crear una comparación de los datos de la estación HYDRAS y las diferentes parametrizaciones del modelo WRF. Se crea una sola columna para la temperatura                                       & 20180404 \\
+mapas\_matplot\_lib.py        & Código exploratorio para buscar una forma de realizar el plot de las variables producidas por el WRF. Con matplotlib                                         & 20180405 \\
+plot.py                       & Código creado con cartophy para plotear mapas provenientes del WRF. Buenos resultados                                                                        & 20180421 \\
+validacion\_hydras\_manual.py & Gráficas de la comparación de termómetro a diferentes alturas y validación de las estaciones automáticas contra las convencionales diferentes altura                                  & 20180423 \\
+busqueda\_fechas.py & Búsqueda de las fechas de las heladas y altas temperaturas Y extracción de las gráficas resumen de la zona. Gráficas de las estaciones con limpieza de datos & 20180606\\
+validacióntemp.py & Búsqueda de las fechas de las heladas y altas temperaturas Y extracción de las gráficas resumen de la zona. Gráficas de las estaciones con limpieza de datos & 20180606
+\end{tabular}}
+\caption{Tabla resumen de los códigos}
+\label{tabla_resumen}
+\end{table}
+
+
+
+\end{landscape}
+\begin{longtable}{rllllrr}
+\toprule
+   Código &                      Nombre & Tipo &     Departamento &         Município &   Latitud &   Longitud \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{{Continued on next page}} \\
+\midrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+ 21195160 &            SUBIA AUTOMATICA &  AUT &     CUNDINAMARCA &          SILVANIA &  4.476611 & -74.383889 \\
+ 21201200 &     ESC LA UNION AUTOMATICA &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.342944 & -74.183889 \\
+ 21201580 &        PASQUILLA AUTOMATICA &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.446500 & -74.154833 \\
+ 21202270 &      PLUVIOMETRO AUTOMATICO &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.608056 & -74.072889 \\
+ 21202271 &          PLUVIOMETRO AUTOMA &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.608056 & -74.072889 \\
+ 21205012 &               UNIV NACIONAL &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.638083 & -74.089083 \\
+ 21205791 &              APTO EL DORADO &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.705583 & -74.150667 \\
+ 21206600 &            NUEVA GENERACION &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.782222 & -74.094333 \\
+ 21206710 &      SAN JOAQUIN AUTOMATICA &  AUT &     CUNDINAMARCA &           LA MESA &  4.633333 & -74.516667 \\
+ 21206790 &           HDA STA ANA AUTOM &  AUT &     CUNDINAMARCA &           NEMOCÓN &  5.090500 & -73.881250 \\
+ 21206920 &     VILLA TERESA AUTOMATICA &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.350000 & -74.150000 \\
+ 21206930 &                PMO GUERRERO &  AUT &     CUNDINAMARCA &         ZIPAQUIRÁ &  5.086444 & -74.022167 \\
+ 21206940 &              CIUDAD BOLIVAR &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.576861 & -74.176778 \\
+ 21206950 &             PMO GUACHENEQUE &  AUT &     CUNDINAMARCA &       VILLAPINZÓN &  5.236056 & -73.525083 \\
+ 21206960 &                IDEAM BOGOTA &  AUT &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.066667 \\
+ 21206980 &          STA CRUZ DE SIECHA &  AUT &     CUNDINAMARCA &            GUASCA &  4.784278 & -73.870806 \\
+ 21206990 &        TIBAITATA AUTOMATICA &  AUT &     CUNDINAMARCA &          MOSQUERA &  4.691417 & -74.209000 \\
+ 21209920 &            STA ROSITA AUTOM &  AUT &     CUNDINAMARCA &            SUESCA &  5.192250 & -73.779056 \\
+ 23125170 &          SAN CAYETANO AUTOM &  AUT &     CUNDINAMARCA &      SAN CAYETANO &  4.516753 & -74.088222 \\
+ 24015110 &        LA BOYERA AUTOMATICA &  AUT &     CUNDINAMARCA &             UBATÉ &  5.303806 & -73.851750 \\
+ 26127010 &                EL ALAMBRADO &  AUT &  VALLE DEL CAUCA &            ZARZAL &  4.410250 & -74.124611 \\
+ 35025080 &          PNN CHINGAZA AUTOM &  AUT &     CUNDINAMARCA &         LA CALERA &  4.661000 & -73.827333 \\
+ 35025090 &          BOSQUE INTERVENIDO &  AUT &     CUNDINAMARCA &         LA CALERA &  4.664889 & -73.846639 \\
+ 35025100 &              CALOSTROS BAJO &  AUT &     CUNDINAMARCA &         LA CALERA &  4.673778 & -73.818889 \\
+ 35027001 &             PLAZA DE FERIAS &  AUT &     CUNDINAMARCA &           CÁQUEZA &  4.403389 & -73.940556 \\
+ 35027002 &         PARQUE RAFAEL NUÑEZ &  AUT &     CUNDINAMARCA &           CÁQUEZA &  4.407417 & -73.947500 \\
+ 35027510 &              CALOSTROS BAJO &  AUT &     CUNDINAMARCA &         LA CALERA &  4.673778 & -73.818889 \\
+ 35035130 &                PMO CHINGAZA &  AUT &     CUNDINAMARCA &         LA CALERA &  4.713667 & -73.803250 \\
+ 35075070 &        CHINAVITA AUTOMATICA &  AUT &           BOYACÁ &         CHINAVITA &  5.219250 & -73.350389 \\
+ 35075080 &      PMO RABANAL AUTOMATICA &  AUT &           BOYACÁ &      VENTAQUEMADA &  5.392389 & -73.562778 \\
+ 35085080 &            LA CAPILLA AUTOM &  AUT &           BOYACÁ &        LA CAPILLA &  5.099194 & -73.436000 \\
+ 21200160 &          PANONIA [21200160] &  CON &     CUNDINAMARCA &          CHOCONTÁ &  5.057972 & -73.734333 \\
+ 21200620 &           PISCIS [21200620] &  CON &     CUNDINAMARCA &          CHOCONTÁ &  5.079167 & -73.696861 \\
+ 21200780 &               POTRERO LARGO &  CON &     CUNDINAMARCA &         GUATAVITA &  4.929222 & -73.780472 \\
+ 21200840 &      FLORESTA LA [21200840] &  CON &     CUNDINAMARCA &            GUASCA &  4.850000 & -73.783333 \\
+ 21201050 &          LOURDES [21201050] &  CON &     CUNDINAMARCA &        GACHANCIPÁ &  4.982889 & -73.864667 \\
+ 21201060 &           PANTANO REDONDO 1 &  CON &     CUNDINAMARCA &         ZIPAQUIRÁ &  5.043250 & -74.033389 \\
+ 21201070 &       CORAZON EL [21201070] &  CON &     CUNDINAMARCA &        FACATATIVÁ &  4.865361 & -74.289417 \\
+ 21201080 &               SAN FRANCISCO &  CON &     CUNDINAMARCA &              SOPÓ &  4.900000 & -73.950000 \\
+ 21201140 &     ESPERANZA LA [21201140] &  CON &     CUNDINAMARCA &             TENJO &  4.802167 & -74.179972 \\
+ 21201160 &             EDIFICIO SARAGA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+ 21201180 &        GUANQUICA [21201180] &  CON &     CUNDINAMARCA &             TAUSA &  5.184278 & -73.941111 \\
+ 21201190 &        LAGUNITAS [21201190] &  CON &     CUNDINAMARCA &             TAUSA &  5.214528 & -73.907250 \\
+ 21201210 &        HATO EL   [21201210] &  CON &     CUNDINAMARCA &             TENJO &  4.866389 & -74.153861 \\
+ 21201220 &          STA CRUZ DE SIECHA &  CON &     CUNDINAMARCA &            GUASCA &  4.784278 & -73.870806 \\
+ 21201230 &            ENMANUEL D ALZON &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.701125 & -74.070306 \\
+ 21201240 &           STA MARIA DE USME &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.481306 & -74.126278 \\
+ 21201250 &        SAN PEDRO [21201250] &  CON &     CUNDINAMARCA &              SOPÓ &  4.871639 & -73.966667 \\
+ 21201270 &         TIBAR EL [21201270] &  CON &     CUNDINAMARCA &            MADRID &  4.816667 & -74.233333 \\
+ 21201300 &        AUSTRALIA [21201300] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.394250 & -74.132000 \\
+ 21201310 &          PREVENTORIO INFANT &  CON &     CUNDINAMARCA &            SIBATÉ &  4.465444 & -74.267500 \\
+ 21201320 &         UNION LA [21201320] &  CON &     CUNDINAMARCA &            SIBATÉ &  4.509361 & -74.268806 \\
+ 21201550 &         ROBLE EL [21201550] &  CON &     CUNDINAMARCA &            MADRID &  4.796667 & -74.226389 \\
+ 21201570 &          ESC COL INGENIERIA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.783333 & -74.050000 \\
+ 21201600 &           SEDE IDEAM KRA 10 &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.607111 & -74.072889 \\
+ 21201610 &       SAN ISIDRO [21201610] &  CON &     CUNDINAMARCA &            GUASCA &  4.850289 & -73.890722 \\
+ 21201620 &        SUESCA    [21201620] &  CON &     CUNDINAMARCA &            SUESCA &  5.109583 & -73.796972 \\
+ 21201630 &        TABIO GJA [21201630] &  CON &     CUNDINAMARCA &             TABIO &  4.933056 & -74.065611 \\
+ 21201640 &             VILLAPINZON GJA &  CON &     CUNDINAMARCA &       VILLAPINZÓN &  5.263750 & -73.590861 \\
+ 21201650 &       STA ROSITA [21201650] &  CON &     CUNDINAMARCA &            SUESCA &  5.115917 & -73.757389 \\
+ 21201920 &             ALTO SAN MIGUEL &  CON &     CUNDINAMARCA &            SIBATÉ &  4.449667 & -74.299722 \\
+ 21201930 &        GUANQUICA [21201930] &  CON &     CUNDINAMARCA &             TAUSA &  5.184278 & -73.941111 \\
+ 21202100 &           IDEAM FONTIBON HB &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.700000 & -74.166667 \\
+ 21202160 &     HIDROPARAISO [21202160] &  CON &     CUNDINAMARCA &        EL COLEGIO &  4.573167 & -74.404833 \\
+ 21202280 &    SEDE IDEAM CALLE 25D KRA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.684000 & -74.129000 \\
+ 21205013 &              UNISALLE NORTE &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.794444 & -74.030556 \\
+ 21205230 &            OBS MET NACIONAL &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.633333 & -74.100000 \\
+ 21205420 &        TIBAITATA [21205420] &  CON &     CUNDINAMARCA &          MOSQUERA &  4.691417 & -74.209000 \\
+ 21205520 &          ELDORADO DIDACTICA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.700000 & -74.150000 \\
+ 21205580 &           VENADO ORO VIVERO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.598361 & -74.061556 \\
+ 21205600 &          VELODROMO 1 D MAYO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.616667 & -74.066667 \\
+ 21205660 &     MERCEDES LAS [21205660] &  CON &     CUNDINAMARCA &          ANAPOIMA &  4.581889 & -74.526611 \\
+ 21205670 &       FLORIDA LA [21205670] &  CON &     CUNDINAMARCA &          ANOLAIMA &  4.770889 & -74.437639 \\
+ 21205700 &           GUASCA [21205700] &  CON &     CUNDINAMARCA &            GUASCA &  4.879861 & -73.868111 \\
+ 21205710 &             JARDIN BOTANICO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.669333 & -74.102667 \\
+ 21205720 &    SAN JORGE GJA [21205720] &  CON &     CUNDINAMARCA &            SOACHA &  4.505750 & -74.189278 \\
+ 21205730 &            CENTRO MED ANDES &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.698167 & -74.036833 \\
+ 21205740 &            SILOS [21205740] &  CON &     CUNDINAMARCA &          CHOCONTÁ &  5.117722 & -73.701417 \\
+ 21205750 &           REP LOS MUCHACHOS &  CON &     CUNDINAMARCA &             FUNZA &  4.733333 & -74.166667 \\
+ 21205760 &          CLINICA SAN RAFAEL &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+ 21205770 &           BASE AEREA MADRID &  CON &     CUNDINAMARCA &            MADRID &  4.728806 & -74.272500 \\
+ 21205780 &         SENA GJA [21205780] &  CON &     CUNDINAMARCA &          MOSQUERA &  4.700000 & -74.216667 \\
+ 21205790 &              APTO EL DORADO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.705583 & -74.150667 \\
+ 21205800 &          BOMBEROS DEL NORTE &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.650000 & -74.066667 \\
+ 21205810 &          CAPITOLIO NACIONAL &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+ 21205820 &          LICORERA BOGOINAMA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.616667 & -74.100000 \\
+ 21205830 &           MUZU CENTRO SALUD &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.133333 \\
+ 21205840 &        SENA K 30 [21205840] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.595361 & -74.111833 \\
+ 21205850 &    COLOMBIANO EL [21205850] &  CON &     CUNDINAMARCA &          SESQUILÉ &  5.033889 & -73.848194 \\
+ 21205860 &         CORZO EL [21205860] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.650000 & -74.200000 \\
+ 21205870 &       SALITRE EL [21205870] &  CON &     CUNDINAMARCA &            BOJACÁ &  4.738889 & -74.334278 \\
+ 21205880 &              FLORES CHIBCHA &  CON &     CUNDINAMARCA &            MADRID &  4.789722 & -74.264778 \\
+ 21205890 &          GUANATA [21205890] &  CON &     CUNDINAMARCA &              CHÍA &  4.885944 & -74.054333 \\
+ 21205900 &      INDUQUIMICA [21205900] &  CON &     CUNDINAMARCA &            SOACHA &  4.583333 & -74.233333 \\
+ 21205910 &       COSECHA LA [21205910] &  CON &     CUNDINAMARCA &         ZIPAQUIRÁ &  4.989222 & -74.001194 \\
+ 21205920 &      SUASUQUE    [21205920] &  CON &     CUNDINAMARCA &              SOPÓ &  4.820833 & -73.963889 \\
+ 21205930 &       VILLA ROSA [21205930] &  CON &     CUNDINAMARCA &              COTA &  4.833333 & -74.100000 \\
+ 21205940 &       VILLA INES [21205940] &  CON &     CUNDINAMARCA &        FACATATIVÁ &  4.834972 & -74.383972 \\
+ 21205950 &              TIBACHOQUE HDA &  CON &     CUNDINAMARCA &             FUNZA &  4.759056 & -74.205167 \\
+ 21205960 &            TACHI [21205960] &  CON &     CUNDINAMARCA &        SUBACHOQUE &  4.939056 & -74.152583 \\
+ 21205970 &      STA ANA HDA [21205970] &  CON &     CUNDINAMARCA &           NEMOCÓN &  5.090500 & -73.881250 \\
+ 21205980 &             PROVIDENCIA GJA &  CON &     CUNDINAMARCA &             TENJO &  4.792389 & -74.200917 \\
+ 21205990 &         LLANO EL [21205990] &  CON &     CUNDINAMARCA &              SOPÓ &  4.927778 & -73.950000 \\
+ 21206000 &         ADPOSTAL [21206000] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.680750 & -74.123639 \\
+ 21206010 &     LORETOKI HDA [21206010] &  CON &     CUNDINAMARCA &            SUESCA &  5.089028 & -73.802750 \\
+ 21206020 &    SANTILLANA    [21206020] &  CON &     CUNDINAMARCA &             TABIO &  4.898528 & -74.104833 \\
+ 21206030 &     SAN CAYETANO [21206030] &  CON &     CUNDINAMARCA &        SUBACHOQUE &  4.916833 & -74.181667 \\
+ 21206040 &             ESAP [21206040] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.646778 & -74.096361 \\
+ 21206050 &          ESC COL INGENIERIA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.783333 & -74.050000 \\
+ 21206060 &       CASABLANCA [21206060] &  CON &     CUNDINAMARCA &            MADRID &  4.717111 & -74.253333 \\
+ 21206150 &           MOLINOS DEL NORTE &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.700000 & -74.050000 \\
+ 21206160 &     HIDROPARAISO [21206160] &  CON &     CUNDINAMARCA &        EL COLEGIO &  4.573167 & -74.404833 \\
+ 21206170 &       CLARETIANO [21206170] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.200000 \\
+ 21206190 &             UNIV PEDAGOGICA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.666667 & -74.066667 \\
+ 21206200 &          TUNDAMA [21206200] &  CON &     CUNDINAMARCA &          MOSQUERA &  4.733333 & -74.250000 \\
+ 21206210 &          FLORES COLOMBIANAS &  CON &     CUNDINAMARCA &             FUNZA &  4.736250 & -74.157333 \\
+ 21206220 &               UNIV NACIONAL &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.638083 & -74.089083 \\
+ 21206230 &               VEGAS LAS HDA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.661667 & -74.151419 \\
+ 21206240 &             CENTRO GAVIOTAS &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.066667 \\
+ 21206250 &           CORITO [21206250] &  CON &     CUNDINAMARCA &        FACATATIVÁ &  4.800000 & -74.366667 \\
+ 21206260 &           C.UNIV.AGROP-UDCA &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.798639 & -74.049722 \\
+ 21206280 &         ACAPULCO [21206280] &  CON &     CUNDINAMARCA &            BOJACÁ &  4.653833 & -74.333056 \\
+ 21206450 &        TERMOZIPA [21206450] &  CON &     CUNDINAMARCA &         TOCANCIPÁ &  4.983333 & -73.933333 \\
+ 21206490 &        HATO ALTO [21206490] &  CON &     CUNDINAMARCA &             TENJO &  4.835083 & -74.139917 \\
+ 21206500 &          COL ABRAHAM LINCOL &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.756639 & -74.061583 \\
+ 21206510 &             CASD [21206510] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+ 21206540 &            EDIFICIO PREMIUM &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.686944 & -74.054222 \\
+ 21206550 &               SENA MOSQUERA &  CON &     CUNDINAMARCA &          MOSQUERA &  4.700000 & -74.216667 \\
+ 21206560 &     INEM KENNEDY [21206560] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.661111 & -74.134778 \\
+ 21206570 &       APTO CATAM [21206570] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.705583 & -74.150667 \\
+ 21206610 &            EFRAIN CA\#AVERAL &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.583333 & -74.066667 \\
+ 21206620 &           COL H DURAN DUSAN &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.634611 & -74.173750 \\
+ 21206630 &          BILBAO MAXIMO POTI &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.751139 & -74.091583 \\
+ 21206640 &         SAN JOSE [21206640] &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.501556 & -74.119306 \\
+ 21206650 &            COL SAN CAYETANO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.516753 & -74.088222 \\
+ 21206660 &          COL SANTIAGO PEREZ &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.576222 & -74.130917 \\
+ 21206670 &              COL BUCKINGHAM &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.792056 & -74.049583 \\
+ 21206680 &            COL NUEVO RETIRO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.734111 & -74.037028 \\
+ 21206690 &          COL MIGUEL A. CARO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.813167 & -74.031111 \\
+ 21206700 &          CEA CENT.EST.AERO. &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.691028 & -74.134417 \\
+ 21206970 &             UNISALLE CENTRO &  CON &      BOGOTA D.C. &       BOGOTA D.C. &  4.595000 & -74.070361 \\
+ 21208670 &        GUANQUICA [21208670] &  CON &     CUNDINAMARCA &             TAUSA &  5.184278 & -73.941111 \\
+ 23065100 &         SABANETA [23065100] &  CON &     CUNDINAMARCA &     SAN FRANCISCO &  4.901750 & -74.307389 \\
+ 24010070 &          LETICIA [24010070] &  CON &     CUNDINAMARCA &       LENGUAZAQUE &  5.303194 & -73.709750 \\
+ 24010140 &         CUCUNUBA [24010140] &  CON &     CUNDINAMARCA &          CUCUNUBÁ &  5.251028 & -73.770750 \\
+ 24010170 &         GUACHETA [24010170] &  CON &     CUNDINAMARCA &          GUACHETÁ &  5.385889 & -73.691056 \\
+ 24010610 &            CARMEN DE CARUPA &  CON &     CUNDINAMARCA &  CARMEN DE CARUPA &  5.351278 & -73.904472 \\
+ 24010800 &        MINAS LAS [24010800] &  CON &           BOYACÁ &            SAMACÁ &  5.483333 & -73.533333 \\
+ 24011060 &             SUSA [24011060] &  CON &     CUNDINAMARCA &              SUSA &  5.462444 & -73.801556 \\
+ 24011080 &       CUCUNUBA 1 [24011080] &  CON &     CUNDINAMARCA &          CUCUNUBÁ &  5.248000 & -73.752500 \\
+ 24011090 &        UBATE GJA [24011090] &  CON &     CUNDINAMARCA &             UBATÉ &  5.327333 & -73.791444 \\
+ 24011100 &          ISLA DEL SANTUARIO &  CON &     CUNDINAMARCA &           FÚQUENE &  5.467278 & -73.734806 \\
+ 24011150 &       ALIZOS LOS [24011150] &  CON &     CUNDINAMARCA &  CARMEN DE CARUPA &  5.329389 & -73.850056 \\
+ 24015120 &          ISLA DEL SANTUARIO &  CON &     CUNDINAMARCA &           FÚQUENE &  5.467278 & -73.734806 \\
+ 24015220 &   VILLA CARMEN   [24015220] &  CON &           BOYACÁ &            SAMACÁ &  5.509389 & -73.495778 \\
+ 24015290 &        GACHANECA [24015290] &  CON &           BOYACÁ &            SAMACÁ &  5.433333 & -73.550000 \\
+ 24015380 &            CARMEN DE CARUPA &  CON &     CUNDINAMARCA &  CARMEN DE CARUPA &  5.347222 & -73.898333 \\
+ 24017150 &             LA BOYERA AUTOM &  CON &     CUNDINAMARCA &             UBATÉ &  5.305972 & -73.855444 \\
+ 24017240 &         ANCON EL [24017240] &  CON &           BOYACÁ &            SAMACÁ &  5.466667 & -73.533333 \\
+ 24017610 &      BOQUERON    [24017610] &  CON &     CUNDINAMARCA &       LENGUAZAQUE &  5.328250 & -73.699722 \\
+ 24017630 &        GACHANECA [24017630] &  CON &           BOYACÁ &            SAMACÁ &  5.450000 & -73.550000 \\
+ 24017660 &          CANAL RUCHICAL BOC &  CON &           BOYACÁ &            SAMACÁ &  5.483333 & -73.516667 \\
+ 24017670 &      AMARILLO EL [24017670] &  CON &           BOYACÁ &            SAMACÁ &  5.500000 & -73.533333 \\
+ 24017680 &       REBOSADERO [24017680] &  CON &           BOYACÁ &            SAMACÁ &  5.450000 & -73.533333 \\
+ 24017690 &              SALIDA EMBALSE &  CON &           BOYACÁ &            SAMACÁ &  5.450000 & -73.533333 \\
+ 24017700 &           PTE EL [24017700] &  CON &           BOYACÁ &            SAMACÁ &  5.456167 & -73.540111 \\
+ 24017720 &               CANAL PATAGUY &  CON &           BOYACÁ &            SAMACÁ &  5.450000 & -73.500000 \\
+ 24017730 &                CUATRO COPAS &  CON &           BOYACÁ &            SAMACÁ &  5.466667 & -73.533333 \\
+ 35020280 &          CHOACHI [35020280] &  CON &     CUNDINAMARCA &           CHOACHÍ &  4.522917 & -73.926583 \\
+ 35020290 &          FOMEQUE [35020290] &  CON &     CUNDINAMARCA &           FÓMEQUE &  4.486528 & -73.890417 \\
+ 35020320 &      LLANO LARGO [35020320] &  CON &     CUNDINAMARCA &            UBAQUE &  4.482833 & -74.030278 \\
+ 35020330 &         BOLSA LA [35020330] &  CON &     CUNDINAMARCA &           CHOACHÍ &  4.575417 & -73.981417 \\
+ 35025050 &      LLANO LARGO [35025050] &  CON &     CUNDINAMARCA &            UBAQUE &  4.482833 & -74.030278 \\
+ 35025060 &         BOLSA LA [35025060] &  CON &     CUNDINAMARCA &           CHOACHÍ &  4.575417 & -73.981417 \\
+ 35027100 &           CARAZA [35027100] &  CON &     CUNDINAMARCA &          CHIPAQUE &  4.428639 & -74.010194 \\
+ 35027220 &      LLANO LARGO [35027220] &  CON &     CUNDINAMARCA &            UBAQUE &  4.485056 & -74.030222 \\
+ 35027500 &             QDA RINCONAUTOM &  CON &     CUNDINAMARCA &         LA CALERA &  4.664944 & -73.857389 \\
+ 35030080 &        CASAS LAS [35030080] &  CON &     CUNDINAMARCA &           CÁQUEZA &  4.441167 & -73.936389 \\
+ 35060020 &            SUEVA [35060020] &  CON &     CUNDINAMARCA &             JUNÍN &  4.810000 & -73.707167 \\
+ 35060160 &       POTRERITOS [35060160] &  CON &     CUNDINAMARCA &         GUATAVITA &  4.828806 & -73.769278 \\
+ 35060200 &     AMOLADERO EL [35060200] &  CON &     CUNDINAMARCA &         GUATAVITA &  4.857972 & -73.745389 \\
+ 35070020 &  VENTAQUEMADA    [35070020] &  CON &           BOYACÁ &      VENTAQUEMADA &  5.383056 & -73.602889 \\
+ 35070030 &      TURMEQUE    [35070030] &  CON &           BOYACÁ &          TURMEQUÉ &  5.317750 & -73.496361 \\
+ 35070040 &           TIBANA [35070040] &  CON &           BOYACÁ &            TIBANÁ &  5.315278 & -73.395944 \\
+ 35070050 &           UMBITA [35070050] &  CON &           BOYACÁ &            ÚMBITA &  5.219111 & -73.444556 \\
+ 35070060 &   QUINCHOS LOS   [35070060] &  CON &           BOYACÁ &         CHINAVITA &  5.219556 & -73.347917 \\
+ 35070070 &     CHINAVITA    [35070070] &  CON &           BOYACÁ &         CHINAVITA &  5.164861 & -73.364250 \\
+ 35070210 &        PACHAVITA [35070210] &  CON &           BOYACÁ &         PACHAVITA &  5.139250 & -73.395639 \\
+ 35070230 &           MACHETA GJA AGROP &  CON &     CUNDINAMARCA &           MACHETÁ &  5.075111 & -73.579417 \\
+ 35070370 &            BELEN [35070370] &  CON &     CUNDINAMARCA &           MACHETÁ &  5.083333 & -73.566667 \\
+ 35070380 &      ROSALES LOS [35070380] &  CON &     CUNDINAMARCA &           MACHETÁ &  5.083333 & -73.616667 \\
+ 35075010 &    NUEVO COLON   [35075010] &  CON &           BOYACÁ &       NUEVO COLÓN &  5.352694 & -73.453778 \\
+ 35077100 &       SAN JOSE   [35077100] &  CON &           BOYACÁ &            SAMACÁ &  5.428639 & -73.528278 \\
+\end{longtable}
+
+\section{Cosas que sobran}
+
+
+La zona de estudio es la Sabana de Bogotá. En la Sabana de Bogotá las variaciones de temperatura afectan los cultivos tales como la papa, pastos, maíz, hortalizas entre otros. Los principales limitantes de caracter agometeorológico en la producción de papa son principalmente eventos de heladas y estrés por déficit hídrico, los cuales pueden producir pérdidas de hasta el 75\% \citep{DANE2002}.\\
+
+En las últimas décadas se documentó un incremento de las temperaturas medias a escala global de aproximadamente 0,15\celc por década \citep{jones2001} 
+
+\section{Comandos para la corrección del documento}
+%% Cómo hacer comentarios
+
+%% En el caso que quieran quitar algo y quiera tacharlo
+Esta es una palabra repetida \sout{repetida}, por ejemplo. \\
+
+%% En el caso que se quiera resaltar algo
+Esto es \emph{muy importante} por favor tener en cuenta.
+
+%% En el caso que se quiera hacer una nota al margen
+\todo{De esta forma se hacen notas en el margen}
+
+%% En el caso que quiera adicionar algo al texto. Puede seleccionar un color y adicionar los comentarios
+
+\textcolor{red}{Esta es una nueva idea}
+
+
+
+
+
+
+
+
+
+%######### Esto fue tomado del capítlo 1 y 3 
+% * <etorresm@unal.edu.co> 2018-09-24T23:44:37.716Z:
+%
+% > %######### Esto fue tomado del capítlo 1 y 3 
+% > \subsection{El modelo Weather Research and Forecasting Model (WRF)}
+% > El modelo WRF es un modelo muy usado al rededor del mundo gracias a los buenos resultados obtenidos, como lo reporta \citet{Jimenez2014}. El modelo WRF es un sistema de cálculo numérico para simulación atmosférica que fue diseñado para cumplir objetivos de investigación y pronóstico, este modelo sirve en un amplio rango de escalas espaciales, desde decenas de metros hasta miles de kilómetros. Los usuarios de este modelo pueden producir simulaciones basadas en las condiciones atmosféricas actuales o condiciones idealizadas \citep{Pielke2002}. WRF es capaz de realizar una reducción de escala de un modelo de pronóstico global como GFS. La reducción de escala toma las condiciones del modelo global y le aumenta la resolución teniendo en cuenta las características de la zona de estudio \citep{Sene2010}.\\
+% > El modelo WRF tiene una aproximación no-hidrostática, esto quiere decir que tiene en cuenta el momento en en la dirección vertical $(w)$, en comparación con el modelo hidrostático el cual no tiene en cuenta los cambios en el momento en la dirección vertical $(w)$. Los modelos no-hidrostáticos son usado para el pronóstico de fenómenos de mesoescala o escalas menores \citep{Pielke2002, Sene2010}.\\
+% > %. El modelo hidrostático supone una homogeneidad en la columna de aire y está dado por la densidad y la gravedad \citep{Pielke2002, Sene2010}.
+% > En el ámbito internacional el modelo WRF se ha usado en varios países como es el caso de Perú, \citet{Saavedra2016} realizó un trabajo de modelación de fenómenos meteorológicos de mesoescala. Como resultado se obtuvo que la modelación reproduce de buena forma el ciclo diario de las temperaturas del aire a dos metros, pero las temperaturas mínimas del aire a dos metros fueron sobrestimadas en las partes altas de la zona de estudio, y subestimó la tasa de enfriamiento en el fondo de los valles, generando una mayor temperatura modelada, respecto a los valores reportados por estaciones ubicadas en las laderas.\\
+% > \citet{Fernandez2011} realizaron un estudio en Argentina para la cuidad de Mendoza con tres dominios espaciales de 36, 12 y 4 km donde se tuvieron en cuenta las condiciones orográficas para la delimitación de los mismos. Se usó el esquema de capa límite planetaria de \textit{Yonsei University}. Como resultado se encontró que los valores máximos tanto de temperatura como de humedad son predichos correctamente.\\
+% > \citet{Corrales2015a} usó el modelo WRF para realizar un pronóstico de las temperaturas en México usando un único dominio y con la parametrización \textit{Mellor-Yamada-Janic} para la capa límite planetaria. Y como resultado obtuvo que hay algunas zonas donde el modelo es confiable para la predicción de las temperatura, lo cual puede prevenir daños por heladas en un horizonte pronóstico de 5 días.\\
+% > \citet{Hu2010} usaron el modelo WRF para modelar las temperaturas en el centro de Estados Unidos, en los estados de Texas, Lousiana y parte de Arkansas. Ellos probaron las diferentes parametrizaciones de capa límite (PLB) y, encontraron que algunas parametrizaciones producen temperaturas más altas de lo esperado.\\
+% > \citet{Parra2012} realizó un estudio para Ecuador donde la finalidad era simular la meteorología de un año completo de todo el país. Para esto usaron el modelo WRF con 2 dominios y con la parametrización Mellor Yamada Jajic (MYJ), y se obtuvo como resultado que las temperaturas simuladas son coherentes con los fenómenos observados en las estaciones en tierra.\\
+% > Basado en estas investigaciones se evidencia la necesidad de probar varias parametrizaciones e intentar lograr la mejor combinación de ellas. Para el caso de Colombia \citet{Uribe2012} escogió 10 eventos de duración de un día. Se probaron dos parametrizaciones diferentes , con dos diferentes resoluciones espaciales y dos diferentes horizontes de pronóstico con la finalidad de encontrar la mejor combinación. Como resultado encontró que la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación, mientras que la parametrización de Morrison presenta los mejores resultados. Y al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.\\
+% > En Colombia, el Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) ha implementado el modero WRF desde el año 2007 para la predicción del tiempo atmosférico convirtiéndose en una herramienta muy importante para esta entidad \citep{Arango2011}. Se han realizado validaciones del modelo WRF en la Sabana de Bogotá para la variable precipitación mediante una comparación con las estaciones convencionales, como la realizada por \citet{Mejia2012}. El objetivo fue identificar y establecer cuál de los modelos operacionales del IDEAM lograba identificar de manera aceptable los patrones de comportamiento de las variables de precipitación. Se encontró que el modelo WRF alimentado con los datos del modelo \textit{Global Forecast System} (GFS) presentó los mejores resultados. Este estudio presenta una metodología útil para la validación de los modelos y la determinación del mejor modelo.\\
+% > %Estos estudios fueron realizados en diferentes cultivos como \citet{prabha2008} que usó el cultivo de durazno, \citep{Gomez2014} quien realizó su estudio en pasturas, \citep{Saavedra2016} quien estudio en una zona productora de papa y maíz.\\
+% > %Es importante resaltar que el modelo toma como referencia datos del suelo. Pero según \citet{Castro-Romero2014} en la Región Andina se presentan cambios por el uso del paisaje que dejan como resultado tan solo el 31\% de los bosques naturales y una degradación del 53\% en arbustales secos. Se estima que para el año 1998 el 69\% de los bosques andinos habían sido talados. Uno de estos sucede en Suesca - Cundinamarca \citet{Castro-Romero2014} reporta que debido al uso agropecuario intensivo que se le ha dado a los suelos es posible observar zonas desprovistas de cobertura vegetal y de suelo con estados muy avanzados de degradación, lo cual imposibilita su posible recuperación en años próximos. Ya que los ecosistemas se usan de una forma extractiva como,lo menciona \citet{Ernesto}, uno de los ecosistemas más importantes de Colombia el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente \citep{Ernesto} cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$. Estos cambios nos hacen reflexionar acerca de la importancia del mantenimiento de los suelos y que se deben hacer ajustes periódicos a los modelos ya que con estos estudios se demuestra que el suelo es dinámico.
+% > %Un modelo de mesoescala es un modelo numérico de predicción del tiempo atmosférico, que se usa para hacer una predicción a escala de kilómetros y horas, basado en la dinámica atmosférica \citep{Uribe2012}.\\
+% > %\section{Conclusiones}
+% > %El cultivo de papa es un cultivo de gran importancia en el país. El consumo interno del país es abastecido casi en su mayoría por la producción interna. Este cultivo es seriamente afectado por muchos factores agroclimáticos y uno de los más importantes es la temperatura extrema. Cundinamarca es el Departamento con mayor producción en el país y la Sabana de Bogotá es la zona de Cundinamarca que más influencia tiene en la producción de papa, por sus condiciones topográficas de sabana se convierte en una altamente suceptible a heladas. Los meses con mayor probabilidad de heladas son diciembre, enero y febrero; y la hora en la que más se presentan bajas temperaturas es a las 5 am. Las temperaturas más altas se presentan en la mayoría de los meses pero principalmente entre los meses de diciembre y abril y las horas en las que más se presentan es a las 12 m.\\
+% > %Basado en los registros de las estaciones convencionales desde 1971 hasta 2016, se evidenció un aumento de la temperatura en 1.34\celc. Adicionalmente se evidencian cambios en la frecuencia de las bajas y las altas temperaturas, ya que la frecuencia de las bajas temperaturas ha venido disminuyendo y las altas temperaturas han presentado un aumento en los valores registrados.
+% > %De los modelos de pronóstico revisados el modelo WRF un modelo de regional de pronóstico es el que presenta las mejores características para realizar el estudio de las temperaturas, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.
+% > %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% > %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% > Se realizó una revisión bibliográfica en los previos capítulos con la finalidad de determinar el mejor modelo para realizar el pronóstico de las temperaturas extremas. Para facilitar las fortalezas y las limitaciones se realizó una comparación , ver tabla \ref{tab:fort_deb_mod}.
+% > \begin{table}[H]
+% > \resizebox{\textwidth}{!}{\begin{tabular}{p{5cm}| p{5cm} p{5cm} p{5cm}}
+% > Modelo                                        & Fortaleza                                                  & Limitación                            &Fuente                                                   \\ \hline
+% > \multirow{2}{*}{Modelos empíricos}            & Fácil aplicación                                                               & No posee alta precisión                                   & \citep{Gomez2014, Allen1957, Snyder2010}                   \\
+% >                                               & Se puede hacer modificaciones al modelo de manera sencilla                     & Los modelos son creados para determinadas condiciones     &                                                                              \\ \hline
+% > \multirow{2}{*}{Balance de energía del suelo} & Fácil aplicación siempre y cuando se tengan todas las variables                & Alta incertidumbre                                        & \citep{evett2011water,Rosenzweig2014, Rossi2002}          \\
+% >                                               &                                                                                & Las variables no son fáciles de calcular                  &                                                                              \\ \hline
+% > Sistemas de información geográfico            & Existe una clara relación entre los valles y las temperaturas extremas         & No  tiene en cuenta los flujos de radiación de onda larga & \citep{evett2011water, Halley2003, Blennow1998}              \\ \hline
+% > Redes neuronales                              & Buenas predicciones predicciones en un corto horizonte de pronóstico (6 horas) & Pronóstico a un horizonte muy corto                       & \citep{Smith2007}                                           \\ \hline
+% > Modelo \textit{Weather Research and Forecasting Model} (WRF)                   & Buenas predicciones en un plazo de 2 días                                      & Alto gasto computacional                                  & \citep{prabha2008evaluation, Arango2011, Mejia2012, Ruiz2014} \\
+% >                                               &                                                                                & Es necesario poseer una alta capacidad de almacenamiento  &                                                                              \\ \hline
+% > \end{tabular}}
+% > \caption{Tabla resumen de las ventajas y desventajas de los modelos}
+% > \label{tab:fort_deb_mod}
+% > \end{table}
+% > Basado en la información de la tabla \ref{tab:fort_deb_mod} y teniendo en cuenta las características de cada uno de los modelos se decidió usar el Modelo WRF, ya que es un modelo que cumple con los requerimientos para este estudio y en el país se ha usado este modelo con resultados satisfactorios como los obtenidos por \citep{Mejia2012,Arango2011,Arango2014,Ruiz2014,Uribe2012,RojasA2011,ArmentaPorras2013}.\\
+% > Los pasos a seguir para realizar una modelación con el modelo WRF consiste en:
+% > \begin{enumerate}
+% > \item Compilar el WPS
+% > \item Compilar el WRF
+% > \item Determinar el área de estudio
+% > \item Selección de los dominios del modelo WRF para la inicializacion del modelo
+% > \item Selección de las parametrizaciones que se van a emplear
+% > \item Descargar los datos que van a alimentar el modelo
+% > \item Realizar el pre-proceso con el WPS
+% > \item Realizar el proceso de modelación con el WRF
+% > \item Realización del pos-proceso con python3.6
+% > \end{enumerate}
+%
+% ^.
+
+
+\subsection{El modelo Weather Research and Forecasting Model (WRF)}
+
+El modelo WRF es un modelo muy usado al rededor del mundo gracias a los buenos resultados obtenidos, como lo reporta \citet{Jimenez2014}. El modelo WRF es un sistema de cálculo numérico para simulación atmosférica que fue diseñado para cumplir objetivos de investigación y pronóstico, este modelo sirve en un amplio rango de escalas espaciales, desde decenas de metros hasta miles de kilómetros. Los usuarios de este modelo pueden producir simulaciones basadas en las condiciones atmosféricas actuales o condiciones idealizadas \citep{Pielke2002}. WRF es capaz de realizar una reducción de escala de un modelo de pronóstico global como GFS. La reducción de escala toma las condiciones del modelo global y le aumenta la resolución teniendo en cuenta las características de la zona de estudio \citep{Sene2010}.\\
+
+El modelo WRF tiene una aproximación no-hidrostática, esto quiere decir que tiene en cuenta el momento en en la dirección vertical $(w)$, en comparación con el modelo hidrostático el cual no tiene en cuenta los cambios en el momento en la dirección vertical $(w)$. Los modelos no-hidrostáticos son usado para el pronóstico de fenómenos de mesoescala o escalas menores \citep{Pielke2002, Sene2010}.\\
+%. El modelo hidrostático supone una homogeneidad en la columna de aire y está dado por la densidad y la gravedad \citep{Pielke2002, Sene2010}.
+
+En el ámbito internacional el modelo WRF se ha usado en varios países como es el caso de Perú, \citet{Saavedra2016} realizó un trabajo de modelación de fenómenos meteorológicos de mesoescala. Como resultado se obtuvo que la modelación reproduce de buena forma el ciclo diario de las temperaturas del aire a dos metros, pero las temperaturas mínimas del aire a dos metros fueron sobrestimadas en las partes altas de la zona de estudio, y subestimó la tasa de enfriamiento en el fondo de los valles, generando una mayor temperatura modelada, respecto a los valores reportados por estaciones ubicadas en las laderas.\\
+
+\citet{Fernandez2011} realizaron un estudio en Argentina para la cuidad de Mendoza con tres dominios espaciales de 36, 12 y 4 km donde se tuvieron en cuenta las condiciones orográficas para la delimitación de los mismos. Se usó el esquema de capa límite planetaria de \textit{Yonsei University}. Como resultado se encontró que los valores máximos tanto de temperatura como de humedad son predichos correctamente.\\
+
+\citet{Corrales2015a} usó el modelo WRF para realizar un pronóstico de las temperaturas en México usando un único dominio y con la parametrización \textit{Mellor-Yamada-Janic} para la capa límite planetaria. Y como resultado obtuvo que hay algunas zonas donde el modelo es confiable para la predicción de las temperatura, lo cual puede prevenir daños por heladas en un horizonte pronóstico de 5 días.\\
+
+\citet{Hu2010} usaron el modelo WRF para modelar las temperaturas en el centro de Estados Unidos, en los estados de Texas, Lousiana y parte de Arkansas. Ellos probaron las diferentes parametrizaciones de capa límite (PLB) y, encontraron que algunas parametrizaciones producen temperaturas más altas de lo esperado.\\
+
+\citet{Parra2012} realizó un estudio para Ecuador donde la finalidad era simular la meteorología de un año completo de todo el país. Para esto usaron el modelo WRF con 2 dominios y con la parametrización Mellor Yamada Jajic (MYJ), y se obtuvo como resultado que las temperaturas simuladas son coherentes con los fenómenos observados en las estaciones en tierra.\\
+
+
+Basado en estas investigaciones se evidencia la necesidad de probar varias parametrizaciones e intentar lograr la mejor combinación de ellas. Para el caso de Colombia \citet{Uribe2012} escogió 10 eventos de duración de un día. Se probaron dos parametrizaciones diferentes , con dos diferentes resoluciones espaciales y dos diferentes horizontes de pronóstico con la finalidad de encontrar la mejor combinación. Como resultado encontró que la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación, mientras que la parametrización de Morrison presenta los mejores resultados. Y al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.\\
+
+En Colombia, el Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) ha implementado el modero WRF desde el año 2007 para la predicción del tiempo atmosférico convirtiéndose en una herramienta muy importante para esta entidad \citep{Arango2011}. Se han realizado validaciones del modelo WRF en la Sabana de Bogotá para la variable precipitación mediante una comparación con las estaciones convencionales, como la realizada por \citet{Mejia2012}. El objetivo fue identificar y establecer cuál de los modelos operacionales del IDEAM lograba identificar de manera aceptable los patrones de comportamiento de las variables de precipitación. Se encontró que el modelo WRF alimentado con los datos del modelo \textit{Global Forecast System} (GFS) presentó los mejores resultados. Este estudio presenta una metodología útil para la validación de los modelos y la determinación del mejor modelo.\\
+
+
+
+%Estos estudios fueron realizados en diferentes cultivos como \citet{prabha2008} que usó el cultivo de durazno, \citep{Gomez2014} quien realizó su estudio en pasturas, \citep{Saavedra2016} quien estudio en una zona productora de papa y maíz.\\
+
+
+
+
+
+%Es importante resaltar que el modelo toma como referencia datos del suelo. Pero según \citet{Castro-Romero2014} en la Región Andina se presentan cambios por el uso del paisaje que dejan como resultado tan solo el 31\% de los bosques naturales y una degradación del 53\% en arbustales secos. Se estima que para el año 1998 el 69\% de los bosques andinos habían sido talados. Uno de estos sucede en Suesca - Cundinamarca \citet{Castro-Romero2014} reporta que debido al uso agropecuario intensivo que se le ha dado a los suelos es posible observar zonas desprovistas de cobertura vegetal y de suelo con estados muy avanzados de degradación, lo cual imposibilita su posible recuperación en años próximos. Ya que los ecosistemas se usan de una forma extractiva como,lo menciona \citet{Ernesto}, uno de los ecosistemas más importantes de Colombia el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente \citep{Ernesto} cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$. Estos cambios nos hacen reflexionar acerca de la importancia del mantenimiento de los suelos y que se deben hacer ajustes periódicos a los modelos ya que con estos estudios se demuestra que el suelo es dinámico.
+
+%Un modelo de mesoescala es un modelo numérico de predicción del tiempo atmosférico, que se usa para hacer una predicción a escala de kilómetros y horas, basado en la dinámica atmosférica \citep{Uribe2012}.\\
+
+
+%\section{Conclusiones}
+
+%El cultivo de papa es un cultivo de gran importancia en el país. El consumo interno del país es abastecido casi en su mayoría por la producción interna. Este cultivo es seriamente afectado por muchos factores agroclimáticos y uno de los más importantes es la temperatura extrema. Cundinamarca es el Departamento con mayor producción en el país y la Sabana de Bogotá es la zona de Cundinamarca que más influencia tiene en la producción de papa, por sus condiciones topográficas de sabana se convierte en una altamente suceptible a heladas. Los meses con mayor probabilidad de heladas son diciembre, enero y febrero; y la hora en la que más se presentan bajas temperaturas es a las 5 am. Las temperaturas más altas se presentan en la mayoría de los meses pero principalmente entre los meses de diciembre y abril y las horas en las que más se presentan es a las 12 m.\\
+
+%Basado en los registros de las estaciones convencionales desde 1971 hasta 2016, se evidenció un aumento de la temperatura en 1.34\celc. Adicionalmente se evidencian cambios en la frecuencia de las bajas y las altas temperaturas, ya que la frecuencia de las bajas temperaturas ha venido disminuyendo y las altas temperaturas han presentado un aumento en los valores registrados.
+
+%De los modelos de pronóstico revisados el modelo WRF un modelo de regional de pronóstico es el que presenta las mejores características para realizar el estudio de las temperaturas, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+Se realizó una revisión bibliográfica en los previos capítulos con la finalidad de determinar el mejor modelo para realizar el pronóstico de las temperaturas extremas. Para facilitar las fortalezas y las limitaciones se realizó una comparación , ver tabla \ref{tab:fort_deb_mod}.
+
+
+
+\begin{table}[H]
+\resizebox{\textwidth}{!}{\begin{tabular}{p{5cm}| p{5cm} p{5cm} p{5cm}}
+Modelo                                        & Fortaleza                                                  & Limitación                            &Fuente                                                   \\ \hline
+\multirow{2}{*}{Modelos empíricos}            & Fácil aplicación                                                               & No posee alta precisión                                   & \citep{Gomez2014, Allen1957, Snyder2010}                   \\
+                                              & Se puede hacer modificaciones al modelo de manera sencilla                     & Los modelos son creados para determinadas condiciones     &                                                                              \\ \hline
+\multirow{2}{*}{Balance de energía del suelo} & Fácil aplicación siempre y cuando se tengan todas las variables                & Alta incertidumbre                                        & \citep{evett2011water,Rosenzweig2014, Rossi2002}          \\
+                                              &                                                                                & Las variables no son fáciles de calcular                  &                                                                              \\ \hline
+Sistemas de información geográfico            & Existe una clara relación entre los valles y las temperaturas extremas         & No  tiene en cuenta los flujos de radiación de onda larga & \citep{evett2011water, Halley2003, Blennow1998}              \\ \hline
+Redes neuronales                              & Buenas predicciones predicciones en un corto horizonte de pronóstico (6 horas) & Pronóstico a un horizonte muy corto                       & \citep{Smith2007}                                           \\ \hline
+Modelo \textit{Weather Research and Forecasting Model} (WRF)                   & Buenas predicciones en un plazo de 2 días                                      & Alto gasto computacional                                  & \citep{prabha2008evaluation, Arango2011, Mejia2012, Ruiz2014} \\
+                                              &                                                                                & Es necesario poseer una alta capacidad de almacenamiento  &                                                                              \\ \hline
+
+
+\end{tabular}}
+\caption{Tabla resumen de las ventajas y desventajas de los modelos}
+\label{tab:fort_deb_mod}
+\end{table}
+
+Basado en la información de la tabla \ref{tab:fort_deb_mod} y teniendo en cuenta las características de cada uno de los modelos se decidió usar el Modelo WRF, ya que es un modelo que cumple con los requerimientos para este estudio y en el país se ha usado este modelo con resultados satisfactorios como los obtenidos por \citep{Mejia2012,Arango2011,Arango2014,Ruiz2014,Uribe2012,RojasA2011,ArmentaPorras2013}.\\
+
+Los pasos a seguir para realizar una modelación con el modelo WRF consiste en:
+\begin{enumerate}
+\item Compilar el WPS
+\item Compilar el WRF
+\item Determinar el área de estudio
+\item Selección de los dominios del modelo WRF para la inicializacion del modelo
+\item Selección de las parametrizaciones que se van a emplear
+\item Descargar los datos que van a alimentar el modelo
+\item Realizar el pre-proceso con el WPS
+\item Realizar el proceso de modelación con el WRF
+\item Realización del pos-proceso con python3.6
+
+
+\end{enumerate}
+
+
+
+
+%% Tabla del porcentaje de coincidencias entre la precipitación horaria y diária
+
+
+\begin{table}[H]
+\begin{center}
+\caption{Porcentaje de coincidencia de los valores de precipitación horaria y el valor de la suma de la precipitación instantánea cada 10 minutos de un día.}
+\begin{tabular}{llr}
+\toprule
+Estación &  Porcentaje de coincidencia (\%) \\
+\midrule
+0  &  21195160 &     24.85 \\
+1  &  21201200 &     15.17 \\
+2  &  21201580 &     33.71 \\
+3  &  21202270 &     25.42 \\
+4  &  21205012 &     18.12 \\
+5  &  21205791 &     39.62 \\
+6  &  21206600 &     39.13 \\
+7  &  21206790 &     20.23 \\
+8  &  21206920 &     13.25 \\
+9  &  21206930 &     13.99 \\
+10 &  21206940 &     20.32 \\
+11 &  21206950 &     13.75 \\
+12 &  21206960 &     47.23 \\
+13 &  21206980 &     27.37 \\
+14 &  21206990 &     61.43 \\
+15 &  21209920 &     43.06 \\
+16 &  23125170 &     27.50 \\
+17 &  24015110 &     34.88 \\
+18 &  26127010 &     27.35 \\
+19 &  35025080 &     14.69 \\
+20 &  35025090 &     20.11 \\
+21 &  35027001 &     34.07 \\
+22 &  35027002 &      0.00 \\
+\bottomrule
+\end{tabular}
+
+\label{table:compar-porcentaje}
+\end{center}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[draft=false, scale=0.1]{altas_bajas_2007/350850800Simulacion_10d03.png}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[draft=false, scale=0.1]{altas_bajas_2007/350850800Simulacion_10d03.png}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+
+
+\begin{comment}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lecturas del páramo}
+
+La inicialización de los modelos juega un papel importante en el pronóstico de los eventos, por ejemplo \citet{Uribe2012} encontró que para un horizonte de pronóstico de 36 horas se deben descartar las primeras 12 horas para evitar el efecto de \textit{spin-up}.
+
+Según \citep{Uribe2012} el anidamiento no mejora la influencia de la predicción, lo cual traduce en una perdida de tiempo para la predicción de lluvias en Colombia.
+
+Según \citep{Uribe2012} la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación.
+
+Al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.
+
+
+
+\subsection{Prioridades de restauración ecológica}
+
+
+
+
+Según el enfoque de \citep{Castro-Romero2014} cuando un suelo en una zona pierde atributos como el contenido de materia orgánica y la diversidad de especies de artropofauna, el suelo se degrada. Y esta degradación es considerada como una perdida paulatina de capital natural, que produce que sus habitantes perciban menos beneficios por los servicios ecosistémicos y una disminución en la calidad de vida de sus pobladores. Esto hace que las actividades agropecuarias sean más difíciles y costosas.
+Estas teorías se basan en estudios previos de \citet{daily1997nature} y \citet{westman1977much}.
+
+Las comunidades que producen algún tipo de degradación en los territorios no son conscientes de los costos del daño producido \citep{westman1977much}. Y estos daños se ven relfejados en la disminución de los ingresos netos de las cosechas \citep{Castro-Romero2014}.
+
+\citet{Castro-Romero2014} estableció que la calidad del suelo se debe tener en cuenta los atributos químicos, físicos y biológicos.
+
+El índice de los procesos denudativos del suelo se consolidan como la suma de la erosión, solifluxión, deslizamientos y desplomes \citep{Castro-Romero2014}. %Solifluxión: se produce cuando un material sólido fluye como si fuera un líquido viscoso.
+
+
+
+Una de las conclusiones de \citep{Castro-Romero2014} es que los suelos con la menor valoración económica son aquellas como de mayor prioridad para la restauración. Del mismo modo \citep{Castro-Romero2014} encontró que las prioridades más bajas de restauración se presentan en aquellas unidades que mostraron las mejores condiciones de conservación y calidad del suelo.
+
+\subsubsection{Emergía}
+
+Uno de los resultados más importantes del estudio de \citep{Ernesto} es que el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente este autor cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$.
+
+La emergía es la cantidad de energía requerida para producir algo, teniendo en cuenta la conservación y pérdida de energía que resulta de las leyes de la termodinámica. Entre más trabajo es realizado para producir algo, más energía debe ser transformada para la realización de ese trabajo y una alta emergía será almacenada en el producto. Emergía es una medida del trabajo medioambiental que es necesario para la producción de un bien o un servicio. Esta medida es sin embargo la suma de los flujos de energía requeridos para la producción de algo, expresada en base a las unidades de energía solar Joules \citep{lei2014ecological}.
+
+"La emergía solar de un trozo de madera corresponde a la energía disponible que utilizó un ecosistema para producirlo, osea, la cantidad de Julios solares que se utilizaron para su elaboración" Frase ejemplo tomada de \citep{Castro-Romero2014}.
+
+La transformicidad solar es la emergía solar requerida para conformar una unidad de energía de un servicio o producto, es decir, la relación entre la emergía de un servicio o un producto, es decir, la relación entre la emergía y una cantidad libre de un producto o servicio, por ello su unidad es $\frac{sej}{J}$.
+
+\citep{Castro-Romero2014} realizó los cálculos de la emergía para la minería y la agricultura, teniendo en cuenta la cantidad de combustibles y los insumos usados en cada proceso. Tomaron los mapas de suelo del IGAC realizados en el 2000.
+
+Realizaron un cálculo de la evapotranspiración a partir de Thornwaite realizado en 1966.
+
+Realizaron una estimación de la escorrentía. 
+
+En el estudio se muestra que se requiere $2.44e5 sej$
+
+La emergía libre está dada en términos de la lluvia y el suelo.
+
+La agricultura y la ganadería usa la energía gratuita del sol y la lluvia para producir ingresos. Pero en la ganadería se enfoca en un organismo consumidor.
+
+La ganadería en su mayor parte depende en un 42\% de fuentes no renovables, frente a lo cual \citet{Castro-Romero2014} afirma que cuestiona la sostenibilidad en periodos de tiempo en los cuales la pérdida de materia orgánica del suelo impida su desarrollo.
+
+La leche producida y vendida contiene más emergía que el dinero que recibe.
+
+El sistema de ceba es el menos provechoso de los 3 sistemas ganaderos evaluados.
+
+El páramo es movido mayormente por fuentes externas a este como lo son los combustibles e insumos materiales
+
+El suelo es la mayor fuente de emergía
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Avances búsqueda parametrizaciones WRF}
+
+
+Se creó una carpeta llamada \texttt{zona\_est\_20180320} en esta carpeta se va a ejecutar el WPS que será usado para probar las combinaciones se ejecutará desde un día antes y un día después de las fechas que se usarán en el WRF, ya que, en el WRF se usarán las fechas \texttt{20070201-20070204}. El centro del dominio será en el município de Tocancipá estas serán las coordenadas \texttt{-73.96740787376062087 4.9704810067620171} en las variables correspondientes a \texttt{ref\_lat, ref\_lon, truelat1, stand\_lon}. Y se tomarán los datos proporcionados por el IDEAM para la Vtable. Sólo se usó un dominio para llegar a una resolución de 2 kilómetros con el WRF, una copia quedó dentro de la carpeta llamada resultados.\\
+
+Al final se crearon los archivos netCDF para las fechas seleccionadas. 
+
+Para la comparación de los mejores modelos se usó el diagrama de Taylor a partír de un código obtenido del repositorio de \textcolor{blue}{ \href{https://gist.github.com/ycopin/3342888}{ycopin}}. En este código se usó lo propuesto por \citet{barnston1992} quien calcula el cuadrado medio del error a partir del la desviación estándar y el coeficiente de correlación.
+
+\begin{equation}\label{eq:rms}
+	     RMS = \sqrt{1-r^{2}}SD_{y}
+\end{equation}
+
+Para poder compara las temperaturas a 2 metros se unieron todas las temperaturas (máximas, mínimas y promedio) conla finalidad de solo usar un valor. Se priorizaron las variables de la variable llamada promedio sobre las demás esto se encuentra en el código llamado \texttt{Procesamiento\_wrf.py}
+
+\begin{enumerate}
+
+\item El IDEAM facilitó las namelist.* y la versión que están usando
+\item Se instaló el WRFV3.9.1.1 en la máquina agrometeo
+\item Se realizó una corrida con los datos del GFS para un periodo de 2016-12-28 00:00 - 2017-01-01 18:00 (4 días). Esta corrida tomó 12 horas y 30 minutos y se usaron 152 GB. Se realizaron 64 simulaciones. (265 días).
+
+\end{enumerate}
+
+\subsection{Resultado de las modelaciones con el WRF}
+
+Se probaron cada una de las parametrizaciones físicas del modelo, (sin combinatoria). Este proceso comenzó el 20180404 y terminó el 20180412, se demoró un total de 8 días.
+\subsection{Literatura sobre las parametrizaciones}
+
+La comprensión de los procesos físicos que rigen las masas de aire frío y su adecuada representación en un modelo de predicción numérico (por sus siglas en inglés \textit{numerical weather prediction} (NWP)) son necesarios para una predicción adecauada de las temperaturas de la superficie y los escenarios de heladas \citep{prabha2008}.\\
+
+
+
+Le balance de energía y la capa límite (bpl) se ha demostrado que pronostica erroneamente las tasas de enfriamiento y las altas temperaturas en la presencia de heladas advectivas \citep{heinemann1988}. El pronóstico de las heladas con la ayuda de moedlos de predicción enfrenta un reto debido la interacción no linear de los componetnes del balance hídrico, el cual puede causar pronósticos imprecisos \citep{gutowski2003}.\\
+
+El estado del arte del WRF se definió como una colección de varios modelos de predicción numericos en la arquitectura de un solo software con dos modelos de pronóstico dos formas de pronóstico de solucionar que son el \textit{Advanced Reseach WRF} por sus siglas en inglés (ARW) y el \textit{Nonhydrostatic Mesoscale Model} por sus siglas en inglés (NMM). El ARW ha sido desarrollado y administrado por \textit{NCAR's Mesoscale and Microscalo Meteorology Laboratory}. El núcleo del NMM fue desarrollado por \textit{National Centers for Envoronmental Prediction} y es actualmente usado en el sistema \textit{Hurricane WRF} (HWRF).
+
+La correcta parametrizaión va a depender de varios factores como lo nombra \citet{prabha2008evaluation} tales como: seleccionar correctamente la resolución, el poder computacional, condiciones iniciales, resolución del terreno, datos del uso del suelo y las parametrizaciones físicas a usar.
+
+Para la verificación de la predicción de estos modelos es necesario comparar con las estaciones para de esta manera verificar los resultados (Validar??).
+
+Uno de los primeros pasos que se deben desarrollar en esta metodología es la caracterización climática de la zona. \citet{prabha2008evaluation} realizaron una caracterización para cada una de las estaciones por 13 años.
+
+\citet{prabha2008evaluation} define el índice de congelamiento como la integral de la temperatura del aire cuando esta se encuentra bajo 0\celc.\\
+
+\citet{prabha2008evaluation} Usan dos índices para evaluar
+
+El índice de congelamiento es definido como el numero de grados día por un periodo específico de tiempo \citep{frauenfeld2007northern}. El índice que propone \citet{frauenfeld2007northern} es definido como la suma de los valores de temperatura bajo 0\celc como:
+
+\begin{equation}\label{eq:frost_index}
+    \int_{t_0}^{t_n} T dt,\quad Para T \leq 0^{\circ}C
+\end{equation}
+
+donde $T$ corresponde al valore de la temperatura, integrado desde $t_0$ hasta el tiempo $t_n$. son el comienzo y final de los diferentes tiempos, $T$ es el valor de la temperatura y $dt$ es el cambio en el tiempo.
+
+Existen dos tipos de heladas la radiativa y la advectiva \citep{snyder2005frost} grandes incusiones de aire frío, vientos atmósferas que se encuentran a temperaturas bajo 0\celc 
+
+Caracterización de una helada radiativa cielos despejados, vientos en calma, inversión de temperatura, bajas temperaturas de punto de rocío y temperaturas que caen por debajo de 0\celc.
+
+El tope de la inversión es variable ya que depende de la topografía y las condiciones climáticas, pero generalmente tiene un rango de 9 a 60 m \citep{snyder2005frost}.
+
+En las noches despejadas más calor es irradiado fuera de la superficie en comparación con el que fue recibido durante el día. La temperatura cae rápidamente cerca de la superficie de radiación causando una inversión.
+
+Según la gráfica de inversión de temperatura la inversión se nota a una altura de 3 o 5 metros. 
+
+Para la protección de las heladas radiativas son más efectivos los métodos "Energy-intensive"
+
+Dentro de las heladas radiativas hay dos categorías:
+
+La helada blanca (hoar frost): Sucede cuando el vapor de agua depositado en la superficie forma una cobertura blanquecina de hielo y es comúnmente llamada "escarcha".
+
+Helada negra (black): Ocurre cuando la temperatura cae bajo 0\celc y no hay formación de hielo en la superficie. Si la humedad es suficientemente baja, entonces la superficie no alcanzará el punto de congelamiento y no se formará hielo. Cuando la humedad es alta, hay una más alta probabilidad de una helada blanca. Se produce calor cuando se pasa de líquido a sólido, por esta razón la helada blanca es menos lesiva en comparación un una helada negra.
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=true, scale=0.6]{latent.png}
+		\caption{Gráfica de calor latente}
+		\label{subfig:cal_lat}	
+	\end{center}
+
+\end{figure}
+
+Una clara seña de que estamos presenciando una helada cae en unas pocas horas antes de del amaneces, cuando la energía neta de radiación de la superficie cambia rápidamente de positiva a negativa. Este cambio se da principalmente porque la radiación solar decrece desde su valor más alto al medio día a 0 en el atardecer.
+
+La densidad del flujo de calor en el suelo está determinada por 
+
+\begin{equation}\label{eq:frost_index}
+    G = -\lambda(\frac{\partial T}{\partial z})
+\end{equation}
+
+tomado de \citep{sauer2002soil}
+
+Helada por advección\\
+Masas de aire frío llegan a una área a remplazar el aire cálido que estaba presente antes de que el tiempo cambiara.
+
+\begin{enumerate}
+\item Condiciones nubladas
+\item Vientos desde moderados hasta fuertes según \citet{prabha2008evaluation} son vientos con velocidades superiores a 2 $m/s$.
+\item Sin inversión térmica
+\item Baja humedad
+\item Las temperaturas caen bajo 0\celc y permanecen de esta misma forma todo el día.
+\item La mayoría de estos eventos ocurren en climas Mediterráneos y tienden a ser más comunes en las costas.
+\item La mayoría de los eventos
+\end{enumerate}
+Este tipo de heladas son difíciles de combatir, es por esto que es la mayoría de los métodos de protección funcionan mejor en la presencia de una inversión. En algunos casos la helada por advección puede generar una helada radiativa.\\
+
+Clasificación de métodos de protección
+
+Existen varias clasificaciones como los métodos pasivos que son más preventivos como métodos biológicos, o técnicas ecológicas incluyendo prácticas como un alistamiento previo a la presencia de las heladas.
+
+Los métodos activos son métodos que son basados en el uso intensivo de energía. Algunos ejemplos son calentadores, riego, máquinas de viento.\\
+
+Entre las latitudes entre los trópicos de Cancer y Capricornio existen grandes áreas con temperaturas bajo cero. Pero aún en estas zonas a veces se presentan daños en lugares con grandes alturas.\\
+
+Es menos probable que ocurra una helada cuando:
+\begin{enumerate}
+\item El terreno se encuentra en un área donde el viento sopla
+\item El terreno se encuentra cerca a una masa de agua
+\end{enumerate}
+
+El humo no ofrece ningún tipo de protección a los cultivos \citep{itier1987influence}\\
+
+Los daños causados en las plantas son debido al congelamiento del agua extra celular dentro de las plantas 
+
+Las ubicaciones bajas presentan problemas de bajas temperaturas. Pero en algunas ocasiones se pueden presentar daños en algunos sitios, esto es debido al tipo de suelo.\\
+
+Un suelo seco arenoso transfiere mejor el calor que un suelo seco y arcilloso y ambos transfieren y almacenan mejor la temperatura que un suelo orgánico.
+
+La transferencia de calor del agua es tres veces mayor que la del suelo. Los suelos húmedos tienen mayor capacidad de conductividad en comparación con un suelo seco.
+
+Obstáculos que inhiban el drenaje de las masas de aire frío.\\
+
+La fertilización puede ser una forma para evitar ele efecto de las heladas en el cultivo
+
+El riego es uno de los mecanismos más económicos para el control de las heladas.\\
+
+La inundación de los suelos puede proveer protección de los cultivos entre 2 a 3\celc. Existe una relación entre la lamina de agua que se debe aplicar para evitar la helada de esa noche y la temperatura máxima registrada en el día.\\
+
+Una de las formas de protección es realizar un pronóstico de las heladas
+
+\subsubsection{Parámetros usado por Prabha en lso dos artículos \citep{prabha2008} y \citep{prabha2008evaluation}}
+
+
+En el artículo \citet{prabha2008} podemos destacar varios aspectos:
+
+\begin{enumerate}
+\item Lo primero que se estudió fueron las condiciones iniciales
+\item Capa límite planetaria
+\item Superficie del terreno
+\end{enumerate}
+
+Se realizó una comparación contra la red de estaciones automáticas de la zona. En este estudio se manejaron 40 niveles de presión y se acomodaron 15 niveles en la PBL. (Grid resolution en el artículo)
+
+
+La configuración de modelo fue la siguiente:
+
+\begin{itemize}
+\item WSM3 en microfísica \texttt{mp\_physics = 3: "WRF Single-Moment (WSM) 3-class simple ice scheme: A simple efficient scheme with ice and snow processes suitable for mesoscale grid sizes."}
+\item La parametrización de cúmulos es la Kain-Fritsch \texttt{cu\_physics = 1: "Kain-Fritsch (new Eta) scheme: deep and shallow sub-grid scheme using a mass flux approach with downdrafts and CAPE removal time scale"}
+
+\item La parametrización usada para la radiación de onda larga corresponde a RRTM \texttt{ra\_lw\_physics = 1: "RRTM scheme: Rapid Radiative Transfer Model. An accurate scheme using look-up tables for efficiency. Accounts for multiple bands, trace gases, and microphysics species. This scheme has been preliminarily tested for WRF-NMM."}
+
+\item La parametrización usada para la radiación de onda corta corresponde a RRTM \texttt{•}
+\end{itemize}
+
+
+El experimento consistió en probar diferentes, capas límites planetarias, condiciones iniciales y diferes esquemas de suelo.:
+
+Condiciones iniciales
+\begin{itemize}
+\item NAM = Grilla de 12 km. North American Regional Reanalysis
+\item NARR grilla de 36 km. North American Mesosclase
+\end{itemize}
+
+Parameterizaciones de capa límite \texttt{bl\_pbl\_physics}
+\begin{itemize}
+\item MYJ = 2. \texttt{Mellor-Yamada-Janjic (Eta) TKE scheme}
+\item YSU = 1. \texttt{YSU scheme}
+\end{itemize}
+
+Parametrizaciones del terreno \texttt{sf\_surface\_physics}
+\begin{itemize}
+
+\item SLAB = 1 \texttt{"Thermal Diffusion scheme: soil temperature only scheme, using five layers."}
+
+\item Noah = 2. \texttt{"Noah Land-Surface Model: Unified NCEP/NCAR/AFWA scheme with soil temperature and moisture in four layers, fractional snow cover and frozen soil physics. This scheme has been preliminarily tested for WRF-NMM."}
+
+
+\item RUC = 3. \texttt{"RUC Land-Surface Model: Rapid Update Cycle operational scheme with soil temperature and moisture in six layers, multi-layer snow and frozen soil physics. This scheme has been preliminarily tested for WRF-NMM."}
+
+
+
+\end{itemize}
+
+
+
+\subsubsection{Revisión de literatura relacionada}
+
+
+Existen diferencias micrometeorológicas, como por ejemplo el echo que existan diferencias de 1\celc en 100 metros.
+
+La máxima temperatura que puede soportar un tuberculo de papa es -0.8\celc\\
+
+
+La capa de aire que toca el suelo se llama vientos catabático o vientos de drenaje. Son causados por el enfriamiento del aire, adyacente al suelo y descienden gracias a la influencia de la gravedad \citep{Stull1988pbl}.
+
+El estudio de la capa límite planetaria contiene el estudio de la micrometeorología \citep{Stull1988pbl}.
+
+Para el estudio de la micrometeorología \citet{Stull1988pbl} los clasifica en 3:
+
+\begin{enumerate}
+\item Métodos estocásticos
+\item Teoría de similitud
+\item Clasificación fenomenológica
+\end{enumerate}
+
+
+
+
+\subsection{Mecanismos de transferencia de energía}
+
+Cuando la energía pasa a través del suelo por conducción se llama densidad de flujo de calor.\\
+La protección de una helada consiste en tratar de reducir o remplazar la pérdida del contenido de calor sensible del aire y de las plantas.
+
+
+
+Cuando el agua se congela la mayoría de las moléculas hacen enlaces con el nitrógeno para formar una estructura cristalina. 
+
+\begin{table}[H]
+\centering
+
+\label{tabla_conductividad}
+\begin{tabular}{@{}llll@{}}
+\multicolumn{4}{l}{Conductividad termica de los suelos $W m^{-1}\cdot^{\circ}C^{-1} $} \\ \midrule
+\multicolumn{1}{l|}{}         & Orgánicos  & Arcillosos & Arenosos \\ \midrule
+\multicolumn{1}{l|}{Secos}    & 0.1        & 0.25       & 0.3      \\
+\multicolumn{1}{l|}{Húmedos}  & 0.5        & 1.6        & 2.4     
+
+\end{tabular}
+\caption{Tabla de conductividad de suelos}
+\end{table}
+
+
+\section{Cosas que sobran}
+
+
+La zona de estudio es la Sabana de Bogotá. En la Sabana de Bogotá las variaciones de temperatura afectan los cultivos tales como la papa, pastos, maíz, hortalizas entre otros. Los principales limitantes de caracter agometeorológico en la producción de papa son principalmente eventos de heladas y estrés por déficit hídrico, los cuales pueden producir pérdidas de hasta el 75\% \citep{DANE2002}.\\
+
+En las últimas décadas se documentó un incremento de las temperaturas medias a escala global de aproximadamente 0,15\celc por década \citep{jones2001} 
+
+\section{Comandos para la corrección del documento}
+%% Cómo hacer comentarios
+
+%% En el caso que quieran quitar algo y quiera tacharlo
+Esta es una palabra repetida \sout{repetida}, por ejemplo. \\
+
+%% En el caso que se quiera resaltar algo
+Esto es \emph{muy importante} por favor tener en cuenta.
+
+%% En el caso que se quiera hacer una nota al margen
+\todo{De esta forma se hacen notas en el margen}
+
+%% En el caso que quiera adicionar algo al texto. Puede seleccionar un color y adicionar los comentarios
+
+\textcolor{red}{Esta es una nueva idea}
+
+
+
+
+
+
+
+
+
+%######### Esto fue tomado del capítlo 1 y 3 
+% * <etorresm@unal.edu.co> 2018-09-24T23:44:37.716Z:
+%
+% > %######### Esto fue tomado del capítlo 1 y 3 
+% > \subsection{El modelo Weather Research and Forecasting Model (WRF)}
+% > El modelo WRF es un modelo muy usado al rededor del mundo gracias a los buenos resultados obtenidos, como lo reporta \citet{Jimenez2014}. El modelo WRF es un sistema de cálculo numérico para simulación atmosférica que fue diseñado para cumplir objetivos de investigación y pronóstico, este modelo sirve en un amplio rango de escalas espaciales, desde decenas de metros hasta miles de kilómetros. Los usuarios de este modelo pueden producir simulaciones basadas en las condiciones atmosféricas actuales o condiciones idealizadas \citep{Pielke2002}. WRF es capaz de realizar una reducción de escala de un modelo de pronóstico global como GFS. La reducción de escala toma las condiciones del modelo global y le aumenta la resolución teniendo en cuenta las características de la zona de estudio \citep{Sene2010}.\\
+% > El modelo WRF tiene una aproximación no-hidrostática, esto quiere decir que tiene en cuenta el momento en en la dirección vertical $(w)$, en comparación con el modelo hidrostático el cual no tiene en cuenta los cambios en el momento en la dirección vertical $(w)$. Los modelos no-hidrostáticos son usado para el pronóstico de fenómenos de mesoescala o escalas menores \citep{Pielke2002, Sene2010}.\\
+% > %. El modelo hidrostático supone una homogeneidad en la columna de aire y está dado por la densidad y la gravedad \citep{Pielke2002, Sene2010}.
+% > En el ámbito internacional el modelo WRF se ha usado en varios países como es el caso de Perú, \citet{Saavedra2016} realizó un trabajo de modelación de fenómenos meteorológicos de mesoescala. Como resultado se obtuvo que la modelación reproduce de buena forma el ciclo diario de las temperaturas del aire a dos metros, pero las temperaturas mínimas del aire a dos metros fueron sobrestimadas en las partes altas de la zona de estudio, y subestimó la tasa de enfriamiento en el fondo de los valles, generando una mayor temperatura modelada, respecto a los valores reportados por estaciones ubicadas en las laderas.\\
+% > \citet{Fernandez2011} realizaron un estudio en Argentina para la cuidad de Mendoza con tres dominios espaciales de 36, 12 y 4 km donde se tuvieron en cuenta las condiciones orográficas para la delimitación de los mismos. Se usó el esquema de capa límite planetaria de \textit{Yonsei University}. Como resultado se encontró que los valores máximos tanto de temperatura como de humedad son predichos correctamente.\\
+% > \citet{Corrales2015a} usó el modelo WRF para realizar un pronóstico de las temperaturas en México usando un único dominio y con la parametrización \textit{Mellor-Yamada-Janic} para la capa límite planetaria. Y como resultado obtuvo que hay algunas zonas donde el modelo es confiable para la predicción de las temperatura, lo cual puede prevenir daños por heladas en un horizonte pronóstico de 5 días.\\
+% > \citet{Hu2010} usaron el modelo WRF para modelar las temperaturas en el centro de Estados Unidos, en los estados de Texas, Lousiana y parte de Arkansas. Ellos probaron las diferentes parametrizaciones de capa límite (PLB) y, encontraron que algunas parametrizaciones producen temperaturas más altas de lo esperado.\\
+% > \citet{Parra2012} realizó un estudio para Ecuador donde la finalidad era simular la meteorología de un año completo de todo el país. Para esto usaron el modelo WRF con 2 dominios y con la parametrización Mellor Yamada Jajic (MYJ), y se obtuvo como resultado que las temperaturas simuladas son coherentes con los fenómenos observados en las estaciones en tierra.\\
+% > Basado en estas investigaciones se evidencia la necesidad de probar varias parametrizaciones e intentar lograr la mejor combinación de ellas. Para el caso de Colombia \citet{Uribe2012} escogió 10 eventos de duración de un día. Se probaron dos parametrizaciones diferentes , con dos diferentes resoluciones espaciales y dos diferentes horizontes de pronóstico con la finalidad de encontrar la mejor combinación. Como resultado encontró que la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación, mientras que la parametrización de Morrison presenta los mejores resultados. Y al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.\\
+% > En Colombia, el Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) ha implementado el modero WRF desde el año 2007 para la predicción del tiempo atmosférico convirtiéndose en una herramienta muy importante para esta entidad \citep{Arango2011}. Se han realizado validaciones del modelo WRF en la Sabana de Bogotá para la variable precipitación mediante una comparación con las estaciones convencionales, como la realizada por \citet{Mejia2012}. El objetivo fue identificar y establecer cuál de los modelos operacionales del IDEAM lograba identificar de manera aceptable los patrones de comportamiento de las variables de precipitación. Se encontró que el modelo WRF alimentado con los datos del modelo \textit{Global Forecast System} (GFS) presentó los mejores resultados. Este estudio presenta una metodología útil para la validación de los modelos y la determinación del mejor modelo.\\
+% > %Estos estudios fueron realizados en diferentes cultivos como \citet{prabha2008} que usó el cultivo de durazno, \citep{Gomez2014} quien realizó su estudio en pasturas, \citep{Saavedra2016} quien estudio en una zona productora de papa y maíz.\\
+% > %Es importante resaltar que el modelo toma como referencia datos del suelo. Pero según \citet{Castro-Romero2014} en la Región Andina se presentan cambios por el uso del paisaje que dejan como resultado tan solo el 31\% de los bosques naturales y una degradación del 53\% en arbustales secos. Se estima que para el año 1998 el 69\% de los bosques andinos habían sido talados. Uno de estos sucede en Suesca - Cundinamarca \citet{Castro-Romero2014} reporta que debido al uso agropecuario intensivo que se le ha dado a los suelos es posible observar zonas desprovistas de cobertura vegetal y de suelo con estados muy avanzados de degradación, lo cual imposibilita su posible recuperación en años próximos. Ya que los ecosistemas se usan de una forma extractiva como,lo menciona \citet{Ernesto}, uno de los ecosistemas más importantes de Colombia el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente \citep{Ernesto} cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$. Estos cambios nos hacen reflexionar acerca de la importancia del mantenimiento de los suelos y que se deben hacer ajustes periódicos a los modelos ya que con estos estudios se demuestra que el suelo es dinámico.
+% > %Un modelo de mesoescala es un modelo numérico de predicción del tiempo atmosférico, que se usa para hacer una predicción a escala de kilómetros y horas, basado en la dinámica atmosférica \citep{Uribe2012}.\\
+% > %\section{Conclusiones}
+% > %El cultivo de papa es un cultivo de gran importancia en el país. El consumo interno del país es abastecido casi en su mayoría por la producción interna. Este cultivo es seriamente afectado por muchos factores agroclimáticos y uno de los más importantes es la temperatura extrema. Cundinamarca es el Departamento con mayor producción en el país y la Sabana de Bogotá es la zona de Cundinamarca que más influencia tiene en la producción de papa, por sus condiciones topográficas de sabana se convierte en una altamente suceptible a heladas. Los meses con mayor probabilidad de heladas son diciembre, enero y febrero; y la hora en la que más se presentan bajas temperaturas es a las 5 am. Las temperaturas más altas se presentan en la mayoría de los meses pero principalmente entre los meses de diciembre y abril y las horas en las que más se presentan es a las 12 m.\\
+% > %Basado en los registros de las estaciones convencionales desde 1971 hasta 2016, se evidenció un aumento de la temperatura en 1.34\celc. Adicionalmente se evidencian cambios en la frecuencia de las bajas y las altas temperaturas, ya que la frecuencia de las bajas temperaturas ha venido disminuyendo y las altas temperaturas han presentado un aumento en los valores registrados.
+% > %De los modelos de pronóstico revisados el modelo WRF un modelo de regional de pronóstico es el que presenta las mejores características para realizar el estudio de las temperaturas, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.
+% > %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% > %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% > Se realizó una revisión bibliográfica en los previos capítulos con la finalidad de determinar el mejor modelo para realizar el pronóstico de las temperaturas extremas. Para facilitar las fortalezas y las limitaciones se realizó una comparación , ver Tabla \ref{tab:fort_deb_mod}.
+% > \begin{table}[H]
+% > \resizebox{\textwidth}{!}{\begin{tabular}{p{5cm}| p{5cm} p{5cm} p{5cm}}
+% > Modelo                                        & Fortaleza                                                  & Limitación                            &Fuente                                                   \\ \hline
+% > \multirow{2}{*}{Modelos empíricos}            & Fácil aplicación                                                               & No posee alta precisión                                   & \citep{Gomez2014, Allen1957, Snyder2010}                   \\
+% >                                               & Se puede hacer modificaciones al modelo de manera sencilla                     & Los modelos son creados para determinadas condiciones     &                                                                              \\ \hline
+% > \multirow{2}{*}{Balance de energía del suelo} & Fácil aplicación siempre y cuando se tengan todas las variables                & Alta incertidumbre                                        & \citep{evett2011water,Rosenzweig2014, Rossi2002}          \\
+% >                                               &                                                                                & Las variables no son fáciles de calcular                  &                                                                              \\ \hline
+% > Sistemas de información geográfico            & Existe una clara relación entre los valles y las temperaturas extremas         & No  tiene en cuenta los flujos de radiación de onda larga & \citep{evett2011water, Halley2003, Blennow1998}              \\ \hline
+% > Redes neuronales                              & Buenas predicciones predicciones en un corto horizonte de pronóstico (6 horas) & Pronóstico a un horizonte muy corto                       & \citep{Smith2007}                                           \\ \hline
+% > Modelo \textit{Weather Research and Forecasting Model} (WRF)                   & Buenas predicciones en un plazo de 2 días                                      & Alto gasto computacional                                  & \citep{prabha2008evaluation, Arango2011, Mejia2012, Ruiz2014} \\
+% >                                               &                                                                                & Es necesario poseer una alta capacidad de almacenamiento  &                                                                              \\ \hline
+% > \end{tabular}}
+% > \caption{Tabla resumen de las ventajas y desventajas de los modelos}
+% > \label{tab:fort_deb_mod}
+% > \end{table}
+% > Basado en la información de la tabla \ref{tab:fort_deb_mod} y teniendo en cuenta las características de cada uno de los modelos se decidió usar el Modelo WRF, ya que es un modelo que cumple con los requerimientos para este estudio y en el país se ha usado este modelo con resultados satisfactorios como los obtenidos por \citep{Mejia2012,Arango2011,Arango2014,Ruiz2014,Uribe2012,RojasA2011,ArmentaPorras2013}.\\
+% > Los pasos a seguir para realizar una modelación con el modelo WRF consiste en:
+% > \begin{enumerate}
+% > \item Compilar el WPS
+% > \item Compilar el WRF
+% > \item Determinar el área de estudio
+% > \item Selección de los dominios del modelo WRF para la inicializacion del modelo
+% > \item Selección de las parametrizaciones que se van a emplear
+% > \item Descargar los datos que van a alimentar el modelo
+% > \item Realizar el pre-proceso con el WPS
+% > \item Realizar el proceso de modelación con el WRF
+% > \item Realización del pos-proceso con python3.6
+% > \end{enumerate}
+%
+% ^.
+
+
+\subsection{El modelo Weather Research and Forecasting Model (WRF)}
+
+El modelo WRF es un modelo muy usado al rededor del mundo gracias a los buenos resultados obtenidos, como lo reporta \citet{Jimenez2014}. El modelo WRF es un sistema de cálculo numérico para simulación atmosférica que fue diseñado para cumplir objetivos de investigación y pronóstico, este modelo sirve en un amplio rango de escalas espaciales, desde decenas de metros hasta miles de kilómetros. Los usuarios de este modelo pueden producir simulaciones basadas en las condiciones atmosféricas actuales o condiciones idealizadas \citep{Pielke2002}. WRF es capaz de realizar una reducción de escala de un modelo de pronóstico global como GFS. La reducción de escala toma las condiciones del modelo global y le aumenta la resolución teniendo en cuenta las características de la zona de estudio \citep{Sene2010}.\\
+
+El modelo WRF tiene una aproximación no-hidrostática, esto quiere decir que tiene en cuenta el momento en en la dirección vertical $(w)$, en comparación con el modelo hidrostático el cual no tiene en cuenta los cambios en el momento en la dirección vertical $(w)$. Los modelos no-hidrostáticos son usado para el pronóstico de fenómenos de mesoescala o escalas menores \citep{Pielke2002, Sene2010}.\\
+%. El modelo hidrostático supone una homogeneidad en la columna de aire y está dado por la densidad y la gravedad \citep{Pielke2002, Sene2010}.
+
+En el ámbito internacional el modelo WRF se ha usado en varios países como es el caso de Perú, \citet{Saavedra2016} realizó un trabajo de modelación de fenómenos meteorológicos de mesoescala. Como resultado se obtuvo que la modelación reproduce de buena forma el ciclo diario de las temperaturas del aire a dos metros, pero las temperaturas mínimas del aire a dos metros fueron sobrestimadas en las partes altas de la zona de estudio, y subestimó la tasa de enfriamiento en el fondo de los valles, generando una mayor temperatura modelada, respecto a los valores reportados por estaciones ubicadas en las laderas.\\
+
+\citet{Fernandez2011} realizaron un estudio en Argentina para la cuidad de Mendoza con tres dominios espaciales de 36, 12 y 4 km donde se tuvieron en cuenta las condiciones orográficas para la delimitación de los mismos. Se usó el esquema de capa límite planetaria de \textit{Yonsei University}. Como resultado se encontró que los valores máximos tanto de temperatura como de humedad son predichos correctamente.\\
+
+\citet{Corrales2015a} usó el modelo WRF para realizar un pronóstico de las temperaturas en México usando un único dominio y con la parametrización \textit{Mellor-Yamada-Janic} para la capa límite planetaria. Y como resultado obtuvo que hay algunas zonas donde el modelo es confiable para la predicción de las temperatura, lo cual puede prevenir daños por heladas en un horizonte pronóstico de 5 días.\\
+
+\citet{Hu2010} usaron el modelo WRF para modelar las temperaturas en el centro de Estados Unidos, en los estados de Texas, Lousiana y parte de Arkansas. Ellos probaron las diferentes parametrizaciones de capa límite (PLB) y, encontraron que algunas parametrizaciones producen temperaturas más altas de lo esperado.\\
+
+\citet{Parra2012} realizó un estudio para Ecuador donde la finalidad era simular la meteorología de un año completo de todo el país. Para esto usaron el modelo WRF con 2 dominios y con la parametrización Mellor Yamada Jajic (MYJ), y se obtuvo como resultado que las temperaturas simuladas son coherentes con los fenómenos observados en las estaciones en tierra.\\
+
+
+Basado en estas investigaciones se evidencia la necesidad de probar varias parametrizaciones e intentar lograr la mejor combinación de ellas. Para el caso de Colombia \citet{Uribe2012} escogió 10 eventos de duración de un día. Se probaron dos parametrizaciones diferentes , con dos diferentes resoluciones espaciales y dos diferentes horizontes de pronóstico con la finalidad de encontrar la mejor combinación. Como resultado encontró que la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación, mientras que la parametrización de Morrison presenta los mejores resultados. Y al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.\\
+
+En Colombia, el Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) ha implementado el modero WRF desde el año 2007 para la predicción del tiempo atmosférico convirtiéndose en una herramienta muy importante para esta entidad \citep{Arango2011}. Se han realizado validaciones del modelo WRF en la Sabana de Bogotá para la variable precipitación mediante una comparación con las estaciones convencionales, como la realizada por \citet{Mejia2012}. El objetivo fue identificar y establecer cuál de los modelos operacionales del IDEAM lograba identificar de manera aceptable los patrones de comportamiento de las variables de precipitación. Se encontró que el modelo WRF alimentado con los datos del modelo \textit{Global Forecast System} (GFS) presentó los mejores resultados. Este estudio presenta una metodología útil para la validación de los modelos y la determinación del mejor modelo.\\
+
+
+
+%Estos estudios fueron realizados en diferentes cultivos como \citet{prabha2008} que usó el cultivo de durazno, \citep{Gomez2014} quien realizó su estudio en pasturas, \citep{Saavedra2016} quien estudio en una zona productora de papa y maíz.\\
+
+
+
+
+
+%Es importante resaltar que el modelo toma como referencia datos del suelo. Pero según \citet{Castro-Romero2014} en la Región Andina se presentan cambios por el uso del paisaje que dejan como resultado tan solo el 31\% de los bosques naturales y una degradación del 53\% en arbustales secos. Se estima que para el año 1998 el 69\% de los bosques andinos habían sido talados. Uno de estos sucede en Suesca - Cundinamarca \citet{Castro-Romero2014} reporta que debido al uso agropecuario intensivo que se le ha dado a los suelos es posible observar zonas desprovistas de cobertura vegetal y de suelo con estados muy avanzados de degradación, lo cual imposibilita su posible recuperación en años próximos. Ya que los ecosistemas se usan de una forma extractiva como,lo menciona \citet{Ernesto}, uno de los ecosistemas más importantes de Colombia el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente \citep{Ernesto} cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$. Estos cambios nos hacen reflexionar acerca de la importancia del mantenimiento de los suelos y que se deben hacer ajustes periódicos a los modelos ya que con estos estudios se demuestra que el suelo es dinámico.
+
+%Un modelo de mesoescala es un modelo numérico de predicción del tiempo atmosférico, que se usa para hacer una predicción a escala de kilómetros y horas, basado en la dinámica atmosférica \citep{Uribe2012}.\\
+
+
+%\section{Conclusiones}
+
+%El cultivo de papa es un cultivo de gran importancia en el país. El consumo interno del país es abastecido casi en su mayoría por la producción interna. Este cultivo es seriamente afectado por muchos factores agroclimáticos y uno de los más importantes es la temperatura extrema. Cundinamarca es el Departamento con mayor producción en el país y la Sabana de Bogotá es la zona de Cundinamarca que más influencia tiene en la producción de papa, por sus condiciones topográficas de sabana se convierte en una altamente suceptible a heladas. Los meses con mayor probabilidad de heladas son diciembre, enero y febrero; y la hora en la que más se presentan bajas temperaturas es a las 5 am. Las temperaturas más altas se presentan en la mayoría de los meses pero principalmente entre los meses de diciembre y abril y las horas en las que más se presentan es a las 12 m.\\
+
+%Basado en los registros de las estaciones convencionales desde 1971 hasta 2016, se evidenció un aumento de la temperatura en 1.34\celc. Adicionalmente se evidencian cambios en la frecuencia de las bajas y las altas temperaturas, ya que la frecuencia de las bajas temperaturas ha venido disminuyendo y las altas temperaturas han presentado un aumento en los valores registrados.
+
+%De los modelos de pronóstico revisados el modelo WRF un modelo de regional de pronóstico es el que presenta las mejores características para realizar el estudio de las temperaturas, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+Se realizó una revisión bibliográfica en los previos capítulos con la finalidad de determinar el mejor modelo para realizar el pronóstico de las temperaturas extremas. Para facilitar las fortalezas y las limitaciones se realizó una comparación , ver Tabla \ref{tab:fort_deb_mod}.
+
+
+
+\begin{table}[H]
+\resizebox{\textwidth}{!}{\begin{tabular}{p{5cm}| p{5cm} p{5cm} p{5cm}}
+Modelo                                        & Fortaleza                                                  & Limitación                            &Fuente                                                   \\ \hline
+\multirow{2}{*}{Modelos empíricos}            & Fácil aplicación                                                               & No posee alta precisión                                   & \citep{Gomez2014, Allen1957, Snyder2010}                   \\
+                                              & Se puede hacer modificaciones al modelo de manera sencilla                     & Los modelos son creados para determinadas condiciones     &                                                                              \\ \hline
+\multirow{2}{*}{Balance de energía del suelo} & Fácil aplicación siempre y cuando se tengan todas las variables                & Alta incertidumbre                                        & \citep{evett2011water,Rosenzweig2014, Rossi2002}          \\
+                                              &                                                                                & Las variables no son fáciles de calcular                  &                                                                              \\ \hline
+Sistemas de información geográfico            & Existe una clara relación entre los valles y las temperaturas extremas         & No  tiene en cuenta los flujos de radiación de onda larga & \citep{evett2011water, Halley2003, Blennow1998}              \\ \hline
+Redes neuronales                              & Buenas predicciones predicciones en un corto horizonte de pronóstico (6 horas) & Pronóstico a un horizonte muy corto                       & \citep{Smith2007}                                           \\ \hline
+Modelo \textit{Weather Research and Forecasting Model} (WRF)                   & Buenas predicciones en un plazo de 2 días                                      & Alto gasto computacional                                  & \citep{prabha2008evaluation, Arango2011, Mejia2012, Ruiz2014} \\
+                                              &                                                                                & Es necesario poseer una alta capacidad de almacenamiento  &                                                                              \\ \hline
+
+
+\end{tabular}}
+\caption{Tabla resumen de las ventajas y desventajas de los modelos}
+\label{tab:fort_deb_mod}
+\end{table}
+
+Basado en la información de la Tabla \ref{tab:fort_deb_mod} y teniendo en cuenta las características de cada uno de los modelos se decidió usar el Modelo WRF, ya que es un modelo que cumple con los requerimientos para este estudio y en el país se ha usado este modelo con resultados satisfactorios como los obtenidos por \citep{Mejia2012,Arango2011,Arango2014,Ruiz2014,Uribe2012,RojasA2011,ArmentaPorras2013}.\\
+
+Los pasos a seguir para realizar una modelación con el modelo WRF consiste en:
+\begin{enumerate}
+\item Compilar el WPS
+\item Compilar el WRF
+\item Determinar el área de estudio
+\item Selección de los dominios del modelo WRF para la inicializacion del modelo
+\item Selección de las parametrizaciones que se van a emplear
+\item Descargar los datos que van a alimentar el modelo
+\item Realizar el pre-proceso con el WPS
+\item Realizar el proceso de modelación con el WRF
+\item Realización del pos-proceso con python3.6
+
+
+\end{enumerate}
+
+
+
+
+%% Tabla del porcentaje de coincidencias entre la precipitación horaria y diária
+
+
+\begin{table}[H]
+\begin{center}
+\caption{Porcentaje de coincidencia de los valores de precipitación horaria y el valor de la suma de la precipitación instantánea cada 10 minutos de un día.}
+\begin{tabular}{llr}
+\toprule
+Estación &  Porcentaje de coincidencia (\%) \\
+\midrule
+0  &  21195160 &     24.85 \\
+1  &  21201200 &     15.17 \\
+2  &  21201580 &     33.71 \\
+3  &  21202270 &     25.42 \\
+4  &  21205012 &     18.12 \\
+5  &  21205791 &     39.62 \\
+6  &  21206600 &     39.13 \\
+7  &  21206790 &     20.23 \\
+8  &  21206920 &     13.25 \\
+9  &  21206930 &     13.99 \\
+10 &  21206940 &     20.32 \\
+11 &  21206950 &     13.75 \\
+12 &  21206960 &     47.23 \\
+13 &  21206980 &     27.37 \\
+14 &  21206990 &     61.43 \\
+15 &  21209920 &     43.06 \\
+16 &  23125170 &     27.50 \\
+17 &  24015110 &     34.88 \\
+18 &  26127010 &     27.35 \\
+19 &  35025080 &     14.69 \\
+20 &  35025090 &     20.11 \\
+21 &  35027001 &     34.07 \\
+22 &  35027002 &      0.00 \\
+\bottomrule
+\end{tabular}
+
+\label{table:compar-porcentaje}
+\end{center}
+\end{table}
+
+
+\section{Conclusiones}
+
+Las variables máximas y mínimas de temperatura de las estaciones HYDRAS no coinciden con los valores máximos y mínimos.
+
+Existen lapsos de tiempo en los cuáles la temperatura no es registrada. Por esta razón se sugiere realizar una unión de los valores de temperatura máxima, mínima y promedio, donde prime la temperatura promedio.
+
+Existen diferencias de temperatura entre las estaciones convencionales y las estaciones automáticas, especialmente en condiciones de alta radiación y poca velocidad del viento.
+
+\end{comment}

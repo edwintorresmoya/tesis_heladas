@@ -9,6 +9,10 @@ Script usado para crear los plots de las fechas de interés; osea de altas y baj
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
+os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam')
+from funciones import busca_cod
+from funciones import un_busca_cod
+
 
 
 os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col/')
@@ -52,15 +56,17 @@ for oo, name_1, cod in zip(base4.list_2, base4.Nombre, base4.cod):
             continue
         
         
-        plt.figure(figsize=((10,10)))
-        plt.plot_date(estacio2.date, estacio2.tmp_2m, '-')
-        plt.xticks(rotation='vertical')
-        plt.ylabel('Temperatura °C',fontsize=24)
-        #plt.legend()
-        #plt.suptitle('Estación '+name_1,fontsize=25)
-        plt.axhline(y = 20, linewidth=2, color='firebrick', linestyle = '--')
-        plt.axhline(y = 25, linewidth=2, color='r', linestyle = '-.')
-        plt.axhline(y = 0, linewidth=2, color='b', linestyle = ':')
-        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/grafica_altas_bajas/' + str(cod)+'.png', figsize=(1,1) ,dpi = 60)
+        fig1 = plt.figure()
+        fig1.set_size_inches(10,7)
+        ax1 = fig1.add_axes([0.1, 0.2, 0.8, 0.75])
+        ax1.plot_date(estacio2.date, estacio2.tmp_2m, '-')
+        ax1.tick_params(axis='x', labelrotation=90)
+        ax1.set_ylabel('Temperatura °C',fontsize=24)
+        ax1.legend()
+        #ax1.set_title('Estación '+name_1,fontsize=25)
+        ax1.axhline(y = 20, linewidth=2, color='firebrick', linestyle = '--')
+        ax1.axhline(y = 25, linewidth=2, color='r', linestyle = '-.')
+        ax1.axhline(y = 0, linewidth=2, color='b', linestyle = ':')
+        fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_altas_bajas/' + str(cod)+'.png', figsize=(1,1) ,dpi = 60)
         plt.close()
 

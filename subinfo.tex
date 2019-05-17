@@ -1,0 +1,94 @@
+\subsection{Selección de una fecha de estudio para realizar la configuración del WRF}
+
+El periodo simulado inicia desde el primer día del mes de febrero del año 2007 a las 00 horas UTC hasta el quinto día del mes de febrero del año 2007 a las 00 horas UTC y las heladas comenzaron a presentarse desde el  segundo día de febrero del 2007 a las 10 horas UTC.\\
+
+La razón para haber escogido estos días es que en estas fechas se presentó un evento de helada en la Sabana de Bogotá y fue uno de los más severos de los últimos 20 años. Adicionalmente el mes de febrero es uno de los meses con mayor probabilidad de heladas. Se seleccionó este caso porque el 4 de febrero del 2007 se presentó una de las temperaturas más bajas registradas para la Sabana de Bogotá, en la Tabla \ref{table:caso1} se evidencian los registros de las temperaturas máximas y mínimas de algunas estaciones convencionales para esa fecha y el valor reportado por la estación automática de TIBAITATÁ. Según la estación automática TIBAITATÁ la helada tuvo una duración de 5 horas comenzando a las 2 a.m. y finalizando a las 7 a.m el valor mínimo es que se registró es de -4.6\celc, esto la convierte en la helada más larga para nuestro periodo de estudio, (ver Figura \ref{gra:tmp_tiba_2007}). Adicionalmente en el mismo día presentó temperaturas sobre 20\celc que duró 5 horas iniciando a las 11 a.m. y finalizando a las 4 p.m., el valor más alto registrado para esta estación fué de 26.3\celc.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[draft=false, scale=0.4]{altas_bajas_2007/21206990.png}
+    \caption{Temperatura registrada por una estación automática entre los días 31 de enero del 2007 y el cinco de febrero del 2007.}
+    \label{gra:tmp_tiba_2007}
+\end{figure}
+
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+-8.8           & 21205980 & PROVIDENCIA GJA       & Tenjo     \\
+-7.4           & 21205920 & SUASUQUE              & Sopó      \\
+-7.0           & 21205880 & FLORES CHIBCHA        & Madrid    \\
+-4.6           & 21205420 & TIBAITATÁ             & Mosquera  \\
+-4.7           & 21205420 & TIBAITATÁ [Automática]& Mosquera  \\
+ 21.6 &  21205700 &     GUASCA [21205700] &       Guasca \\
+ 22.0 &  21205790 &        APTO EL DORADO &  Bogotá D.C. \\
+ 22.2 &  21206230 &         VEGAS LAS HDA &  Bogotá D.C. \\
+ 22.5 &  21205770 &     BASE AEREA MADRID &       Madrid \\
+ 23.8 &  21205980 &       PROVIDENCIA GJA &        Tenjo \\
+ 23.8 &  21206260 &     C.UNIV.AGROP-UDCA &  Bogotá D.C. \\
+ 24.0 &  21206210 &    FLORES COLOMBIANAS &        Funza \\
+ 24.2 &  21206660 &    COL SANTIAGO PEREZ &  Bogotá D.C. \\
+ 24.8 &  21205420 &  TIBAITATA [21205420] &     Mosquera \\
+ 26.3 &  21205420 &  TIBAITATA [Automática] &     Mosquera \\
+\end{tabular}
+\caption{Registros de las temperaturas debajo de 0\celc y sobre 20\celc para del día 4 de febrero del 2007}
+\label{table:caso1}
+\end{table}
+
+
+
+\subsection{Corrección por altura}
+
+Se realizó una corrección de los valores de temperatura simulada por el WRF basado en la altura real de las estaciones del IDEAM. Las estaciones del IDEAM tienen un valor asociado de altura (Ver Tabla \ref{tab:correccion_alturas} columna "Altura IDEAM") para cada una de sus estaciones, pero algunos de estos no concuerdan con la realidad. Un ejemplo de esto es el caso de la estación llamada PMO GUACHENEQUE el IDEAM reporta una altura de 2300 msnm pero según el modelo digital de elevación (DEM) ALOS-PALSAR creado por \citet{ASFDAAC2007} esta ubicación tiene una elevación de 3288, la cual presenta una mejor aproximación a la altura de la zona donde se encuentra la estación. Por esta razón no se tomaron los valores de altura sugeridos por el IDEAM; en cambio se usó la altura brindada por el DEM de ALOS-PALSAR para cada una de las estaciones estudiadas, éstos valores de altura serán usados como la altura de referencia a partir de este punto (Ver Tabla \ref{tab:correccion_alturas} columna "Altura ALOS-PALSAR"). Usando la ubicación de cada una de las estaciones se realizó una extracción de los valores de altura presentes en los archivos netCDF generados en el pre-procesamiento \textit{WRF Preprocessing System} (WPS) (Ver Tabla \ref{tab:correccion_alturas} columna "Altura modelo") a partír de la variable "HGT\_M" la cuál hace referencia a la altura topográfica en metros.\\
+
+Los valores modelados fueron corregidos teniendo en cuenta la diferencia entre la altura de la modelación ($A_{wrf}$) y la altura real ($A_{real}$). Donde se calcula la diferencia entre el modelo y la altura real y se multiplica por un factor de 6.5\celc\ por cada 1000 metros (ver Ecuación \ref{correccion_altura}). El resultado de esta operación se le suma a los valores de temperatura modelados. Las tablas de las correcciones de las alturas se encuentran en el Anexo \ref{tab:correccion_alturas}
+
+\begin{equation} \label{correccion_altura}
+(A_{wrf} - A_{real}) \times 0.0065 \frac{^{\circ}C}{m}
+\end{equation}
+ Como lo sugiere \citet{ValenciaMonroy2015}, 
+ \ref{tab:correccion_alturas}
+ 
+\subsection{Valores asociados al GFS}
+ 
+Profe para hacer los plots del GFS me demoré bastante porque no los sabía hacer pero acá están los resultados. En ellos se muestra que no había viento en esos momentos y que la nubosidad estaba en la parte sur del país, como lo muestra la carta sinóptica de superficie de la NOAA del anterior informe.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.45]{altas_bajas_2007/barbas.png}
+		\caption{Mapa de temperatura superficial y gráfica de barbas para el viento}
+		\label{gra_barbas}
+		\end{subfigure}
+		~
+				\begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=false, scale=0.45]{altas_bajas_2007/precip.png}
+		\caption{Imágen de los valores de agua precipitable. Las unidades son $\frac{kg}{m^2}$.}
+		\label{gra_agua_precip}
+		\end{subfigure}
+		~
+			\end{center}
+	\caption{Imágenes creadas a partír de la información del GFS para el cuatro de febrero del 2007 a las 12 horas UTC. Para la realización de la Figura \ref{gra_agua_precip} se usó la variable \textit{Precipitable water} del modelo GFS. La cuál según la NOAA corresponde al agua que en teoría puede precipitar si las condiciones atmosféricas fuesen adecuadas.}
+	\label{gra:taylor_totaltotal}	
+\end{figure}
+
+En la figura \ref{gra_barbas} podemos ver que los vientos estaban en calma, que sobre Colombia no estaba la ZCTI, como se vió en la carta control Figura \ref{fig:carta4}. Se puede observar que frente a Ecuador existía corrientes de vientos lo cuál coincide con la carta control. El agua precipitable de la Figura \ref{gra_agua_precip} se puede observar que hay una mancha roja más abajo del río Amazonas y si esta figura se compara con la figura \ref{fig:carta4}, podemos observar que se encuentra en la misma zona en la cuál se presenta alta nubosidad.\\
+
+
+Como conlcusión podemos observar que el modelo GFS está viendo el comportamiento sinóptico de el área. Adicionalmente podemos decir que para el día 4 de febrero del 2007 se presentaban condiciones secas ya que la ZCIT no estaba sobre Colombia y una gran nubosidad se presentaba en el sur del país.
+
+
+
+%Estos son los links de la información:
+%http://www.nco.ncep.noaa.gov/pmb/docs/on388/table2.html
+%https://sos.noaa.gov/datasets/gfs-forecast-model-precipitable-water-real-time/
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[draft=false, scale=0.4]{cartas/2007/07020402QPAA99.png}
+    \caption{Carta control para el día cuatro de febrero del 2007}
+    \label{fig:carta4}
+\end{figure}
+ 

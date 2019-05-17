@@ -1,0 +1,1963 @@
+%\documentclass[draft, 11pt]{article}
+\documentclass[11pt]{article}
+
+%\usepackage[margin = 1in]{geometry} Usado para las márgeneds del documento
+\usepackage[utf8]{inputenc} % Usado par la recepción de las tíldes
+\usepackage{fullpage}
+\usepackage{gensymb}%Sacar nuevo símbolos
+\usepackage{apacite} % Citar con APA
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\usepackage{csvsimple}%To read the documents in csv
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}%Usado para crear suplots
+\graphicspath{ {graph/} }%Ubicación de las gráficas
+\def\celc{$^{\circ}C$ }%Código para el grados celcius
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}%Usado para crear suplots
+
+\usepackage{float}%Control de los nombres debajo de la gráfica
+\usepackage{pdflscape}%Lanscape
+\usepackage{longtable} % usada para crear grandes tablas
+\usepackage[usenames, dvipsnames]{color} %Uso del color
+\usepackage{booktabs} % para tomar las tablas desde python
+\usepackage{multirow}
+
+
+
+%\usepackage[draft]{article}
+
+\begin{document}
+
+\title{Tareas}
+\author{Edwin Torres Moya}
+%\usepackage{datetime}
+\date{\today}
+%\date{2018-02-26}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+La papa (\textit{Solanum tuberosum} L.) es el tercer cultivo de mayor importancia en el mundo después del arroz y el trigo. La producción global excede las 300 millones de toneladas, por esta razón el cultivo de la papa es un cultivo de gran importancia en términos de seguridad alimentaria \citep{birch2012crops}. Las temperaturas óptimas para su crecimiento y desarrollo se encuentran entre 14-22\celc, cuando las temperaturas del aire están por fuera de estos rangos el rendimiento puede decrecer dependiendo el estado fenológico en el que se encuentre. Los efectos del calentamiento global en la producción de papa han estado prediciendo una disminución entre el 18 y 32\% para el año 2050 \citep{hijmans2003effect}. La temperatura es considerada como el factor meteorológico sobre el que menos se tiene control y que afecta significativamente el crecimiento y rendimiento de los cultivos de papa \citep{hancock2014physiological}.\\
+
+El cultivo de la papa en Colombia es uno de los cultivos más importantes, en el 2017 el Fondo Nacional de Fomento de la Papa (Fedepapa) aseguró que la producción nacional es de 2.7 millones de toneladas de las el 90\% de la papa que se produce en Colombia y el 10\% es importada \citep{Portafolio2017}. Una de las zonas de mayor importancia para la producción de papa es el Altiplano Cundiboyacence y según \citet{Barrientos2014} el cambio climático en la zona se ha manifestado con un incremento de la temperatura media y ampliación del rango de mínimos y máximos. Este tipo de cambios probablemente conllevará a una reducción en la productividad.\\
+
+Las respuestas de las plantas a las temperaturas extremas dependen del estado fenológico en el cual se encuentre. Para cada especie existe un rango de temperaturas máximas y mínimas, por ejemplo según \citet{Hatfield2008} asegura que el cultivo de papa en la brotación y emergencia la temperatura del aire debe estar entre el rango de 4-16\celc y la temperatura óptima para el desarrollo después de la emergencia es de 16-25\celc, es en esta etapa cuando las plantas son más susceptible a daños por temperaturas extremas.
+
+
+\section{Generalidades del cultivo de papa}
+
+\subsection{Rendimientos departamentales}
+
+En el 2011 \citet{Rojas2011} reportó que el principal departamento en producción de papa en Colombia es Cundinamarca seguido por Boyacá, Nariño y Antioquia, estos departamentos suman el 85\% de la producción total del país. En el 2014 Cundinamarca se ubicó como el departamento con mayor área sembrada de papa en Colombia con 163358 hectáreas (ha), correspondientes al 38.4\% del total del área sembrada \citet{MADR2014}. En el primer periodo del 2017 Cundinamarca es el mayor productor del cultivo de papa, debido a que tiene la mayor área sembrada, área cosechada, producción y rendimiento de papa, seguido por Boyacá, Nariño y Antioquia, como lo muestra el cuadro \ref{table:1}, esta tabla fue realizada con la información proveniente de \textcolor{blue}{ \href{https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Papa-Area-Producci-n-Y-Rendimien/pnsj-t3kh}{Cadena Productiva Papa-Área Producción Y Rendimiento}} \citep{madr2017}.\\
+
+Basado en la anterior información Cundinamarca es el departamento con mayor importancia en la producción de papa, según los datos de \citep{madr2017} el área de siembra para el Departamento de Cundinamarca ha variado en el tiempo y ha presentando 3 valores máximos relativos uno en el 2006, 2013 y uno recientemente en el 2017, ver figura \ref{gra:papa_cund_1}. La producción presentó un aumento en el 2010 y una caída hasta el 2013. Después de estos eventos se ha presentado un aumento continuo, comportamiento similar al presentado en el rendimiento. Al parecer las tendencias son al alza con respecto a las áreas, producción y rendimiento. En cuanto a la producción de papa en Cundinamarca se registró una alta producción para el año 2010 y luego la producción cayó, actualmente se encuentra con una tendencia al aumento, ver figura \ref{gra:papa_cund_2}. El rendimiento presenta un comportamiento similar al presentado por la producción, ya que para el año 2010 se presentó una alza seguido de un decrecimiento en el rendimiento, para finalmente presentar un aumento, ver figura \ref{gra:papa_cund_3}.
+
+\newpage
+\begin{landscape}
+
+
+
+\begin{table}[H] % el H mayúscula significa que el archivo debe ir en ese lugar, de lo contrario la tabla se baja
+\begin{center}
+	\begin{tabular}{ccccccccccc}
+Departamento&Periodo&Área Sembrada(ha)&Área Cosechada(ha)&Producción(t)&Rendimiento(t/ha)&\\
+\hline
+Cundinamarca&2017-01-01&32036&32034&812218&20.8&\\
+Boyacá&2017-01-01&25975&25971&462780&14.49&\\
+Nariño&2017-01-01&20391&20391&357156&14.75&\\
+Antioquia&2017-01-01&3515&3504&77618&17.25&\\
+Santander&2017-01-01&3409&3409&55823&15.87&\\
+Cauca&2017-01-01&1826&1819&43940&12.21&\\
+Norte de Santander&2017-01-01&1650&1545&34707&20.53&\\
+Tolima&2017-01-01&1235&1158&18830&18.09&\\
+Caldas&2017-01-01&487&487&6892&16.46&\\
+Valle del Cauca&2017-01-01&247&228&3249&14.3&\\
+Putumayo&2017-01-01&29&29&287&10.07&\\
+Huila&2017-01-01&20&20&106&5.23&\\
+Meta&2017-01-01&1&1&17&17.6&\\
+Quindío&2017-01-01&1&1&7&6.5&\\
+		\end{tabular}
+		
+\end{center}
+	\caption{Tabla de los datos de Papa para el primer semestre del 2017 ordenada de acuerdo a el área cosechada}
+	\label{table:1}
+\end{table}
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{subfigure}[normla]{0.65\textwidth}
+		\includegraphics[draft=true, scale=0.55]{papa_cund_png_1.png}	
+		\caption{Gráfica del área sembrada en Cundinamarca.}
+		\label{gra:papa_cund_1}	
+		\end{subfigure}
+		~
+		\begin{subfigure}[normla]{0.65\textwidth}
+		\includegraphics[draft=true, scale=0.55]{papa_cund_png_2.png}	
+		\caption{Gráfica de las toneladas producidas en Cundinamarca.}
+		\label{gra:papa_cund_2}	
+		\end{subfigure}
+		~
+		\begin{subfigure}[normla]{0.65\textwidth}
+		\includegraphics[draft=true, scale=0.55]{papa_cund_png_3.png}	
+		\caption{Gráfica del rendimiento en Cundinamarca.}
+		\label{gra:papa_cund_3}	
+		\end{subfigure}
+
+	\end{center}
+	
+	\caption{Área Sembrada, área Cosechada, producción y promedio del Rendimiento para Cundinamarca en diferentes años.}
+	 \label{gra:papa_cund}
+\end{figure}
+
+\end{landscape}
+
+\subsection{El cultivo de la papa en la Sabana de Bogotá}
+
+%Se realizó una tabla que resume los rendimientos de cada municipio esta tabla la pueden encontrar en la tabla llamada \texttt{tab\_pivot.csv}.
+
+En Cundinamarca gran parte de los municipios productores de papa hacen parte de la Sabana de Bogotá. La Sabana de Bogotá se ubica en la parte central de la cordillera Oriental de Colombia y se ubica a una altura promedio de 2500 metros sobre el nivel del mar (msnm). Constituye una provincia geomorfológica en la cual se diferencian dos zonas: una zona plana, ubicada hacia la parte central del área, y otra zona de relieve montañoso que alcanza alturas hasta de 3700 msnm \citep{hermelin2007entorno}, en este estudio se realizó una delimitación de las áreas planas con un área de 317928 hectáreas las cuales se encuentran representada por una línea azul en las imágenes, las áreas verdes punteadas corresponden a las áreas de páramo, las áreas azules corresponden a los embalses y los puntos corresponden a las estaciones del Instituto de Hidrología, Meteorología y Estudios Ambientales(IDEAM) las cuales se encuentran el la tabla \ref{tab:estaciones}, ver figura \ref{gra:areas_paramo}.\\
+
+Basado en la información suministrada por el \citet{madr2017} correspondiente al periodo 2006 hasta el 2017, se espacializaron los valores de áreas promedio de siembra de papa \ref{subfig:a1}. En la figura \ref{subfig:a1} podemos observar que el municipio con mayor producción es Tausa, seguido de Villapinzón, Zipaquirá, Sesquilé, Chocontá, Carmen de Carupa, San Cayetano y Une ver figura \ref{subfig:a1}. Para hacer un estimado de la participación del cultivo de papa en cada uno de los municipios se tomó el área promedio de producción de cada municipio, se dividió entre el área total del municipio y se multiplicó por 100 para calcular el porcentaje de área sembrada, ver figura\ref{subfig:a2}, en la cual se ve que Tausa de nuevo es el municipio con mayor valor, seguido por Villapinzón, Chocontá, Sesquilé, Zipaquirá, Cogua, Susa, San Cayetano, Sibaté, Une y Funza. Es importante resaltar que Tausa es el municipio más importante en producción de papa, pero la mayor parte de su terreno se encuentra dentro del Páramo de Guerrero y en otra gran área está el Embalse del Neusa, como se puede observar en la figura \ref{subfig:a1}, por esta razón el área de estudio no cubre este municipio.
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[draft=true, scale=0.3]{municipios_paramos.png}
+		\caption{}
+		\label{gra:areas_paramo}
+	\end{center}
+\end{figure}
+	
+%%%%%%%%%%%% 
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=true, scale=0.3]{promedio.png}
+		\caption{Áreas promedio de siembra en hectáreas.}
+		\label{subfig:a1}
+		\end{subfigure}
+		~
+				\begin{subfigure}[normla]{0.4\textwidth}
+	\includegraphics[draft=true, scale=0.3]{papa-area.png}
+		\caption{Relación área de papa y área del municipio en porcentaje}
+		\label{subfig:a2}
+		\end{subfigure}
+
+	\end{center}
+	\caption{Mapas de las áreas de producción de papa, basado en \citet{madr2017}}
+	\label{gra:areas}	
+\end{figure}
+
+
+\subsection{Comportamiento de los precios}
+
+La oferta de la papa está condicionada por diferentes factores tales como la oferta climática, los precios del periodo anterior, tecnología de producción, costos de producción y el ataque de plagas y enfermedades \citep{Barrientos2014}. Por estas razones la papa se produce principalmente en dos periodos del año en el centro del país y tiene las características de una producción discontinua, ya que presentan un comportamiento de bajadas y subidas atribuido al teorema de la telaraña \citep{BarrientosF.2011, Ezekiel1938}. En la gráfica \ref{gra:papa_precio} podemos observar la alta variación de los precios a través del año y una variación en las áreas sembradas.\\
+
+
+Las heladas provocan una disminución en la producción de papa, pero la demanda continúa igual, por esta razón los precios aumentan. Por esta razón se tomaron los datos históricos de las áreas sembradas y los precios y se ubicaron en un solo gráfico, ver gráfico \ref{gra:papa_precio}. Adicionabrotaciónlmente se realizaron estas gráficas para poder observar si existía alguna periodicidad de las áreas o los precios.\\
+
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=true, scale=.5]{papa_cund_2.png}
+	\caption{Gráfica del área sembrada en Cundinamarca y el precio por kilogramo de papa en Bogotá, fuente \citep{madr2017, Agronet2018},}
+	 \label{gra:papa_precio}
+	\end{center}
+\end{figure}
+
+
+\section{Altas y bajas temperaturas en la Sabana de Bogotá y su relación con el cultivo de papa} %Temperaturas extremas y su relación con la papa}
+%
+\citet{Ruiz2012} asegura que en los últimos 40 años, la temperatura del aire para Bogotá ha aumentado entre 1 y 2\celc. Se esperaría que este fenómeno no sea localizado sólo para Bogotá sino para toda la Sabana de Bogotá. Por esta razón se tomaron todos los valores de temperatura medios reportados por las estaciones del IDEAM de las estaciones convencionales de la zona de estudio. Con esta información se realizó un histograma para cada año y adicionalmente se representó el promedio de ese año con una línea, ver figura \ref{graph:evol_tmp_sabana}.\\
+
+En el año 1971 la temperatura del aire promedio fue de 12.54\celc como lo indica la figura \ref{graph:histo_tiempo_1971}. A través de los años se ve un aumento en la temperatura del aire promedio, ver gráfica \ref{graph:histo_tiempo}, la gráfica comienza desde el año 1971 con un colores azul aguamarina y finaliza en el 2016 con un color naranja donde se puede observar el aumento de los valores de temperatura. En el año 2016 se obtuvo una temperatura promedio para la Sabana de Bogotá de 13.88\celc, ver figura \ref{graph:histo_tiempo_2016}. En promedio desde el año 1971 hasta el 2016 se ha presentado un aumento de la temperatura promedio del aire de 1.34\celc y gracias a la gráfica \ref{graph:evol_tmp_sabana} se puede apreciar ese cambio.
+
+
+% La temperatura promedio para la Sabana de Bogotá en el año de 1971 era de 12.54\celc. En la figura \ref{graph:evol_tmp_sabana} podemos observar el cambio en la temperatura promedio de la temperatura del aire, la gráfica comienza desde el año 1971 con un color azul aguamarina y finaliza en el 2016 con un color naranja, los colores van cambiando a través de los años de fríos a cálidos. En la gráfica podemos observar cómo las líneas azules se encuentran a la izquierda, ya que el valor promedio de temperatura para el año 1971 fue de 12.54\celc y para el año 2016 el color corresponde a las líneas de colores naranja y rojo y la temperatura promedio de la zona fue de 13.74\celc. La figura \ref{graph:histo_tiempo_2016} es el histograma correspondiente al año 2016 y sirve de referencia para poder observar en comparación con la figura \ref{graph:histo_tiempo} y ver el aumento de la temperatura promedio de la Sabana de Bogotá.
+
+
+\begin{figure}[H]
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.6]{grafica_tiempo_1971.png}
+		
+		\caption{Histogramas de la temperatura y promedio en el año 1971}		
+		\label{graph:histo_tiempo_1971}
+		
+	\end{center}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.6]{grafica_tiempo.png}
+		
+		\caption{Histogramas de la temperatura a través del tiempo y promedios}		
+		\label{graph:histo_tiempo}
+		
+	\end{center}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.6]{grafica_tiempo_2016.png}
+		
+		\caption{Histogramas de la temperatura y promedio en el año 2016}		
+		\label{graph:histo_tiempo_2016}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Histogramas de la temperatura promedio del aire en la Sabana de Bogotá y promedios, basado en datos del IDEAM de las estaciones convencionales}		
+	\label{graph:evol_tmp_sabana} 
+		
+\end{figure}
+
+Se realizaron un par de gráficas usando todos los datos diarios (máximos, mínimos y promedio) de las estaciones convencionales que están por fuera del rango entre 0 y 20\celc y las fechas en las cuales se presentó cada valor. Se realizó una gráfica de las temperaturas de las estaciones convencionales que se encuentran bajo 0\celc a través del tiempo gráfica \ref{graph:tmp_bajo0}, en esta gráfica podemos observar que aproximadamente desde el 2009 ha venido disminuyendo el número casos de bajas temperaturas y los valores de la temperatura han sido cada vez menos negativos. Para el caso de las temperaturas sobre 20\celc se observa un aumento en la cantidad de eventos y de un aumento de las temperaturas, ver figura\ref{graph:tmp_sobre20}.
+
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.7]{tmp_debajo0.png}
+		
+		\caption{Valores de temperatura bajo 0\celc y fecha del evento}		
+		\label{graph:tmp_bajo0}
+		
+	\end{center}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.7]{tmp_sobre20.png}
+		
+		\caption{Valores de temperatura sobre 20\celc y fecha del evento}		
+		\label{graph:tmp_sobre20}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Valores diarios de temperatura del aire de las estaciones convencionales de la Sabana de Bogotá que están fuera del rango entre 0 y 20\celc}		
+	\label{graph:limites}
+
+\end{figure}
+
+Se realizó un análisis de la distribución de las temperaturas bajo cero en los diferentes meses del año usando la información de las temperaturas mínimas de las estaciones convencionales. Se han registrado temperaturas bajo cero en todos los meses del año, pero con mayor frecuencia entre los meses de diciembre, enero y febrero ver figura\ref{graph:tmp_bajo_meses}. Las temperaturas sobre sobre 20\celc se presentan durante todos los meses del año pero con mayor frecuencia entre diciembre y abril, ver figura\ref{graph:tmp_sobre_meses}.
+
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.7]{frec_bajas_tmp.png}
+		
+		\caption{Frecuencia de ocurrencia de valores de temperatura de cada una de las estaciones ubicadas en la Sabana de Bogotá bajo 0\celc en función de los meses del año}
+		\label{graph:tmp_bajo_meses}
+		
+	\end{center}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.7]{frec_altas_tmp.png}
+		
+		\caption{Frecuencia de ocurrencia de valores de temperatura de cada una de las estaciones ubicadas en la Sabana de Bogotá sobre 20\celc en función de los meses del año}		
+		\label{graph:tmp_sobre_meses}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Frecuencia de ocurrencia de las temperaturas bajo 0\celc y de las temperaturas sobre 20\celc}		
+	\label{graph:tmp_meses}
+
+\end{figure}
+
+Hay un rango de temperatura óptimo en el que las plantas presentan el mejor desarrollo. En el caso de las plantas de papa depende de la variedad, pero en general se encuentra entre 20\celc y 0\celc \citep{Hijmans2003}. Se realizó un análisis de la distribución horaria de la temperatura que está por fuera del rango entre 0 y 20\celc. Para este análisis se usó información de la estación automática Tibaitatá perteneciente a la red HYDRAS del IDEAM, ver figura\ref{graph:tmp_hora}. Como se puede observar en la figura \ref{graph:tmp_bajo_hora} la mayoría de eventos se presentan entre las 0 horas y las 7 horas, presentando la mayor frecuencia a las 5 de la mañana. Para las horas en las que se presenta la mayor cantidad de eventos sobre 20\celc podemos decir que se encuentran dentro del rango de las 8 hasta las 17 horas teniendo la mayor frecuencia a las 12, ver figura\ref{graph:tmp_sobre_hora}.
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.7]{hora_heladas.png}
+		
+		\caption{Ocurrencia de temperaturas bajo 0\celc en las diferentes horas del día.}		
+		\label{graph:tmp_bajo_hora}
+		
+	\end{center}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\linewidth}
+	\begin{center}
+	\includegraphics[draft=true, scale=0.7]{hora_tmp_altas.png}
+		
+		\caption{Frecuencia de ocurrencia de temperaturas sobre 20\celc a en las diferentes horas del día.}		
+		\label{graph:tmp_sobre_hora}
+		
+	\end{center}
+	\end{subfigure}
+	
+	
+	\caption{Frecuencia de ocurrencia de las temperaturas horarias bajo 0\celc y sobre 20\celc}		
+	\label{graph:tmp_hora}
+
+\end{figure}
+
+\subsection{Efectos fisiológicos de las altas y bajas temperaturas en el cultivo de la papa}
+
+Para el cultivo de papa el rango óptimo de temperatura del aire está entre 20\celc y 0\celc \citep{Hijmans2003}, valores de temperatura en el suelo sobre 25\celc reducen la emergencia de las plantas, el número de plantas que nacen y el número de tallos por planta \citep{birch2012crops, sale1979growth}. Cuando la temperatura del aire es superior a 27\celc en los primeros estados de desarrollo, se produce una disminución de la cantidad de hojas en las plantas de papa \citep{birch2012crops, sale1979growth}. Cuando las temperaturas exceden los 29\celc se reduce el área foliar y el peso húmedo, esto detiene la producción de los tubérculos \citep{prange1990reduction}.\\
+
+Las temperaturas bajas también producen estrés en las plantas, cuando el agua ya sea en la superficie de las hojas o dentro de las plantas se congela a este fenómeno lo llamamos helada. Una de las adaptaciones de las plantas durante periodos fríos es el endurecimiento. El endurecimiento está más relacionado con el aumento de contenido de solutos en los tejidos de las plantas que impiden el congelamiento de los tejidos disminuyendo la temperatura de congelamiento \citep{Snyder2010}.\\
+
+Las bajas temperaturas causan una reducción del calor sensible contenido en la superficie, este fenómeno se da principalmente por una pérdida de energía a través de la radiación hacia la atmósfera, este fenómeno recibe el nombre de helada radiativa y el movimiento de masas de aire frío que remplaza las masas de aire establecidas recibe el nombre de helada advectiva.\\
+
+Una helada advectiva es producida por las masas de aire frío que se depositan en un área, remplazando el aire que estaba a una temperatura mayor, generalmente se presentan en latitudes medias a latitudes altas. Una de las características de estas heladas es que a menudo las temperaturas caen bajo cero y se mantienen en la misma temperatura todo el día. Este tipo de  heladas están asociadas a condiciones nubladas, vientos moderados a fuertes y no hay presencia de inversiones. A menudo las temperaturas descienden y se mantienen bajas todo el día \citep{Prabha2008a, IDEAM2012a}. Por ejemplo \citet{Prabha2008a} define una helada advectiva como noches en la que la velocidad del viento excede los 2 $m\ s^{-1}$ y existen temperaturas bajo 0\celc.\\
+
+Una helada radiativa es producida bajo condiciones de cielo despejado donde la pérdida de calor de las plantas y el suelo es mayor a el calor recibido durante el día, por esta razón la temperatura desciende y cae por debajo 0\celc. está caracterizada por cielos despejados vientos con baja velocidad, inversiones de temperatura, bajas temperaturas de punto de rocío y temperaturas menores a 0\celc \citep{Halley2003, IDEAM2012a}. Existen dos subcategorías de heladas radiatívas la helada blanca y la helada negra. La helada blanca sucede cuando hay temperaturas por debajo de 0\celc y el vapor de agua se condensa sobre la superficie de las hojas, entonces se forma una película de hielo sobre las hojas que se llama comúnmente escarcha. Una helada negra sucede cuando la temperatura cae bajo 0\celc y no se forma hielo sobre la superficie. Cuando la humedad es muy alta es más probable que se forme una superficie de hielo sobre las hojas y que se forme una helada blanca. En el momento de la formación de escarcha sobre las hojas genera energía, debido al cambio de estado, por esta razón la helada blanca produce menos daño que la helada negra \citep{Snyder2010}.\\
+
+La incidencia de temperaturas extremas sobre los cultivos de papa tiene impacto en la producción. Como ejemplo tenemos la temporada de heladas presentadas en 1995 en las planicies del Altiplano Cundiboyacense,  Nariño y Antioquia; causaron la destrucción de cerca del 70\% de la cosecha de papa. Esto representó una pérdida aproximada de 56000 millones de pesos \citep{Romero1996}. Por otra parte, el primero y segundo día de febrero del 2007 se presentaron temperaturas de -4.7\celc en los municipios de Mosquera, Sopó, Tenjo, Subachoque, Funza, Sesquilé y Nemocón; este fenómeno afectó cerca de 7500 hectáreas de papa \citep{ElTiempo2007}.\\
+
+
+Uno de los daños más frecuentes en las plantas es causado por el congelamiento de las plantas. Según \citet{Snyder2005} se pueden presentar dos tipos de congelamiento en la planta:
+
+\begin{enumerate}
+\item Formación de los cristales dentro del protoplasma (congelamiento intracelular)
+\item Formación de cristales dentro de la planta pero fuera del protoplasma (congelamiento extracelular)
+\end{enumerate}
+
+La formación de hielo produce daño en las plantas. Hay poca o nula evidencia acerca de los efectos de la duración de heladas sobre las plantas. Esto podría significar que los efectos dañinos para las plantas no dependen de la duración del evento sino de la temperatura que se alcance. Cuando la tasa de enfriamiento de la temperatura del aire es muy rápida, se produce un mayor efecto en las plantas \citep{Snyder2010}.\\
+
+En las plantas cuando la temperatura es menor a 0\celc y existen sustancias que actúen como nucleador heterogéneo el agua se congelará, esto por lo general sucede en las cavidades extracelulares en las cuales el agua se congelará primero. Caso contrario ocurre dentro de las células ya que su contenido de solutos es alto y esto la protege de la congelación. Si las condiciones de temperatura se mantienen o la temperatura desciende, entonces la presión de vapor del hielo será más baja que la presión de vapor del agua en estado líquido. Como resultado el agua líquida dentro de la célula pasará a través de la membrana semipermeable y se depositará en los cristales de hielo fuera de la célula. Cuando se presenta un congelamiento en los tejidos de las plantas, las células van muriendo debido a la fuga de agua de las células en dirección a las masas de hielo extraceluar \citep{levitt2012chilling, pearce2001plant}.
+
+%Las moléculas de agua se unen para formar un núcleo estable de hielo (nucleación homogénea), o puede ser catalizado por otra sustancia (nucleación heteogénea). Una nucleación homogénea es muy poco probable a temperaturas sobre 0\celc, en contraste en un clima húmedo una nucleación heterogénea es difícil de evitar \citep{pearce2001plant}. 
+
+Si una célula de una planta no tiene un núcleador hetereogéneo la temperatura a la cual se congelaría es de -40\celc. En general el hielo es usualmente extracelular en las hojas congeladas \citep{pearce2001plant}. Algunas de las sustancias que pueden actuar como un nucleador heterogéneo segun \citet{pearce2001plant} son:
+\begin{enumerate}
+\item Bacterias nucleadoras del hielo \textit{Ice nucleation-active} (INA). \textit{Pseudomonas syringae y Erwinia herbicola}.
+\item Otras moléculas y estructuras biológicas.
+\item Residuos orgánicos o inorgánicos.
+\end{enumerate}
+
+
+
+
+%Es importante notar que estas zonas siempre han sido de vocación agropecuaria algunos de estos tienen un mayor costo que otros. Y según \citep{Castro-Romero2014}, esto depende de la calidad de servicios ecosistémicos de las fincas, pero estos servicios ecosistémicos no son infinitos, es más rápidamente tienen a deteriorarse, como es el caso de la materia orgánica. %% Ojo usar esto.
+
+\section{Modelos usados para el análisis de la temperatura del aire}
+
+Como se explicó anteriormente la temperatura del aire tiene un rol central en el crecimiento y desarrollo de los cultivos, ya que influye sobre las tasas de crecimiento de las plantas, pero los extremos de temperatura del aire pueden generar daños en las plantas \citep{wheeler2000}. Por esta razón es importante realizar un pronóstico de estos eventos extremos, ya que son capaces de generar serios daños a los cultivos.
+
+Una de las formas para determinar las temperaturas extremas es la utilización de los modelos empíricos. \citet{Gomez2014} realizó un estudio sobre las heladas y su efecto en pasturas en el Valle de Ubaté y Chiquinquirá para el período del 2006 y 2007 y se basó en la fórmula de \citet{Allen1957a}, basada en el estudio de \citet{Snyder2010}, para generar un pronóstico de las heladas del siguiente día a partir del día presente. Además, caracterizó el comportamiento de las heladas en la Sabana de Bogotá y reportó que en las épocas secas hay mayor probabilidad de heladas. El área de estudio comprendió un total del 216907 hectáreas, de las cuáles \citet{Gomez2014} encontró que 2442 hectáreas tienen una alta exposición frente a las heladas. Uno de los resultados de este estudio fue que las estimaciones realizadas por el modelo no fueron precisas, ya que 5 de cada 14 oportunidades el resultado se subestimó y en las demás ocasiones se sobrestimó.\\
+
+El balance de energía del suelo es fue usado por \citet{Rosenzweig2014a} donde su objetivo era establecer el rango de incertidumbres del cambio climático en la producción de alimentos en el mundo. En este estudio fue necesario realizar una estimación de la temperatura, por esta razón se usó los modelos de agroecoistema los cuales usan el balance de energía para poder hacer una apŕoximación de la temperatura del aire. Como resultado se destaca que hay una alta incertidumbre en la modelación del dióxido de carbono, nitrógeno y las altas temperaturas y su efecto sobre la producción agrícola.\\
+
+Otro estudio que usa un balance energético fue \citep{Rossi2002} en la región al norte de Italia llamada Emilia Romagna, ya que en esta zona las heladas causan grandes pérdidas en los cultivos. El tipo de helada que afecta esta zona principalmente es de tipo advectivo, pero también hay presencia de heladas radiativas. Como resultado se encontró que en las heladas radiativas existe una gran estratificación del aire, haciendo más complejo el proceso de parametrización del intercambio de calor en la atmósfera que predice los perfiles de temperatura en la atmósfera. La caracterización de la estabilidad de la atmósfera es un factor mandatorio en la predicción de la temperatura interna de los tejidos y brotes localizados en las partes productivas de los cultivos.\\
+
+Los sistemas de información geográfica también han sido usados para la predicción de bajas temperaturas, ya que las mas bajas temperaturas son encontradas en los valles durante una radiación de tipo advectivo \citep{Halley2003, Blennow1998}. \citet{Halley2003} realizó un estudio en el Norte de Tasmania, ya que desde 1992 la incidencia de heladas ha presentado un incremento y se ha visto afectada la producción de vino. Como resultado el modelo implementado logró explicar las heladas en un 61\% de la zona de estudio, pero se resalta que se debido cuantificar los flujos de radiación de onda larga.\\
+
+El uso de redes neuronales también ha mostrado buenos resultados en la modelación de las heladas como en el caso de \citep{Smith2007} quien como resultado muestra que las predicciones fueron útiles incluso cuando las condiciones iniciales no son las mejores, pero cuando el horizonte de pronóstico aumenta incrementa los errores del pronóstico.\\
+
+Para subsanar algunas de las falencias mencionadas anteriormente, algunas investigaciones han usado modelos regionales para el pronóstico de las heladas tal como lo realizó \citet{prabha2008evaluation} que usaron el modelo \textit{Weather Research and Forecasting Model} (WRF) para poder determinar  si la información de mesoescala puede ser una guía para la protección de los cultivos y poder generar información que ayude a reducir los efectos de las bajas temperaturas sobre los cultivos de arándano y durazno. Este estudio analizó heladas advectivas y radiativas en los años 2006 y 2007, en la zona del Sur de Georgia. En este estudio se tuvieron en cuenta las variables temperatura y velocidad del viento. \citet{prabha2008evaluation} concluyeron que el modelo después de calibrado permitió realizar un pronóstico de razonable precisión con respecto a las variaciones de la temperatura. El modelo WRF se usa actualmente en Colombia y es usado actualmente por el IDEAM para el pronóstico del tiempo en Colombia como lo sugieren varios autores \citep{Arango2011, Mejia2012, Ruiz2014}.\\
+
+
+%Para el pronóstico de las variaciones diarias de temperatura se han usado diferentes métodos por ejemplo, métodos empíricos \citep{Allen1957a, Kangieser1959}, métodos de balance de energía del suelo \citep{Rosenzweig2014a, Rossi2002} métodos basados en los sistemas de información geográfica \citep{Halley2003} y métodos basados en redes neuronales \citep{Smith2007}. Una de las problemáticas de estos métodos es que no se tienen en cuenta los aspectos físicos y dinámicos de la atmósfera y su evolución temporal \citep{Prabha2008a}.\\
+
+Una de las problemáticas de algunos modelos nombrados anteriormente es que no tienen en cuenta aspectos dinámicos y físicos de la atmósfera y su evolución \citep{Prabha2008a}. Por esta razón y por la utilidad que se le ha dado en Colombia el modelo WRF se convierte en el mejor modelo para la evaluación de las heladas.
+
+\subsection{El modelo Weather Research and Forecasting Model (WRF)}
+
+El modelo WRF es un modelo muy usado al rededor del mundo gracias a los buenos resultado que obtenidos, como lo reporta \citep{Jimenez2014}. El modelo WRF es un sistema de cálculo numérico para simulación atmosférica que fue diseñado para cumplir objetivos de investigación y pronóstico, este modelo sirve en un amplio rango de escalas desde decenas de metros hasta miles de kilómetros. Los usuarios de este modelo pueden producir simulaciones basadas en las condiciones atmosféricas actuales o condiciones idealizadas \citep{Pielke2002}. WRF es capaz de realizar una reducción de escala de un modelo de pronóstico global como GFS. La reducción de escala toma las condiciones del modelo global y le aumenta la resolución teniendo en cuenta las características de la zona de estudio \citep{Sene2010}.\\
+
+El modelo WRF tiene una aproximación no-hidrostática esto quiere decir que tiene en cuenta el momento en $w$, en comparación con el modelo hidrostático el cual no tiene en cuenta los cambios en el momento en $w$. El modelo hisdrostático es usado para estudiar y pronosticar fenómenos globales, pero los modelos no-hidrostáticos son usado para el pronóstico de fenómenos de mesoescala o escalas menores. El modelo hidrostático supone una homogeneidad en la columna de aire y está dado por la densidad y la gravedad \citep{Pielke2002, Sene2010}.\\
+
+En el ámbito internacional se ha usado en varios países como es el caso de Perú, \citet{Saavedra2016} realizó un trabajo de modelación con el WRF con la utilización de modelos meteorológicos de mesoescala. Como resultado se obtuvo que la modelación reproduce de buena forma el ciclo diario de las temperaturas, pero las temperaturas mínimas fueron sobrestimadas en las partes altas de la zona de estudio, y subestimó la tasa de enfriamiento en el fondo de los valles, generando una mayor temperatura modelada, respecto a los valores reportados por estaciones ubicadas en las laderas.\\
+
+\citet{Fernandez2011} realizaron un estudio en Argentina en la cuidad de Mendoza con 3 dominios de 36, 12 y 4 km donde se tuvieron en cuenta las condiciones orográficas para la delimitación de los mismos. Se usó el esquema de capa límite planetaria de \textit{Yonsei University}. Como resultado se encontró que tanto los valores máximos de temperatura y humedad son predecidos correctamente.\\
+
+\citet{Corrales2015a} usó el modelo WRF para realizar un pronóstico de las temperaturas en México usando un único dominio y con la parametrización \textit{Mellor-Yamada-Janic} para la capa límite planetaria. Y como resultado obtuvo que hay algunas zonas donde el modelo es confiable para la predicción de las temperatura, lo cual puede prevenir daños por heladas en un horizonte pronóstico de 5 días.\\
+
+\citet{Hu2010} usaron el modelo WRF para modelas las temperaturas en el centro de Estados Unidos, en los estados de Texas, Lousiana y parte de Arkansas, donde se probaron las diferentes parametrizaciones de capa límite (PLB), donde encontraron que algunas parametrizaciones produce temperaturas más altas de lo esperado.\\
+
+\citet{Parra2012} realizó un estudio en Ecuador donde la finalidad era simular la meteorología de un año completo para poder disponer de datos con mayor alcance espacial. Para esto usaron el modelo WRF con 2 dominios y con la parametrización Mellor Yamada Jajic (MYJ), y se obtuvo como resultado que las temperaturas simuladas son coherentes con los fenómenos observados en las estaciones en tierra.\\
+
+
+Basado en estas investigaciones se evidencia la necesidad de probar varias parametrizaciones e intentar lograr la mejor combinación de ellas. En Colombia \citet{Uribe2012} escogió 10 casos de longitud de un día, donde se probaron dos parametrizaciones diferentes , con dos diferentes resoluciones espaciales y dos diferentes horizontes de pronóstico. Con la finalidad de encontrar la mejor combinación. Como resultado encontró que la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación, mientras que la aparametrización de Morrison presenta los mejores resultados. Y al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.\\
+
+En Colombia, el Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) ha implementado el modero WRF desde el 2007 para la predicción del tiempo atmosférico convirtiéndose en una herramienta muy importante para esta entidad \citep{Arango2011}. Se han realizado validaciones del modelo WRF en la Sabana de Bogotá para la variable de precipitación mediante una comparación con las estaciones convencionales, como la realizada por \citet{Mejia2012} en este estudio se deseaba identificar y establecer cuál de los modelos operacionales del IDEAM lograba identificar de manera aceptable los patrones de comportamiento de las variables de precipitación. En este estudio encontraron que el modelo WRF alimentado con los datos del modelo \textit{Global Forecast System} (GFS) presentó los mejores resultados. Este estudio presenta una metodología útil para la validación de los modelos y la determinación del mejor modelo.\\
+
+
+
+%Estos estudios fueron realizados en diferentes cultivos como \citet{prabha2008} que usó el cultivo de durazno, \citep{Gomez2014} quien realizó su estudio en pasturas, \citep{Saavedra2016} quien estudio en una zona productora de papa y maíz.\\
+
+
+
+
+
+%Es importante resaltar que el modelo toma como referencia datos del suelo. Pero según \citet{Castro-Romero2014} en la Región Andina se presentan cambios por el uso del paisaje que dejan como resultado tan solo el 31\% de los bosques naturales y una degradación del 53\% en arbustales secos. Se estima que para el año 1998 el 69\% de los bosques andinos habían sido talados. Uno de estos sucede en Suesca - Cundinamarca \citet{Castro-Romero2014} reporta que debido al uso agropecuario intensivo que se le ha dado a los suelos es posible observar zonas desprovistas de cobertura vegetal y de suelo con estados muy avanzados de degradación, lo cual imposibilita su posible recuperación en años próximos. Ya que los ecosistemas se usan de una forma extractiva como,lo menciona \citet{Ernesto}, uno de los ecosistemas más importantes de Colombia el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente \citep{Ernesto} cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$. Estos cambios nos hacen reflexionar acerca de la importancia del mantenimiento de los suelos y que se deben hacer ajustes periódicos a los modelos ya que con estos estudios se demuestra que el suelo es dinámico.
+
+%Un modelo de mesoescala es un modelo numérico de predicción del tiempo atmosférico, que se usa para hacer una predicción a escala de kilómetros y horas, basado en la dinámica atmosférica \citep{Uribe2012}.\\
+
+
+%\section{Conclusiones}
+
+%El cultivo de papa es un cultivo de gran importancia en el país. El consumo interno del país es abastecido casi en su mayoría por la producción interna. Este cultivo es seriamente afectado por muchos factores agroclimáticos y uno de los más importantes es la temperatura extrema. Cundinamarca es el Departamento con mayor producción en el país y la Sabana de Bogotá es la zona de Cundinamarca que más influencia tiene en la producción de papa, por sus condiciones topográficas de sabana se convierte en una altamente suceptible a heladas. Los meses con mayor probabilidad de heladas son diciembre, enero y febrero; y la hora en la que más se presentan bajas temperaturas es a las 5 am. Las temperaturas más altas se presentan en la mayoría de los meses pero principalmente entre los meses de diciembre y abril y las horas en las que más se presentan es a las 12 m.\\
+
+%Basado en los registros de las estaciones convencionales desde 1971 hasta 2016, se evidenció un aumento de la temperatura en 1.34\celc. Adicionalmente se evidencian cambios en la frecuencia de las bajas y las altas temperaturas, ya que la frecuencia de las bajas temperaturas ha venido disminuyendo y las altas temperaturas han presentado un aumento en los valores registrados.
+
+%De los modelos de pronóstico revisados el modelo WRF un modelo de regional de pronóstico es el que presenta las mejores características para realizar el estudio de las temperaturas, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Control de calidad de las estaciones meteorológicas}
+
+Se usaron los datos provenientes de las estaciones meteorológicas del IDEAM. La información usada son de estaciones convencionales y estaciones automáticas. En las estaciones convencionales una persona se encarga de tomar datos al menos una vez por día y las estaciones automáticas son estaciones que reportan los datos horarios al IDEAM, a través de la red HYDRAS.\\
+
+Las estaciones convencionales poseen un control de calidad, pero las estaciones meteorológicas automáticas del IDEAM no poseen un control de calidad, por esta razón fue necesario realizar un control de calidad. La programación se realizó usando el software python3.6.
+
+\subsection{Validación de las estaciones convencionales}
+
+Se solicitaron los datos de la red de estaciones convencionales al IDEAM desde el registro más antiguo hasta el registro más reciente de todas las estaciones presentes en Cundinamarca y Bogotá en formato tr5, ya que el formato tr5 posee los datos de los días, el formato tr8 no.\\
+
+El formato tr5 es una matriz de datos que vienen organizadas por espacios, la explicación del uso de estos datos fue brindada por el IDEAM en un documento llamado "MANEJO DE LOS ARCHIVOS DE TEXTO DEL BANCO DE DATOS" \citep{pedraza2015} basado en este documento se creó un código que permite facilitar la labor de interpretación de los datos código llamado \texttt{pre\_procesamiento\_ideam.py}.\\
+
+El código \texttt{pre\_procesamiento\_ideam.py} toma los datos y son organizados como lo sugiere \citet{pedraza2015}, adicionalmente se les agrega la georreferenciación de las estaciones basadas en el \textit{Shapefile} que proporciona el IDEAM en su página de Internet en la sección de \textcolor{blue}{ \href{http://www.ideam.gov.co/solicitud-de-informacion}{Solicitúd de información}} \textcolor{blue}{ \href{institucional.ideam.gov.co/jsp/info/institucional/publicaciones/CATALOGO_ESTACIONES_IDEAM_V10_AGOSTO2017.zip}{Catálogo Shape del IDEAM}}.\\
+
+
+\subsubsection{Validación de los datos de las estaciones convencionales}
+
+Se analizaron las estaciones que se encuentran dentro del polígono estas pueden ser observadas como los puntos dentro del polígono en la gráfica \ref{gra:areas}. Los valores que no pasan las pruebas no son tenidos en cuenta para los análisis. Los pasos realizados para la validación fueron los siguientes:\\
+
+\begin{enumerate}
+
+
+	\item Conteo de no valores.\\
+	Para cada estación convencional se calcularon el numero de no-valores. Estos valores están representados en la gráfica \ref{subfig:b1} en la parte superior izquierda donde el color purpura simboliza la cantidad de datos tomados y en color azul la cantidad de no-valores.
+
+	\item Prueba de límites fijos.\\
+	Se realizó una prueba de rango con la finalidad de determinar cuales datos se salen de estos límites como lo sugiere \citet{estevez2011}. Los valores de temperatura ($T$), deben estar entre -30 y 50\celc de temperatura $-30 < T< 50$. Esta prueba fue superada por todos los datos de todas las estaciones.
+
+
+	\item Detección de saltos.\\
+	Se usó la metodología propuesta por \citet{vickers1997} quienes proponen usar el promedio móvil, ver ecuación \ref{eq:prom-mobil} y la desviación estándar móvil, ver ecuación \ref{eq:desv-mobil}. Donde el valor $T_i$ no puede ser superior al promedio móvil mas y/o menos dos veces y media la desviaciones estándar móvil, ver ecuación \ref{eq:spikes}.\\
+%	El valor de la temperatura en la posición i-ésima debe ser superior al promedio móvil en la posición i-ésima menos dos veces y medio el valor de la desviación estándar móvil en la posición i-ésima, y el valor i-ésimo de la temperatura no debe superar el valor promedio móvil en la posición i-ésima más dos veces y medio el valor de la desviación estándar móvil en la posición i-ésima, como lo indica la ecuación \ref{eq:spikes}, de lo contrario el dato será marcado como sospechoso.
+	
+\begin{equation}\label{eq:prom-mobil}
+    x_{mob} = \frac{\sum\limits_{n=i-k}^{i+k} T_{n}}{2k + 1}
+\end{equation}
+
+\begin{equation}\label{eq:desv-mobil}
+s_{mob} = \sqrt[2]{\frac{\sum\limits_{n=i-k}^{i+k} (T_{n} - x_{mob})^2}{2k}} 
+\end{equation}
+ 
+\begin{equation}\label{eq:spikes}
+	     x_{mob} - (2.5\cdot{s_{mob}}) < T_{i} \lor T_{i} < x_{mob} + (2.5\cdot{s_{mob}}) 
+\end{equation}
+
+\item Prueba de discontinuidad.\\
+Se realizó basado en el artículo de \citet{roggero2012} quien usa la desviación estándar como una medida de homogeneidad dentro de la serie de tiempo, teniendo en cuenta que las variables aquí medidas corresponden a un valor diario, por lo tanto podemos pensar en que se deben presentar ciertos valores de homogeneidad.\\
+
+Se construyó un ejemplo para poder validar la metodología. El ejemplo consistió en crear una distribución normal para las temperaturas de 1000 datos y a los 400 datos agregar un salto en los valores de temperatura gráfica \ref{subfig:discontinuidad}. En esta gráfica se observa de color azul los datos de temperatura, en color naranja los datos de la desviación estándar móviles de una ventana de 11 datos y una linea de color azul que corresponde a el promedio de las desviaciones estándar mas la desviación estándar de todas las desviaciones estándar móviles ver figura \ref{subfig:discontinuidad}. En este ejemplo se puede ver como en ciertos momentos la desviación estándar supera el límite y luego cuando los datos vuelven a la normalidad se presenta otro pico en la desviación estándar, en estos casos los datos que superen la línea azul, los datos serán marcados como sospechosos.
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=true, scale=0.6]{discontinuidad.png}
+		\caption{Ejemplo gráfico de una discontinuidad}
+		\label{subfig:discontinuidad}	
+	\end{center}
+
+\end{figure}
+
+\end{enumerate}
+
+\subsubsection{Gráficas}
+
+Las estaciones convencionales miden 3 tipos de temperatura los cuales son temperatura máxima, mínima y promedio. Para los 3 casos se aplicó la validación dando como resultado 
+
+Para poder visualizar más fácilmente la validación de los datos se construyeron varias gráficas, la primera de ellas se encuentra en la figura \ref{subfig:b11} parte superior izquierda y corresponde a los datos y no-datos de los diferentes años, abajo de esta encontramos los saltos y las discontinuidades para los años, a la derecha en la parte superior encontramos los valores de datos y no datos analizados en los diferentes meses, abajo de esta imagen encontramos la distribución de los saltos y las discontinuidades a través de los meses y para finalizar en la base de la gráfica encontramos toda la serie de datos correspondiente a esta variable junto con la desviación estándar y de azul el límite y debajo de esta podemos observar de amarillo el valor de desviación móvil para cada una de las ventanas, además podemos observar los límites de las  En el título de cada variable encontramos el código de la estación y la variable medida de temperatura. Estas gráficas se realizaron para los valores máximos, mínimos y promedios.
+
+\begin{figure}[H]
+	
+			\begin{subfigure}[b]{\linewidth}
+			\begin{center}
+			\includegraphics[draft=true, scale=0.25]{21205420Valores_medios.png}
+			\caption{Valores medios de temperatura}
+			\label{subfig:b11}
+			\end{center}
+			\end{subfigure}
+			
+			\begin{subfigure}[b]{\linewidth}
+			\begin{center}
+			\includegraphics[draft=true, scale=0.25]{21205420Minmos_medios.png}
+			\caption{Valores mínimos de temperatura}
+			\label{subfig:b21}
+			\end{center}
+			\end{subfigure}			
+
+			\begin{subfigure}[b]{\linewidth}
+			\begin{center}
+			\includegraphics[draft=true, scale=0.25]{21205420Maximos_absolutos.png}
+			\caption{Valores máximos de temperatura}
+			\label{subfig:b31}
+			\end{center}
+			\end{subfigure}			
+
+		
+		\caption{Comparación de las temperaturas registradas por la estación convencional y la estación automática}
+		\label{gra:conv_vali}
+	
+
+
+\end{figure}
+
+\subsection{Validación de las estaciones automáticas de la red HYDRAS}
+
+La validación de las estaciones automáticas de la red HYDRAS fue diferente a la validación de las estaciones convencionales ya que estas estaciones toman datos horarios. Para realizar este trabajo se realizó la validación de las estaciones automáticas dentro de la zona.
+
+\subsubsection{Descarga de los datos}
+Para la descarga de los datos se realizó un código llamado \texttt{descarga\_IDEAM\_hydras.py} este código permite la descarga de los archivos de la red de estaciones del IDEAM siempre y cuando se tenga el número SID que es facilitado por la entidad, mediante un usuario y una contraseña.
+
+\subsubsection{Preprocesamiento de las estaciones automáticas HYDRAS}
+
+La finalidad del preprocesamiento es generar archivos homogéneos y de esta forma facilitar la validación de los datos. El preprocesamiento consistió en la unión de las diferentes variables de una misma estación, con la finalidad de generar un solo archivo que contenga todas las variables de una misma estación. Para esto se usó el código llamado \texttt{nuevo\_preprocesam\_hydras.py}.
+
+El resumen de las validaciones se puede observar en cada una de las tablas asociadas. En cada una de ellas se encuentra el código de la estación analizada, los valores que no pasaron cada uno de las pruebas en porcentaje y el total de los datos analizados.
+
+\subsubsection{Validación de la temperatura del aire}
+
+La plataforma HYDRAS presenta la temperatura de tres formas diferentes las cuales son: "Temp Max Aire 2m", "Temp Min Aire 2m" y "Temp Aire 2m", las cuales hacen referencia a las temperaturas máximas, mínimas y promedio, respectivamente. Estas variables se unieron dándole prioridad a la temperatura promedio. La forma como se realizó la validación fue la siguiente:
+
+
+\begin{enumerate}
+\item Conteo de no valores.\\
+	Para cada estación automática se calcularon el numero de no-valores. 
+
+\item Prueba de límites fijos.\\
+Lo siguiente fue realizar una prueba de rango igual a la usada en el primer paso de la validación de las estaciones convencionales, propuesta por \citet{estevez2011}. Donde las temperaturas $T$ en grados Celsius no deben ser menores a -20\celc ni superior a 40\celc, $-30 < T< 50$. Los rangos de la temperatura fueron modificados teniendo en cuenta las temperaturas extremas registrados por las estaciones convencionales y se les sumó 10\celc al mayor y se le restó 10\celc al menor. 
+
+\item Detección de saltos.\\
+Para la detección de los saltos se usó la misma metodología usada para la detección de saltos en las estaciones convencionales ver ecuación \ref{eq:spikes} metodología propuesta por \citet{vickers1997}.
+
+Para este procedimiento se uso la ecuación que proviene de la ecuación \ref{eq:spikes}, pero en este caso el factor de 2.5 es reducido a 1 para ser más selectivo en el filtro, ver ecuación \ref{eq:spikes_aut2}.
+
+\begin{equation}\label{eq:spikes_aut2}
+	     x_{mob} - (1\cdot{s_{mob}}) < T_{i} \lor T_{i} < x_{mob} + (1\cdot{s_{mob}}) 
+\end{equation}
+
+\item Prueba de paso.\\
+Según \citep{estevez2011} en dos datos consecutivos  de temperatura del aire con una hora de diferencia no puede presentarse una diferencia de 4\celc en valor absoluto. Ya que estos deberán ser marcados como valores sospechosos.\\
+
+\item Prueba de variación.\\
+
+Se realizó una prueba para evaluar si el sensor no presenta variación por un lapso de tiempo de 10 horas. Cuando el sensor de temperatura no presente variación en los datos de temperatura, estos deben ser marcados como sospechosos. Para esto se evalúa que la desviación estándar de una ventana de 10 horas debe ser superior a 0.01. Esta prueba  se basó en \citet{zahumensky2004} y \citet{Shafer2000} quien propone que la desviación estandar de un parámetro cae por debajo de un límite estos datos se deben reportar como sospechosos porque, es probable que el sensor este reportando el mismo valor, ver ecuación \ref{eq:desv_est}.
+
+\begin{center}
+\begin{equation}\label{eq:desv_est}
+	s_{mob} > 0.001
+\end{equation}
+\end{center}
+
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+
+\begin{tabular}{lrrrrrr}
+\toprule
+      Código &  No datos (\%) &  P. Rango (\%) &  P. diferencia (\%) &  P. roll (\%) &  P. spikes (\%) & Total datos \\
+\midrule
+ 21195160 &       0.00 &      0.02 &           0.85 &     0.03 &      18.40 &        110033 \\
+ 21201200 &       0.00 &      0.00 &           0.14 &     0.02 &      20.44 &        378885 \\
+ 21201580 &       0.00 &    100.00 &           0.00 &    99.99 &       0.00 &         72784 \\
+ 21205012 &      14.05 &      7.39 &           9.41 &     0.22 &      16.13 &        159047 \\
+ 21205791 &       0.00 &      0.00 &           0.68 &     0.03 &      14.47 &         78636 \\
+ 21206600 &      20.66 &      0.59 &           2.75 &     4.75 &      13.96 &        121765 \\
+ 21206790 &       0.00 &      4.72 &          10.49 &     0.16 &      15.52 &        265428 \\
+ 21206920 &       0.00 &      4.35 &           8.61 &     0.04 &      21.05 &        243016 \\
+ 21206930 &       0.00 &      2.54 &           7.21 &     0.13 &      16.47 &        257602 \\
+ 21206940 &       0.00 &      8.19 &          16.18 &     0.02 &      17.34 &        229395 \\
+ 21206950 &       0.00 &      5.79 &           7.46 &     0.14 &      20.06 &        265070 \\
+ 21206960 &       0.00 &      1.57 &           3.36 &     0.01 &      15.79 &        227182 \\
+ 21206980 &       0.00 &      1.46 &           5.88 &     1.38 &      18.16 &        254552 \\
+ 21206990 &       0.00 &      9.53 &          25.13 &     0.11 &      18.35 &        314116 \\
+ 23125170 &       0.00 &      0.86 &           3.79 &     0.06 &      20.03 &        189971 \\
+ 24015110 &       0.00 &      2.02 &           5.25 &     0.09 &      13.66 &        247084 \\
+ 35025080 &       0.00 &      1.04 &          11.54 &     0.22 &      19.64 &        209566 \\
+ 35025090 &       0.00 &      0.00 &           1.56 &     0.69 &      13.93 &        109860 \\
+ 35027510 &       4.87 &     13.03 &          25.15 &     0.15 &      17.04 &        158922 \\
+ 35035130 &      24.15 &      7.47 &           7.05 &     0.11 &      19.98 &        159047 \\
+ 35075070 &       0.00 &      4.07 &          24.96 &     0.66 &      16.11 &        280902 \\
+ 35075080 &       0.00 &      5.39 &          11.33 &     1.67 &      18.14 &        253532 \\
+ 35085080 &       7.18 &      3.35 &           7.67 &     0.46 &      16.15 &        276593 \\
+\bottomrule
+\end{tabular}
+		\caption{Tabla resumen de validación del viento}
+		\label{tabla:val_viento}
+\end{center}
+\end{table}
+
+\subsubsection{Validación de la humedad}
+
+Para la validación de la humedad se realizaron los siguientes pasos.\\
+
+\begin{enumerate}
+\item Conteo de no valores.\\
+Se identificaron los no-valores
+\item Prueba de límites fijos.
+Se marcaron como sospechosos los valores de humedad relativa que son menores a 0.8 y superiores a 103, siguiendo los criterios de \citep{estevez2011}.
+\item Prueba de paso
+Se marcaron como datos sospechosos aquellos datos consecutivos que la diferencia de estos 2 es mayor a 45, siguiendo los criterios de \citep{estevez2011}.
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+
+\begin{tabular}{lrrrr}
+\toprule
+      Código &  No datos (\%) &  P. diferencia (\%) &  P. rango (\%) & Total datos \\
+\midrule
+ 21195160 &     22.29 &           0.13 &      0.23 &         51476 \\
+ 21201200 &     49.61 &           0.01 &      0.02 &        547658 \\
+ 21201580 &      2.24 &           0.00 &    100.00 &         74397 \\
+ 21205012 &     69.38 &           0.05 &      0.01 &        159047 \\
+ 21205791 &     34.63 &           0.01 &      0.00 &         46175 \\
+ 21206600 &     57.16 &           2.34 &     12.05 &        121765 \\
+ 21206790 &     15.76 &           4.21 &      3.73 &        115171 \\
+ 21206920 &     46.60 &           0.75 &      2.18 &        159047 \\
+ 21206930 &     53.34 &           0.08 &      0.25 &        199272 \\
+ 21206940 &     75.44 &           0.01 &      0.01 &        127607 \\
+ 21206950 &     16.50 &           0.38 &      2.27 &        115192 \\
+ 21206960 &     34.55 &           0.11 &      0.03 &        105382 \\
+ 21206980 &     21.42 &           0.21 &      0.11 &        115181 \\
+ 21206990 &     36.44 &           2.03 &      3.95 &        159047 \\
+ 23125170 &     52.94 &           0.05 &      0.16 &        148124 \\
+ 24015110 &     44.04 &           0.08 &      0.02 &        158756 \\
+ 35025080 &     62.34 &           0.38 &     14.68 &        193558 \\
+ 35025090 &     41.78 &           0.65 &      7.18 &         77328 \\
+ 35027510 &     57.83 &           0.09 &     26.68 &        158922 \\
+ 35035130 &     74.80 &           3.23 &      8.40 &        159047 \\
+ 35075070 &     35.84 &           0.08 &      0.20 &        142751 \\
+ 35075080 &     49.90 &           1.17 &      9.14 &        173178 \\
+ 35085080 &     66.02 &           7.97 &      6.40 &        276593 \\
+\bottomrule
+\end{tabular}
+		\caption{Tabla resumen de validación de la humedad relativa}
+		\label{tabla:val_humedad}
+\end{center}
+\end{table}
+
+
+\subsubsection{Validación de la precipitación}
+
+En la plataforma HYDRAS hay dos variables de precipitación una llamada "Precipitación instantánea 10 min" y otra llamada "Precipitación acumulada diaria". Se supone que si sumamos la precipitación instantánea cada 10 minutos se puede obtener la precipitación acumulada diaria. Pero esto no sucede. Para el caso de la estación Tibaitatá solo en el 61.4\% de las veces se cumple esto, ver tabla \ref{table:compar-porcentaje}. Y es probable que el porcentaje de acierto se deba a la gran cantidad de ceros. Se realizó una entrevista con un funcionario del IDEAM encargado de la automatización de las estaciones y él asevera que las estaciones toman los valores de precipitación del día comenzando son tomados desde las 7 a.m hasta las 7 a.m. del siguiente día.
+
+\begin{table}[H]
+\begin{center}
+
+\begin{tabular}{llr}
+\toprule
+{} &  Estación &  Relación \\
+\midrule
+0  &  21195160 &     24.85 \\
+1  &  21201200 &     15.17 \\
+2  &  21201580 &     33.71 \\
+3  &  21202270 &     25.42 \\
+4  &  21205012 &     18.12 \\
+5  &  21205791 &     39.62 \\
+6  &  21206600 &     39.13 \\
+7  &  21206790 &     20.23 \\
+8  &  21206920 &     13.25 \\
+9  &  21206930 &     13.99 \\
+10 &  21206940 &     20.32 \\
+11 &  21206950 &     13.75 \\
+12 &  21206960 &     47.23 \\
+13 &  21206980 &     27.37 \\
+14 &  21206990 &     61.43 \\
+15 &  21209920 &     43.06 \\
+16 &  23125170 &     27.50 \\
+17 &  24015110 &     34.88 \\
+18 &  26127010 &     27.35 \\
+19 &  35025080 &     14.69 \\
+20 &  35025090 &     20.11 \\
+21 &  35027001 &     34.07 \\
+22 &  35027002 &      0.00 \\
+\bottomrule
+\end{tabular}
+\caption{Tabla de porcentaje cuando coinciden los valores de precipitación horaria y diez-minutal.}
+\label{table:compar-porcentaje}
+\end{center}
+\end{table}
+
+%El modelo de pronóstico del tiempo fue configurado para generar resultados cada hora, por esta razón se decidió escoger la variable de precipitación que emite valores cada hora, es decir se descartó la variable de precipitación horaria. Los pasos de la validación fueron los siguientes:
+
+
+\begin{enumerate}
+\item Conteo de no valores.\\
+Se marcaron los no-valores.
+\item Prueba de limites.\\
+Se marcaron como sospechosos los valores que son menores que 0 y superiores a 120.
+
+\end{enumerate}
+
+
+\begin{table}[H]
+\begin{center}
+
+
+\begin{tabular}{lrrr}
+\toprule
+      Código &  No datos (\%) &  P. rango (\%) & Total datos \\
+\midrule
+ 21195160 &     30.54 &      0.00 &        345024 \\
+ 21201200 &      7.05 &      0.00 &        547658 \\
+ 21201580 &      1.87 &      0.00 &         74397 \\
+ 21205012 &     31.64 &      0.01 &        427550 \\
+ 21205791 &     86.53 &      0.00 &       1344740 \\
+ 21206600 &     26.99 &      2.83 &        260585 \\
+ 21206790 &     38.12 &      1.15 &        934720 \\
+ 21206920 &     33.42 &      1.32 &        750323 \\
+ 21206930 &     33.18 &      0.91 &        838168 \\
+ 21206940 &     33.22 &      0.71 &        706410 \\
+ 21206950 &     32.84 &      0.00 &        857276 \\
+ 21206960 &     35.43 &      0.01 &        664940 \\
+ 21206980 &     41.47 &      0.12 &        924378 \\
+ 21206990 &     42.09 &      0.00 &       1041316 \\
+ 23125170 &     41.77 &      0.01 &        716628 \\
+ 24015110 &     50.61 &      1.14 &       1075460 \\
+ 35025080 &     35.62 &      0.05 &        674167 \\
+ 35025090 &     24.45 &      0.00 &        384572 \\
+ 35027510 &     19.72 &      0.07 &        528865 \\
+ 35035130 &     26.25 &      1.00 &        736226 \\
+ 35075070 &     45.58 &      0.00 &       1001810 \\
+ 35075080 &     45.19 &      0.00 &        950651 \\
+ 35085080 &     32.59 &      0.65 &        814872 \\
+\bottomrule
+\end{tabular}
+		\caption{Tabla resumen de validación de la precipitación}
+		\label{tabla:val_precipitacion}
+\end{center}
+\end{table}
+
+%validación de la Radiación
+
+\subsubsection{Validación de la radiación}
+
+\begin{enumerate}
+\item Conteo de no valores.\\
+Se marcaron los no valores
+
+\item Prueba de límites.\\
+Los valores analizados no pueden ser menores a 0 ni superiores a 1500.
+
+\item Prueba de limites relativos
+La radiación nunca puede ser mayor a los valores de la radiación extraterrestre o radiación con cielo despejado, la función para su estimación es usada y explicada en  \citet{Allen1994}. Los resultados de la función varían dependiendo la latitud, longitud y fecha del año, para su estimación se usó el paquete \textcolor{blue}{ \href{http://pvlib-python.readthedocs.io/en/latest/index.html}{pvlib-python}}. Los valores que exceden la radiación con cielo despejado fueron marcados como sospechosos.
+
+
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+
+\begin{tabular}{lrrrrr}
+\toprule
+      Código &  No. datos (\%) &  P. Rango (\%) &  P. cielo despejado (\%) &  P. diferencia (\%) & Total datos \\
+\midrule
+ 21195160 &      22.56 &      0.40 &                5.95 &           0.84 &         51476 \\
+ 21205012 &      69.40 &      3.43 &                6.99 &           0.25 &        159047 \\
+ 21205791 &      34.62 &      0.00 &               34.00 &           0.28 &         46175 \\
+ 21206600 &      56.87 &      1.05 &                4.03 &           0.22 &        121765 \\
+ 21206790 &      18.03 &     15.79 &               15.53 &           1.37 &        115171 \\
+ 21206920 &      44.48 &     19.83 &               40.18 &           6.69 &        159047 \\
+ 21206940 &      36.58 &     28.48 &               18.19 &           6.63 &        127607 \\
+ 21206960 &      32.96 &      5.48 &                7.52 &           0.38 &        105382 \\
+ 21206980 &      19.55 &     28.34 &               11.75 &           0.51 &        115181 \\
+ 21206990 &      36.79 &     16.85 &                9.05 &           0.22 &        159047 \\
+ 23125170 &      47.53 &     23.50 &               13.53 &           0.17 &        148124 \\
+ 24015110 &      44.08 &     10.60 &               15.12 &           0.25 &        158756 \\
+ 35075070 &      40.39 &      3.50 &               28.40 &           2.43 &        142751 \\
+ 35085080 &      63.18 &     31.25 &               19.04 &          16.33 &        276593 \\
+\bottomrule
+\end{tabular}
+		\caption{Tabla resumen de validación de la radiación}
+		\label{tabla:val_radiacion}
+\end{center}
+\end{table}
+
+\subsubsection{Validación de la velocidad del viento}
+
+Velocidad
+
+\begin{enumerate}
+\item Conteo de no valores.\\
+Se marcaron los no valores
+
+\item Prueba de límites.\\
+Los valores analizados no pueden ser menores a 0 ni superiores a 60.3.
+
+\item Prueba de paso
+Se marcaron como datos sospechosos aquellos datos consecutivos que la diferencia de estos 2 es mayor a 10, siguiendo los criterios de \citep{estevez2011}.
+
+\item Prueba de variación.\\
+
+Se realizó una prueba para evaluar si el sensor no presenta variación por un lapso de tiempo de 10 horas. Cuando el sensor de velocidad del viento no presente variación en los datos de temperatura, estos deben ser marcados como sospechosos. Para esto se evalúa que la desviación estándar de una ventana de 10 horas debe ser superior a 0.01. Esta prueba  se basó en \citet{zahumensky2004} y \citet{Shafer2000} quien propone que la desviación estandar de un parámetro cae por debajo de un límite estos datos se deben reportar como sospechosos porque, es probable que el sensor este reportando el mismo valor, ver ecuación \ref{eq:desv_est}.
+
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+
+\begin{tabular}{lrrrrr}
+\toprule
+      Código &  No. datos  (\%)&  P. Rango  (\%)&  P. diferencia  (\%)&  P. secuencia  (\%)& Total datos \\
+\midrule
+ 21195160 &      52.03 &      0.00 &           0.01 &         91.70 &        345024 \\
+ 21205012 &      39.25 &      0.05 &           0.08 &         90.78 &        427550 \\
+ 21205791 &      86.53 &      0.00 &           0.00 &         99.94 &       1344740 \\
+ 21206600 &      30.12 &      0.12 &           0.76 &         80.95 &        260585 \\
+ 21206790 &      64.75 &      0.05 &           0.05 &         93.53 &        934720 \\
+ 21206920 &      52.02 &      0.02 &           0.03 &         92.68 &        750323 \\
+ 21206930 &      57.15 &      1.25 &           1.74 &         88.56 &        838168 \\
+ 21206940 &      68.90 &      0.01 &           0.01 &         92.20 &        706410 \\
+ 21206950 &      66.59 &      2.15 &           2.83 &         92.12 &        857276 \\
+ 21206960 &      38.43 &      0.15 &           0.18 &         92.51 &        664940 \\
+ 21206980 &      57.64 &      0.62 &           0.88 &         95.18 &        924378 \\
+ 21206990 &      68.69 &      0.97 &           2.14 &         94.54 &       1041316 \\
+ 23125170 &      68.81 &      0.00 &           0.01 &         90.08 &        716628 \\
+ 24015110 &      53.48 &      0.01 &           1.73 &         93.70 &       1075460 \\
+ 35025080 &      39.48 &      0.24 &           0.23 &         92.11 &        674167 \\
+ 35025090 &      41.92 &      0.00 &           0.00 &         82.72 &        384572 \\
+ 35035130 &      56.63 &      0.00 &           0.01 &         81.23 &        736226 \\
+ 35075070 &      53.38 &      1.97 &           3.40 &         94.32 &       1001810 \\
+ 35075080 &      50.86 &      1.58 &           1.42 &         88.55 &        950651 \\
+ 35085080 &      63.88 &      0.98 &           1.43 &         89.56 &        814872 \\
+\bottomrule
+\end{tabular}
+		\caption{Tabla resumen de validación de la velocidad del viento}
+		\label{tabla:val_vel_viento}
+\end{center}
+\end{table}
+
+\subsubsection{Validación de la dirección del viento}
+
+\begin{enumerate}
+\item Conteo de no valores.\\
+Se marcaron los no valores
+
+\item Prueba de límites.\\
+Los valores analizados no pueden ser menores a 0 ni superiores a 360.
+\end{enumerate}
+
+\begin{table}[H]
+\begin{center}
+
+
+\begin{tabular}{lrrr}
+\toprule
+      Código &  No. datos  (\%)&  P. Rango  (\%)& Total datos \\
+\midrule
+ 21195160 &      52.04 &      0.00 &        345024 \\
+ 21205012 &      39.35 &      3.61 &        427550 \\
+ 21205791 &      86.53 &      0.00 &       1344740 \\
+ 21206600 &      30.14 &      0.05 &        260585 \\
+ 21206790 &      64.76 &      0.02 &        934720 \\
+ 21206920 &      52.04 &      0.00 &        750323 \\
+ 21206930 &      57.73 &      0.17 &        838168 \\
+ 21206940 &      75.92 &      1.03 &        706410 \\
+ 21206950 &      66.75 &      0.45 &        857276 \\
+ 21206960 &      38.45 &      0.00 &        664940 \\
+ 21206980 &      57.70 &      5.61 &        924378 \\
+ 21206990 &      68.95 &      0.06 &       1041316 \\
+ 23125170 &      68.81 &      0.03 &        716628 \\
+ 24015110 &      53.49 &      1.59 &       1075460 \\
+ 35025080 &      49.79 &      0.01 &        674167 \\
+ 35025090 &      41.92 &      0.00 &        384572 \\
+ 35035130 &      56.64 &      0.00 &        736226 \\
+ 35075070 &      70.91 &      0.02 &       1001810 \\
+ 35075080 &      51.24 &      0.98 &        950651 \\
+ 35085080 &      64.26 &      1.30 &        814872 \\
+\bottomrule
+\end{tabular}
+		\caption{Tabla resumen de validación de la dirección del viento}
+		\label{tabla:val_dir_viento}
+\end{center}
+\end{table}
+
+\subsection{Resultados de la validación de las estaciones}
+
+\subsubsection{Informe de las estaciones automáticas}
+
+Se realizó la validación de la temperatura del aire y los datos que se marcaron como sospechosos no fueron tomados en cuenta a partir de este punto. Algunas de las estaciones luego de la validación con los datos presentan aún datos que pueden ser atípicos, por esta razón se realiza este análisis.
+
+\begin{enumerate}
+
+
+\item 21195160 Subia Automática. Presenta homogeneidad en los datos. No hay datos bajo 0\celc hay unos pocos datos sobre 25\celc presenta homogeneidad. La desviación de 3.5 es suficiente
+
+
+\item 21201200 Esc La Unión Automática. Presenta cambios extraños hasta antes del 2012, puede que se halla realizado un emplazamiento. Los valores en general después del 2012 mejoran. No hay datos por debajo de 0 ni por encima de 25\celc. Ubicada en Bogotá. La desviación estándar de 4 para el límite superior y de 3.5 para el límite inferior.
+
+\item 21201580 Pasquilla Automática estación que no presenta datos.
+
+\item 21205012 Univ Nacional. Presenta varios picos de datos en la temperatura para el año 2004, 2013 y 2017. Posee datos bajo 0 y sobre 25\celc.
+
+\item 21205791 Apto el Dorado. Presenta una homogeneidad en los datos. No presenta datos bajo 0\celc y hay datos sobre 25\celc. Bogotá. La desviación estándar de 4 está bien.
+
+\item 21206600 Nueva Generación. Presenta un pico de altas temperaturas en el año 2013 y en el 2010 el sensor se pega en 0 \celc. Bogotá. Desviación estándar sobre 3 está bien.
+
+\item 21206790 Hacienda Santa Ana Automática, Nemocón. Presenta un pico de temperatura en fechas cercanas al 2016 y un pico de temperaturas bajas en el 2010, presenta homogeneidad y con 4 de desviación estándar está bien.
+
+\item 21206920 Villa Teresa Automática, Bogotá. Presenta varios picos, pero los rangos de estos picos no se salen de rangos extraños. Creo que es una estación muy estable, creo que no se le debe aplicar la limpieza de las desviaciones estándar.
+
+\item 21206930 PMO Guerrero, Zipaquirá. Estación que presenta buenos datos, creo que no es necesario realizar la corrección de los datos.
+
+\item 21206940 Ciudad Bolívar, presenta homogeneidad aunque existe un pico en el año 2010. Se presentan algunos valores atípicos. Que pueden ser eliminados con 3.5 desviaciones estándar.
+
+\item 21206950 Pmo Guacheneque, Villapinzón. Presenta una buena homogeneidad, pero existen algunos datos fuera de los rangos, en especial valores inferiores a -20\celc. Exiten algunos picos pero parecen dentro de lo normal. No recomendaría aplicar filtro por desviación estándar, preferiría sólo quitar los no valores.
+
+\item 21206960 IDEAM BOGOTA. Estación que presenta unos picos para el 2013 y 2014. Es una estación con homogeneidad marcada que aplicando el filtro de  4 desviaciones estándar estaría correcta. No hay datos debajo de 0\celc ni superiores a 25\celc.
+
+\item 21206980 Sta cruz de Siecha, Guasca. Es una estación que presenta una alta homogeneidad. Hay valores debajo de 0\celc probablemente valores sobre 25\celc. No le aplicaría el filtro de la desviación estándar.
+
+\item 21206990 Tibaitata Automática, Mosquera. Estación con gran homogeneidad presenta valores atípicos, valores sobre 25\celc y valores sobre 30\celc, además de valores por debajo de 0\celc. Le aplicaría el filtro de 4 desviaciones estándar.
+
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{0.5\textwidth}
+	\begin{center}
+		\includegraphics[draft=false, scale=0.5]{21206990_tmp_2mcrudas.jpg}
+
+	\caption{Valores sin filtros}
+	\label{subfig:c1}
+		\end{center}
+	\end{subfigure}
+	~
+		\begin{subfigure}[b]{0.5\textwidth}
+	\begin{center}
+		\includegraphics[draft=false, scale=0.5]{21206990_tmp_2mlimpias.jpg}
+
+	\caption{Valores con filtros y desviaciones estándar}
+	\label{subfig:c2}
+	\end{center}	
+	\end{subfigure}
+	
+	
+	
+	%% las demás gráficas están en /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas
+\end{figure}
+
+\item 23125170 San Pablo de Borbur, Boyacá. Es una serie que presenta muchos vacíos, pero presenta un buen comportamiento. Existen algunos casos de datos atípicos, pero pueden ser eliminados fácilmente con la desviación estándar 4.
+
+\item 24015110 La Boyera, Ubaté Cundinamarca. Estación con buen comportamiento, al parecer no es necesario hacer modificaciones.
+
+\item 35025080 PNN Chingaza la Calera. Estación con un lapso de tiempo largo sin datos. Al inicio de la segunda toma de datos se observa un pico de datos que puede ser eliminado con la desviación de 4. El segundo periodo de tiempo presenta homogeneidad en los datos. Yo solo le quitaría los datos correspondientes al pico del 2007.
+
+\item 35025090 Bosque Intervenido, La Calera. Estación con algunos lapsos de tiempo faltante, pero con una buena homogeneidad. Yo no haría cambio alguno.
+
+\item 35025090 Calostros Bajos, La Calera. Estación con algunos lapsos de tiempo faltante, pero con una buena homogeneidad. Yo no haría cambio alguno.
+
+\item 35035130 Calostro Bajo, La Calera. Estación con muchas fallas, creería que lo mejor es no usar esta información.
+
+\item 35075070 Chinavita Fusavita, Boyacá. Estación con un buen comportamiento, presenta algunos datos atípicos, pero aplicando el filtro de la desviación estándar de 4 se arregla.
+
+\item 35075080 PMO  Rabanál Boyacá, Ventaquemada. Estación en la que existe un periodo sin datos y posteriormente se amplia los rangos de temperatura, a partir del 2015, este caso sería una discontinuidad.
+
+\item 35085080 La capilla la unión, Boyacá, la Capilla. Estación con buen comportamiento, presenta un vacío en el año 2012, pero no existen más. Hay algunos datos que son datos atípicos, pero con la desviación estándar de 4 son corregidos satisfactoriamennte.
+
+
+
+\end{enumerate}
+
+\subsection{Resultados}
+
+
+Existen varios métodos para la validación de los datos meteorológicos, muchos de ellos se pueden aplicar en su mayoría en diferentes latitudes, pero estos no son optimizados regionalmente, como lo resalta \citet{espinar2012controlling}. Las condiciones del clima de una región específica es influenciada por factores de escalas mayores y locales. Para lograr una descripción confiable del clima es necesario tener datos sobre periodos de tiempo lo suficientemente largos que aseguren el registro de diferentes oscilaciones climáticas \citep{kaspar2016climate}. Anteriormente la mayoría de las estaciones eran de tipo convencional pero ultimamente se ha venido presentando un cambio paulatino en la forma de recolección de la información, ya que se ha cambiado de estaciones convencionales a estaciones automáticas.\\
+
+Podemos concluir que es necesario realizar un control de calidad de las estaciones, especialmente las estaciones automáticas. Las estaciones automáticas de la red HYDRAS presentan gran cantidad de errores, pero son una gran herramienta para la investigación ya que nos brindan datos horarios útiles para poder observar fenómenos más específicos. El protocolo y los códigos acá realizados se pueden convertir en una guía para el análisis de este tipo de datos ya que existe una gran cantidad de información en la red HYDRAS.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comparación entre datos de una estación automática y una convencional en el evento de helada presentado en Febrero del 2007}
+
+%%%acá voy
+
+Las estaciones meteorológicas automáticas están tomando el lugar de las observaciones con las estaciones convencionales. Pero es claro que las estaciones meteorológicas automáticas necesitan de un periodo de observaciones en paralelo y todos los datos debe recibir un control de calidad para asegurar una homogeneidad en los datos \citep{Ying2004}, ya que en los análisis futuros la información provendrá solo de las estaciones automáticas.
+
+Las estaciones automáticas Los sensores permanecen en el campo hasta que se reportan problemas o el sensor cumple su tiempo útil. El tiempo de vida útil se establece en base de la experiencia de la red \citep{Shafer2000}.
+
+El promedio y la desviación estándar no debe superar ciertos límites de lo contrario los datos serán tomadon como sospechosos \citep{Shafer2000}.
+
+La rutina de persistencia consiste en evaluar los datos cada 24 horas, si la diferencia excede los límites entonces será marcada como sospechosa \citep{Shafer2000}. Este test es útil para encontrar los momentos cuando el sensor no varía (se queda pegado).
+
+Las inhomogeneidades en las series climáticas pueden ser causadas por cambios en la instrumentación, prácticas de observación, el método para realizar el cálculo la temperatura media de la estación y condiciones medioambientales que rodean la estación de observación \citep{Menne2001}.
+
+Los errores pueden ser producidos por un ruido electrónico en las medidas, comunicaciones defectuosas, degradación del sensor, golpe de un rayo o cambios de los registros en los días \citep{Menne2001}.
+
+Uno de los errores que se presentan es el de la transposición de los números (ejemplo: 12 es registrado por 21) o la transposición de máximos y mínimos.
+
+A nivel espacial cuando las mediciones exceden 2 desviaciones estándar serán marcadas como sospechosas y si el dato excede tres desviaciones estándar será marcada como un dato erróneo.
+
+Se realizaron dos gráficas de las temperaturas del aire medidas a 2 metros y a 10 centímetros. La primera gráfica nos muestra los valores correspondientes a los datos registrados en 6 variables de HYDRAS. Los valores máximos de temperatura a 2 metros corresponden al color rojo, los valores de temperatura máxima corresponden al color azul y los valores de temperatura mínima corresponden al color verde. Para el caso de las temperaturas a 10 centímetros del suelo los valores de temperatura tienen color fucsia, los valores de temperatura máxima tienen color morado y los valores de temperatura mínima tienen un color café.
+
+La primera gráfica \ref{subfig:b9} se graficó primero los valores de promedio, seguido de valores máximos y mínimos. Lo primero que se nota es que los valores de temperatura a 2 metros las tres variables coinciden en los mismos puntos, esto quiere decir que se están tomando con un mismo sensor pero se están guardando en variables diferentes. Además notamos que los valores de temperatura máxima en algunos casos no coincide con el valor máximo y lo mismo sucede con los valores mínimos. Y este comportamiento también se ve en la temperatura del suelo.
+
+La segunda gráfica \ref{subfig:b10} se graficó cambiando el orden de las variables en este caso se graficó primero los valores máximos, mínimos y de la totalidad de la temperatura. Esto implica que la última línea corresponda a los valores de la totalidad de la temperatura, pero se pueden ver algunos puntos, esto implica que la variable de la totalidad de la temperatura tiene espacios vacíos cuyos datos son guardados en otras variables.
+
+Los valores mínimos de las estaciones no se reportan cada hora, pero los valores de la variable llamada promedio se reportan cada hora.
+
+\begin{figure}[H]
+	\centering
+			\begin{subfigure}[b]{0.3\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.1]{temp_hydr_2.png}
+			\caption{Gráfica de las temperaturas de HYDRAS detalle}
+			\label{subfig:b9}
+
+			\end{subfigure}
+			%% % Simbolo usado para poner las gráficas una frente a la ootra
+			\begin{subfigure}[b]{0.3\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.1]{temp_hydr_1.png}
+		\caption{Gráfica de las temperaturas de HYDRAS datos faltantes}
+			\label{subfig:b10}
+
+			\end{subfigure}			
+
+		
+		\caption{Gráfico de la comparación entre variables de HYDRAS}
+		\label{gra:conv_vali}
+	
+\end{figure}
+
+
+
+La helada más fuerte que se ha presentado en los últimos 20 años en la Sabana de Bogotá, ha sido la helada presentada entre el 29 de febrero del 2007 y el 8 de febrero del 2007. Se tomó esta fecha para realizar una comparación entre una estación automática y una estación convencional para estas fechas. Como resultado se obtuvo la figura \ref{subfig:b1}. En esta figura podemos encontrar la estación automática está reportando tres tipos de valores: máximos (tmp\_2m\_max), mínimos (tmp\_2m\_min) y promedio (tmp\_2m). Pero los valores más altos de temperatura no están siendo reportados en la variable de valores máximos, ya que esta está siendo reportada en la variable de temperaturas promedio. \textbf{Los datos de temperatura se almacenan en dos variables, pero el criterio de almacenamiento en una u otra variable depende más del tiempo que de ser valores máximos o mínimos.}\\
+
+
+La estación automática HYDRAS reporta varios valores de temperatura tales como: temperatura a 2 metros, temperatura máxima a dos metros, temperatura mínima a dos metros, temperatura a 10 cm, temperatura máxima a 10 cm, temperatura mínima a 10 cm, temperatura a 10 cm bajo el suelo, temperatura a 30 cm bajo el suelo y temperatura a 50 centímetros bajo el suelo.\\
+
+Las condiciones ambientales afectan el perfil de temperatura del suelo. La distribución de temperatura en el suelo se ve afectada por la estructura y las condiciones físicas del suelo, cobertura del suelo, la interacción con el clima, determinado por la temperatura del aire, viento, radiación solar, humedad del aire y precipitación. Las variaciones sobre el suelo pueden afectar las oscilaciones de temperatura hasta aproximadamente un metro. La temperatura por debajo de  un metro de profundidad usualmente no se ve afectada por cambios de los ciclos diurnos de la temperatura del aire y la radiación solar \citep{florides2005}.
+
+Todas suelos poseen una capacidad diferente de transferencia de calor por ejemplo \citet{florides2005} dice que las rocas que son ricas en cuarzo poseen una graa conductividad térmica, pero en comparación las suelos que son ricos en arcilla y materia orgánica poseen menor capacidad de conductividad térmica. \textcolor{blue}{ \href{http://ces.iisc.ernet.in/hpg/envis/Remote/section994.htm}{CEP}} \citep{CES2000}.
+
+La razón física para el retraso de las ondas de la temperatura es debido a que a cierta profundidad cierta cantidad de temperatura es absorbida o libreada a través de la propagación de la temperatura a través del camino de la propagación del la temperatura como lo muestra \citet{hillel2013} en su libro. Donde muestra una gráfica idealizada de la variación idealizada de la temperatura a través del perfil 
+
+\begin{figure}[H]
+	\begin{center}
+\includegraphics[draft=true, scale=.5]{temp_prof.png}
+	\caption{Variación idealizada de la temperatura del suelo en diferentes tiempo para diferentes profundidades}
+	 \label{gra:tmp_soil}
+	\end{center}
+\end{figure}
+
+realizar una comparación de los valores de temperatura reportado por los sensores a diferentes alturas, podemos observar que hay diferencias marcadas. Los sensores que reportan las más bajas temperaturas ordenados de menor a mayor temperatura son el sensor ubicado a 2 metros, 10 cm, 30 cm y 50 cm. Los sensores que reportan las más altas temperaturas ordenadas de mayor a menor temperatura son: sensor a 10 cm, 2 m, 30 cm y 50 cm.
+
+Uno de los aspectos a resaltar de esta comparación es que se realizó una comparación con las estaciones convencionales. Y podemos ver que los valores de temperaturas mínimas del termómetro de mínimas de la estación convencional coinciden con los puntos más bajos de la estación automática y nunca el valor de la estación automática es menor que el valor de la estación convencional. Pero para el caso de las temperaturas altas podemos ver que en la mayoría de los casos los valores de la estación automática exceden los valores de la estación convencional.
+
+ 
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=true, scale=0.3]{conv_hyd_2007.png}
+		\caption{Comparación de las temperaturas registradas por la estación convencional y la estación automática}
+		\label{subfig:b1}
+	\end{center}
+\end{figure}
+
+En CORPOICA Tibaitatá se encuentra una estación convencional del IDEAM que tiene la capacidad de registrar los valores de temperatura a diferentes niveles de altura como lo podemos observar en la gráfica \ref{grafica_dif_alt_suelo} donde en los años 2007 y 2012 gráficas \ref{suelo_2007} y \ref{suelo_2012}, respectivamente se observa una diferencia entre los valores de la estación automática HYDRAS y la estación convencional.
+
+El promedio de las temperaturas mínimas para esta estación convencional se encuentra en la tabla \ref{tabla_minimas_convencional}. Donde en el conjunto de gráficas \ref{grafica_dif_alt_suelo} podemos ver que en la mayoría de los casos se presenta un orden de menor a mayor de la siguiente forma: 5 centímetros, 10 centímetros, 50 centímetros, 1 metro y 2 metros (Mínima convencional). Si calculamos la diferencia entre los promedios de las temperaturas a 2 metros y 5 centímetros podemos concluir que hay una diferencia de 2.8 \celc. Pero se nota que hay una diferencia con respecto al año 2017 ya que el los ordenes tienden a cambiar, y se presenta un mejor ajuste entre las temperaturas mínimas a 10 cm de ambas estaciones gráfica \ref{suelo_2017}.
+
+
+
+\begin{figure}[H]
+	
+			
+			\begin{subfigure}[b]{\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.2]{comparacion_tmp_del_suelo_2007.png}
+			\caption{Detalle de la comparación de la estación automática HYDRAS contra la estación convencional en diferentes alturas para el año 2007}
+			\label{suelo_2007}
+
+			\end{subfigure}
+	
+
+			%% % Simbolo usado para poner las gráficas una frente a la ootra
+			
+			\begin{subfigure}[b]{\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.2]{comparacion_tmp_del_suelo_2012.png}
+		\caption{Detalle de la comparación de la estación automática HYDRAS contra la estación convencional en diferentes alturas para el año 2012}
+			\label{suelo_2012}
+
+			\end{subfigure}		
+			
+			\begin{subfigure}[b]{\textwidth}
+
+			%%\includegraphics[draft=true, scale=0.2]{comparacion_tmp_del_suelo_2017.png}
+		\caption{Detalle de la comparación de la estación automática HYDRAS contra la estación convencional en diferentes alturas para el año 2017}
+			\label{suelo_2017}
+
+			\end{subfigure}			
+
+		
+		\caption{Gráfico de diferentes años donde se comparan la estación automática de la red HYDRAS y la estación convencional}
+		\label{grafica_dif_alt_suelo}
+	
+\end{figure}
+
+
+
+
+%%% Tabla de los valores mínimos
+
+\begin{table}[]
+\centering
+
+\begin{tabular}{l|l}
+\textbf{Promedio de la variable} & \textbf{\celc} \\ \hline
+Temperatura a 5 cm               & 4.4         \\
+Temperatura a 10 cm              & 5.1         \\
+Temperatura a 50 cm              & 5.9         \\
+Temperatura a 100 cm             & 6.7         \\
+Temperatura a 200 cm             & 7.2        
+\end{tabular}
+\caption{Tabla resumen de las temperaturas mínimas reportados por la estación convencional}
+\label{tabla_minimas_convencional}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{útiles para la comparación entre una estación convencional y una automática}
+
+El funcionamiento de las estaciones automáticas y convencionales es diferente. Por esta razón se han realizado estudios, donde el objetivo es determinar si hay una diferencia entre las estaciones automáticas y las estaciones convencionales \citep{auchmann2012physics}. Por ejemplo \citet{augter2013vergleich} concluye que el cambio en las observaciones solo provoca pequeños cambios para la presión atmosférica y la temperatura y no se presentaron inhomogeneidades, la precipitación es ligeramente diferente, pero la mayor incertidumbre es reflejada en los sensores de lectura manual tales como la medición de la humedad y el brillo solar \citep{augter2013vergleich}. Pero otros autores como \citet{kamtz1831lehrbuch} han reportado diferencias en los valores de las mediciones, al igual que \citet{lacombe2010results} y \citep{kaspar2016climate} quienes aseveran que en ciertos casos la temperatura registrada por la estación convencional registra valores más altos.\\
+
+Una de las ventajas de las estaciones automáticas es que la recolección de los datos mediante estos sensores permite un seguimiento más rápido de las condiciones atmosféricas para la toma de decisiones de importancia agrícola \citep{Soares2017}.
+
+La temperatura promedio es calculada con la siguiente fórmula:
+
+\begin{equation}\label{fx:promedio}
+T_{promedio} = \frac{T_{I} + T_{II} +T_{II}}{4}
+\end{equation}
+
+donde $T_{I}$ es la temperatura observada a las 6:00, $T_{II}$ temperatura observada a las 12:00 y $T_{III}$ temperatura observada a las 18:00. Esta es una adaptación de la fórmula propuesta por \citet{kamtz1831lehrbuch}.
+
+Los valores reportados por las estaciones convencionales son registrados basado en dos tipos de termómetros, para las temperaturas medias se usa un termómetro de mercurio y para las temperaturas mínimas se usa un termómetro de alcohol \citep{augter2013vergleich}. 
+
+Los abrigos meteorológicos de las estaciones convencionales son basados en las modificaciones hechas por la Real Sociedad Meteorológica en 1884 y los sensores de las estaciones automáticas son operadas en Abrigos Laminares del tipo "LAM 630".
+
+Las estaciones automáticas en comparación con las estaciones convencionales, en general midieron valores por debajo de lo normal \citet{kamtz1831lehrbuch}.
+
+En caso de alta radiación y baja velocidad del viento se ha demostrado que el abrigo meteorológico LAM 630 registra valores de temperatura más alto en comparación con la garita de termómetro tipo Stevenson \citep{lacombe2010results, kaspar2016climate}.
+
+El aumento de la temperatura es en parte generado por el efecto de la radiación y la posición del sensor dentro del abrigo. De acuerdo con \citet{kaspar2016climate} el sensor se debe ubicar en una posición que evite la radiación directa en el atardecer, ya que en el estudio realizado se ve que no hay sesgo de la temperatura en el verano.
+
+Como conclusiones \citet{kaspar2016climate} dice que el cambio en la tecnología no introduce un incremento artificial de la temperatura media. Pero el efecto de las temperaturas extremas diarias se vio afectado por el uso del abrigo LAM 630.
+
+Existe la necesidad de actualizar los sensores ya que desde 1989 que no se hace una actualización \citep{lacombe2010results}. El lugar de la comparación se realizó en un lugar que presentó temperaturas de 45 \celc. 
+
+La ventilación de los sensores dan resultados erróneos \citep{lacombe2010results}
+
+Algunas de las estaciones evaluadas por \citet{Soares2017} presentaron valores de temperatura máxima superiores en las estaciones automáticas en comparación de las estaciones convencionales. Los mejores ajustes de datos de las estaciones automáticas y convencionales se presentaron para la variable de precipitación, un ajuste intermedio se presentó para la humedad relativa y un bajo ajuste se presentó para la velocidad del viento.
+
+El proceso final de la limpieza y calidad de los datos es el juzgamiento de los datos por parte de un experto \citep{Estevez2008}
+
+\cite{Estevez2008} nombra varios pasos para la realización de la validación:
+
+\begin{enumerate}
+\item Validación de la estructura, se comprueba que todos los datos estén en la misma forma y dado el caso que no coincidan las fechas estos datos deben ser eliminados
+
+\item Validación según los límites, esta parte de la evaluación tiene en cuenta ciertos rangos para los cuales los datos no deben exceder.
+
+\item Validación de límites flexibles
+
+\item Validación de la coherencia temporal del dato, usada para chequear el exceso de variación de los datos. Donde se compara entreo dos o más observaciones consecutivas.
+
+\item Validación de la coherencia interna, es usado para la verificación de la coherencia entre variables. También es usado para comparar los valores máximos de alguna variable con respecto a los valores del mismo día.
+
+\item Validación de la coherencia temporal de la serie, se usa un periodo de 24 horas y se evalúa el promedio y la desviación estándar, si dichos valores son inferiores a un valor, entonces todos los datos serán reportados como sospechosos. Ya que se espera que los datos estén "pegados".
+
+\item Validación de la coherencia espacial, esta prueba hace referencia a que los valores de estaciones cercanas deben reportar valores similares de lo contrario serán marcados como sospechosos.
+
+\item Inspección visual, para hacer esta revisión es muy útil realizar una representación temporal de las distintas variables en varios niveles de agregación. Para la precipitación y la irradiación resulta muy útil el método de doble masa.
+
+\end{enumerate}
+
+Algunos datos fueron registrados como erróneos y esto se debe a el mantenimiento periódico que se les realiza a las estaciones \citep{Estevez2008}.
+
+La validación de estos datos permitió tomar decisiones tales como la sustitución de sensores o la depuración de registros fuera de rango antes de ser empleados \citep{Estevez2008}.
+
+\citep{Graybeal2004b} propone que para el caso de la humedad la diferencia entre dos valores consecutivos no debe superar los 20\celc. $|T_0 - T_{-1}| > 20^{\circ}C$
+ 
+Existen muchas formas para la determinación de los outliers, pero la determinación de los límites a los cuales se maneja es un concepto subjetivo \citet{Graybeal2004b}.
+
+La temperatura del aire más extrema que se halla presentado fue en Libya en septiembre de 1922 y fue de 57.8\celc \citep{Kubecka2001}
+
+Debido a los datos meteorológicos obtenidos de las estaciones meteorológicas automáticas, los modelos que usan estos datos han presentado resultados cuestionables \citep{Meek1994}.
+
+No se pudo usar el la prueba de la consistencia en la humedad relativa, ya que en la humedad relativa es muy común que la humedad alcance el 100\% y se mantenga en estos valores.
+
+Los valores extremos de precipitación en Colombia según \citet{Arango2014} se han presentado los mas bajos valores en la Guajira con 500 mm/anuales o menos y los más altos valores en la Región Pacífica con más de 9000 mm/año.
+
+Debido a las condiciones orográficas las precipitaciones en el país varían demasiado \citep{Arango2014}. La precipitación posee en general un régimen bimodal, para la mayor parte de la región Andina y de la región Caribe.
+
+La temperatura en la región andina presenta una distribución bimodal
+
+Existen varios límites para la precipitación, \citet{Estevez2011} propone 120 mm/h, \citet{Feng2004} propone 1812.8 mm/día.\\
+
+Entrevista con Jaime Andrés Villareal Rojas el día 20180618 funcionario encargado de la automatización de las estaciones Hydras:
+
+\begin{enumerate}
+\item Ellos han notado la diferencia entre las temperaturas de una estación automática y una estación convencional.
+\item Existen varios tipos de sensores, ya que ellos no pueden comprar sensores a una sola marca porque eso no es legal.
+\item Hasta ahora se van a comenzar las labores de calibración a los sensores porque hasta el momento se instalan los sensores y sólo cuando el sensor presenta datos extraños se procede a realizar el cambio de los mismos, ahora se va a hacer mantenimiento cada 6 meses y se hará calibración de los sensores cada año.
+\item Yo tenía dudas con respecto a la forma como se toman los datos, pero me aclararon que los sensores son capaces de tomar la información de todas las variables al mismo tiempo.
+\item Las variables acumuladas como por ejemplo la precipitación se toma de 7 am hasta el siguiente día a las 7 am.
+\item Es importante para el análisis de la temperatura incluir las 3 temperaturas máximas, mínimas y horarias; ya que las máximas y mínimas registran valores que en algunos casos no se encuentran en la variable horaria.
+
+\end{enumerate}
+
+Buscar la justificación para los límites de la temperatura ya que usé -20\celc y 40\celc. La posible justificación es que las temperaturas mínimas registradas por las estaciones bajan hasta -10\celc entonces le damos una tolerancia de 10\celc más y lo mismo para las temperaturas máximas.
+
+A la velocidad del viento no se le puede hacer el control para los valores pegados ya que hay muchos momentos que la velocidad no cambia.
+
+En el modelo WRF la variable SWDOWN es igual a GHI. Global Horizontal Irradiance is the total solar radiation incident on a horizontal surface. It is the sum of Direct Normal Irradiance (DNI), Diffuse Horizontal Irradiance (DHI), and ground-reflected radiation.
+
+La radiación reportada por los sensores de las estaciones HYDRAS corresponde al rango visible, por esta razón se usará la variable (SWDOWN DOWNWARD SHORT WAVE FLUX AT GROUND SURFACE W m-2) que corresponde a GHI.
+
+Los parámetros para la validación de la dirección del viento se tomaron de \citep{Shafer2000a, DeGaetano1996} donde los rangos para la dirección fueron 0-360 y la diferencia de los datos no debía exceder 360?
+
+Si la velocidad es 0 puede registrar una dirección diferente de 0 dirección. Esto se debe a que el sensor de rapidez del viento puede captar la velocidad del viento, pero si la velocidad del viento no supera cierto humbral entonces la velocidad no se registrará en la plataforma. Como ejemplo si la rapidez fue de 0.000001 el sensor de velocidad en la plataforma registrará 0, pero si la velocidad es de 0.9, entonces el sensor registrará 1.
+
+\subsection{Comparación de los resultados de los resultados obtenidos con diferentes dominios y resoluciones}
+
+Se crearon 3 dominios con las coordenadas de la tabla \ref{tabla_coordenadas_dominios}. Para cada uno de los dominios se cambiaron las resoluciones, teniendo en cuenta que cada nuevo dominio debe tener una tercera parte de la resolución del dominio que lo contiene. Se probaron 
+
+\begin{center}
+
+\begin{table}[H]
+\begin{tabular}{lll}
+Punto & Latitud & Longitud \\ \hline
+1A    & 3.19    & -75.72   \\
+1B    & 6.72    & -72.01   \\
+2A    & 3.61    & -75.32   \\
+2B    & 6.28    & -72.37   \\
+3A    & 4.01    & -74.92   \\
+3B    & 5.61    & -73.01  
+\end{tabular}
+\caption{Coordenadas de los dominios.}
+\label{tabla_coordenadas_dominios}
+\end{table}
+\end{center}
+
+
+\section{Determinación de las fechas de estudio}%Código busqueda_fechas.py
+
+Los pixeles usados son de 108.8 km de ancho
+
+Se usó la estación automática de Tibaitatá de la red HYDRAS. La fecha más antigua usada para el análisis depende de la disponibilidad de datos de la estación automática, esta fecha corresponde al 2007 ya que los datos anteriores no presentaron buenos resultados en la validación de los mismos. Esta estación reporta la temperatura a 2 metros en tres variables temperatura máxima, temperatura mínima y temperatura cada hora. El conjunto de datos de las temperaturas máximas y mínimas se encuentra en su mayoría representado por las temperaturas horarias. Solo en algunos casos las temperaturas máximas y temperaturas mínimas no están dentro de las temperaturas totales. Por esta razón los datos de las temperaturas máximas y mínimas que no se encuentran dentro de las temperaturas horarias fueron adicionados y se creó una nueva variable de temperatura que reúne las temperaturas horarias más los valores adicionales de temperatura máxima y mínima.\\
+
+En el periodo de estudio no se presentaron casos de altas temperaturas en momentos asociados con el fenómeno el niño.\\
+
+Se determinaron las fechas y horas en las cuales la temperatura estuvo bajo 0\celc y sobre 25\celc en la estación automática de Tibaitatá, adicionalmente se buscaron los periodos de El Niño, la Niña y los periodos más largos en horas; como resultado se obtuvo las siguientes fechas, en todos los casos se encuentra reportada la estación convencional de Tibaitatá ya para poder comparar los datos obtenidos con la estación automática:
+
+\begin{itemize}
+\item{Caso 1}%Este caso corresponde al mas largo, fuerte y está en el último mes de un periodo el niño ggweather.com/enso/oni.html
+
+El primer caso de estudio se encuentra entre las fechas 31 de enero del 2007 hasta el 5 de febrero del 2007 que corresponde a los meses más frecuentes de heladas, en temporada reportada bajo la influencia del El Niño. Se seleccionó este caso porque presentó una de las temperaturas más bajas para el día 4 de febrero del 2007 ver tabla \ref{table:caso1}. Según la estación automática la helada tuvo una duración de 5 horas comenzando a las 2 a.m. y finalizando a las 7 a.m., esto la convierte en la helada más larga para nuestro periodo de estudio.
+
+En el periodo estudiado 2007-2016 no se presentaron heladas en fechas asociadas con el fenómeno La Niña.
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+-8.8           & 21205980 & PROVIDENCIA GJA       & Tenjo     \\
+-7.4           & 21205920 & SUASUQUE              & Sopó      \\
+-7.0           & 21205880 & FLORES CHIBCHA        & Madrid    \\
+-4.6           & 21205420 & TIBAITATÁ             & Mosquera  \\
+-4.7           & 21205420 & TIBAITATÁ [Automática]& Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más bajas para el caso 1 del día 4 de febrero del 2007}
+\label{table:caso1}
+\end{table}
+
+\item{Caso 2}%Mes no común en un niño (el periodo del 2015 fue niño todo)
+
+La segunda fecha seleccionada corresponde a una helada presentada en meses atípicos del año, en temporada reportada bajo la influencia del El Niño. La cuál se encuentra en el periodo correspondiente al 29 de agosto del 2014 hasta el 2 de septiembre del 2014. Para esta fecha seleccionada la helada sólo fue registrada por la estación convencional de Tibaitatá ver tabla \ref{table:caso2}. La helada se presentó el día 30 de agosto del 2017.
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+-1           & 21205420 & TIBAITATÁ             & Mosquera \\
+-1.0         & 21205420 & TIBAITATÁ[Automática] & Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más bajas para el caso 2 del día 30 de agosto del 2014}
+\label{table:caso2}
+\end{table}
+
+\textit{En el periodo de estudio no se presentaron altas temperaturas en fenómenos de la NIÑA}
+
+\item{Caso 3}
+
+\textit{Se creó una carpeta en agrometeo llamada /home/agrometeo/wrf/resultados/zona\_201508, para procesar el wps y los archivos usados se descargaron en Downloads}
+
+La cuarta fecha seleccionada corresponde a una alta temperatura presentada en el mes de agosto en una temporada de fenómeno El Niño. Se seleccionó este caso porque se presentó en un mes poco habitual. La cuál se encuentra en el periodo correspondiente al 24 de agosto del 2015 hasta el 28 de agosto del 2015. Según las estaciones convencionales para estas fechas en la zona de estudio no se presentaron temperaturas sobre 25\celc, razón por la cuál se usaron como nuevo límite para las convencionales un valor de 20\celc y se obtuvo la siguiente tabla \ref{table:caso3}. El valor de la estación convencional no superó los 20\celc. El periodo de duración de este evento fue de una hora, iniciando a las 9 am y finalizando a las 10 am.
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+22.0           & 21206620 & COL H DURAN DUSAN   & Bogotá \\
+20.1           & 21205980 & PROVIDENCIA GJA   & Tenjo \\
+19.6           & 21205420 & TIBAITATÁ   & Mosquera \\
+26.0         & 21205420 & TIBAITATÁ[Automática] & Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más altas para el caso del día 27 de agosto del 2015}
+\label{table:caso3}
+
+
+\end{table}
+
+
+
+\item{Caso 4}
+
+
+\textit{Se creó una carpeta en agrometeo llamada /home/agrometeo/wrf/resultados/zona\_201509, para procesar el wps y los archivos usados se descargaron en Downloads}
+
+La tercera fecha seleccionada corresponde a una alta temperatura presentada en el mes de septiembre en una temporada de fenómeno El Niño. Se seleccionó este caso ya que fue uno de los que presentó mas horas sobre 25\celc, según la estación automática el tiempo sobre 25\celc fue de . La cuál se encuentra en el periodo correspondiente al 06 de septiembre del 2015 hasta el 09 de septiembre del 2015. Según las estaciones convencionales para estas fechas en la zona de estudio no se presentaron temperaturas sobre 25\celc, razón por la cuál se usaron como nuevo límite para las convencionales un valor de 20\celc y se obtuvo la siguiente tabla \ref{table:caso4}. Las temperaturas sobre 25\celc comenzó a las 10:33 y finalizó a las 15:21, duró casi 5 horas.\\
+
+El día 20150907 no estaba disponible en los datos del GFS, por esta razón no se usaron estos datos. Pero si estaban los datos del día analizado que corresponde al 20150908.
+%ftp://nomads.ncdc.noaa.gov/GFS/analysis_only/201509/20150907/
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{llll}
+Temperatura \celc & Código   & Nombre de la estación & Municipio \\ \hline
+21.6           & 21206260 & C.UNIV-AGROP-UDCA   & Bogotá \\
+21.6           & 21205980 & PROVIDENCIA GJA   & Tenjo \\
+20.8           & 21206560 & INEM KENNEDY     & Bogotá \\
+20.8           & 21205420 & TIBAITATÁ   & Mosquera \\
+26.7         & 21205420 & TIBAITATÁ[Automática] & Mosquera
+\end{tabular}
+\caption{Tabla de las temperaturas más altas para el caso 4 del día 08 de septiembre del 2015}
+\label{table:caso4}
+
+
+
+\end{table}
+
+
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lecturas del páramo}
+
+\citet{Uribe2012} encontró que para un horizonte de pronóstico de 36 horas se deben descartar las primeras 12 horas para evitar el efecto de \textit{spin-up}.
+
+Según \citep{Uribe2012} el anidamiento no mejora la influencia de la predicción, lo cual traduce en una perdida de tiempo para la predicción de lluvias en Colombia.
+
+Según \citep{Uribe2012} la parametrización por el método de Kain-Fritschc con una resolución de 20 km de grilla presentó la mayor subestimación para la precipitación.
+
+Al aumentar el horizonte de pronóstico de 36 a 48 horas se logra una mejor simulación de los valores de precipitación \citep{Uribe2012}.
+
+
+
+\subsection{Prioridades de restauración ecológica}
+
+
+
+
+Según el enfoque de \citep{Castro-Romero2014} cuando un suelo en una zona pierde atributos como el contenido de materia orgánica y la diversidad de especies de artropofauna, el suelo se degrada. Y esta degradación es considerada como una perdida paulatina de capital natural, que produce que sus habitantes perciban menos beneficios por los servicios ecosistémicos y una disminución en la calidad de vida de sus pobladores. Esto hace que las actividades agropecuarias sean más difíciles y costosas.
+Estas teorías se basan en estudios previos de \citet{daily1997nature} y \citet{westman1977much}.
+
+Las comunidades que producen algún tipo de degradación en los territorios no son conscientes de los costos del daño producido \citep{westman1977much}. Y estos daños se ven relfejados en la disminución de los ingresos netos de las cosechas \citep{Castro-Romero2014}.
+
+\citet{Castro-Romero2014} estableció que la calidad del suelo se debe tener en cuenta los atributos químicos, físicos y biológicos.
+
+El índice de los procesos denudativos del suelo se consolidan como la suma de la erosión, solifluxión, deslizamientos y desplomes \citep{Castro-Romero2014}. %Solifluxión: se produce cuando un material sólido fluye como si fuera un líquido viscoso.
+
+
+
+Una de las conclusiones de \citep{Castro-Romero2014} es que los suelos con la menor valoración económica son aquellas como de mayor prioridad para la restauración. Del mismo modo \citep{Castro-Romero2014} encontró que las prioridades más bajas de restauración se presentan en aquellas unidades que mostraron las mejores condiciones de conservación y calidad del suelo.
+
+\subsubsection{Emergía}
+
+Uno de los resultados más importantes del estudio de \citep{Ernesto} es que el Páramo es usado como una mina del que se extrae carbón, materia orgánica de los suelos y biomasa de sus páramos. Pero adicionalmente este autor cuantificó la tasa a la que se extrae y la estimó en $2.49e-20 \frac{seJ}{year}$.
+
+La emergía es la cantidad de energía requerida para producir algo, teniendo en cuenta la conservación y pérdida de energía que resulta de las leyes de la termodinámica. Entre más trabajo es realizado para producir algo, más energía debe ser transformada para la realización de ese trabajo y una alta emergía será almacenada en el producto. Emergía es una medida del trabajo medioambiental que es necesario para la producción de un bien o un servicio. Esta medida es sin embargo la suma de los flujos de energía requeridos para la producción de algo, expresada en base a las unidades de energía solar Joules \citep{lei2014ecological}.
+
+"La emergía solar de un trozo de madera corresponde a la energía disponible que utilizó un ecosistema para producirlo, osea, la cantidad de Julios solares que se utilizaron para su elaboración" Frase ejemplo tomada de \citep{Castro-Romero2014}.
+
+La transformicidad solar es la emergía solar requerida para conformar una unidad de energía de un servicio o producto, es decir, la relación entre la emergía de un servicio o un producto, es decir, la relación entre la emergía y una cantidad libre de un producto o servicio, por ello su unidad es $\frac{sej}{J}$.
+
+\citep{Castro-Romero2014} realizó los cálculos de la emergía para la minería y la agricultura, teniendo en cuenta la cantidad de combustibles y los insumos usados en cada proceso. Tomaron los mapas de suelo del IGAC realizados en el 2000.
+
+Realizaron un cálculo de la evapotranspiración a partir de Thornwaite realizado en 1966.
+
+Realizaron una estimación de la escorrentía. 
+
+En el estudio se muestra que se requiere $2.44e5 sej$
+
+La emergía libre está dada en términos de la lluvia y el suelo.
+
+La agricultura y la ganadería usa la energía gratuita del sol y la lluvia para producir ingresos. Pero en la ganadería se enfoca en un organismo consumidor.
+
+La ganadería en su mayor parte depende en un 42\% de fuentes no renovables, frente a lo cual \citet{Castro-Romero2014} afirma que cuestiona la sostenibilidad en periodos de tiempo en los cuales la pérdida de materia orgánica del suelo impida su desarrollo.
+
+La leche producida y vendida contiene más emergía que el dinero que recibe.
+
+El sistema de ceba es el menos provechoso de los 3 sistemas ganaderos evaluados.
+
+El páramo es movido mayormente por fuentes externas a este como lo son los combustibles e insumos materiales
+
+El suelo es la mayor fuente de emergía
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Avances búsqueda parametrizaciones WRF}
+
+
+Se creó una carpeta llamada \texttt{zona\_est\_20180320} en esta carpeta se va a ejecutar el WPS que será usado para probar las combinaciones se ejecutará desde un día antes y un día después de las fechas que se usarán en el WRF, ya que, en el WRF se usarán las fechas \texttt{20070201-20070204}. El centro del dominio será en el município de Tocancipá estas serán las coordenadas \texttt{-73.96740787376062087 4.9704810067620171} en las variables correspondientes a \texttt{ref\_lat, ref\_lon, truelat1, stand\_lon}. Y se tomarán los datos proporcionados por el IDEAM para la Vtable. Sólo se usó un dominio para llegar a una resolución de 2 kilómetros con el WRF, una copia quedó dentro de la carpeta llamada resultados.\\
+
+Al final se crearon los archivos netCDF para las fechas seleccionadas. 
+
+Para la comparación de los mejores modelos se usó el diagrama de Taylor a partír de un código obtenido del repositorio de \textcolor{blue}{ \href{https://gist.github.com/ycopin/3342888}{ycopin}}. En este código se usó lo propuesto por \citet{barnston1992} quien calcula el cuadrado medio del error a partir del la desviación estándar y el coeficiente de correlación.
+
+\begin{equation}\label{eq:rms}
+	     RMS = \sqrt{1-r^{2}}SD_{y}
+\end{equation}
+
+Para poder compara las temperaturas a 2 metros se unieron todas las temperaturas (máximas, mínimas y promedio) conla finalidad de solo usar un valor. Se priorizaron las variables de la variable llamada promedio sobre las demás esto se encuentra en el código llamado \texttt{Procesamiento\_wrf.py}
+
+\begin{enumerate}
+
+\item El IDEAM facilitó las namelist.* y la versión que están usando
+\item Se instaló el WRFV3.9.1.1 en la máquina agrometeo
+\item Se realizó una corrida con los datos del GFS para un periodo de 2016-12-28 00:00 - 2017-01-01 18:00 (4 días). Esta corrida tomó 12 horas y 30 minutos y se usaron 152 GB. Se realizaron 64 simulaciones. (265 días).
+
+\end{enumerate}
+
+\subsection{Resultado de las modelaciones con el WRF}
+
+Se probaron cada una de las parametrizaciones físicas del modelo, (sin combinatoria). Este proceso comenzó el 20180404 y terminó el 20180412, se demoró un total de 8 días.
+\subsection{Literatura sobre las parametrizaciones}
+
+La comprensión de los procesos físicos que rigen las masas de aire frío y su adecuada representación en un modelo de predicción numérico (por sus siglas en inglés \textit{numerical weather prediction} (NWP)) son necesarios para una predicción adecauada de las temperaturas de la superficie y los escenarios de heladas \citep{prabha2008}.\\
+
+
+
+Le balance de energía y la capa límite (bpl) se ha demostrado que pronostica erroneamente las tasas de enfriamiento y las altas temperaturas en la presencia de heladas advectivas \citep{heinemann1988}. El pronóstico de las heladas con la ayuda de moedlos de predicción enfrenta un reto debido la interacción no linear de los componetnes del balance hídrico, el cual puede causar pronósticos imprecisos \citep{gutowski2003}.\\
+
+El estado del arte del WRF se definió como una colección de varios modelos de predicción numericos en la arquitectura de un solo software con dos modelos de pronóstico dos formas de pronóstico de solucionar que son el \textit{Advanced Reseach WRF} por sus siglas en inglés (ARW) y el \textit{Nonhydrostatic Mesoscale Model} por sus siglas en inglés (NMM). El ARW ha sido desarrollado y administrado por \textit{NCAR's Mesoscale and Microscalo Meteorology Laboratory}. El núcleo del NMM fue desarrollado por \textit{National Centers for Envoronmental Prediction} y es actualmente usado en el sistema \textit{Hurricane WRF} (HWRF).
+
+La correcta parametrizaión va a depender de varios factores como lo nombra \citet{prabha2008evaluation} tales como: seleccionar correctamente la resolución, el poder computacional, condiciones iniciales, resolución del terreno, datos del uso del suelo y las parametrizaciones físicas a usar.
+
+Para la verificación de la predicción de estos modelos es necesario comparar con las estaciones para de esta manera verificar los resultados (Validar??).
+
+Uno de los primeros pasos que se deben desarrollar en esta metodología es la caracterización climática de la zona. \citet{prabha2008evaluation} realizaron una caracterización para cada una de las estaciones por 13 años.
+
+\citet{prabha2008evaluation} define el índice de congelamiento como la integral de la temperatura del aire cuando esta se encuentra bajo 0\celc.\\
+
+\citet{prabha2008evaluation} Usan dos índices para evaluar
+
+El índice de congelamiento es definido como el numero de grados día por un periodo específico de tiempo \citep{frauenfeld2007northern}. El índice que propone \citet{frauenfeld2007northern} es definido como la suma de los valores de temperatura bajo 0\celc como:
+
+\begin{equation}\label{eq:frost_index}
+    \int_{t_0}^{t_n} T dt,\quad Para T \leq 0^{\circ}C
+\end{equation}
+
+donde $T$ corresponde al valore de la temperatura, integrado desde $t_0$ hasta el tiempo $t_n$. son el comienzo y final de los diferentes tiempos, $T$ es el valor de la temperatura y $dt$ es el cambio en el tiempo.
+
+Existen dos tipos de heladas la radiativa y la advectiva \citep{snyder2005frost} grandes incusiones de aire frío, vientos atmósferas que se encuentran a temperaturas bajo 0\celc 
+
+Caracterización de una helada radiativa cielos despejados, vientos en calma, inversión de temperatura, bajas temperaturas de punto de rocío y temperaturas que caen por debajo de 0\celc.
+
+El tope de la inversión es variable ya que depende de la topografía y las condiciones climáticas, pero generalmente tiene un rango de 9 a 60 m \citep{snyder2005frost}.
+
+En las noches despejadas más calor es irradiado fuera de la superficie en comparación con el que fue recibido durante el día. La temperatura cae rápidamente cerca de la superficie de radiación causando una inversión.
+
+Según la gráfica de inversión de temperatura la inversión se nota a una altura de 3 o 5 metros. 
+
+Para la protección de las heladas radiativas son más efectivos los métodos "Energy-intensive"
+
+Dentro de las heladas radiativas hay dos categorías:
+
+La helada blanca (hoar frost): Sucede cuando el vapor de agua depositado en la superficie forma una cobertura blanquecina de hielo y es comúnmente llamada "escarcha".
+
+Helada negra (black): Ocurre cuando la temperatura cae bajo 0\celc y no hay formación de hielo en la superficie. Si la humedad es suficientemente baja, entonces la superficie no alcanzará el punto de congelamiento y no se formará hielo. Cuando la humedad es alta, hay una más alta probabilidad de una helada blanca. Se produce calor cuando se pasa de líquido a sólido, por esta razón la helada blanca es menos lesiva en comparación un una helada negra.
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[draft=true, scale=0.6]{latent.png}
+		\caption{Gráfica de calor latente}
+		\label{subfig:cal_lat}	
+	\end{center}
+
+\end{figure}
+
+Una clara seña de que estamos presenciando una helada cae en unas pocas horas antes de del amaneces, cuando la energía neta de radiación de la superficie cambia rápidamente de positiva a negativa. Este cambio se da principalmente porque la radiación solar decrece desde su valor más alto al medio día a 0 en el atardecer.
+
+La densidad del flujo de calor en el suelo está determinada por 
+
+\begin{equation}\label{eq:frost_index}
+    G = -\lambda(\frac{\partial T}{\partial z})
+\end{equation}
+
+tomado de \citep{sauer2002soil}
+
+Helada por advección\\
+Masas de aire frío llegan a una área a remplazar el aire cálido que estaba presente antes de que el tiempo cambiara.
+
+\begin{enumerate}
+\item Condiciones nubladas
+\item Vientos desde moderados hasta fuertes según \citet{prabha2008evaluation} son vientos con velocidades superiores a 2 $m/s$.
+\item Sin inversión térmica
+\item Baja humedad
+\item Las temperaturas caen bajo 0\celc y permanecen de esta misma forma todo el día.
+\item La mayoría de estos eventos ocurren en climas Mediterráneos y tienden a ser más comunes en las costas.
+\item La mayoría de los eventos
+\end{enumerate}
+Este tipo de heladas son difíciles de combatir, es por esto que es la mayoría de los métodos de protección funcionan mejor en la presencia de una inversión. En algunos casos la helada por advección puede generar una helada radiativa.\\
+
+Clasificación de métodos de protección
+
+Existen varias clasificaciones como los métodos pasivos que son más preventivos como métodos biológicos, o técnicas ecológicas incluyendo prácticas como un alistamiento previo a la presencia de las heladas.
+
+Los métodos activos son métodos que son basados en el uso intensivo de energía. Algunos ejemplos son calentadores, riego, máquinas de viento.\\
+
+Entre las latitudes entre los trópicos de Cancer y Capricornio existen grandes áreas con temperaturas bajo cero. Pero aún en estas zonas a veces se presentan daños en lugares con grandes alturas.\\
+
+Es menos probable que ocurra una helada cuando:
+\begin{enumerate}
+\item El terreno se encuentra en un área donde el viento sopla
+\item El terreno se encuentra cerca a una masa de agua
+\end{enumerate}
+
+El humo no ofrece ningún tipo de protección a los cultivos \citep{itier1987influence}\\
+
+Los daños causados en las plantas son debido al congelamiento del agua extra celular dentro de las plantas 
+
+Las ubicaciones bajas presentan problemas de bajas temperaturas. Pero en algunas ocasiones se pueden presentar daños en algunos sitios, esto es debido al tipo de suelo.\\
+
+Un suelo seco arenoso transfiere mejor el calor que un suelo seco y arcilloso y ambos transfieren y almacenan mejor la temperatura que un suelo orgánico.
+
+La transferencia de calor del agua es tres veces mayor que la del suelo. Los suelos húmedos tienen mayor capacidad de conductividad en comparación con un suelo seco.
+
+Obstáculos que inhiban el drenaje de las masas de aire frío.\\
+
+La fertilización puede ser una forma para evitar ele efecto de las heladas en el cultivo
+
+El riego es uno de los mecanismos más económicos para el control de las heladas.\\
+
+La inundación de los suelos puede proveer protección de los cultivos entre 2 a 3\celc. Existe una relación entre la lamina de agua que se debe aplicar para evitar la helada de esa noche y la temperatura máxima registrada en el día.\\
+
+Una de las formas de protección es realizar un pronóstico de las heladas
+
+\subsubsection{Parámetros usado por Prabha en lso dos artículos \citep{prabha2008} y \citep{prabha2008evaluation}}
+
+
+En el artículo \citet{prabha2008} podemos destacar varios aspectos:
+
+\begin{enumerate}
+\item Lo primero que se estudió fueron las condiciones iniciales
+\item Capa límite planetaria
+\item Superficie del terreno
+\end{enumerate}
+
+Se realizó una comparación contra la red de estaciones automáticas de la zona. En este estudio se manejaron 40 niveles de presión y se acomodaron 15 niveles en la PBL. (Grid resolution en el artículo)
+
+
+La configuración de modelo fue la siguiente:
+
+\begin{itemize}
+\item WSM3 en microfísica \texttt{mp\_physics = 3: "WRF Single-Moment (WSM) 3-class simple ice scheme: A simple efficient scheme with ice and snow processes suitable for mesoscale grid sizes."}
+\item La parametrización de cúmulos es la Kain-Fritsch \texttt{cu\_physics = 1: "Kain-Fritsch (new Eta) scheme: deep and shallow sub-grid scheme using a mass flux approach with downdrafts and CAPE removal time scale"}
+
+\item La parametrización usada para la radiación de onda larga corresponde a RRTM \texttt{ra\_lw\_physics = 1: "RRTM scheme: Rapid Radiative Transfer Model. An accurate scheme using look-up tables for efficiency. Accounts for multiple bands, trace gases, and microphysics species. This scheme has been preliminarily tested for WRF-NMM."}
+
+\item La parametrización usada para la radiación de onda corta corresponde a RRTM \texttt{•}
+\end{itemize}
+
+
+El experimento consistió en probar diferentes, capas límites planetarias, condiciones iniciales y diferes esquemas de suelo.:
+
+Condiciones iniciales
+\begin{itemize}
+\item NAM = Grilla de 12 km. North American Regional Reanalysis
+\item NARR grilla de 36 km. North American Mesosclase
+\end{itemize}
+
+Parameterizaciones de capa límite \texttt{bl\_pbl\_physics}
+\begin{itemize}
+\item MYJ = 2. \texttt{Mellor-Yamada-Janjic (Eta) TKE scheme}
+\item YSU = 1. \texttt{YSU scheme}
+\end{itemize}
+
+Parametrizaciones del terreno \texttt{sf\_surface\_physics}
+\begin{itemize}
+
+\item SLAB = 1 \texttt{"Thermal Diffusion scheme: soil temperature only scheme, using five layers."}
+
+\item Noah = 2. \texttt{"Noah Land-Surface Model: Unified NCEP/NCAR/AFWA scheme with soil temperature and moisture in four layers, fractional snow cover and frozen soil physics. This scheme has been preliminarily tested for WRF-NMM."}
+
+
+\item RUC = 3. \texttt{"RUC Land-Surface Model: Rapid Update Cycle operational scheme with soil temperature and moisture in six layers, multi-layer snow and frozen soil physics. This scheme has been preliminarily tested for WRF-NMM."}
+
+
+
+\end{itemize}
+
+
+
+\subsubsection{Revisión de literatura relacionada}
+
+
+Existen diferencias micrometeorológicas, como por ejemplo el echo que existan diferencias de 1\celc en 100 metros.
+
+La máxima temperatura que puede soportar un tuberculo de papa es -0.8\celc\\
+
+
+La capa de aire que toca el suelo se llama vientos catabático o vientos de drenaje. Son causados por el enfriamiento del aire, adyacente al suelo y descienden gracias a la influencia de la gravedad \citep{Stull1988pbl}.
+
+El estudio de la capa límite planetaria contiene el estudio de la micrometeorología \citep{Stull1988pbl}.
+
+Para el estudio de la micrometeorología \citet{Stull1988pbl} los clasifica en 3:
+
+\begin{enumerate}
+\item Métodos estocásticos
+\item Teoría de similitud
+\item Clasificación fenomenológica
+\end{enumerate}
+
+
+
+
+\subsection{Mecanismos de transferencia de energía}
+
+Cuando la energía pasa a través del suelo por conducción se llama densidad de flujo de calor.\\
+La protección de una helada consiste en tratar de reducir o remplazar la pérdida del contenido de calor sensible del aire y de las plantas.
+
+
+
+Cuando el agua se congela la mayoría de las moléculas hacen enlaces con el nitrógeno para formar una estructura cristalina. 
+
+\begin{table}[H]
+\centering
+
+\label{tabla_conductividad}
+\begin{tabular}{@{}llll@{}}
+\multicolumn{4}{l}{Conductividad termica de los suelos $W m^{-1}\cdot^{\circ}C^{-1} $} \\ \midrule
+\multicolumn{1}{l|}{}         & Orgánicos  & Arcillosos & Arenosos \\ \midrule
+\multicolumn{1}{l|}{Secos}    & 0.1        & 0.25       & 0.3      \\
+\multicolumn{1}{l|}{Húmedos}  & 0.5        & 1.6        & 2.4     
+
+\end{tabular}
+\caption{Tabla de conductividad de suelos}
+\end{table}
+
+
+%%%Pagina de las tablas
+\newpage
+\begin{landscape}
+\section{Tabla resumen de los códigos}
+
+\begin{table}[ht]
+\centering
+
+\resizebox{\textwidth}{!}{\begin{tabular}{lll}
+Nombre del código             & Función                                                                                                                                                      & Fecha    \\ \hline
+pandas                        & Base de entrenamiento en pandas                                                                                                                              & 20180130 \\
+pre\_procesamieto\_ideam.py   & Función que toma los datos en tr5 y cambia las columnas (pivot)                                                                                              & 20180131 \\
+matplot\_lib.py               & Base de entrenamiento en matplotlib                                                                                                                          & 20180214 \\
+pre-procesamiento-hydras.py   & Función para unir las bases de datos con todas sus variables con un mismo código                                                                             & 20180215 \\
+manejo\_ideam\_diarias.py     & Base para manejar los datos en tr5 con la finalidad de determinar la cantidad de datos faltantes de una sola estación, Tibaitatá principalmente              & 20180216 \\
+missin\_data.py               & Código para realizar los plots de las estaciones convecionales cuando se reportan NA oinconsistencias son guardados como gráficas resúmen                    & 20180217 \\
+vickers\_mahrt.py             & Base de entrenamiento para las validaciones de los datos de las estaciones automáticas                                                                       & 20180222 \\
+descarga\_IDEAM\_hydras.py    & Código para la descarga de los datos de la red HYDRAS                                                                                                        & 20180223 \\
+bases\_dane\_papa.py          & Código usado para procesar la información del DANE. Usado para la creación de las tablas de estadística usados en el documento y en las gráficas municipales & 20180305 \\
+nuevo\_preprocesam\_hydras.py & Código creado para 1 eliminar las bases por variable y 2 eliminar las bases por años. Poner la información de cada estación en una sola forma.               & 20180307 \\
+automatizacion\_graph.py      & Grafica donde se comparan los valores de la estación convencional y la estación automática. Es la versión mejorada y automatizada                            & 20180313 \\
+automatizacion\_graph.py      & Código usado para la automatización de las gráficas donde se compara la estación automática y la estación convencional.                                      & 20180313 \\
+extraccion.py                 & Código usado para la extracción de los datos de la modelación del WRF, primera versión. No está muy bien                                                     & 20180321 \\
+extraccion\_2.py              & Código usado para la extracción de datos del WRF versión mejorada y modificada                                                                               & 20180304 \\
+validacion\_tmps.py           & Validación de los datos de temperatura de las estaciones HYDRAS, con sus gráficas                                                                            & 20180331 \\
+validacion\_20180522.py           & Modificación del código antiguo de validación, se mejoró SPIKES y sólo se procesa información a 2m, que son unidas en una sola variable & 20180522 \\
+Procesamiento\_wrf.py         & Código para crear una comparación de los datos de la estación HYDRAS y las diferentes parametrizaciones del modelo WRF. Se crea una sola columna para la temperatura                                       & 20180404 \\
+mapas\_matplot\_lib.py        & Código exploratorio para buscar una forma de realizar el plot de las variables producidas por el WRF. Con matplotlib                                         & 20180405 \\
+plot.py                       & Código creado con cartophy para plotear mapas provenientes del WRF. Buenos resultados                                                                        & 20180421 \\
+validacion\_hydras\_manual.py & Gráficas de la comparación de termómetro a diferentes alturas y validación de las estaciones automáticas contra las convencionales diferentes altura                                  & 20180423 \\
+busqueda\_fechas.py & Búsqueda de las fechas de las heladas y altas temperaturas Y extracción de las gráficas resumen de la zona. Gráficas de las estaciones con limpieza de datos & 20180606\\
+validacióntemp.py & Búsqueda de las fechas de las heladas y altas temperaturas Y extracción de las gráficas resumen de la zona. Gráficas de las estaciones con limpieza de datos & 20180606
+\end{tabular}}
+\caption{Tabla resumen de los códigos}
+\label{tabla_resumen}
+\end{table}
+
+
+
+\end{landscape}
+
+\begin{table}
+\iffalse % Usado para que no cargue la tabla cada vez que compila
+%\iftrue
+\begin{tabular}{lrllllrr}
+\toprule
+{} &    Código &                    Nombre & Tipo &  Departamento &         Município &   Latitud &   Longitud \\
+\midrule
+0   &  21195160 &          SUBIA AUTOMATICA &  AUT &  CUNDINAMARCA &          SILVANIA &  4.476611 & -74.383889 \\
+1   &  21201200 &   ESC LA UNION AUTOMATICA &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.342944 & -74.183889 \\
+2   &  21201580 &      PASQUILLA AUTOMATICA &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.446500 & -74.154833 \\
+3   &  21202270 &    PLUVIOMETRO AUTOMATICO &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.608056 & -74.072889 \\
+4   &  21202271 &        PLUVIOMETRO AUTOMA &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.608056 & -74.072889 \\
+5   &  21205012 &             UNIV NACIONAL &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.638083 & -74.089083 \\
+6   &  21205791 &            APTO EL DORADO &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.705583 & -74.150667 \\
+7   &  21206600 &          NUEVA GENERACION &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.782222 & -74.094333 \\
+8   &  21206710 &    SAN JOAQUIN AUTOMATICA &  AUT &  CUNDINAMARCA &           LA MESA &  4.633333 & -74.516667 \\
+9   &  21206790 &         HDA STA ANA AUTOM &  AUT &  CUNDINAMARCA &           NEMOCÓN &  5.090500 & -73.881250 \\
+10  &  21206920 &   VILLA TERESA AUTOMATICA &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.350000 & -74.150000 \\
+11  &  21206930 &              PMO GUERRERO &  AUT &  CUNDINAMARCA &         ZIPAQUIRÁ &  5.086444 & -74.022167 \\
+12  &  21206940 &            CIUDAD BOLIVAR &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.576861 & -74.176778 \\
+13  &  21206950 &           PMO GUACHENEQUE &  AUT &  CUNDINAMARCA &       VILLAPINZÓN &  5.236056 & -73.525083 \\
+14  &  21206960 &              IDEAM BOGOTA &  AUT &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.066667 \\
+15  &  21206980 &        STA CRUZ DE SIECHA &  AUT &  CUNDINAMARCA &            GUASCA &  4.784278 & -73.870806 \\
+16  &  21206990 &      TIBAITATA AUTOMATICA &  AUT &  CUNDINAMARCA &          MOSQUERA &  4.691417 & -74.209000 \\
+17  &  21209920 &          STA ROSITA AUTOM &  AUT &  CUNDINAMARCA &            SUESCA &  5.192250 & -73.779056 \\
+18  &  23125170 &        SAN CAYETANO AUTOM &  AUT &  CUNDINAMARCA &      SAN CAYETANO &  4.516753 & -74.088222 \\
+19  &  24015110 &      LA BOYERA AUTOMATICA &  AUT &  CUNDINAMARCA &             UBATÉ &  5.303806 & -73.851750 \\
+20  &  35025080 &        PNN CHINGAZA AUTOM &  AUT &  CUNDINAMARCA &         LA CALERA &  4.661000 & -73.827333 \\
+21  &  35025090 &        BOSQUE INTERVENIDO &  AUT &  CUNDINAMARCA &         LA CALERA &  4.664889 & -73.846639 \\
+22  &  35025100 &            CALOSTROS BAJO &  AUT &  CUNDINAMARCA &         LA CALERA &  4.673778 & -73.818889 \\
+23  &  35027001 &           PLAZA DE FERIAS &  AUT &  CUNDINAMARCA &           CÁQUEZA &  4.403389 & -73.940556 \\
+24  &  35027002 &       PARQUE RAFAEL NUÑEZ &  AUT &  CUNDINAMARCA &           CÁQUEZA &  4.407417 & -73.947500 \\
+25  &  35027510 &            CALOSTROS BAJO &  AUT &  CUNDINAMARCA &         LA CALERA &  4.673778 & -73.818889 \\
+26  &  35035130 &              PMO CHINGAZA &  AUT &  CUNDINAMARCA &         LA CALERA &  4.713667 & -73.803250 \\
+27  &  35075070 &      CHINAVITA AUTOMATICA &  AUT &        BOYACÁ &         CHINAVITA &  5.219250 & -73.350389 \\
+28  &  35075080 &    PMO RABANAL AUTOMATICA &  AUT &        BOYACÁ &      VENTAQUEMADA &  5.392389 & -73.562778 \\
+29  &  35085080 &          LA CAPILLA AUTOM &  AUT &        BOYACÁ &        LA CAPILLA &  5.099194 & -73.436000 \\
+30  &  21200160 &                   PANONIA &  CON &  CUNDINAMARCA &          CHOCONTÁ &  5.057972 & -73.734333 \\
+31  &  21200620 &                   PISCIS  &  CON &  CUNDINAMARCA &          CHOCONTÁ &  5.079167 & -73.696861 \\
+32  &  21200780 &             POTRERO LARGO &  CON &  CUNDINAMARCA &         GUATAVITA &  4.929222 & -73.780472 \\
+33  &  21200840 &              FLORESTA LA  &  CON &  CUNDINAMARCA &            GUASCA &  4.850000 & -73.783333 \\
+34  &  21201050 &                  LOURDES  &  CON &  CUNDINAMARCA &        GACHANCIPÁ &  4.982889 & -73.864667 \\
+35  &  21201060 &         PANTANO REDONDO 1 &  CON &  CUNDINAMARCA &         ZIPAQUIRÁ &  5.043250 & -74.033389 \\
+36  &  21201070 &               CORAZON EL  &  CON &  CUNDINAMARCA &        FACATATIVÁ &  4.865361 & -74.289417 \\
+37  &  21201080 &             SAN FRANCISCO &  CON &  CUNDINAMARCA &              SOPÓ &  4.900000 & -73.950000 \\
+38  &  21201140 &             ESPERANZA LA  &  CON &  CUNDINAMARCA &             TENJO &  4.802167 & -74.179972 \\
+39  &  21201160 &           EDIFICIO SARAGA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+40  &  21201180 &                GUANQUICA  &  CON &  CUNDINAMARCA &             TAUSA &  5.184278 & -73.941111 \\
+41  &  21201190 &                LAGUNITAS  &  CON &  CUNDINAMARCA &             TAUSA &  5.214528 & -73.907250 \\
+42  &  21201210 &                HATO EL    &  CON &  CUNDINAMARCA &             TENJO &  4.866389 & -74.153861 \\
+43  &  21201220 &        STA CRUZ DE SIECHA &  CON &  CUNDINAMARCA &            GUASCA &  4.784278 & -73.870806 \\
+44  &  21201230 &          ENMANUEL D ALZON &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.701125 & -74.070306 \\
+45  &  21201240 &         STA MARIA DE USME &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.481306 & -74.126278 \\
+46  &  21201250 &                SAN PEDRO  &  CON &  CUNDINAMARCA &              SOPÓ &  4.871639 & -73.966667 \\
+47  &  21201270 &                 TIBAR EL  &  CON &  CUNDINAMARCA &            MADRID &  4.816667 & -74.233333 \\
+48  &  21201300 &                AUSTRALIA  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.394250 & -74.132000 \\
+49  &  21201310 &        PREVENTORIO INFANT &  CON &  CUNDINAMARCA &            SIBATÉ &  4.465444 & -74.267500 \\
+50  &  21201320 &                 UNION LA  &  CON &  CUNDINAMARCA &            SIBATÉ &  4.509361 & -74.268806 \\
+51  &  21201550 &                 ROBLE EL  &  CON &  CUNDINAMARCA &            MADRID &  4.796667 & -74.226389 \\
+52  &  21201570 &        ESC COL INGENIERIA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.783333 & -74.050000 \\
+53  &  21201600 &         SEDE IDEAM KRA 10 &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.607111 & -74.072889 \\
+54  &  21201610 &               SAN ISIDRO  &  CON &  CUNDINAMARCA &            GUASCA &  4.850289 & -73.890722 \\
+55  &  21201620 &                SUESCA     &  CON &  CUNDINAMARCA &            SUESCA &  5.109583 & -73.796972 \\
+56  &  21201630 &                TABIO GJA  &  CON &  CUNDINAMARCA &             TABIO &  4.933056 & -74.065611 \\
+57  &  21201640 &           VILLAPINZON GJA &  CON &  CUNDINAMARCA &       VILLAPINZÓN &  5.263750 & -73.590861 \\
+58  &  21201650 &               STA ROSITA  &  CON &  CUNDINAMARCA &            SUESCA &  5.115917 & -73.757389 \\
+59  &  21201920 &           ALTO SAN MIGUEL &  CON &  CUNDINAMARCA &            SIBATÉ &  4.449667 & -74.299722 \\
+60  &  21201930 &                GUANQUICA  &  CON &  CUNDINAMARCA &             TAUSA &  5.184278 & -73.941111 \\
+61  &  21202100 &         IDEAM FONTIBON HB &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.700000 & -74.166667 \\
+62  &  21202160 &             HIDROPARAISO  &  CON &  CUNDINAMARCA &        EL COLEGIO &  4.573167 & -74.404833 \\
+63  &  21202280 &  SEDE IDEAM CALLE 25D KRA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.684000 & -74.129000 \\
+64  &  21205013 &            UNISALLE NORTE &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.794444 & -74.030556 \\
+65  &  21205230 &          OBS MET NACIONAL &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.633333 & -74.100000 \\
+66  &  21205420 &                TIBAITATA  &  CON &  CUNDINAMARCA &          MOSQUERA &  4.691417 & -74.209000 \\
+67  &  21205520 &        ELDORADO DIDACTICA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.700000 & -74.150000 \\
+68  &  21205580 &         VENADO ORO VIVERO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.598361 & -74.061556 \\
+69  &  21205600 &        VELODROMO 1 D MAYO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.616667 & -74.066667 \\
+70  &  21205660 &             MERCEDES LAS  &  CON &  CUNDINAMARCA &          ANAPOIMA &  4.581889 & -74.526611 \\
+71  &  21205670 &               FLORIDA LA  &  CON &  CUNDINAMARCA &          ANOLAIMA &  4.770889 & -74.437639 \\
+72  &  21205700 &                   GUASCA  &  CON &  CUNDINAMARCA &            GUASCA &  4.879861 & -73.868111 \\
+73  &  21205710 &           JARDIN BOTANICO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.669333 & -74.102667 \\
+74  &  21205720 &            SAN JORGE GJA  &  CON &  CUNDINAMARCA &            SOACHA &  4.505750 & -74.189278 \\
+75  &  21205730 &          CENTRO MED ANDES &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.698167 & -74.036833 \\
+76  &  21205740 &                    SILOS  &  CON &  CUNDINAMARCA &          CHOCONTÁ &  5.117722 & -73.701417 \\
+77  &  21205750 &         REP LOS MUCHACHOS &  CON &  CUNDINAMARCA &             FUNZA &  4.733333 & -74.166667 \\
+78  &  21205760 &        CLINICA SAN RAFAEL &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+79  &  21205770 &         BASE AEREA MADRID &  CON &  CUNDINAMARCA &            MADRID &  4.728806 & -74.272500 \\
+80  &  21205780 &                 SENA GJA  &  CON &  CUNDINAMARCA &          MOSQUERA &  4.700000 & -74.216667 \\
+81  &  21205790 &            APTO EL DORADO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.705583 & -74.150667 \\
+82  &  21205800 &        BOMBEROS DEL NORTE &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.650000 & -74.066667 \\
+83  &  21205810 &        CAPITOLIO NACIONAL &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+84  &  21205820 &        LICORERA BOGOINAMA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.616667 & -74.100000 \\
+85  &  21205830 &         MUZU CENTRO SALUD &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.133333 \\
+86  &  21205840 &                SENA K 30  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.595361 & -74.111833 \\
+87  &  21205850 &            COLOMBIANO EL  &  CON &  CUNDINAMARCA &          SESQUILÉ &  5.033889 & -73.848194 \\
+88  &  21205860 &                 CORZO EL  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.650000 & -74.200000 \\
+89  &  21205870 &               SALITRE EL  &  CON &  CUNDINAMARCA &            BOJACÁ &  4.738889 & -74.334278 \\
+90  &  21205880 &            FLORES CHIBCHA &  CON &  CUNDINAMARCA &            MADRID &  4.789722 & -74.264778 \\
+91  &  21205890 &                  GUANATA  &  CON &  CUNDINAMARCA &              CHÍA &  4.885944 & -74.054333 \\
+92  &  21205900 &              INDUQUIMICA  &  CON &  CUNDINAMARCA &            SOACHA &  4.583333 & -74.233333 \\
+93  &  21205910 &               COSECHA LA  &  CON &  CUNDINAMARCA &         ZIPAQUIRÁ &  4.989222 & -74.001194 \\
+94  &  21205920 &              SUASUQUE     &  CON &  CUNDINAMARCA &              SOPÓ &  4.820833 & -73.963889 \\
+95  &  21205930 &               VILLA ROSA  &  CON &  CUNDINAMARCA &              COTA &  4.833333 & -74.100000 \\
+96  &  21205940 &               VILLA INES  &  CON &  CUNDINAMARCA &        FACATATIVÁ &  4.834972 & -74.383972 \\
+97  &  21205950 &            TIBACHOQUE HDA &  CON &  CUNDINAMARCA &             FUNZA &  4.759056 & -74.205167 \\
+98  &  21205960 &                    TACHI  &  CON &  CUNDINAMARCA &        SUBACHOQUE &  4.939056 & -74.152583 \\
+99  &  21205970 &              STA ANA HDA  &  CON &  CUNDINAMARCA &           NEMOCÓN &  5.090500 & -73.881250 \\
+100 &  21205980 &           PROVIDENCIA GJA &  CON &  CUNDINAMARCA &             TENJO &  4.792389 & -74.200917 \\
+101 &  21205990 &                 LLANO EL  &  CON &  CUNDINAMARCA &              SOPÓ &  4.927778 & -73.950000 \\
+102 &  21206000 &                 ADPOSTAL  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.680750 & -74.123639 \\
+103 &  21206010 &             LORETOKI HDA  &  CON &  CUNDINAMARCA &            SUESCA &  5.089028 & -73.802750 \\
+104 &  21206020 &            SANTILLANA     &  CON &  CUNDINAMARCA &             TABIO &  4.898528 & -74.104833 \\
+105 &  21206030 &             SAN CAYETANO  &  CON &  CUNDINAMARCA &        SUBACHOQUE &  4.916833 & -74.181667 \\
+106 &  21206040 &                     ESAP  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.646778 & -74.096361 \\
+107 &  21206050 &        ESC COL INGENIERIA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.783333 & -74.050000 \\
+108 &  21206060 &               CASABLANCA  &  CON &  CUNDINAMARCA &            MADRID &  4.717111 & -74.253333 \\
+109 &  21206150 &         MOLINOS DEL NORTE &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.700000 & -74.050000 \\
+110 &  21206160 &             HIDROPARAISO  &  CON &  CUNDINAMARCA &        EL COLEGIO &  4.573167 & -74.404833 \\
+111 &  21206170 &               CLARETIANO  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.200000 \\
+112 &  21206190 &           UNIV PEDAGOGICA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.666667 & -74.066667 \\
+113 &  21206200 &                  TUNDAMA  &  CON &  CUNDINAMARCA &          MOSQUERA &  4.733333 & -74.250000 \\
+114 &  21206210 &        FLORES COLOMBIANAS &  CON &  CUNDINAMARCA &             FUNZA &  4.736250 & -74.157333 \\
+115 &  21206220 &             UNIV NACIONAL &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.638083 & -74.089083 \\
+116 &  21206230 &             VEGAS LAS HDA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.661667 & -74.151419 \\
+117 &  21206240 &           CENTRO GAVIOTAS &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.066667 \\
+118 &  21206250 &                   CORITO  &  CON &  CUNDINAMARCA &        FACATATIVÁ &  4.800000 & -74.366667 \\
+119 &  21206260 &         C.UNIV.AGROP-UDCA &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.798639 & -74.049722 \\
+120 &  21206280 &                 ACAPULCO  &  CON &  CUNDINAMARCA &            BOJACÁ &  4.653833 & -74.333056 \\
+121 &  21206450 &                TERMOZIPA  &  CON &  CUNDINAMARCA &         TOCANCIPÁ &  4.983333 & -73.933333 \\
+122 &  21206490 &                HATO ALTO  &  CON &  CUNDINAMARCA &             TENJO &  4.835083 & -74.139917 \\
+123 &  21206500 &        COL ABRAHAM LINCOL &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.756639 & -74.061583 \\
+124 &  21206510 &                     CASD  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.600000 & -74.083333 \\
+125 &  21206540 &          EDIFICIO PREMIUM &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.686944 & -74.054222 \\
+126 &  21206550 &             SENA MOSQUERA &  CON &  CUNDINAMARCA &          MOSQUERA &  4.700000 & -74.216667 \\
+127 &  21206560 &             INEM KENNEDY  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.661111 & -74.134778 \\
+128 &  21206570 &               APTO CATAM  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.705583 & -74.150667 \\
+129 &  21206610 &          EFRAIN CAÑAVERAL &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.583333 & -74.066667 \\
+130 &  21206620 &         COL H DURAN DUSAN &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.634611 & -74.173750 \\
+131 &  21206630 &        BILBAO MAXIMO POTI &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.751139 & -74.091583 \\
+132 &  21206640 &                 SAN JOSE  &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.501556 & -74.119306 \\
+133 &  21206650 &          COL SAN CAYETANO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.516753 & -74.088222 \\
+134 &  21206660 &        COL SANTIAGO PEREZ &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.576222 & -74.130917 \\
+135 &  21206670 &            COL BUCKINGHAM &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.792056 & -74.049583 \\
+136 &  21206680 &          COL NUEVO RETIRO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.734111 & -74.037028 \\
+137 &  21206690 &        COL MIGUEL A. CARO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.813167 & -74.031111 \\
+138 &  21206700 &        CEA CENT.EST.AERO. &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.691028 & -74.134417 \\
+139 &  21206970 &           UNISALLE CENTRO &  CON &   BOGOTA D.C. &       BOGOTA D.C. &  4.595000 & -74.070361 \\
+140 &  21208670 &                GUANQUICA  &  CON &  CUNDINAMARCA &             TAUSA &  5.184278 & -73.941111 \\
+141 &  23065100 &                 SABANETA  &  CON &  CUNDINAMARCA &     SAN FRANCISCO &  4.901750 & -74.307389 \\
+142 &  24010070 &                  LETICIA  &  CON &  CUNDINAMARCA &       LENGUAZAQUE &  5.303194 & -73.709750 \\
+143 &  24010140 &                 CUCUNUBA  &  CON &  CUNDINAMARCA &          CUCUNUBÁ &  5.251028 & -73.770750 \\
+144 &  24010170 &                 GUACHETA  &  CON &  CUNDINAMARCA &          GUACHETÁ &  5.385889 & -73.691056 \\
+145 &  24010610 &          CARMEN DE CARUPA &  CON &  CUNDINAMARCA &  CARMEN DE CARUPA &  5.351278 & -73.904472 \\
+146 &  24010800 &                MINAS LAS  &  CON &        BOYACÁ &            SAMACÁ &  5.483333 & -73.533333 \\
+147 &  24011060 &                     SUSA  &  CON &  CUNDINAMARCA &              SUSA &  5.462444 & -73.801556 \\
+148 &  24011080 &               CUCUNUBA 1  &  CON &  CUNDINAMARCA &          CUCUNUBÁ &  5.248000 & -73.752500 \\
+149 &  24011090 &                UBATE GJA  &  CON &  CUNDINAMARCA &             UBATÉ &  5.327333 & -73.791444 \\
+150 &  24011100 &        ISLA DEL SANTUARIO &  CON &  CUNDINAMARCA &           FÚQUENE &  5.467278 & -73.734806 \\
+151 &  24011150 &               ALIZOS LOS  &  CON &  CUNDINAMARCA &  CARMEN DE CARUPA &  5.329389 & -73.850056 \\
+152 &  24015120 &        ISLA DEL SANTUARIO &  CON &  CUNDINAMARCA &           FÚQUENE &  5.467278 & -73.734806 \\
+153 &  24015220 &           VILLA CARMEN    &  CON &        BOYACÁ &            SAMACÁ &  5.509389 & -73.495778 \\
+154 &  24015290 &                 GACHANECA &  CON &        BOYACÁ &            SAMACÁ &  5.433333 & -73.550000 \\
+155 &  24015380 &          CARMEN DE CARUPA &  CON &  CUNDINAMARCA &  CARMEN DE CARUPA &  5.347222 & -73.898333 \\
+156 &  24017150 &           LA BOYERA AUTOM &  CON &  CUNDINAMARCA &             UBATÉ &  5.305972 & -73.855444 \\
+157 &  24017240 &                 ANCON EL  &  CON &        BOYACÁ &            SAMACÁ &  5.466667 & -73.533333 \\
+158 &  24017610 &              BOQUERON     &  CON &  CUNDINAMARCA &       LENGUAZAQUE &  5.328250 & -73.699722 \\
+159 &  24017630 &                GACHANECA  &  CON &        BOYACÁ &            SAMACÁ &  5.450000 & -73.550000 \\
+160 &  24017660 &        CANAL RUCHICAL BOC &  CON &        BOYACÁ &            SAMACÁ &  5.483333 & -73.516667 \\
+161 &  24017670 &              AMARILLO EL  &  CON &        BOYACÁ &            SAMACÁ &  5.500000 & -73.533333 \\
+162 &  24017680 &               REBOSADERO  &  CON &        BOYACÁ &            SAMACÁ &  5.450000 & -73.533333 \\
+163 &  24017690 &            SALIDA EMBALSE &  CON &        BOYACÁ &            SAMACÁ &  5.450000 & -73.533333 \\
+164 &  24017700 &                   PTE EL  &  CON &        BOYACÁ &            SAMACÁ &  5.456167 & -73.540111 \\
+165 &  24017720 &             CANAL PATAGUY &  CON &        BOYACÁ &            SAMACÁ &  5.450000 & -73.500000 \\
+166 &  24017730 &              CUATRO COPAS &  CON &        BOYACÁ &            SAMACÁ &  5.466667 & -73.533333 \\
+167 &  35020280 &                  CHOACHI  &  CON &  CUNDINAMARCA &           CHOACHÍ &  4.522917 & -73.926583 \\
+168 &  35020290 &                  FOMEQUE  &  CON &  CUNDINAMARCA &           FÓMEQUE &  4.486528 & -73.890417 \\
+169 &  35020320 &              LLANO LARGO  &  CON &  CUNDINAMARCA &            UBAQUE &  4.482833 & -74.030278 \\
+170 &  35020330 &                 BOLSA LA  &  CON &  CUNDINAMARCA &           CHOACHÍ &  4.575417 & -73.981417 \\
+171 &  35025050 &              LLANO LARGO  &  CON &  CUNDINAMARCA &            UBAQUE &  4.482833 & -74.030278 \\
+172 &  35025060 &                 BOLSA LA  &  CON &  CUNDINAMARCA &           CHOACHÍ &  4.575417 & -73.981417 \\
+173 &  35027100 &                   CARAZA  &  CON &  CUNDINAMARCA &          CHIPAQUE &  4.428639 & -74.010194 \\
+174 &  35027220 &              LLANO LARGO  &  CON &  CUNDINAMARCA &            UBAQUE &  4.485056 & -74.030222 \\
+175 &  35027500 &           QDA RINCONAUTOM &  CON &  CUNDINAMARCA &         LA CALERA &  4.664944 & -73.857389 \\
+176 &  35030080 &                CASAS LAS  &  CON &  CUNDINAMARCA &           CÁQUEZA &  4.441167 & -73.936389 \\
+177 &  35060020 &                    SUEVA  &  CON &  CUNDINAMARCA &             JUNÍN &  4.810000 & -73.707167 \\
+178 &  35060160 &               POTRERITOS  &  CON &  CUNDINAMARCA &         GUATAVITA &  4.828806 & -73.769278 \\
+179 &  35060200 &             AMOLADERO EL  &  CON &  CUNDINAMARCA &         GUATAVITA &  4.857972 & -73.745389 \\
+180 &  35070020 &          VENTAQUEMADA     &  CON &        BOYACÁ &      VENTAQUEMADA &  5.383056 & -73.602889 \\
+181 &  35070030 &              TURMEQUE     &  CON &        BOYACÁ &          TURMEQUÉ &  5.317750 & -73.496361 \\
+182 &  35070040 &                   TIBANA  &  CON &        BOYACÁ &            TIBANÁ &  5.315278 & -73.395944 \\
+183 &  35070050 &                   UMBITA  &  CON &        BOYACÁ &            ÚMBITA &  5.219111 & -73.444556 \\
+184 &  35070060 &           QUINCHOS LOS    &  CON &        BOYACÁ &         CHINAVITA &  5.219556 & -73.347917 \\
+185 &  35070070 &             CHINAVITA     &  CON &        BOYACÁ &         CHINAVITA &  5.164861 & -73.364250 \\
+186 &  35070210 &                PACHAVITA  &  CON &        BOYACÁ &         PACHAVITA &  5.139250 & -73.395639 \\
+187 &  35070230 &         MACHETA GJA AGROP &  CON &  CUNDINAMARCA &           MACHETÁ &  5.075111 & -73.579417 \\
+188 &  35070370 &                    BELEN  &  CON &  CUNDINAMARCA &           MACHETÁ &  5.083333 & -73.566667 \\
+189 &  35070380 &              ROSALES LOS  &  CON &  CUNDINAMARCA &           MACHETÁ &  5.083333 & -73.616667 \\
+190 &  35075010 &            NUEVO COLON    &  CON &        BOYACÁ &       NUEVO COLÓN &  5.352694 & -73.453778 \\
+191 &  35077100 &                SAN JOSE   &  CON &        BOYACÁ &            SAMACÁ &  5.428639 & -73.528278 \\
+\bottomrule
+
+\end{tabular}
+\fi
+\caption{Tabla de las estaciones usadas en el trabajo. En esta tabla se encuentran las estaciones automáticas (tipo : AUT) y las estaciones convencionales (tipo: CON)}
+\label{tab:estaciones}
+\end{table}
+
+\section{Cosas que sobran}
+
+
+La zona de estudio es la Sabana de Bogotá. En la Sabana de Bogotá las variaciones de temperatura afectan los cultivos tales como la papa, pastos, maíz, hortalizas entre otros. Los principales limitantes de caracter agometeorológico en la producción de papa son principalmente eventos de heladas y estrés por déficit hídrico, los cuales pueden producir pérdidas de hasta el 75\% \citep{DANE2002}.\\
+
+En las últimas décadas se documentó un incremento de las temperaturas medias a escala global de aproximadamente 0,15\celc por década \citep{jones2001} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{apalike}
+
+\bibliography{biblio}{}%Nombre del archivo que tiene las citas
+
+\end{document}
+
+
