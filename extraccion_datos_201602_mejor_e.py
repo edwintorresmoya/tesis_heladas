@@ -22,28 +22,12 @@ os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extra
 #resumen_2 = pd.read_pickle('resumen_tiempo_20181124_2.pickle')
 #resumen_3 = pd.read_pickle('resumen_tiempo_20181124_3.pickle')
 #
-#resumen_1n = pd.concat([resumen_1, resumen_2])
-#resumen = pd.concat([resumen_1n, resumen_3])
-
-#resumen1 = pd.read_pickle('resumen_simulaciones_201408.pickle')
-#mejores = pd.read_pickle('ext_mejores.pickle')
-#condi = mejores.fecha.str.contains('201408')
-#condi[0] = False
-#mejores2 = mejores[condi]
 #
-#resumen = pd.concat([resumen1, mejores2])
-
-resumen1 = pd.read_pickle('resumen_simulaciones_201408.pickle')# Son los archivos de la priera extracción
-mejores1 = pd.read_pickle('extraccion_icm_con_nmrse.pickle') # En esta línea van los valores con la corrección con NRMSE
-mejores2 = pd.read_pickle('ext_imc3_20190515.pickle') #Archivo donde viene la parametrización de physics 3
-#mejores2 = pd.read_pickle('ext_mejores_3.pickle') # En este están los llamdados cu_14 y cu_5
-#mejores3 = pd.read_pickle('extraccion_tiempo_20190214_1.pickle') # En estos están los que la profe propone
-mejores = pd.concat([mejores1, mejores2])
-condi = mejores.fecha.str.contains('201408')
-condi[0] = False
-mejores2 = mejores[condi]
-
-resumen = pd.concat([resumen1, mejores2])
+mejores = pd.read_pickle('ext_icm_3.pickle') # En esta línea van los valores con la corrección con NRMSE
+#mejores = pd.concat([mejores1, mejores2])
+condi = mejores.fecha.str.contains('201602')
+condi = condi.fillna(False)
+resumen = mejores[condi]
 
 
 #resumen = pd.read_pickle('resumen_tiempo_20181124.pickle') # Este fue el archivo original de la extracción, pero debido a la adición de nuevos datos del caso 5
@@ -58,7 +42,7 @@ n_fech = n_fech.str.replace('/', '-')
 n_fech = n_fech.str.replace('_folder', '')
 
 resumen.fecha = n_fech 
-
+resumen[resumen.fecha == 'ideam-mejor7']
 
 ###Ajuste de las horas debido a que es UTM -5
 resumen['date'] = pd.to_datetime(resumen.date_1.str.slice(4), 
@@ -88,28 +72,9 @@ resumen_back.T2 = resumen_back.temp
 
 
 ### Creación de la tabla de recepción
-
-recep_t = pd.DataFrame({'tipo_1':np.tile(resumen_back.fecha.unique()[1:], 93),
-'dom_1':np.tile(np.repeat(['d01','d02','d03'], len(resumen_back.fecha.unique()[1:])), 31),
-'cod_1':np.repeat((resumen_back.cod.unique())[1:].astype(np.str), (len(resumen_back.fecha.unique()[1:]) * 3))})
-
-recep_t['r2'] = np.NaN
-recep_t['rmse'] = np.NaN
-recep_t['std_1'] = np.NaN
-recep_t['domin_1'] = np.NaN
-recep_t['std_pura'] = np.NaN
-recep_t['std_estandar'] = np.NaN
-recep_t['std_pura_2'] = np.NaN # ADicionado sólo para comparar
-
-
-recoleccion_minim = pd.DataFrame({'cod_1':[],
-                          'min_1':[],
-                          'max_1':[]})
-    
-
-recep_t = pd.DataFrame({'tipo_1':np.tile(resumen_back.fecha.unique()[1:], 93),
-'dom_1':np.tile(np.repeat(['d01','d02','d03'], len(resumen_back.fecha.unique()[1:])), 31),
-'cod_1':np.repeat((resumen_back.cod.unique())[1:].astype(np.str), (len(resumen_back.fecha.unique()[1:]) * 3))})
+recep_t = pd.DataFrame({'tipo_1':np.tile(resumen_back.fecha.unique(), 93),
+    'dom_1':np.tile(np.repeat(['d01','d02','d03'], len(resumen_back.fecha.unique())), 31),
+    'cod_1':np.repeat((resumen_back.cod.unique()).astype(np.str), (len(resumen_back.fecha.unique()) * 3))})
 
 recep_t['r2'] = np.NaN
 recep_t['rmse'] = np.NaN
@@ -124,6 +89,24 @@ recoleccion_minim = pd.DataFrame({'cod_1':[],
                           'min_1':[],
                           'max_1':[]})
     
+
+#recep_t = pd.DataFrame({'tipo_1':np.tile(resumen_back.fecha.unique()[1:], 93),
+#    'dom_1':np.tile(np.repeat(['d01','d02','d03'], len(resumen_back.fecha.unique()[1:])), 31),
+#    'cod_1':np.repeat((resumen_back.cod.unique())[1:].astype(np.str), (len(resumen_back.fecha.unique()[1:]) * 3))})
+#
+#recep_t['r2'] = np.NaN
+#recep_t['rmse'] = np.NaN
+#recep_t['std_1'] = np.NaN
+#recep_t['domin_1'] = np.NaN
+#recep_t['std_pura'] = np.NaN
+#recep_t['std_estandar'] = np.NaN
+#recep_t['std_pura_2'] = np.NaN # ADicionado sólo para comparar
+#
+#
+#recoleccion_minim = pd.DataFrame({'cod_1':[],
+#                          'min_1':[],
+#                          'max_1':[]})
+#    
 #recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/fechas_min_sel_dom.csv')
 
 #recoleccion_minim_1.max_1 = pd.to_datetime(recoleccion_minim_1.max_1, format ='%Y-%m-%d %H:%M:%S', errors='coerce')
@@ -142,7 +125,6 @@ estaciones_aut = pd.DataFrame({'cod':[],
                                'fin':[]})
     
  
-
 #for j in resumen_back.cod.unique()[1:]:#[21206950.0]:#
 #    #print(j)
 #    min_2 = []
@@ -222,9 +204,9 @@ estaciones_aut = pd.DataFrame({'cod':[],
 #    
 #    recoleccion_minim_1 = recoleccion_minim
 ####### Esta tabla se va a guardar ya que a partír de esta se corregiran los demás datos.
-#    recoleccion_minim_1.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/simulacion_mejor_201408.csv')                    
+#    recoleccion_minim_1.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/simulacion_mejor_200702.csv')                    
 
-recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/simulacion_mejor_201408.csv')                                    
+recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/simulacion_mejor_201602.csv')                                    
 
 
 os.system('spd-say "Process has ended"')
@@ -252,6 +234,7 @@ for j in recoleccion_minim_1.cod_1:#[21201200.0]:#
     base_series = pd.DataFrame()
     min_2 = []
     max_2 = []
+
 
 
             
@@ -300,7 +283,7 @@ for j in recoleccion_minim_1.cod_1:#[21201200.0]:#
     indice = recoleccion_minim_1[recoleccion_minim_1.cod_1 == j].index[0]
     
         
-    for count, i in enumerate(resumen_back.fecha.unique()[1:]):
+    for count, i in enumerate(resumen_back.fecha.unique()):
         print(i) 
     
 
@@ -330,4 +313,6 @@ for j in recoleccion_minim_1.cod_1:#[21201200.0]:#
             #pdb.set_trace()
             base_series[str(j)[:-2]+'_'+i+'_'+comparacion['date_1'].str[0:3][1]] = comparacion['T2']
 
-    base_series.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_201408/'+str(j)[:-2]+'.csv')
+    base_series.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_201602/'+str(j)[:-2]+'.csv')
+
+

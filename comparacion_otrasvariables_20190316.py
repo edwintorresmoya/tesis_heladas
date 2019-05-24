@@ -30,7 +30,6 @@ def angulo(uu, vv):
     # bse_o = pd.DataFrame({'a':[1,2,3], 'b':[4,0,-5]})
     # print(angulo(uu = bse_o.a, vv = bse_o.b))
 
-    pdb.set_trace()
     hyp = (uu**2 + vv**2)**(1/2)
     theta = (np.arccos(vv / hyp) * 180)/np.pi
     theta_base = []
@@ -48,10 +47,20 @@ def angulo(uu, vv):
 ##mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_2.pickle')
 ##mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_3.pickle')
 #mejores = pd.concat([mejores1, mejores2])
-mejores = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables_20190316.pickle')
+mejores0 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables_20190316.pickle')
+##
+#mejores0 = mejores0[-mejores0.fecha.isnull()]
+#mejores0 = mejores0[mejores0.fecha.str.contains('colombia')]
 
 
-for pp in ['200702', '201408', '201508', '201509']:
+mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_icm_3.pickle') # En esta línea van los valores con la corrección con NRMSE
+mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_imc3_20190515.pickle') #Archivo donde viene la parametrización de physics 3
+
+mejores = pd.concat([mejores0, mejores1, mejores2])
+mejores = mejores[-mejores.fecha.isnull()]
+
+
+for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
     print(pp)
     
     for varia_1, pp_col, pp_val, pp_col_wrf, var_y in zip(['_hum_2m.csv','_val_rad.csv', '_precip_1.csv', '_td.csv', '_wb.csv', '_vel_vi10.csv'],# nombre de las bases
@@ -130,7 +139,7 @@ for pp in ['200702', '201408', '201508', '201509']:
         
         recep_t = pd.DataFrame({'tipo_1':np.tile(resumen_back.fecha.unique(), 93),
                                 'dom_1':np.tile(np.repeat(['d01','d02','d03'], len(resumen_back.fecha.unique())), 31),
-                                'cod_1':np.repeat((mejores.cod.unique()[1:]).astype(np.str), (len(resumen_back.fecha.unique()) * 3))})
+                                'cod_1':np.repeat((mejores.cod.unique()).astype(np.str), (len(resumen_back.fecha.unique()) * 3))})
         
         
         recep_t['r2'] = np.NaN
@@ -150,10 +159,14 @@ for pp in ['200702', '201408', '201508', '201509']:
         
         
         #Esta es la tabla donde se sacan las fechas mínimas para hacer la comparación        
-        if (varia_1 == '_td.csv') | (varia_1 == '_wb.csv') | (varia_1 == '_vel_vi10.csv'):
-            recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/otras_variables/mejores_var_'+pp+'_hum_2m.csv') 
+        if (pp == '201602') | (pp == '201712'):
+            recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/simulacion_mejor_'+pp+'.csv')
         else:
-            recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/otras_variables/mejores_var_'+pp+varia_1)                    
+
+            if (varia_1 == '_td.csv') | (varia_1 == '_wb.csv') | (varia_1 == '_vel_vi10.csv'):
+                recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/otras_variables/mejores_var_'+pp+'_hum_2m.csv') 
+            else:
+                recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/otras_variables/mejores_var_'+pp+varia_1)                    
         
         base_h = []
         estacion_sintmp = []
@@ -223,12 +236,17 @@ for pp in ['200702', '201408', '201508', '201509']:
             
             print(resumen_back.fecha.unique())
             
+
             
-            plt.rcParams["figure.figsize"] = (7,7.5)       
-            for i in ['ideam-colombia', 'ideam-icm']:
+            fig = plt.figure()
+            ax = fig.add_axes([0.1, 0.2, 0.65, 0.78])
+            #fig.rcParams["figure.figsize"] = (7,7.5)       
+            for i in ['ideam-colombia', 'ideam-icm_3','ideam-icm',]:
                 print(i) 
                 if i == 'ideam-colombia':
                     cod_2 = 'ideam_c'
+                if i == 'ideam-icm_3':
+                    cod_2 = 'ideam_3'
                 else:
                     cod_2 = 'ideam_i'
                 
@@ -256,7 +274,7 @@ for pp in ['200702', '201408', '201508', '201509']:
                         continue
         
     
-                    ##Esta línea se usa para generar las tablas usadas para la comparación de los datos &&&
+                    #Esta línea se usa para generar las tablas usadas para la comparación de los datos &&&
                     #comparacion.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas/'+pp+'_'+str(j)[:-2]+'_'+cod_2+'_'+kk+pp_col_wrf+'.csv')
         
         
@@ -273,9 +291,8 @@ for pp in ['200702', '201408', '201508', '201509']:
                     #para_desv_2 = pd.merge(result, para_desv, on='date', how='inner')
                     #desvest_const = para_desv_2.tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
                     #print(desvest_const)
-                    
+                           
     
-                        
                     if i == 'ideam-colombia':
                         type_1 = '-.'
                         color_1 = 'gray'
@@ -283,21 +300,50 @@ for pp in ['200702', '201408', '201508', '201509']:
                             marker_1 = 'p'
                         else:
                             marker_1 = "^"
-                        label_1 = 'IDEAM-Colombia'
+                        label_1 = 'ideam-colombia'
+	
+                    if i == 'ideam-icm_3':
+                        type_1 = '--'
+                        color_1 = 'midnightblue'
+                        if kk == 'd02':
+                            marker_1 = 'p'
+                        else:
+                            marker_1 = "^"
+                        label_1 = 'icm-mp_physics 3'
+                    
                     if i == 'ideam-icm':
                         type_1 = '--'
-                        color_1 = 'red'
+                        color_1 = 'darkorange'
                         if kk == 'd02':
-                            marker_1 = 'D'
+                            marker_1 = 'p'
                         else:
-                            marker_1 = "^"                
+                            marker_1 = "^"
                         label_1 = 'icm'
+	                    
                         
                     
                     
                     if varia_1 == '_hum_2m.csv':
                         comparacion.humedad = (comparacion.humedad * 100)
-                    plt.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
+                    if varia_1 == '_val_rad.csv':
+                        ### Estoy editando estos valores para poder insertar NaN en la Columna de comparacion[pp_col_wrf]
+                        
+                        base_p = pd.DataFrame({'date':[], 'algo':[]})
+                        ini_date = comparacion.date.min()
+                        fin_date = comparacion.date.max()
+                        lap = pd.to_timedelta('1 hours')
+
+                        while ini_date <= fin_date:
+                            base_p2 = pd.DataFrame({'date':[ini_date], 'algo':[np.NaN]})
+                            base_p = pd.concat([base_p, base_p2])
+                            ini_date += lap
+                        
+                        comparacion = pd.merge(comparacion, base_p, on = 'date', how='outer')
+                        comparacion = comparacion.sort_values('date')
+
+                        ax.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
+                    else:
+                        ax.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
                     
                     
                     
@@ -310,13 +356,13 @@ for pp in ['200702', '201408', '201508', '201509']:
                 
                 comparacion[pp_col] = base_precip                    
             
-            plt.plot_date(comparacion.date, comparacion[pp_col], '-', color = 'k', label = 'Estación automática')
+            ax.plot_date(comparacion.date, comparacion[pp_col], '-', color = 'k', label = 'Estación automática')
             
             
-            plt.legend()
-            plt.xlabel('Fecha - Hora')
-            plt.ylabel(var_y) 
+            ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+            ax.set_xlabel('Fecha - Hora')
+            ax.set_ylabel(var_y) 
             plt.xticks(rotation=90)
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
+            fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
             plt.close()
         

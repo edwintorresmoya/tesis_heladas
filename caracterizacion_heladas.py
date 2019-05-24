@@ -29,6 +29,7 @@ def lista_nombres(base):
 
 ####Descripción de los datos de temperatura
 os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col1')
+#os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col')
 file_list = os.listdir()
 estacion_var = []
 estacion_1 = pd.DataFrame({'date':[]})
@@ -401,7 +402,6 @@ base_1 = pd.DataFrame()
 ##base_1.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/resumen_dias_con_heladas_20190129.csv')
 ##base_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/resumen_dias_con_heladas_20190129.csv')
 #
-#pdb.set_trace()
 
 
 #######################################################
@@ -441,6 +441,7 @@ def busca_columna(base, contains):
 
 ####Descripción de los datos de temperatura
 os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col1')
+#os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col')
 file_list = os.listdir()
 estacion_var = []
 estacion_1 = pd.DataFrame({'date':[]})
@@ -452,7 +453,7 @@ for uu in file_list:
         cod_1 = uu[2:10]
         estacion_1 = pd.read_csv(uu)
         
-        for tipo_1, var_2, val_2, nombre_var in zip(['_hum_2m.csv', '_precip_1.csv', '_vel_vi10.csv', '_val_rad.csv'], ['hum_2m', 'precip_1', 'vel_vi10', 'rad_1'], ['val_hum', 'val_prec', 'val_vv', 'val_rad'], ['Humedad %', 'Precipitación mm', 'm/s', 'W/$m^2$']):
+        for tipo_1, var_2, val_2, nombre_var in zip(['_wb.csv','_td.csv','_hum_2m.csv', '_precip_1.csv', '_vel_vi10.csv', '_val_rad.csv'], ['wb','Td','hum_2m', 'precip_1', 'vel_vi10', 'rad_1'], ['val_wb','val_td','val_hum', 'val_prec', 'val_vv', 'val_rad'], ['°C','°C','Humedad %', 'Precipitación mm', 'm/s', 'W/$m^2$']):
 #            tipo_1 = '_hum_2m.csv'
 #            var_2= 'hum_2m'
 #            val_2 = 'val_hum'
@@ -550,6 +551,8 @@ for uu in file_list:
                 
                 busca_columna(base=estacion_3, contains=var_2)[0]
                 
+                if 'val_tmp' in estacion_3.columns:
+                    estacion_3 = estacion_3.drop(['tmp_2m', 'val_tmp'], axis=1)
                 estacion_3.columns.values[busca_columna(base=estacion_3, contains=var_2)[0]] = 'tmp_2m'
                 estacion_3.columns.values[busca_columna(base=estacion_3, contains=val_2)[0]] = 'val_tmp'
                 estacion_3 = estacion_3.reset_index()
@@ -730,7 +733,6 @@ for uu in file_list:
                 ###Plot de las temperaturas con altas temperaturas = 5
                 ###Plot de las temperaturas antes de las altas temperaturas= 6
                 
-                pdb.set_trace()
                 print(nombre_var)
                 #Plot de las temperaturas totales
                 estacion_3 = estacion_3[-estacion_3.hora_n.isnull()]

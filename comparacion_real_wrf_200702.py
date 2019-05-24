@@ -30,7 +30,7 @@ mejores = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorol
 #mejores = pd.concat([mejores1, mejores2])
 
 
-for pp in ['200702', '201408', '201508', '201509']:
+for pp in ['200702', '201408', '201508', '201509', '201602', '201712']:
     print(pp)
 
     os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios')
@@ -42,7 +42,8 @@ for pp in ['200702', '201408', '201508', '201509']:
     #resumen_1n = pd.concat([resumen_1, resumen_2])
     #resumen = pd.concat([resumen_1n, resumen_3])
     
-    resumen1 = pd.read_pickle('resumen_simulaciones_'+pp+'.pickle')
+    #resumen1 = pd.read_pickle('resumen_simulaciones_'+pp+'.pickle')
+    resumen1 = pd.read_csv('simulacion_mejor_'+pp+'.csv')
     condi = mejores.fecha.str.contains(pp)
     
     condi[0] = False
@@ -58,6 +59,7 @@ for pp in ['200702', '201408', '201508', '201509']:
     
     #fecha de int es 2014080410 Pero sumando 5 horas es igual a 20017020460 <- esta es la hora que se usa en WRF
     
+    pdb.set_trace()
     resumen.fecha.unique()
     
     #Usado para crear un sólo nombre para cada una de las parametrizaciones
@@ -221,7 +223,7 @@ for pp in ['200702', '201408', '201508', '201509']:
         
         
         plt.rcParams["figure.figsize"] = (7,7.5)       
-        for i in ['ideam-icm', 'ideam-colombia']:
+        for i in ['ideam-icm', 'ideam-colombia', 'ideam-icm_3']:
             print(i) 
             
             
@@ -275,6 +277,16 @@ for pp in ['200702', '201408', '201508', '201509']:
                     else:
                         marker_1 = "^"
                     label_1 = 'ideam-colombia'
+
+                if i == 'ideam-icm_3':
+                    type_1 = '--'
+                    color_1 = 'blue'
+                    if kk == 'd02':
+                        marker_1 = 'D'
+                    else:
+                        marker_1 = "^"
+                    label_1 = 'icm'
+                
                 if i == 'ideam-icm':
                     type_1 = '--'
                     color_1 = 'red'
@@ -283,7 +295,6 @@ for pp in ['200702', '201408', '201508', '201509']:
                     else:
                         marker_1 = "^"
                     label_1 = 'icm'
-
                 
                 
                 plt.plot_date(comparacion.date, comparacion.T2, color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
