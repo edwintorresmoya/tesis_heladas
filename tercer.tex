@@ -6,6 +6,52 @@
 
 %\textbf{Actividad: Escoger un modelo regional de pronóstico atmosférico y su configuración, que sean útiles para pronósticos de temperaturas máxima y mínima en la Sabana de Bogotá a partir de distintas parametrizaciones y de configuraciones del modelo y del cálculo de distintos estadísticos que evalúen el desempeño.}\\
 
+
+\section{Modelos usados para el pronóstico y simulación de la temperatura del aire}
+
+Como se explicó anteriormente, la temperatura del aire tiene un rol central en el crecimiento y desarrollo de los cultivos, ya que influye sobre las tasas de crecimiento de las plantas, pero los extremos de temperatura del aire pueden generar daños en las plantas \citep{wheeler2000}. Por esta razón es importante realizar un pronóstico de estos eventos extremos, ya que son capaces de generar serios daños a los cultivos.\\
+
+Una de las formas para determinar las temperaturas extremas es la utilización de modelos empíricos. \citet{Gomez2014} realizó un estudio sobre las heladas y su efecto en pasturas en el Valle de Ubaté y Chiquinquirá para el período del 2006 y 2007 para generar un pronóstico de las heladas del siguiente día a partir del día presente y se basó en la fórmula de \citet{Allen1957} y el estudio de \citet{Snyder2010}. Además, caracterizó el comportamiento de las heladas en la Sabana de Bogotá y reportó que en las épocas secas hay mayor probabilidad de heladas. El área de estudio comprendió un total del 216.907 ha, de las cuáles \citet{Gomez2014} encontró que 2.442 (1.13\%) hectáreas tienen una alta exposición frente a las heladas. Otro de los resultados de este estudio fue que las estimaciones realizadas por el modelo no fueron precisas, ya que en 5 de cada 14 oportunidades se subestimó la temperatura y en las demás ocasiones se sobrestimó.\\
+
+El balance de energía del suelo fue usado por \citet{Rosenzweig2014} con el objetivo de establecer el rango de incertidumbres del cambio climático en la producción de alimentos en el mundo. En este estudio fue necesario realizar una estimación de la temperatura, por esta razón se usaron los modelos de agroecoistema, los cuales usan el balance de energía para poder hacer una aproximación de la temperatura del aire. Como resultado se obtuvo que hay una alta incertidumbre en la modelación del dióxido de carbono, nitrógeno y las altas temperaturas y su efecto sobre la producción agrícola.\\
+
+Otro estudio que usa un balance energético fue el de \citet{Rossi2002}, hecho para la región al norte de Italia llamada Emilia Romagna. En esta zona, las heladas causan grandes pérdidas en los cultivos. El tipo de helada que afecta esta zona es principalmente de tipo advectivo, pero también hay presencia de heladas radiativas. Como resultado se encontró que en las heladas radiativas existe una gran estratificación del aire, haciendo más complejo el proceso de parametrización del intercambio de calor en la atmósfera que predice los perfiles de temperatura en la atmósfera. La caracterización de la estabilidad de la atmósfera es un elemento esencial en la predicción de la temperatura interna de los tejidos y brotes localizados en las partes productivas de los cultivos.\\
+
+Los sistemas de información geoFigura (SIG) también han sido usados para la predicción de bajas temperaturas, ya que las mas bajas temperaturas son encontradas en los valles durante un evento de radiación de tipo advectivo \citep{Halley2003, Blennow1998}. \citet{Halley2003} realizó un estudio para el Norte de Tasmania, ya que desde 1992 la incidencia de heladas ha presentado un incremento y se ha visto afectada la producción de vino. Como resultado, se mostró que el modelo implementado logró explicar las heladas en un 61\% de la zona de estudio, pero se resalta que este modelo no cuantificó los flujos de radiación de onda larga, lo cual produce un sesgo.\\
+
+El uso de redes neuronales también ha mostrado buenos resultados en la modelación de las heladas como en el caso de \citet{Smith2007} quien como resultado muestra que las predicciones fueron útiles incluso cuando las condiciones iniciales no son las mejores, pero cuando el horizonte de pronóstico aumenta incrementa los errores del pronóstico. \citet{Abhishek2012} concluyen que el proceso es demandante de recursos computacionales y que mediante este método se puede hacer predicción de otras variables meteorológicas tales como humedad, velocidad del viento, entre otros.\\
+
+Para subsanar algunas de las falencias mencionadas anteriormente, en algunas investigaciones se han usado modelos regionales para el pronóstico de las heladas tal como lo hizo \citet{prabha2008evaluation} quienes usaron el modelo \textit{Weather Research and Forecasting Model} (WRF) para poder determinar  si la información de mesoescala puede ser una guía para la protección de los cultivos y poder generar información que ayude a reducir los efectos de las bajas temperaturas sobre los cultivos de arándano y durazno. Este estudio analizó heladas advectivas y radiativas en la zona del Sur de Georgia, E.E.U.U. en los años 2006 y 2007. En este estudio se tuvieron en cuenta las variables temperatura y velocidad del viento. \citet{prabha2008evaluation} concluyeron que el modelo, después de calibrado, permitió realizar un pronóstico de razonable precisión con respecto a las variaciones de la temperatura. El modelo WRF se usa actualmente en Colombia y es usado actualmente por el IDEAM para el pronóstico del tiempo en Colombia como lo reportan varios autores \citep{Arango2011, Mejia2012, Ruiz2014}.\\
+
+
+%Para el pronóstico de las variaciones diarias de temperatura se han usado diferentes métodos por ejemplo, métodos empíricos \citep{Allen1957a, Kangieser1959}, métodos de balance de energía del suelo \citep{Rosenzweig2014a, Rossi2002} métodos basados en los sistemas de información geoFigura \citep{Halley2003} y métodos basados en redes neuronales \citep{Smith2007}. Una de las problemáticas de estos métodos es que no se tienen en cuenta los aspectos físicos y dinámicos de la atmósfera y su evolución temporal \citep{Prabha2008a}.\\
+
+Una de las problemáticas de algunos modelos nombrados anteriormente (modelos empíricos, modelos de balance d energía, SIG  y redes neuronales) no tienen en cuenta aspectos dinámicos y físicos de la atmósfera y su evolución \citep{Prabha2008a}. Por esta razón y por el uso que se le ha dado en Colombia el modelo WRF se convierte en el modelo más interesante para la evaluación de las heladas. Basado en toda la información recopilada se creo una tabla para resumir las fortalezas y las limitaciones de cada uno de los modelos, ver Tabla \ref{tab:fort_deb_mod}.
+
+
+
+\begin{table}[H]
+\caption{Resumen de las ventajas y desventajas de los modelos usados para el pronóstico de temperaturas del aire}
+\resizebox{\textwidth}{!}{\begin{tabular}{p{5cm}| p{5cm} p{5cm} p{5cm}}
+Modelo                                        & Fortaleza                                                  & Limitación                            &Fuente                                                   \\ \hline
+\multirow{2}{*}{Modelos empíricos}            & Fácil aplicación                                                               & Baja precisión en la predicción de la temperatura del aire       & \citep{Gomez2014, Allen1957, Snyder2010}                   \\
+                                              & Se pueden hacer modificaciones al modelo de manera sencilla                     & Los modelos son creados para determinadas condiciones     &                                                                              \\ \hline
+\multirow{2}{*}{Balance de energía del suelo} & Fácil aplicación siempre y cuando se tengan los valores de todas las variables                & Alta incertidumbre                                        & \citep{evett2011water,Rosenzweig2014, Rossi2002}          \\
+                                              &                                                                                & Las variables no son fáciles de calcular                  &                                                                              \\ \hline
+Sistemas de información geoFigura            & Predice muy bien las bajas temperaturas en los valles         & No  tiene en cuenta los flujos de radiación de onda larga & \citep{evett2011water, Halley2003, Blennow1998}              \\ \hline
+Redes neuronales                              & Buenas predicciones en un corto horizonte de pronóstico (6 horas) & Pronóstico a un horizonte muy corto                       & \citep{Smith2007}                                           \\ \hline
+Modelo \textit{Weather Research and Forecasting Model} (WRF)                   & Buenas predicciones en un horizonte de 2 días                                      & Alto gasto computacional                                  & \citep{prabha2008evaluation, Arango2011, Mejia2012, Ruiz2014} \\
+                                              &                                                                                & Es necesario tener una alta capacidad de almacenamiento  &                                                                              \\ \hline
+
+
+\end{tabular}}
+
+\label{tab:fort_deb_mod}
+\end{table}
+
+En la Tabla \ref{tab:fort_deb_mod} podemos observar que algunos modelos presentan ciertas fortalezas y debilidades, pero dependiendo de las necesidades del usuario se debe realizar una valoración de cada uno de ellos para tomar las mejores decisiones.
+
+
 \section{Escogencia del modelo de pronóstico}
 
 El modelo WRF es un sistema de cálculo numérico para simular la atmósfera que fue diseñado para cumplir objetivos de investigación y pronóstico, este modelo sirve en un amplio rango de escalas espaciales, desde decenas de metros hasta miles de kilómetros. Los usuarios de este modelo pueden producir simulaciones basadas en condiciones atmosféricas reales o condiciones idealizadas \citep{Pielke2002}. WRF es capaz de realizar una reducción de escala de un modelo de pronóstico global como el Global Forecast System (GFS). La reducción de escala toma las condiciones del modelo global y aumenta la resolución de los resultados del modelo teniendo en cuenta las características de la zona de estudio \citep{Sene2010}.\\
@@ -187,7 +233,7 @@ Las estación Tibaitatá automáticas y Tibaitatá convencional, se encuentran u
 
 \section{Corrección por altura}
 
-Se realizó una corrección de los valores de temperatura simulada por el modelo WRF basado en la altura real de las estaciones del IDEAM. Cada estación del IDEAM tiene un valor asociado de altura (Ver Tabla \ref{tab:alturas_ideam_alos_2} columna $ Altura\ IDEAM$) , pero algunos de estos no concuerdan con la realidad. Un ejemplo de esto es el caso de la estación llamada Pmo (Páramo) Guacheneque. El IDEAM reporta una altura de 2300 msnm pero según el modelo digital de elevación (DEM) ALOS-PALSAR creado por \citet{ASFDAAC2007}, la ubicación de la estación tiene una elevación de 3288 msnm. Por otra parte, según el Distrito Regional de Manejo Integrado generado por \citet{Corpochivor2011}, el área de este páramo está entre los 3000 y los 3500 msnm. De modo que el modelo de ALOS-PALSAR presenta una mejor aproximación a la altura de la zona donde se encuentra la estación, ver Tabla \ref{tab:alturas_ideam_alos_2}. Razón por la cual no se tomaron los valores de altura sugeridos por el IDEAM; en cambio se usó la altura brindada por el DEM de ALOS-PALSAR para cada una de las ubicaciones de las estaciones, estos valores de altura serán usados como la altura de referencia para las estaciones. Usando la ubicación de cada una de las estaciones se realizó una extracción de los valores de altura presentes en los archivos netCDF generados por el modelo WRF. La forma como se realiza la extracción de los valores de altura se encuentra en el código \textit{ext\_simulaciones\_200702.py} que fue creado a partir de la información del siguiente enlace \textcolor{blue}{\href{http://www.openwfm.org/wiki/How_to_interpret_WRF_variables}{link}}, donde se explica que la altura del terreno se calcula a partir de las alturas geopotenciales, la cual toma los valores de los archivos NetCDF generados por el WRF.\\
+Se realizó una corrección de los valores de temperatura simulada por el modelo WRF basado en la altura real de las estaciones del IDEAM. Cada estación del IDEAM tiene un valor asociado de altura (Ver Tabla \ref{tab:alturas_ideam_alos_2} columna $ Altura\ IDEAM$) , pero algunos de estos no concuerdan con la realidad. Un ejemplo de esto es el caso de la estación llamada Pmo (Páramo) Guacheneque. El IDEAM reporta una altura de 2300 msnm pero según el modelo digital de elevación (DEM) ALOS-PALSAR creado por \citet{ASFDAAC2007}, la ubicación de la estación tiene una elevación de 3288 msnm. Según el Distrito Regional de Manejo Integrado generado por \citet{Corpochivor2011}, el área de este páramo está entre los 3000 y los 3500 msnm. De modo que el modelo de ALOS-PALSAR presenta una mejor aproximación a la altura de la zona donde se encuentra la estación, ver Tabla \ref{tab:alturas_ideam_alos_2}. Razón por la cual no se tomaron los valores de altura sugeridos por el IDEAM; en cambio se usó la altura brindada por el DEM de ALOS-PALSAR para cada una de las ubicaciones de las estaciones, estos valores de altura serán usados como la altura de referencia para las estaciones. Usando la ubicación de cada una de las estaciones se realizó una extracción de los valores de altura presentes en los archivos netCDF generados por el modelo WRF. La forma como se realiza la extracción de los valores de altura se encuentra en el código \textit{ext\_simulaciones\_200702.py} que fue creado a partir de la información del siguiente enlace \textcolor{blue}{\href{http://www.openwfm.org/wiki/How_to_interpret_WRF_variables}{link}}, donde se explica que la altura del terreno se calcula a partir de las alturas geopotenciales, la cual toma los valores de los archivos NetCDF generados por el WRF.\\
 
 \begin{table}[H]
 \centering
@@ -259,9 +305,9 @@ En el diagrama de Taylor el coeficiente de Pearson está asociado al ángulo azi
 
 \begin{figure}[h]
     \centering
+	\caption{Ejemplo de un diagrama de Taylor.}
 	\label{fig_explicacion_taylor}
 	\includegraphics[draft=false, scale=0.45]{graph/explicacion_taylor.png}
-	\caption{Ejemplo de un diagrama de Taylor.}
 \end{figure}
 
 La metodología propuesta por \citet{taylor2001summarizing} es una buena forma para escoger un modelo, sin embargo, por ser un método gráfico deja de ser útil cuando la cantidad de modelos es grande o cuando la diferencia entre modelos es pequeña. Por esta razón para la selección de los mejores resultados se usará la correlación de Pearson y una versión del cuadrado medio del error, llamado error cuadrado medio normalizado (NRMSE) (Ecuación \ref{rmse_eq}), ya que este estadístico permite realizar la comparación de grupos de datos o modelos con diferentes escalas.\\
@@ -283,7 +329,7 @@ En la Figura \ref{gra:taylor_total_a} se muestran los diagramas de Taylor para l
 %    {STD}_{abs} = |sd_{x} - sd_{x'}|
 %\end{equation}
 
-Donde $n$ es el número de datos, $x$ corresponde a los registros de las estaciones automáticas, $x'$ corresponde a los datos modelados.\\
+%Donde $n$ es el número de datos, $x$ corresponde a los registros de las estaciones automáticas, $x'$ corresponde a los datos modelados.\\
 
 
 \begin{figure}[H]
@@ -773,7 +819,7 @@ Chinavita Automatica  &          9 &     d03 &   0.9355** &  0.3274 &   \textbf{
 
 En la Tabla \ref{tabla:ejemplo_dominios} se puede observar que el mayor resultado de la columna $ET$ es de 0.8527 y este valor es el resultado de la simulación 6 dominio 2 la cuál presentó el más alto valor de $\rho$ y un valor que no es el peor ni el mejor valor de $NRMSE$.\\
 
-Para evaluar la mejor simulación, se marcaron los valores que tuvieran un coeficiente de Pearson en la columna  $Pearson$ superior a 0.8 y valores inferiores a 0.3 en la columna $NRMSE$ como lo sugiere \citet{Agua2016}. Se realizó una tabla de frecuencia de los resultados (Tabla \ref{tabla:resultado_dom_sum_dom}).\\
+Para evaluar la mejor simulación, se usaron los valores que tuvieran un coeficiente de Pearson en la columna  $Pearson$ superior a 0.8 y valores inferiores a 0.3 en la columna $NRMSE$ como lo sugiere \citet{Agua2016}. Se realizó una tabla de frecuencia de los resultados (Tabla \ref{tabla:resultado_dom_sum_dom}).\\
 
 
 %\begin{table}[H]
@@ -910,7 +956,7 @@ Simulación & Dominio & Frecuencia \\ \hline
 \label{Tabla_resum_dom}
 \end{table}
 
-En la Tabla \ref{Tabla_mejores_5_dominio}{Tabla_resum_dom} se evaluaron 10 estaciones y se tomaron los 5 mejores resultados para cada una de las estaciones se esperaría que la suma de la columna frecuencia fuera de 50, pero para las estaciones Chinativa Automática no hubo simulaciones que superaran los filtros y para la estación Hda Sta Ana Autom sólo hubo un caso que logró superar los filtros como se evidencia en la Tabla \ref{Tabla_mejores_5_dominio}. En la Tabla \ref{Tabla_resum_dom} se observa que la mejor simulacion es la simulación 2 dominio 2, pero esta simulacion 2 consume 164 horas (ver Tabla \ref{tabla:dominios_1}). Por lo tanto esta simulación no sera de gran utilidad si estos resultados se quieren usar para hacer pronósticos. La simulación que presenta buenos resultados según los resultados de las Tablas \ref{tabla:dominios_1}, \ref{tabla:resultado_dom_sum_dom} y \ref{Tabla_resum_dom} es la simulación 4 ya que presenta un consumo de máquina aceptable, presenta buenos resultados teniendo en cuenta las diferentes simulaciones y a nivel de los cinco mejores resultados.\\
+En la Tabla \ref{Tabla_resum_dom} se evaluaron 10 estaciones y se tomaron los 5 mejores resultados para cada una de las estaciones se esperaría que la suma de la columna frecuencia fuera de 50, pero para la estación Chinativa Automática no hubo simulaciones que superaran los filtros y para la estación Hda Sta Ana Autom sólo hubo un caso que logró superar los filtros como se evidencia en la Tabla \ref{Tabla_mejores_5_dominio}. En la Tabla \ref{Tabla_resum_dom} se observa que la mejor simulacion es la simulación 2 dominio 2, pero esta simulacion 2 consume 164 horas (ver Tabla \ref{tabla:dominios_1}). Por lo tanto esta simulación no sera de gran utilidad si estos resultados se quieren usar para hacer pronósticos. La simulación que presenta buenos resultados según los resultados de las Tablas \ref{tabla:dominios_1}, \ref{tabla:resultado_dom_sum_dom} y \ref{Tabla_resum_dom} es la simulación 4 ya que presenta un consumo de máquina aceptable, presenta buenos resultados teniendo en cuenta las diferentes simulaciones y a nivel de los cinco mejores resultados.\\
 
 La simulación 4 tiene una reducción de escala de un factor de 5 entre las resoluciones de los datos GFS y del dominio parental. La reducción de escala es un aspecto de gran importancia, como se menciona en el trabajo de \citet{Corrales2015} quienes realizaron una reducción de escala con un factor de 5, \citet{Parra2012} en sus investigación también usó un factor de 5 y \citep{ArmentaPorras2013} también usó una reducción de escala de 5.  Basado en estos trabajos podemos decir que la reducción de escala hecha a través de la simulación 4 ha es apta y proporciona buenos resultados.\\
 
@@ -922,9 +968,12 @@ La simulación 4 tiene una reducción de escala de un factor de 5 entre las reso
 
 \section{Conclusiones}
 
-La escogencia de WRF como modelo de la atmósfer es aceptada porque WRF es un modelo regional de pronóstico de tiempo atmosférico que presenta buenas características para la realización de estudios de la temperatura, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.\\
+La escogencia de WRF como modelo de la atmósfera es aceptada porque WRF es un modelo regional de pronóstico de tiempo atmosférico que presenta buenas características para la realización de estudios de la temperatura, ya que es un modelo que tiene en cuenta aspectos físicos, dinámicos y su evolución, además es un modelo que ha sido probado y es usado actualmente en Colombia.\\
 
 La mejor combinación simulación-dominio-resolución corresponde a la Simulación 4. Ya que esta simulación fue una de las que mejor representó la temperatura del aire  y se realizó en un tiempo de máquina promedio que sería aceptable para realizar pronósticos con 12 horas de anticipación a eventos de temperaturas mínimas y máximas.\\
+
+
+Existe una gran variedad de modelos de pronóstico del tiempo usados para el pronóstico de las temperaturas del aire, pero cada uno de ellos posee fortalezas y debilidades. Para escoger el mejor modelo se deberá tener en cuenta las necesidades y la capacidad de cómputo que se posea.\\
 
 %En la mayoría de los casos cuando la desviación estándar con la cuál se compara es superior a seis se presenta poca variabilidad en las series simuladas con el modelo WRF.\\
 

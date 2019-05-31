@@ -41,7 +41,6 @@ def angulo(uu, vv):
     return theta_base
 
 
-
 #mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables.pickle')
 #mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables_1.pickle')
 ##mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_2.pickle')
@@ -274,7 +273,7 @@ for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
                         continue
         
     
-                    #Esta línea se usa para generar las tablas usadas para la comparación de los datos &&&
+                    ### Esta línea se usa para generar las tablas usadas para la comparación de los datos &&&
                     #comparacion.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas/'+pp+'_'+str(j)[:-2]+'_'+cod_2+'_'+kk+pp_col_wrf+'.csv')
         
         
@@ -325,6 +324,16 @@ for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
                     
                     if varia_1 == '_hum_2m.csv':
                         comparacion.humedad = (comparacion.humedad * 100)
+                        if comparacion.humedad.max() > 100:
+                            comparacion.humedad = np.where(comparacion['humedad'] > 100, 100, comparacion['humedad'])
+                            #print(comparacion.humedad)
+                            #comparacion[comparacion.humedad > 100]
+                            #tmp_model[tmp_model.humedad > 1]
+                            #print(resumen_back[(resumen_back.fecha == i) & (resumen_back.cod == j) & (resumen_back.date_1.str.slice(0,3) == kk) & (resumen_back.humedad > 1)][['T2', 'q2', 'psfc', 'humedad']])
+                            #relhum(t = (8.428406 + 237.15), p = 75149.328125, r = 0.009366)
+                            ## Página https://www.rotronic.com/en/humidity_measurement-feuchtemessung-mesure_de_l_humidite/humidity-calculator-feuchterechner-mr
+
+
                     if varia_1 == '_val_rad.csv':
                         ### Estoy editando estos valores para poder insertar NaN en la Columna de comparacion[pp_col_wrf]
                         

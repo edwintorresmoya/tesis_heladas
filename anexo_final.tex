@@ -1,0 +1,454 @@
+\appendix
+\clearpage
+\addappheadtotoc
+\appendixpage
+\chapter{Análisis de dos casos de altas y bajas temperaturas en la Sabana de Bogotá.}
+
+Para poder probar el ajuste de la configuración icm a los datos reales de temperatura del aire de las estaciones meteorológicas automáticas en la Sabana de Bogotá, se escogieron dos casos en los que se presentaron altas y bajas temperaturas en la Sabana de Bogotá. Estos casos nunca fueron usados para hacer la calibración de las parametrizaciones y el objetivo es evaluar si la configuración icm e icm-mp\_physics 3 presenta mejores resultados frente a la configuración IDEAM-Colombia.\\
+
+El Caso 5 se presentó el 19 de febrero de 2016, en este caso se presentó una alta temperatura en la Sabana de Bogotá. El Caso 6 se presentó el 18 de diciembre de 2017 y para esta fecha se presentó una alta temperatura en la Sabana de Bogotá.\\
+
+La tabla de frecuencia para las diferentes combinaciones muestra que la mejor combinación es la icm, superando por poco a la icm-mp\_physics 3, ver Tabla \ref{tab_anex_56}.
+
+
+\begin{table}[H]
+\centering
+\caption{Frecuencia de ocurrencia de la combinación mayor a 0.8 en $Pearson$ e inferior a 0.3 en $NMRSE$ que se encuentra entre los 5 mejores resultados.}
+\label{tab_anex_56} % Extraído de extraccion_datos_dominios_20190506.py
+\begin{tabular}{lr}
+\toprule
+Simulación & Frecuencia \\
+\midrule
+IDEAM-Colombia &     23 \\
+icm      &     42 \\
+icm-mp\_physics 3    &     41 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Comparación de temperaturas simuladas y observadas}
+
+Para evaluar el comportamiento de las nuevas configuraciones del modelo WRF con a las configuraciones icm e icm-mp\_physics 3 se realizaron gráficas que permiten comparar los datos con respecto a una estación automática, los datos de la configuración usada por el IDEAM para Colombia llamada IDEAM-Colombia y las nuevas configuraciónes llamadas icm e icm-mp\_physics 3.\\
+
+En en el caso 5 se aprecia que las configuraciones representan bien la temperatura excepto en la mañana de día 20 de febrero ya que todas las configuraciones subestimaron los valores de temperatura, Figura \ref{caso5_tiba_wrf}. Las bajas temperaturas del día 19 de febrero la configuración icm-mp\_physics 3 fue la que mejor representó la temperatua mínima. En el caso 6 podemos observar que ninguna de las configuraciones fue capaz de reproducir correctamente la baja temperatura, pero fue la configuración icm la que presentó los resultados menos lejanos, ya que presentó una diferencia de 2.7\celc, ver Figura \ref{caso6_tiba_wrf}.
+
+
+\begin{figure}[H]
+\centering    
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 5 alta temperatura del 19 de febrero de 2016.}
+%"comparacion_real_wrf_201602.py"
+\label{caso5_tiba_wrf}
+\includegraphics[draft=false, scale=0.4]{comparacion_grafica/201602_21206990.png}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 6 baja temperatura del 18 de diciembre de 2017.}
+\label{caso6_tiba_wrf}
+\includegraphics[draft=false, scale=0.4]{comparacion_grafica/201712_21206990.png}
+\end{subfigure}
+~
+
+    \caption{Temperatura del aire a dos metros para los casos 5 y 6. Valores registrados en la estación automática Tibaitatá y los valores simulados con las configuraciones IDEAM-Colombia, icm e icm-mp\_physics 3.}
+    \label{fig:wrf_temp_tibaitata}
+
+\end{figure}
+
+Es importante resaltar que la configuración icm en la mayoría de los casos continúa presentando las temperaturas más extremas.\\
+
+\section{Comparación de otras variables}
+
+Además del análisis realizado para la variable de temperatura del aire se evaluó cuál fue el desempeño de la combinación icm, icm-mp\_physics 3 e IDEAM-Colombia con respecto a otras variables medidas por las estaciones automáticas de la zona de estudio tales como precipitación, humedad relativa, radiación, bulbo húmedo, punto de rocío y rapidez del viento.\\
+
+\subsection{Humedad relativa}
+
+En el caso 5 podemos observar que la humedad fue mejor representada por la configuración icm-mp\_physics 3, aunque continúa generando valores que exceden el 100\% (Figura \ref{caso5_tiba_wrf_hum}). Para el caso 6 se puede observar que fue la configuración IDEAM-Colombia la configuración que mejor representó la humedad (Figura \ref{caso6_tiba_wrf_hum}).
+
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 5 alta temperatura del 19 de febrero de 2016.}
+\label{caso5_tiba_wrf_hum}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201602_21206990_humedad.png}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 6 baja temperatura del 18 de diciembre de 2017.}
+\label{caso6_tiba_wrf_hum}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201712_21206990_humedad.png}
+\end{subfigure}
+~
+
+    \caption{Humedad relativa para los cuatro casos escogidos de acuerdo a los valores registrados en la  estación automática Tibaitatá y los valores simulados con las configuraciones icm, icm-mp\_phyiscs 3 e IDEAM-Colombia.}
+    \label{fig:wrf_hum_tibaitata}
+\end{figure}
+
+
+\subsection{Radiación}
+
+
+La radiación es una de las variables que presenta más fallas por falta de datos observados, esto se ha evidenciado en el análisis de los casos anteriores y de nuevo en la gráfica \ref{fig:wrf_rad_tibaitata2}. Para el caso 5 (Figura \ref{caso5_tiba_wrf_rad}) se puede observar que los datos modelados no se acercan a los valores registrados. Para el caso 6 (Figura \ref{caso6_tiba_wrf_rad2}) se observa que hay una gran cantidad de fallas de registro.\\
+
+Para los cuatro casos la radiación no fue correctamente modelada ya que los valores fueron sobreestimados por todas las configuraciones.\\
+
+\begin{figure}[H]
+\centering    
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 5 alta temperatura del 19 de febrero de 2016.}
+\label{caso5_tiba_wrf_rad}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201602_21206990_radiacion.png}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 6 baja temperatura del 18 de diciembre de 2017.}
+\label{caso6_tiba_wrf_rad2}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201712_21206990_radiacion.png}
+\end{subfigure}
+
+    \caption{Radiación de onda corta para los cuatro casos escogidos de acuerdo a los valores registrados en la estacón Tibaitatá y a los valores simulados con las configuraciones icm, icm-mp\_physics 3 e IDEAM-Colombia.} % La variable que se usó para la extracción del wrf fue SWDOWN = DOWNWARD SHORT WAVE FLUX AT GROUND SURFACE (W m-2)
+    \label{fig:wrf_rad_tibaitata2}
+\end{figure}
+
+
+\subsection{Precipitación}
+
+En la Figura \ref{fig:wrf_prec_tibaitata2} se puede observar que en ninguno de los días de los dos casos se presentaron lluvias y las tres configuraciones del modelo generaron precipitaciones (Figuras \ref{caso5_tiba_wrf_prec} y \ref{caso6_tiba_wrf_prec}). La configuración que presentó menos precipitación en ambos casos fue la configuración IDEAM-Colombia.\\
+
+%La precipitación del modelo resulta de la suma de dos variables internas de las salidas una de ellas es RAINC la cual viene del esquema de cúmulos y la otra es RAINNC la cual viene de la microfísica de nubes. Ya que los resultados mostraron que la mejor opción es mantener parametrizaciones apagadas mp\_physics y cu\_physics, como resultado no se van a obtener valores de precipitación en las salidas de la configuración icm.\\
+
+\begin{figure}[H]
+\centering    
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 5 alta temperatura del 19 de febrero de 2016.}
+\label{caso5_tiba_wrf_prec}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201602_21206990_rain.png}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 6 baja temperatura del 18 de diciembre de 2017.}
+\label{caso6_tiba_wrf_prec}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201712_21206990_rain.png}
+\end{subfigure}
+~
+
+
+    \caption{
+    %Figuras de comparación entre los datos de precipitación para la estación Tibaitatá en los cuatro casos escogidos. La línea continua representa los datos de la estación meteorológica automática del IDEAM, la línea gris representa los valores modelados teniendo en cuenta la configuración del IDEAM-Colombia y la línea roja representa los datos de la configuración hallada icm. Los triángulos representan los resultados de el dominio 1 y los pentágonos representan los resultados del dominio 2.
+Precipitación para los cuatro casos escogidos de acuerdo a los valores registrados en la estacón Tibaitatá y a los valores simulados con las configuraciones icm, icm-mp\_physics 3 e IDEAM-Colombia.    
+    }
+    \label{fig:wrf_prec_tibaitata2}
+\end{figure}
+
+
+%\subsection{Bulbo húmedo}
+%
+%En el caso 1 \ref{caso1_tiba_wrf_wb} los valores modelados no representaron correctamente los valores mínimos, el día 3 de febrero del 2007 la configuración icm tuvo una mejor aproximación a los valores maximos y el día 4 de febrero de 2007 la configuración IDEAM-Colombia fue la que presentó la mejor aproximación a los valore máximos reales. En el caso 2 las ambas configuraciones presentaron resultados similares a los valores generados por la estación automática, para el día 30 de octubre del 2014 los valores de las configuraciones no presentaron valores similares a los valores de la estación automática, ver Figura \ref{caso2_tiba_wrf_wb}. En el caso 3 el valor del bulbo húmedo para los modelos tuvo una buena aproximación, el valor mínimo del 28 de octubre del 2015 no fue correctamente representado, pero el valor máximo fue correctamente representado por la configuración icm, ver Figura \ref{caso3_tiba_wrf_prec}. Y en el caso 4 se observa que la configuración icm presentó un mejor ajuste a los valores de la estación automática, el día 8 de septiembre del 2015 ambas configuraciones presentaron una subestimación y fue más evidente en la configuración icm, ver Figura \ref{caso4_tiba_wrf_wb}.\\
+%
+%%La precipitación del modelo resulta de la suma de dos variables internas de las salidas una de ellas es RAINC la cual viene del esquema de cúmulos y la otra es RAINNC la cual viene de la microfísica de nubes. Ya que los resultados mostraron que la mejor opción es mantener parametrizaciones apagadas mp\_physics y cu\_physics, como resultado no se van a obtener valores de precipitación en las salidas de la configuración icm.\\
+%
+%\begin{figure}[H]
+%    
+%\begin{subfigure}[normla]{0.4\textwidth}
+%\caption{Caso 1 helada del 4 de febrero de 2007.}
+%\label{caso1_tiba_wrf_wb}
+%\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201602_21206990_wetbulb.png}
+%\end{subfigure}
+%~
+%\begin{subfigure}[normla]{0.4\textwidth}
+%\caption{Caso 2 helada del 30 de octubre de 2014.}
+%\label{caso2_tiba_wrf_wb}
+%\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201712_21206990_wetbulb.png}
+%\end{subfigure}
+%~
+%\centering
+%\begin{subfigure}[normla]{0.4\textwidth}
+%\caption{Caso 3 altas temperaturas para el 28 de octubre de 2015.}
+%\label{caso3_tiba_wrf_wb}
+%\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201508_21206990_wetbulb.png}
+%\end{subfigure}
+%~
+%\centering
+%\begin{subfigure}[normla]{0.4\textwidth}
+%\caption{Caso 4 altas temperaturas para el 8 de septiembre de 2015.}
+%\label{caso4_tiba_wrf_wb}
+%\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201509_21206990_wetbulb.png}
+%\end{subfigure}
+%
+%    \caption{Figuras de comparación entre los datos de bulbo húmedo para la estación Tibaitatá en los cuatro casos escogidos. La línea continua representa los datos de la estación meteorológica automática del IDEAM, la línea gris representa los valores modelados teniendo en cuenta la configuración del IDEAM-Colombia y la línea roja representa los datos de la configuración hallada icm. Los triángulos representan los resultados de el dominio 1 y los pentágonos representan los resultados del dominio 2.}
+%    \label{fig:wrf_wb_tibaitata}
+%\end{figure}
+
+
+\subsection{Punto de rocío}
+
+En el caso 5 se observa que las simulaciones presentan un ajuste en las últimas horas del día 18 de febrero de 2016 hasta el medio día del 19 de febrero de 2016 hora local, posterior a estas fechas se evidencia que los valores modelados no se ajustan a los valores de la estación automática (Figura \ref{caso5_tiba_wrf_dp}). En el caso 6, podemos observar que no hubo un buen ajuste a lo largo del período de estudio por parte de las diferentes configuraciones (Figura \ref{caso6_tiba_wrf_dp}).\\
+
+
+\begin{figure}[H]
+\centering    
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 5 alta temperatura del 19 de febrero de 2016.}
+\label{caso5_tiba_wrf_dp}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201602_21206990_dewpoint.png}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 6 baja temperatura del 18 de diciembre de 2017.}
+\label{caso6_tiba_wrf_dp}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201712_21206990_dewpoint.png}
+\end{subfigure}
+~
+    \caption{Temperatura de punto de rocío para los cuatro casos escogidos de acuerdo a los valores registrados en la estación automática Tibaitatá y a los valores simulados con la configuraciones icm, icm-mp\_physics 3 e IDEAM-Colombia.}
+    \label{fig:wrf_dp_tibaitata}
+\end{figure}
+
+
+\subsection{Rapidez del viento}
+
+En el caso 6 los valores de rapidez del viento para la estación Tibaitatá no pasaron el control de calidad, por esta razón se trabajó con la estación La Boyera, ya que esta se encuentra a una altura similar a la de Tibaitatá.\\
+
+En el caso 5 se puede observar un buen ajuste de los datos generador por las configuraciones y los datos generados por la estación automática, excepto en la mañana del día 20 de febrero de 2016 ya que en estos días se presentó una subestimación de los valores de la velocidad de viento, en especial por la configuración icm (Figura \ref{caso5_tiba_wrf_vv}). En el caso 6 podemos ver que no hay una buena representación de la rapidez del viento, ya que tienen un comportamiento diferente los valores de las diferentes configuraciones y los valores de la estación automática (Figura \ref{caso6_tiba_wrf_vv}).
+
+%La precipitación del modelo resulta de la suma de dos variables internas de las salidas una de ellas es RAINC la cual viene del esquema de cúmulos y la otra es RAINNC la cual viene de la microfísica de nubes. Ya que los resultados mostraron que la mejor opción es mantener parametrizaciones apagadas mp\_physics y cu\_physics, como resultado no se van a obtener valores de precipitación en las salidas de la configuración icm.\\
+
+\begin{figure}[H]
+\centering    
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 5 alta temperatura del 19 de febrero de 2016.}
+\label{caso5_tiba_wrf_vv}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201602_21206990_vel_viento.png}
+\end{subfigure}
+~
+\begin{subfigure}[normla]{0.4\textwidth}
+\caption{Caso 6 baja temperatura del 18 de diciembre de 2017.}
+\label{caso6_tiba_wrf_vv}
+\includegraphics[draft=false, scale=0.4]{comparacion_graficas_otras_var/201712_24015110_vel_viento.png}
+\end{subfigure}
+~
+    \caption{Rapidez del viento para los cuatro casos escogidos de acuerdo a los valores registrados en las estaciones automáticas la Boyera y Tibaitatá y los valores simulados con las configuraciones icm, icm-mp\_physics 3 e IDEAM-Colombia.}
+    \label{fig:wrf_vv_tibaitata}
+\end{figure}
+
+
+%\section{Comparación estadística entre la configuración icm, icm-mp\_physics\_3 e IDEAM-Colombia}
+%
+%Para el caso de las heladas, la información sobre temperatura, humedad, y rapidez del viento en capas cercanas a la superficie juega un papel importante en la toma de decisiones para la protección de los cultivos \citep{prabha2008}. Por esta razón, se realizó una comparación estadística de las variables temperatura, humedad relativa, y rapidez del viento para los cuatro casos de los datos modelados y los datos de las estaciones automáticas.\\
+%
+%%Para la extracción de estas variables se usaron las siguientes fórmulas.\\
+%
+%Para saber la frecuencia horaria en cada año que se presentaron heladas y altas temperaturas se realizaron gráficas de la cantidad de horas en las que se presentaron temperaturas por encima de 0\celc\ y por debajo de 25\celc (Figura \ref{subfig:temp_horarias_ext}) usando los valores validados de las estaciones automáticas.\\
+%
+%\begin{figure}[H]
+%    \centering
+%
+%	\begin{subfigure}[b]{0.45\textwidth}
+%        \caption{Número de horas por año que la temperatura estuvo por debajo de 0\celc.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica2/bajas_tmp.png}
+%    \label{subfig:tmp_0}
+%	\end{subfigure}
+%	~
+%		\begin{subfigure}[b]{0.45\textwidth}
+%        \caption{Número de horas por año que la temperatura estuvo por encima de 25\celc.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica2/altas_tmp.png}
+%    \label{subfig:tmp_25}
+%	\end{subfigure}
+%	~
+%
+%\caption{Número de horas por año en las cuales la temperatura estuvo por debajo de 0\celc\ o por encima de 25\celc.}	
+%\label{subfig:temp_horarias_ext}	
+%\end{figure}
+%
+%Para el caso de las temperaturas bajo 0\celc\ podemos observar que hay varios picos estos picos están asociados a años en los que se presentó eventos el Niño (2006/2007, 2009/2010 y 2014/2015/2016; \citep{NOAA-ORI}). La estación que presentó la mayor cantidad de valores de horas bajo 0\celc\ en la Figura \ref{subfig:tmp_0} es la estación Hda Santa Ana en el municipio de Nemocón a 2572 msnm. La estación que presentó la mayor cantidad de horas anuales con temperaturas por encima de los 25\celc\ es la estación La Capilla Autom en el municipio de a 1917 msnm, la estación Hda Santa Ana se encuentra en un valle entre montañas, lo que implica que las masas de aire frío se puedan depositar en este lugar. La estación La Capilla Autom se encuentra en el município de La Capilla el cual tiene una temperatura promedio de 18\celc, entonces temperaturas por encima de 25\celc\ no son extrañas en esta región.\\
+%
+%Para poder realizar una comparación de los valores obtenidos con el modelo WRF y los datos observados se usó el PE, Ecuación \ref{eq:mbe}. Este estadístico nos ayuda a determinar cuando el modelo presenta sobreestimación o subestimación. Este estadístico fue calculado a nivel horario.\\
+%
+%\begin{equation}\label{eq:mbe}
+%MBE = \mathlarger{\frac{1}{n} \sum_{i=1}^n (x'_i - x_i)}
+%\end{equation}
+%
+%Donde $n$ es el número de datos, $x_i$ corresponde a los registros de las estaciones automáticas, $x'_i$ corresponde a los datos modelados.\\
+%
+%%%%% Voy acá
+%
+%Se calculó el PE para todas las estaciones con la configuración icm, estos valores fueron promediados y se les calculó la desviación estándar a este Grupo de Estaciones (GE). Las desviaciones estándar de GE se encuentran representadas por líneas verdes. Adicionalmente, se calculó el PE para la estación Tibaitatá usando las configuraciones IDEAM-Colombia, icm e icm-mp\_physics 3, con la finalidad de comparar el desempeño de estas configuraciones. Este procedimiento se realizó para cada caso y  para las siguientes variables: temperatura del aire, punto de rocío, bulbo húmedo y rapidez del viento.\\
+%
+%
+%%Para el cálculo del sesgo horario se usó la fórmula de la ecuación \ref{eq:mbe} y los valores se promediaron dependiendo la cantidad de días de cada caso. El análisis para todas las estaciones se realizó con la configuración icm. Se tomaron todas las estaciones y se excluyó la estación Tibaitatá, ya que solo para esta estación se analizará la configuración IDEAM-Colombia e icm a forma de ejemplo.\\
+%
+%%Para este análisis se tomaron los valores horarios de las variables temperatura del aire, punto de rocío, bulbo húmedo y rapidez del viento, estos valores fueron promediados y se les sacó la desviación estándar. Dentro de este grupo de datos no se incluyó la estación Tibaitatá, ya que esta fue analizada por separado.\\
+%
+%%Se realizó una valoración del rendimiento de la configuración IDEAM-Colombia, icm e icm-mp\_physics 3 frente a los datos de temperatura de las estaciones automáticas. Se tomó como referencia la estación Tibaitatá ya que es una de las estaciones de referencia del IDEAM. Se incluyó la configuración IDEAM-Colombia para evaluar las nuevas configuraciones icm e icm-mp\_physicss 3 frente a la configuración del IDEAM.\\
+%
+%\subsection{Caso 1}
+%
+%Los valores de rapidez del viento de la estación Tibaitatá en el caso 1 no fueron suficientes para hacer una gráfica, por esa razón solo para el caso 1 se tendrá en cuenta la estación La Boyera, ubicada en Ubaté para analizar la rapidez del viento.
+%	
+%\begin{figure}[H]
+%    \centering
+%    \begin{subfigure}[b]{0.45\textwidth}
+%        \caption{PE para la temperatura del aire.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201602_tmp_2m.png}
+%    \label{subfig:tmp_0_caso1}
+%	\end{subfigure}
+%	~
+%	    \begin{subfigure}[b]{0.45\textwidth}
+%	        \caption{PE para el punto de rocío.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201602_Td.png}
+%
+%    \label{subfig:td_caso1}
+%	\end{subfigure}
+%	~
+%	    \begin{subfigure}[b]{0.45\textwidth}
+%	\caption{PE para el bulbo húmedo.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201602_wb.png}
+%    \label{subfig:wb_caso1}
+%	\end{subfigure}
+%	~
+%	    \begin{subfigure}[b]{0.45\textwidth}
+%	\caption{PE para la rapidez del viento.}	
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201602_vel_vi10.png}
+%    
+%    \label{subfig:vel_caso1}
+%	\end{subfigure}
+%	~
+%
+%\caption{PE para el caso 1 comprendido entre el 3 y el 4 de febrero de 2007. Los triángulos representan el dominio 2 y los cuadrados representan el dominio 1. Las figuras verdes representan los valores del GE donde las líneas verdes representan la desviación estándar.}	
+%\label{subfig:mbe_caso1}	
+%\end{figure}
+%
+%%Cómo se calculó el punto de rocío y la tmp de bulbo húmedo y su importancia
+%
+%La temperatura del aire para GE presenta un buen comportamiento a través del día, pero entre las 7 y 19 horas hay una PE a que WRF subestime los valores de temperatura llegando hasta -3\celc, en la mayoría de las horas hay una desviación estándar homogénea entre los 4 y -4. Para las configuraciones icm, icm-mp\_physics 3 en la estación Tibaitatá podemos observar que subestiman los valores de temperatura llegando hasta -6\celc\ a las 14 horas y en la noche los valores son sobreestimados alcanzando valores de 8\celc a las 4 horas, la configuración que presenta los valores más lejanos a 0 es icm-mp\_physics 3, ver Figura \ref{subfig:tmp_0_caso1}.\\
+%
+%
+%El punto de rocío para el GE presentó una sobreestimación en la mayoría de las horas la cual alcanza valores de 7\celc a las 6 horas y desde las 19 horas hasta las 21 horas, que se ve disminuida a las 13 horas llegando a valores de -2\celc, la desviación estándar estuvo entre 5 y -5. Para las combinaciones icm, icm-mp\_physics 3 e IDEAM-Colombia en el día se presentó una subestimación que llegó hasta -9.5\celc\ y en las horas de la noche se presentó una sobreestimación que alcanzó valores de 7\celc, en general las diferentes configuraciones se comportaron de una forma similar, pero se observó que la configuración IDEAM-Colombia presentó los valores más negativos, en comparación con las otras configuraciones, ver Figura \ref{subfig:td_caso1}.\\
+%
+%El bulbo húmedo del GE presentó una sobre estimación generalizada excepto entre las 8 y 9 horas, la desviación estándar estuvo entre 5 y -5\celsius, ver Figura \ref{subfig:wb_caso1}. Las configuraciones icm e icm-mp\_physics 3 para la estación Tibaitatá presentaron una sobre estimación generalizada excepto a las 13 horas y entre las 17 y 19 horas que se presentaron valores negativos los cuales llegaron a -3\celc. La configuración IDEAM-Colombia para la estación Tibaitatá presentó los valores más lejanos a 0 en el PE en la variable de bulbo húmedo.\\
+%
+%La variable rapidez del viento podemos observar que para el grupo de estaciones en las horas de la mañana hubo una sobreestimación que llegó hasta los 4 $m/s$ a las 12 horas y en las horas de la noche mejoró el comportamiento, la desviación estándar fue más alta entre las 4 y 12 horas. Las combinaciones icm, icm-mp\_physics 3 e IDEAM-Colombia en La Boyera entre las 8 y 20 horas presentaron una sobre estimación cuyo valor máximo fue de 3\celc\ las demás horas fueron subestimadas alcanzando valores de -4\celc, Figura \ref{subfig:vel_caso1}.\\
+%
+%
+%\subsection{Caso 2}
+%
+%\begin{figure}[H]
+%    \centering
+%    \begin{subfigure}[b]{0.45\textwidth}
+%        \caption{PE para la temperatura del aire.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201712_tmp_2m.png}
+%    \label{subfig:tmp_0_caso2}
+%	\end{subfigure}
+%	~
+%	    \begin{subfigure}[b]{0.45\textwidth}
+%	        \caption{PE para el punto de rocío.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201712_Td.png}
+%
+%    \label{subfig:td_caso2}
+%	\end{subfigure}
+%	~
+%	    \begin{subfigure}[b]{0.45\textwidth}
+%	\caption{PE para el bulbo húmedo.}
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201712_wb.png}
+%    \label{subfig:wb_caso2}
+%	\end{subfigure}
+%	~
+%	    \begin{subfigure}[b]{0.45\textwidth}
+%	\caption{PE para la rapidez del viento.}	
+%	\includegraphics[draft=false, scale=0.45]{prabha/grafica4abcd_final/201712_vel_vi10.png}
+%    
+%    \label{subfig:vel_caso2}
+%	\end{subfigure}
+%	~
+%
+%\caption{PE para el caso 2 comprendido entre el 29 y 31 de agosto de 2014. Los triángulos representan el dominio 2 y los cuadrados representan el dominio 1. Las figuras verdes representan los valores del GE donde las líneas verdes representan la desviación estándar.}	
+%\label{subfig:mbe_caso2}	
+%\end{figure}
+%
+%%Cómo se calculó el punto de rocío y la tmp de bulbo húmedo y su importancia
+%
+%El GE presenta subestimaciónes entre 0\celsius y -4\celsius durante las 24 horas siendo menor a las 13 horas con valores promedio de 0\celc, la desviación estándar de mantiene en promedio constante con valores entre 3.5 y -3.5\celc. Las combinaciones icm, icm-mp\_physics 3 e IDEAM-Colombia varían entre 2 y -2\celc\ alrededor del valor de 0\celc\ (figura \ref{subfig:tmp_0_caso2}).\\
+%
+%Para el punto de rocío, se puede observar que GE presentó sobreestimación en la mayoría de las horas y la desviación estándar aumentó desde las 21 horas hasta las 6 horas (Figura \ref{subfig:td_caso2}). Las combinaciones icm, icm-mp\_physics 3 e IDEAM-Colombia presentaron una subestimación que llegó hasta -6\celc\ y en las horas de la noche se presentó una sobreestimación similar a la que presentó el grupo de estaciones llegando hasta 4\celc.\\
+%
+%Para la temperatura de bulbo húmedo, el GE presentaron valores cercanos a 0\celc\ con PE a la sobreestimación llegando a valores promedio de 1\celc, la desviación estándar se mantuvo relativamente constante entre 2.3 y -2.3\celsius (Figura \ref{subfig:wb_caso2}). Las combinaciones icm, icm-mp\_physics 3 e IDEAM-Colombia para la estación Tibaitatá presentaron una sobreestimación más alta en comparación con GE, en las horas de la mañana se presentaron valores subestimados que alcanzaron -3\celc.\\
+%
+%Para la rapidez del viento, podemos observar que tanto GE como las combinaciones icm, icm-mp\_physics 3 e IDEAM-Colombia presentaron un comportamiento similar, en el cual están entre 0 y 2 $m/s$ y se presenta una sobreestimación entre las 13 y 19 horas que alcanza valores máximos promedios de 3 $m/s$, la desviación estándar de GE presenta una disminución entre las 21 horas y las 5 horas, ver Figura \ref{subfig:vel_caso2}.\\
+
+
+\section{Comparación de temperaturas extremas observadas y simuladas con configuraciones icm e icm-mp\_physics\_3 e IDEAM-Colombia.}
+
+Para cada caso se realizó una comparación entre los datos de la configuración IDEAM-Colombia, icm e icm-mp\_physics 3 del dominio 2 frente a los valores diarios de temperaturas extremas (máximas y mínimas) y la temperatura a las 18 horas y 22 horas. Estas horas fueron escogidas ya que según \citet{snyder2005frost,} estas horas son importantes para la predicción de las temperaturas extremas del día siguiente \citet{prabha2008}, ver Figura \ref{subfig:tmp_ext_caso4_d01}.\\
+
+En la Figura \ref{subfig:tmp_ext_caso5} del caso 5 podemos observar que hay un buen ajuste de los datos modelados frente a los datos registrados por la estación automática, ya que se observa que tanto los datos máximos como los datos mínimos están cercanos a la línea central (Figura \ref{subfig:tmp_ext_caso5_1}) este mismo comportamiento sucede con las otras configuraciones (Figuras \ref{subfig:tmp_ext_caso5_1} y \ref{subfig:tmp_ext_caso5_1}). No hay diferencias marcadas como lo sucedido para los casos 1, 2, 3, y 4.\\
+
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \caption{Temperaturas a las 18, 22, máximas y mínimas para el caso 1.}
+	\includegraphics[draft=false, scale=0.45]{prabha/grafica7/201602_ideam_i_d02.png}
+    \label{subfig:tmp_ext_caso5_1}
+	\end{subfigure}
+	~
+	    \begin{subfigure}[b]{0.45\textwidth}
+        \caption{Temperaturas a las 18, 22, máximas y mínimas para el caso 1.}
+	\includegraphics[draft=false, scale=0.45]{prabha/grafica7/201602_ideam_c_d02.png}
+
+    \label{subfig:tmp_ext_caso5_2}
+	\end{subfigure}
+	~
+	\centering
+	    \begin{subfigure}[b]{0.45\textwidth}
+        \caption{Temperaturas a las 18, 22, máximas y mínimas para el caso 1.}
+	\includegraphics[draft=false, scale=0.45]{prabha/grafica7/201602_ideam_3_d02.png}
+    \label{subfig:tmp_ext_caso5_3}
+	\end{subfigure}
+	~
+	
+\caption{Comparación de las temperaturas del aire a las 18, 22, máximas y mínimas entre los valores de IDEAM-Colombia frente a los valores de las estaciones automáticas.}	
+\label{subfig:tmp_ext_caso6}	
+\end{figure}
+
+En el caso 6 podemos observar que los valores de altas y bajas temperaturas se encuentran más distantes entre sí (Figura \ref{subfig:tmp_ext_caso6}). Hay un buen comportamiento de los datos modelados frente a los datos reales ya que no hay muchos datos que se encuentren lejos de la línea central.\\
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \caption{Temperaturas a las 18, 22, máximas y mínimas para el caso 1.}
+	\includegraphics[draft=false, scale=0.45]{prabha/grafica7/201712_ideam_i_d02.png}
+    \label{subfig:tmp_ext_caso6_d01}
+	\end{subfigure}
+	~
+	    \begin{subfigure}[b]{0.45\textwidth}
+        \caption{Temperaturas a las 18, 22, máximas y mínimas para el caso 1.}
+	\includegraphics[draft=false, scale=0.45]{prabha/grafica7/201712_ideam_c_d02.png}
+
+    \label{subfig:tmp_ext_caso6_d01}
+	\end{subfigure}
+	~
+	    \begin{subfigure}[b]{0.45\textwidth}
+        \caption{Temperaturas a las 18, 22, máximas y mínimas para el caso 1.}
+	\includegraphics[draft=false, scale=0.45]{prabha/grafica7/201712_ideam_3_d02.png}
+    \label{subfig:tmp_ext_caso6_d01}
+	\end{subfigure}
+	~
+
+
+
+\caption{Comparación de las temperaturas del aire a las 18, 22, máximas y mínimas entre los valores de IDEAM-Colombia frente a los valores de las estaciones automáticas.}	
+\label{subfig:tmp_ext_caso6}	
+\end{figure}
+
+
+
+
+\section{Conclusiones}
+
+\begin{itemize}
+
+    \item No se evidencian grandes diferencias entre las diferentes configuraciones a nivel gráfico.
+    
+    \item Las mejores combinaciones para la simulación de la temperatura extrema son las configuraciones icm e icm-mp\_physics 3.
+\end{itemize}
+% de acá se sacó la formula de dew point dewpoint https://iridl.ldeo.columbia.edu/dochelp/QA/Basic/dewpoint.html

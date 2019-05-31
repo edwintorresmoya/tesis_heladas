@@ -12,6 +12,9 @@ import matplotlib.dates as mdates
 ###Como obtener las gráficas fig 2a
 
 #def grafica2a():
+#    aaa = 0
+#    ## Lista de los marcadores
+#    lista_marcadores = ".",",","o","v","^","<",">","1","2","3","4","8","s","p","P","*","h","H","+","x","X","D","d","|","_"
 #    start = timer()
 #    #Gráfica de las heladas que se presentaron cada año sólo tiene en cuenta las estaciones automáticas
 #
@@ -31,6 +34,9 @@ import matplotlib.dates as mdates
 #        base = base[base.val_tmp == 0]
 #        if len(base)<10:
 #            continue
+#        else:
+#            aaa += 1
+#            print('conteo ',aaa)
 #        base.date = pd.to_datetime(base.date)
 #        base['year_1'] = base.date.dt.year
 #        base_0 = base
@@ -41,7 +47,7 @@ import matplotlib.dates as mdates
 #        base_plot0.year_1 = pd.to_datetime(base_plot0.year_1, format='%Y')
 #
 #        #Gráficas de las heladas
-#        ax.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10]))
+#        ax.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10]), marker = lista_marcadores[aaa])
 #        ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
 #
 #        
@@ -51,11 +57,11 @@ import matplotlib.dates as mdates
 #        # se va a hacer una resta de todos los valores de temperatura
 #
 #        #Gráficas de las heladas
-#        ax2.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10]))
+#        ax2.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10],), marker = lista_marcadores[aaa])
 #        ax2.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
 #
-#    fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/grafica2/bajas_tmp.png')
-#    fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/grafica2/altas_tmp.png')
+#    fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica2/bajas_tmp.png')
+#    fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica2/altas_tmp.png')
 #    #plt.show()
 #    
 #    print('tiempo->',(timer() - start))
@@ -534,8 +540,8 @@ import matplotlib.dates as mdates
 #        base_2['ix_1'] = np.arange(1, 25)
 #        
 #        
-#        ax1.errorbar(base_2.ix_1, base_2.otras_d01_mean, yerr=base_2.otras_d01_std, linestyle='-', label = 'Grupo de estaciones d01', marker = 's', color = 'forestgreen')
-#        ax1.errorbar(base_2.ix_1, base_2.otras_d02_mean, yerr=base_2.otras_d02_std, linestyle='-', label = 'Grupo de estaciones d02', marker = '^', color = 'forestgreen')
+#        ax1.errorbar(base_2.ix_1, base_2.otras_d01_mean, yerr=base_2.otras_d01_std, linestyle='-', label = 'GE d01', marker = 's', color = 'forestgreen')
+#        ax1.errorbar(base_2.ix_1, base_2.otras_d02_mean, yerr=base_2.otras_d02_std, linestyle='-', label = 'GE d02', marker = '^', color = 'forestgreen')
 #
 #        if (year_1 == '200702') & (var_1 == 'vel_vi10'):
 #
@@ -584,148 +590,154 @@ import matplotlib.dates as mdates
 #        ax1.set_ylabel('MBE('+unidades+')')
 #        fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica4abcd_final/'+nombre[:-4]+'.png')
 #
-##grafica_casos()
+#grafica_casos()
 
 
 
 
 
 
-################################
-## Gráfica tipo 7
-################################
-
-def grafica7():
-    # Gráficas de la temperatura para sólo la temperatura en el numeral a de la figura 4
-    for i in ['201602','201712','200702','201408','201508','201509']:
-        print(i)
-        os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+i)
-        lista_archivos = pd.DataFrame({'col_1':os.listdir()})
-        lista_tmp = lista_archivos[lista_archivos.col_1.str.contains('.csv')]
-        #horas_6 = ['6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','0','1','2','3','4','5']
-        #lista_horas = ['2','2','2','2','2','2','2','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1']
-        #lista_horas = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1,1,2,3,4,5,6]
-        #fechas_horas = pd.to_datetime(lista_horas, format = '%d')
-        #fechas_horas = pd.to_datetime(horas_6, format = '%H')
-        #horas_3 = []
-        #for xx in lista_horas:
-        #    adicional = pd.Timedelta(xx + ' hours')
-        #    horas_3.append(adicional)
-        #horas_4 = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22']
-
-
-        a_d = pd.to_datetime('20000101 6:00')
-        b_d = pd.to_datetime('20000102 6:00')
-        horas_3 = []
-        while a_d < b_d:
-            horas_3.append(a_d)
-            a_d += pd.Timedelta('1 hours') 
-
-
-
-        fig1, ax1 = plt.subplots()
-        fig2, ax2 = plt.subplots()
-        fig3, ax3 = plt.subplots()
-        fig4, ax4 = plt.subplots()
-        #Gráficas
-
-        for mm in ['icm_d','icm_3']:
-            print(mm)
-            for j in lista_tmp.col_1:
-
-                print(j)
-                base = pd.read_csv(j)
-                if len(base) < 10:
-                    continue
-                base.date = pd.to_datetime(base.date)
-
-                #Usado para sacar los valores que de icm y de Colombia
-                lista_loop = base.columns[base.columns.str.contains('ideam')]
-                lista_loop_2 = lista_loop[lista_loop.str.contains(mm) | lista_loop.str.contains('colombia')]
-                #lista_loop_2 = lista_loop[lista_loop.str.contains('icm') | lista_loop.str.contains('colombia')]
-
-                ###Gráfica de las comparaciones entre estaciones
-                ax1.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[0]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
-                ax1.plot(base[base.tmp_2m == base.tmp_2m.max()][lista_loop_2[0]], base[base.tmp_2m == base.tmp_2m.max()].tmp_2m, 's', color = 'k', label= 'T max')
-                ax1.plot(base[base.date.dt.hour == 18][lista_loop_2[0]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label= 'T(1800 hrs)')
-                ax1.plot(base[base.date.dt.hour == 22][lista_loop_2[0]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
-
-                ax2.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[1]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
-                ax2.plot(base[base.tmp_2m == base.tmp_2m.max()][lista_loop_2[1]], base[base.tmp_2m == base.tmp_2m.max()].tmp_2m, 's', color = 'k', label= 'T max')
-                ax2.plot(base[base.date.dt.hour == 18][lista_loop_2[1]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label= 'T(1800 hrs)')
-                ax2.plot(base[base.date.dt.hour == 22][lista_loop_2[1]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
-                ax3.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[2]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
-                ax3.plot(base[base.tmp_2m == base.tmp_2m.max()][lista_loop_2[2]], base[base.tmp_2m == base.tmp_2m.max()].tmp_2m, 's', color = 'k', label= 'T max')
-                ax3.plot(base[base.date.dt.hour == 18][lista_loop_2[2]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label = 'T(1800) hrs')
-                ax3.plot(base[base.date.dt.hour == 22][lista_loop_2[2]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label = 'T(2200) hrs')
-                ax4.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[3]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
-                ax4.plot(base[base.tmp_2m == base.tmp_2m.max()][lista_loop_2[3]], base[base.tmp_2m == base.tmp_2m.max()].tmp_2m, 's', color = 'k', label= 'T max')
-                ax4.plot(base[base.date.dt.hour == 18][lista_loop_2[3]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label= 'T(1800) hrs')
-                ax4.plot(base[base.date.dt.hour == 22][lista_loop_2[3]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200) hrs')
-
-            
-            
-       #    #Usado para polear sólo un lable 
-            ax1.plot(base[base.date.dt.hour == 22][lista_loop_2[0]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
-            ax2.plot(base[base.date.dt.hour == 22][lista_loop_2[1]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
-            ax3.plot(base[base.date.dt.hour == 22][lista_loop_2[2]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
-            ax4.plot(base[base.date.dt.hour == 22][lista_loop_2[3]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
-            
-            
-            
-            
-            
-            ax1.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
-            ax2.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
-            ax3.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
-            ax4.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
-            ax1.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
-            ax2.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
-            ax3.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
-            ax4.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
-            ax1.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
-            ax2.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
-            ax3.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
-            ax4.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
-            
-            handles, labels = ax1.get_legend_handles_labels()
-            ax1.legend(handles, labels[0:4])
-            handles, labels = ax2.get_legend_handles_labels()
-            ax2.legend(handles, labels[0:4])
-            handles, labels = ax3.get_legend_handles_labels()
-            ax3.legend(handles, labels[0:4])
-            handles, labels = ax4.get_legend_handles_labels()
-            ax4.legend(handles, labels[0:4])
-
-            ax1.set_ylabel('Observaciones (°C)')
-            ax2.set_ylabel('Observaciones (°C)')
-            ax3.set_ylabel('Observaciones (°C)')
-            ax4.set_ylabel('Observaciones (°C)')
-
-            if mm == 'icm_d':
-                ax1.set_xlabel('Configuración icm (°C)')
-                ax2.set_xlabel('Configuración icm (°C)')
-                ax3.set_xlabel('Configuración icm (°C)')
-                ax4.set_xlabel('Configuración icm (°C)')
-            else:
-                ax1.set_xlabel('Configuración icm-mp_physics 3 (°C)')
-                ax2.set_xlabel('Configuración icm-mp_physics 3 (°C)')
-                ax3.set_xlabel('Configuración icm-mp_physics 3 (°C)')
-                ax4.set_xlabel('Configuración icm-mp_physics 3 (°C)')
-
-            if mm == 'icm_d':
-
-                fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d01.png')
-                fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d02.png')
-                fig3.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_i_d01.png')
-                fig4.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_i_d02.png')
-            else:
-                fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d01.png')
-                fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d02.png')
-                fig3.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_3_d01.png')
-                fig4.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_3_d02.png')
-
-
+##################################
+### Gráfica tipo 7
+#################################
+#
+#def grafica7():
+#    # Gráficas de la temperatura para sólo la temperatura en el numeral a de la figura 4
+#    for i in ['201602','201712','200702','201408','201508','201509']:
+#        print(i)
+#        os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+i)
+#        lista_archivos = pd.DataFrame({'col_1':os.listdir()})
+#        lista_tmp = lista_archivos[lista_archivos.col_1.str.contains('.csv')]
+#        #horas_6 = ['6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','0','1','2','3','4','5']
+#        #lista_horas = ['2','2','2','2','2','2','2','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1']
+#        #lista_horas = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1,1,2,3,4,5,6]
+#        #fechas_horas = pd.to_datetime(lista_horas, format = '%d')
+#        #fechas_horas = pd.to_datetime(horas_6, format = '%H')
+#        #horas_3 = []
+#        #for xx in lista_horas:
+#        #    adicional = pd.Timedelta(xx + ' hours')
+#        #    horas_3.append(adicional)
+#        #horas_4 = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22']
+#
+#
+#        a_d = pd.to_datetime('20000101 6:00')
+#        b_d = pd.to_datetime('20000102 6:00')
+#        horas_3 = []
+#        while a_d < b_d:
+#            horas_3.append(a_d)
+#            a_d += pd.Timedelta('1 hours') 
+#
+#
+#
+#        #Gráficas
+#
+#        for mm in ['icm_d','icm_3']:
+#            print(mm)
+#            fig1 = plt.figure()
+#            ax1 = fig1.add_axes([0.1, 0.13, 0.8, 0.85])
+#            fig2 = plt.figure()
+#            ax2 = fig2.add_axes([0.1, 0.13, 0.8, 0.85])
+#            fig3 = plt.figure()
+#            ax3 = fig3.add_axes([0.1, 0.13, 0.8, 0.85])
+#            fig4 = plt.figure()
+#            ax4 = fig4.add_axes([0.1, 0.13, 0.8, 0.85])
+#            for j in lista_tmp.col_1:
+#
+#                print(j)
+#                base = pd.read_csv(j)
+#                if len(base) < 10:
+#                    continue
+#                base.date = pd.to_datetime(base.date)
+#
+#                #Usado para sacar los valores que de icm y de Colombia
+#                lista_loop = base.columns[base.columns.str.contains('ideam')]
+#                lista_loop_2 = lista_loop[lista_loop.str.contains(mm) | lista_loop.str.contains('colombia')]
+#                #lista_loop_2 = lista_loop[lista_loop.str.contains('icm') | lista_loop.str.contains('colombia')]
+#
+#                ###Gráfica de las comparaciones entre estaciones
+#                ax1.plot(base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)][lista_loop_2[0]], base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)].tmp_2m, 's', color = 'k', label= 'T max')
+#                ax1.plot(base[base.date.dt.hour == 18][lista_loop_2[0]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label= 'T(1800 hrs)')
+#                ax1.plot(base[base.date.dt.hour == 22][lista_loop_2[0]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
+#                ax1.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[0]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
+#
+#                ax2.plot(base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)][lista_loop_2[1]], base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)].tmp_2m, 's', color = 'k', label= 'T max')
+#                ax2.plot(base[base.date.dt.hour == 18][lista_loop_2[1]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label= 'T(1800 hrs)')
+#                ax2.plot(base[base.date.dt.hour == 22][lista_loop_2[1]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
+#                ax2.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[1]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
+#
+#                ax3.plot(base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)][lista_loop_2[2]], base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)].tmp_2m, 's', color = 'k', label= 'T max')
+#                ax3.plot(base[base.date.dt.hour == 18][lista_loop_2[2]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label = 'T(1800) hrs')
+#                ax3.plot(base[base.date.dt.hour == 22][lista_loop_2[2]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label = 'T(2200) hrs')
+#                ax3.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[2]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
+#
+#                ax4.plot(base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)][lista_loop_2[3]], base[(base.tmp_2m == base.tmp_2m.max())&(base.tmp_2m > 10)].tmp_2m, 's', color = 'k', label= 'T max')
+#                ax4.plot(base[base.date.dt.hour == 18][lista_loop_2[3]], base[base.date.dt.hour == 18].tmp_2m, '+', color = 'k', label= 'T(1800) hrs')
+#                ax4.plot(base[base.date.dt.hour == 22][lista_loop_2[3]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200) hrs')
+#                ax4.plot(base[base.tmp_2m == base.tmp_2m.min()][lista_loop_2[3]], base[base.tmp_2m == base.tmp_2m.min()].tmp_2m, 'o', color = 'k', label= 'T min')
+#
+#            
+#            
+#       #    #Usado para polear sólo un lable 
+#            ax1.plot(base[base.date.dt.hour == 22][lista_loop_2[0]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
+#            ax2.plot(base[base.date.dt.hour == 22][lista_loop_2[1]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
+#            ax3.plot(base[base.date.dt.hour == 22][lista_loop_2[2]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
+#            ax4.plot(base[base.date.dt.hour == 22][lista_loop_2[3]], base[base.date.dt.hour == 22].tmp_2m, '*', color = 'k', label= 'T(2200 hrs)')
+#            
+#            
+#            
+#            
+#            
+#            ax1.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
+#            ax2.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
+#            ax3.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
+#            ax4.plot([-5, base.tmp_2m.max()],[-5, base.tmp_2m.max()], linestyle = ':', color = 'gray')
+#            ax1.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
+#            ax2.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
+#            ax3.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
+#            ax4.plot([-5, (base.tmp_2m.max()-5)],[-0, (base.tmp_2m.max())], linestyle = ':', color = 'silver')
+#            ax1.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
+#            ax2.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
+#            ax3.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
+#            ax4.plot([-0, (base.tmp_2m.max())],[-5, (base.tmp_2m.max()-5)], linestyle = ':', color = 'silver')
+#            
+#            handles, labels = ax1.get_legend_handles_labels()
+#            ax1.legend(handles, labels[0:4])
+#            handles, labels = ax2.get_legend_handles_labels()
+#            ax2.legend(handles, labels[0:4])
+#            handles, labels = ax3.get_legend_handles_labels()
+#            ax3.legend(handles, labels[0:4])
+#            handles, labels = ax4.get_legend_handles_labels()
+#            ax4.legend(handles, labels[0:4])
+#
+#            ax1.set_ylabel('Observaciones (°C)')
+#            ax2.set_ylabel('Observaciones (°C)')
+#            ax3.set_ylabel('Observaciones (°C)')
+#            ax4.set_ylabel('Observaciones (°C)')
+#
+#            if mm == 'icm_d':
+#                ax1.set_xlabel('Configuración IDEAM-Colombia (°C)')
+#                ax2.set_xlabel('Configuración IDEAM-Colombia (°C)')
+#                ax3.set_xlabel('Configuración icm (°C)')
+#                ax4.set_xlabel('Configuración icm (°C)')
+#            else:
+#                ax1.set_xlabel('Configuración IDEAM-Colombia (°C)')
+#                ax2.set_xlabel('Configuración IDEAM-Colombia (°C)')
+#                ax3.set_xlabel('Configuración icm-mp_physics 3 (°C)')
+#                ax4.set_xlabel('Configuración icm-mp_physics 3 (°C)')
+#
+#            if mm == 'icm_d':
+#
+#                fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d01.png')
+#                fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d02.png')
+#                fig3.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_i_d01.png')
+#                fig4.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_i_d02.png')
+#            else:
+#                fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d01.png')
+#                fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_c_d02.png')
+#                fig3.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_3_d01.png')
+#                fig4.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica7/'+str(i)+'_'+'ideam_3_d02.png')
+#
+#
 #grafica7()
 
 

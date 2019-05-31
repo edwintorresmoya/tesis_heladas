@@ -20,7 +20,7 @@ os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extra
 #
 mejores = pd.read_pickle('ext_icm_3.pickle') # En esta línea van los valores con la corrección con NRMSE
 #mejores = pd.concat([mejores1, mejores2])
-condi = mejores.fecha.str.contains('201602')
+condi = mejores.fecha.str.contains('201712')
 condi = condi.fillna(False)
 resumen = mejores[condi]
 

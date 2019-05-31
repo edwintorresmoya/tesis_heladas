@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Oct  4 18:22:37 2018
-
+# Creado para hacer las gráficas del control de calidad de las estaciones convencionales, antes estaban en la carpeta graficas_nan
 @author: edwin
 """
 
@@ -117,7 +117,7 @@ for j in est_zon:
             plt.ylabel('Frecuencia')
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/graficas_nan/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_1'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_1'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             
             
@@ -134,7 +134,7 @@ for j in est_zon:
             plt.xticks(np.arange(1,13))
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/graficas_nan/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_2'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_2'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             
             
@@ -191,7 +191,7 @@ for j in est_zon:
             plt.ylabel('Frecuencia')
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/graficas_nan/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_3'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_3'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             
             
@@ -207,6 +207,6 @@ for j in est_zon:
             plt.xticks(np.arange(1,13))
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/graficas_nan/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_4'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_4'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             
