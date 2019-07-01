@@ -11,6 +11,8 @@ Script que recopila algunas de las funciones creadas para este proyecto
 import pandas as pd
 
 def busca_cod(base_1, col_cod='cod'):
+    # base_1 = base en la que está la culumna a la que se va a buscar los códigos
+    # col_cod = columna con los códigos que se quiere buscar
     #Función creada para buscar los nombres de las estaciones automáticas o convencionales a partír del código
     #tmp_tabla = busca_cod(tmp_tabla, 'cod')
     #El código de la base a usar debe ser numérico
@@ -19,6 +21,24 @@ def busca_cod(base_1, col_cod='cod'):
     lista_estaciones.columns.values[0] = 'cod_1'
     lista_estaciones.columns = lista_estaciones.columns.str.strip()
     lista_estaciones.columns.values[1] = 'Nombre'
+    
+    name_0 = pd.merge(left=base_1, right=lista_estaciones, 
+                    left_on=col_cod, right_on='cod_1', how='left')
+    
+    return(name_0)
+    #busca_cod(tmp_tabla, 'cod')
+
+def busca_cod_coordenadas(base_1, col_cod='cod'):
+    # base_1 = base en la que está la culumna a la que se va a buscar los códigos
+    # col_cod = columna con los códigos que se quiere buscar
+    #Función creada para buscar los nombres de las estaciones automáticas o convencionales a partír del código
+    #tmp_tabla = busca_cod(tmp_tabla, 'cod')
+    #El código de la base a usar debe ser numérico
+    base_1[col_cod] = base_1[col_cod].convert_objects(convert_numeric=True)
+    lista_estaciones = pd.read_csv('/media/edwin/Downloads/CATALOGO_ESTACIONES_IDEAM_V10_AGOSTO2017.csv')
+    lista_estaciones.columns.values[1] = 'cod_1'
+    lista_estaciones.columns = lista_estaciones.columns.str.strip()
+    lista_estaciones.columns.values[2] = 'Nombre'
     
     name_0 = pd.merge(left=base_1, right=lista_estaciones, 
                     left_on=col_cod, right_on='cod_1', how='left')

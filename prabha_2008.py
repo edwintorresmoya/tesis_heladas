@@ -6,11 +6,11 @@ from timeit import default_timer as timer
 import numpy as np
 import matplotlib.pyplot as plt
 from funciones import un_busca_cod
+from funciones import busca_cod
 import matplotlib.dates as mdates
 
-#@jit
-###Como obtener las gráficas fig 2a
-
+####Como obtener las gráficas fig 2a
+#
 #def grafica2a():
 #    aaa = 0
 #    ## Lista de los marcadores
@@ -27,7 +27,7 @@ import matplotlib.dates as mdates
 #    ax = fig.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
 #
 #    fig2 = plt.figure()
-#    ax2 = fig2.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+#    ax2 = fig2.add_axes([0.12, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
 #    for i in lista_tmp.col_1:
 #        print(i)
 #        base = pd.read_csv(i)
@@ -49,6 +49,8 @@ import matplotlib.dates as mdates
 #        #Gráficas de las heladas
 #        ax.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10]), marker = lista_marcadores[aaa])
 #        ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+#        ax.set_xlabel('Año')
+#        ax.set_ylabel('Número de horas bajo 0°C')
 #
 #        
 #        base_20['cond_1'] = np.where(base.tmp_2m < 25, 0, 1).tolist() # si la temperatura es menor a 0 entonces se convierte en 1 para ser sumado
@@ -59,6 +61,8 @@ import matplotlib.dates as mdates
 #        #Gráficas de las heladas
 #        ax2.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10],), marker = lista_marcadores[aaa])
 #        ax2.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+#        ax2.set_xlabel('Año')
+#        ax2.set_ylabel('Número de horas sobre 25°C')
 #
 #    fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica2/bajas_tmp.png')
 #    fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica2/altas_tmp.png')
@@ -66,9 +70,9 @@ import matplotlib.dates as mdates
 #    
 #    print('tiempo->',(timer() - start))
 #grafica2a()
-
+#
 ###Gráficas de la figura 4
-
+#
 #def grafica4a():
 #    # Gráficas de la temperatura para sólo la temperatura en el numeral a de la figura 4
 #    for i in ['200702','201408','201508','201509']:
@@ -179,10 +183,10 @@ import matplotlib.dates as mdates
 #            fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/grafica4/'+'mbe_'+str(i)+'_'+j[0:8]+'.png')
 #
 #grafica4a()
-
-
-
-
+#
+#
+#
+#
 #def grafica4bcd():
 #    ## Gráfica de las subgráficas bcd
 #    start = timer()
@@ -297,10 +301,10 @@ import matplotlib.dates as mdates
 #                fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/grafica4bcd/'+year_1+'_'+cod+'_'+tipo+'.png')
 #    print('tiempo->',(timer() - start))        
 #grafica4bcd()
-
-
-
-
+#
+#
+#
+#
 #def tabla4bcd():
 #    # Usado para sacar las tablas unidas que se van a plotear que serían iguales a las gráficas 4 del artículo
 #    # Gráficas de otras variables diferenta a la temperatura
@@ -375,6 +379,11 @@ import matplotlib.dates as mdates
 #                        #lista_loop = base.columns[base.columns.str.contains('ideam')]
 #                        #lista_loop_2 = lista_loop[lista_loop.str.contains('icm') | lista_loop.str.contains('colombia')]
 #                        base.date = pd.to_datetime(base.date)
+#                        ################ ADición para cambio de profesora Astrid
+#
+#                        base = base[(base.date >= base.date[0]) & (base.date < (base.date[0] + pd.Timedelta('1 days')))]
+#
+#                        #### Fin de la adición 
 #                        base['hora'] = base.date.dt.hour
 #                        base['frec'] = 1
 #                        ###MBE
@@ -385,9 +394,9 @@ import matplotlib.dates as mdates
 #                        base_v = pd.merge(base_mbe[['hora', cod+'_'+wrf+'_'+dom]], base_v, on='hora', how='outer')
 #            base_v.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4/'+year_1+'_'+col+'.csv')            
 #tabla4bcd()
-
-
-
+#
+#
+#
 #def tablas4a():
 #    # Tablas de la temperatura que serán de utilidad para sacar las gráficas
 #    # gráficas de la temperatura
@@ -454,6 +463,11 @@ import matplotlib.dates as mdates
 #
 #                #####################
 #                base.date = pd.to_datetime(base.date)
+#                ################ ADición para cambio de profesora Astrid
+#
+#                base = base[(base.date >= base.date[0]) & (base.date < (base.date[0] + pd.Timedelta('1 days')))]
+#
+#                #### Fin de la adición 
 #                base['hora'] = base.date.dt.hour
 #                base['frec'] = 1
 #                ###MBE
@@ -464,15 +478,16 @@ import matplotlib.dates as mdates
 #                base_v = pd.merge(base_mbe[['hora', cod+'_'+wrf+'_'+caso[-3:]]], base_v, on='hora', how='outer')
 #        base_v.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4/'+i+'_tmp_2m'+'.csv')            
 #tablas4a()
-
-
+#
+#
 #################################
 ### Gráfica tipo 4
 #################################
 #
 #def grafica_casos():
-#    #### Scrip creado para hacer las gráficas de la totalidad de los datos
+#    #### Script creado para hacer las gráficas de la totalidad de los datos
 #    #### La columna llamada ideam es la que tiene los valores de la estación automática Tibaitatá
+#    #### El Grupo de estaciones corresponde a la configuración icm
 #    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4')
 #    lista = pd.DataFrame({'col_1':os.listdir()})
 #    print('hola')
@@ -509,7 +524,7 @@ import matplotlib.dates as mdates
 #        base_otras_d02_mean = base_otras[base_otras.columns[~base_otras.columns.str.contains('d02')].tolist()].mean(axis=1)
 #
 #        #base_ideam_d02_std = base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d02')].tolist()].std(axis=1)
-#        #base_ideam_d01_std = base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d01')].tolist()].std(axis=1)
+#        #base_ideam_d01_std = base_ideam[base_ideam.columns[base_ideam.columns.str.contains('d02')].tolist()].std(axis=1)
 #        base_otras_d01_std = base_otras[base_otras.columns[~base_otras.columns.str.contains('d01')].tolist()].std(axis=1)
 #        base_otras_d02_std = base_otras[base_otras.columns[~base_otras.columns.str.contains('d02')].tolist()].std(axis=1)
 #
@@ -524,7 +539,8 @@ import matplotlib.dates as mdates
 #        fecha_1 = []
 #        for oo in base.hora:
 #            print(oo)
-#            if oo < 6:
+#            #if oo < 6:#Modificaciones antes de la profe Astrid
+#            if oo < 13:
 #                fecha_1.append(pd.to_datetime(oo, format ='%H') + pd.Timedelta('1 days'))
 #            else:
 #                fecha_1.append(pd.to_datetime(oo, format ='%H'))
@@ -591,12 +607,12 @@ import matplotlib.dates as mdates
 #        fig1.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica4abcd_final/'+nombre[:-4]+'.png')
 #
 #grafica_casos()
-
-
-
-
-
-
+#
+#
+#
+#
+#
+#
 ##################################
 ### Gráfica tipo 7
 #################################
@@ -739,10 +755,10 @@ import matplotlib.dates as mdates
 #
 #
 #grafica7()
-
-
-
-
+#
+#
+#
+#
 #def tablas_variables():
 #    # Usado para sacar las tablas unidas que se van a plotear que serían iguales a las gráficas 4 del artículo
 #
@@ -823,5 +839,288 @@ import matplotlib.dates as mdates
 #                        base_v = pd.merge(base_mbe[['hora', cod+'_'+wrf+'_'+dom]], base_v, on='hora', how='outer')
 #            base_v.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/prabha/tablas4/'+year_1+'_'+col+'.csv')            
 #tablas_variables()
+#
+#
+#### Frost Index
+#
+#def grafica22():
+#    aaa = 0
+#    ## Lista de los marcadores
+#    lista_marcadores = ".",",","o","v","^","<",">","1","2","3","4","8","s","p","P","*","h","H","+","x","X","D","d","|","_"
+#    start = timer()
+#    #Gráfica de las heladas que se presentaron cada año sólo tiene en cuenta las estaciones automáticas
+#
+#    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col/')
+#    lista_archivos = pd.DataFrame({'col_1':os.listdir()})
+#    lista_tmp = lista_archivos[lista_archivos.col_1.str.contains('tmp_2m')]
+#    
+#    #Loop entre cada uno de los archivos de temperatura
+#    fig = plt.figure()
+#    ax = fig.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+#
+#    fig2 = plt.figure()
+#    ax2 = fig2.add_axes([0.12, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+#    for i in lista_tmp.col_1:
+#        print(i)
+#        base = pd.read_csv(i)
+#        base = base[base.val_tmp == 0]
+#        if len(base)<10:
+#            continue
+#        else:
+#            aaa += 1
+#            print('conteo ',aaa)
+#        base.date = pd.to_datetime(base.date)
+#        base['year_1'] = base.date.dt.year
+#        base_0 = base
+#        base_20 = base
+#
+#        base_0['cond_1'] = np.where(base.tmp_2m < 0, (base.tmp_2m * -1), 0).tolist() # si la temperatura es menor a 0 entonces se convierte en 1 para ser sumado
+#        base_plot0 = base_0.groupby(base_0.year_1).sum()[['cond_1']].reset_index()
+#        base_plot0.year_1 = pd.to_datetime(base_plot0.year_1, format='%Y')
+#
+#        #Gráficas de las heladas
+#        ax.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10]), marker = lista_marcadores[aaa])
+#        ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+#        ax.set_xlabel('Año')
+#        ax.set_ylabel('Índice de Congelamiento (°C-horas)')
+#
+#        
+#        base_20['cond_1'] = np.where(base.tmp_2m > 25, (base.tmp_2m - 25), 1).tolist() # si la temperatura es menor a 0 entonces se convierte en 1 para ser sumado
+#        base_plot0 = base_20.groupby(base_20.year_1).sum()[['cond_1']].reset_index()
+#        base_plot0.year_1 = pd.to_datetime(base_plot0.year_1, format='%Y')
+#        # se va a hacer una resta de todos los valores de temperatura
+#
+#        #Gráficas de las heladas
+#        ax2.plot_date(base_plot0.year_1, base_plot0.cond_1, '-', label = un_busca_cod(i[2:10],), marker = lista_marcadores[aaa])
+#        ax2.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+#        ax2.set_xlabel('Año')
+#        ax2.set_ylabel('Índice de Altas Temperaturas (°C-horas)')
+#
+#    fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica22/bajas_tmp.png')
+#    fig2.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/grafica22/altas_tmp.png')
+#    #plt.show()
+#    
+#    print('tiempo->',(timer() - start))
+#grafica22()
+#
+#
+### Tablas de d y accuraci
+#
+#
+#base = pd.DataFrame({'a':[0,1,3,3,4, 3,-1,20,30],'b':[0,1,2,3,4,-1, -2, 26, 27 ]})
+def fx_d(observaciones, modelo):
+    # Función para obtener la tabla 2 de la página 243 del art de Prabha
+    d1 = 1 - sum(((modelo - observaciones.mean()) - (observaciones -observaciones.mean()))
+            )**2 /sum((abs(modelo - observaciones.mean()) + abs(observaciones - observaciones.mean())))**2
+    # Accuracy 0
+    if d1 == 1:
+        print(d1)
+    a = np.where(((observaciones <= 0) & (modelo > 0)), 1, 0).sum()
+    b = np.where(((observaciones > 0) &  (modelo > 0)), 1, 0).sum()
+    c = np.where(((observaciones <= 0) & (modelo <= 0)),1, 0).sum()
+    d = np.where(((observaciones > 0) &  (modelo <= 0)),1, 0).sum()
+
+    if len(observaciones[observaciones < 0]) >= 1:
+        acc_0 = 100*(b+c)/(a+b+c+d)
+    else:
+        acc_0 = np.NaN
+
+    # Accuracy 1
+
+    e = np.where(((observaciones <= 25) & (modelo > 25)), 1, 0).sum()
+    f = np.where(((observaciones > 25) &  (modelo > 25)), 1, 0).sum()
+    g = np.where(((observaciones <= 25) & (modelo <= 25)),1, 0).sum()
+    h = np.where(((observaciones > 25) &  (modelo <= 25)),1, 0).sum()
+
+    if len(observaciones[observaciones > 25]) >= 1:
+        acc_25 = 100*(f+g)/(e+f+g+h)
+    else:
+        acc_25 = np.NaN
+
+    ## MBE
+    mbe = 1/len(observaciones) * (modelo - observaciones).sum()
+    mae = 1/len(observaciones) * abs((modelo - observaciones)).sum()
+    rmse = (1/len(observaciones) * ((modelo - observaciones)**2).sum())**(1/2)
+    pearson = np.corrcoef(observaciones, modelo)[0,1]
+
+    return(d1, acc_0, acc_25, mbe, mae, rmse, pearson)
+##numero = fx_d(base.a, base.b)
+##
+##
+## Tabla número 2 de Prabha
+#
+#def table2():
+#    # usado para crear la tabla que saca la precisión y el valor de "d" para hacer las tablas
+#    adicionar = pd.DataFrame({'year':[],'id':[], 'd1':[], 'acc_0':[], 'acc_25':[], 'mbe':[], 'mae':[], 'rmse':[], 'pearson':[]})
+#    for i in ['201602','201712','200702','201408','201508','201509']:
+#    #for i in ['201508','201509']:
+#        os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+i)
+#        lista_archivos2 = pd.DataFrame({'col_1':os.listdir()})
+#        lista_archivos = lista_archivos2[lista_archivos2.col_1.str.contains('.csv')]
+#        for j in lista_archivos.col_1:
+#            print(i)
+#            base = pd.read_csv(j)
+#            for k in base.columns[3:]:
+#                resultado = fx_d(base.tmp_2m, base[k])
+#                adicionar_1 = pd.DataFrame({'year':[i],'id':[k], 'd1':[resultado[0]], 'acc_0':[resultado[1]], 'acc_25':[resultado[2]], 'mbe':[resultado[3]], 'mae':[resultado[4]], 'rmse':[resultado[5]], 'pearson':[resultado[6]]})
+#                adicionar = pd.concat([adicionar, adicionar_1])
+#                
+#                
+#    adicionar.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/tabla_temperatura.csv')
+#table2()
+#
+#
+#
+## Usado para hacer la tabla 4 de las siguientes variables
+#
+#      
+#def tabla4_variables():
+#    # Usado para sacar las tablas unidas que se van a plotear que serían iguales a las gráficas 4 del artículo
+#
+#    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas')
+#    lista_archivos = pd.DataFrame({'col_1':os.listdir()})
+#    lista_tmp = lista_archivos[lista_archivos.col_1.str.contains('.csv')]
+#    #lista_tmp['year_1'] = lista_tmp.col_1.str[0:6]
+#    #lista_tmp['cod'] = lista_tmp.col_1.str[7:15]
+#    #lista_tmp['wrf'] = lista_tmp.col_1.str[16:23]
+#    #lista_tmp['dom'] = lista_tmp.col_1.str[24:27]
+#    ##lista_tmp['tipo'] = lista_tmp.col_1.str[27:-4]
+#
+#
+#    ##Usado para sacar las fechas para los plots
+#
+#    adicionar = pd.DataFrame({'id':[], 'd1':[], 'acc_0':[], 'acc_25':[], 'mbe':[], 'mae':[], 'rmse':[], 'pearson':[]})
+#    for i in lista_tmp.col_1:
+#        base = pd.read_csv(i)
+#        for oo in base.columns:
+#            if oo == 'humedad':
+#                base['humedad'] = (base['humedad'] * 100)
+#
+#        try:
+#            resultado = fx_d(base.iloc[:,2], base.iloc[:,3])
+#        except:
+#            continue
+#        adicionar_1 = pd.DataFrame({'id':[i], 'd1':[resultado[0]], 'acc_0':[resultado[1]], 'acc_25':[resultado[2]], 'mbe':[resultado[3]], 'mae':[resultado[4]], 'rmse':[resultado[5]], 'pearson':[resultado[6]]})
+#        adicionar = pd.concat([adicionar, adicionar_1])
+#
+#
+#    adicionar.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/tabla_otras_var.csv')
+#tabla4_variables()
+#
+
+##############################Proceso de las tablas
+
+#def extraccion_tablas():
+#
+#    base_tmp = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/tabla_temperatura.csv')
+#    ## Transformar las tablas para que sea más fácil de usar
+#    base_tmp['cod'] = base_tmp.id.str[0:8]
+#    base_tmp['tipo'] = base_tmp.id.str[9:-4]
+#    base_tmp['dom'] = base_tmp.id.str[-3:]
+#    
+#    base_tmp_2 = busca_cod(base_tmp)
+#    
+#    ## Primer condicional
+#    base_filtrada = base_tmp_2[(base_tmp_2.dom == 'd02') & ((base_tmp_2.tipo == 'ideam-icm')|(base_tmp_2.tipo == 's-ideam-icm'))]
+#    
+#    for i in [201602, 201712, 200702, 201408, 201508, 201509]:
+#        base_tabla2 = base_filtrada[base_filtrada.year == i]
+#        base_tabla2.round(2).to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/derivadas/'+str(i)+'tabla2.csv')
+#    
+#    print('hola')
+#    
+#    ## Tabla de diferentes variables a la temperatura
+#    base_tmp = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/tabla_otras_var.csv')
+#    ## Transformar las tablas para que sea más fácil de usar
+#    
+#    base_tmp['year'] = base_tmp.id.str[0:6]
+#    base_tmp['cod'] = base_tmp.id.str[7:15]
+#    base_tmp['tipo'] = base_tmp.id.str[16:23]
+#    base_tmp['dom'] = base_tmp.id.str[24:27]
+#    base_tmp['var_1'] = base_tmp.id.str[27:-4]
+#    
+#    
+#    base_tmp_2 = busca_cod(base_tmp)
+#    
+#    ## Primer condicional
+#    base_filtrada = base_tmp_2[(base_tmp_2.dom == 'd02') & ((base_tmp_2.tipo == 'ideam_i')|(base_tmp_2.tipo == 's-ideam_i'))]
+#    
+#    for j in base_tmp.var_1.unique():
+#        for i in [201602, 201712, 200702, 201408, 201508, 201509]:
+#            base_tabla2 = base_filtrada[(base_filtrada.year == str(i)) & (base_filtrada.var_1 == j)]
+#            base_tabla2.round(2).to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/derivadas/'+j+'_'+str(i)+'_tabla2.csv')
+#
+#extraccion_tablas()
 
 
+
+def table3():
+    # usado para crear la tabla 3 que usa máximas, mínimas, 22 y 18 horas
+    adicionar = pd.DataFrame({'year':[],'id':[], 'd1':[], 'acc_0':[], 'acc_25':[], 'mbe':[], 'mae':[], 'rmse':[], 'pearson':[]})
+    for i, j in zip(['200702','201509'],['201408','201508']):
+    #for i in ['201508','201509']:
+        os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+i)
+        lista_archivos2 = pd.DataFrame({'col_1':os.listdir()})
+        lista_archivos = lista_archivos2[lista_archivos2.col_1.str.contains('.csv')]
+
+        os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+j)
+        lista_archivos3 = pd.DataFrame({'col_1':os.listdir()})
+        lista_archivos4 = lista_archivos3[lista_archivos3.col_1.str.contains('.csv')]
+        
+        ## Unión de los archivos
+        lista_archivos_union = pd.merge(lista_archivos, lista_archivos4, how='outer', on='col_1')
+
+        for k in lista_archivos_union.col_1:
+            try:
+                base1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+i+'/'+k)
+            except:
+                base1 = []
+
+            try:
+                base2 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+j+'/'+k)
+                print('paso 1')
+                if j == '201408':
+                    nombres_col = base2.columns.values.tolist()
+                    qq = pd.DataFrame({'a':nombres_col})
+                    qq = qq.a.str.replace('_s-', '_')
+                    base2.columns = qq
+
+            except:
+                base2 = []
+                print('paso 1')
+
+            if (len(base1) > 1) & (len(base2)> 1):
+                base = base1.append([base2])
+                print('doble')
+            else:
+                if len(base1) > 1:
+                    base = base1
+                if len(base2) > 1:
+                    base = base2
+
+            
+            base.date = pd.to_datetime(base.date)
+            if len(base[base.date.dt.hour == 18]) < 3:
+                continue
+            #condicionales = base.groupby(base.date.dt.day).max()['tmp_1m'].reset_index()
+            #condicionales = base.groupby(base.date.dt.day).min()['tmp_2m'].reset_index()
+
+        ###### Usado para cuando se trabajó con las máximas y las mínimas
+            #tabla__1 = []
+            #for t, y in zip(condicionales.date, condicionales.tmp_2m):
+            #    tabla__1.append(base[(base.date.dt.day == t) & (base.tmp_2m == y)].index[0])
+            #base = base.iloc[tabla__1,:]
+        ######### -----------------
+
+            base = base[base.date.dt.hour == 22]
+            #for pp in []
+            for k in base.columns[base.columns.str.contains('deam-icm_d02')]:
+                resultado = fx_d(base.tmp_2m, base[k])
+                adicionar_1 = pd.DataFrame({'year':[i],'id':[k], 'd1':[resultado[0]], 'acc_0':[resultado[1]], 'acc_25':[resultado[2]], 'mbe':[resultado[3]], 'mae':[resultado[4]], 'rmse':[resultado[5]], 'pearson':[resultado[6]]})
+                adicionar = pd.concat([adicionar, adicionar_1])
+                
+                
+        #adicionar.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/tabla_tmp_tabla_3_max'+i+'_.csv')
+        #adicionar.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/tabla_tmp_tabla_3_min'+i+'_.csv')
+        adicionar.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla2/tabla_tmp_tabla_3_22_'+i+'_.csv')
+table3()

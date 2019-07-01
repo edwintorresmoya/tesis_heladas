@@ -30,7 +30,8 @@ mejores = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorol
 #mejores = pd.concat([mejores1, mejores2])
 
 
-for pp in ['200702', '201408', '201508', '201509', '201602', '201712']:
+#for pp in ['200702', '201408', '201508', '201509', '201602', '201712']:
+for pp in ['201508']:
     print(pp)
 
     os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios')
@@ -59,7 +60,6 @@ for pp in ['200702', '201408', '201508', '201509', '201602', '201712']:
     
     #fecha de int es 2014080410 Pero sumando 5 horas es igual a 20017020460 <- esta es la hora que se usa en WRF
     
-    pdb.set_trace()
     resumen.fecha.unique()
     
     #Usado para crear un sólo nombre para cada una de las parametrizaciones

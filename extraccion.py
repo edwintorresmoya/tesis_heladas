@@ -142,8 +142,11 @@ estaciones['T2'] = 0.0
 #####
 
 os.chdir('/home/edwin/wrf_b/resultados/physic_a/1_folder')
+## &&&
+os.chdir('/home/edwin/Downloads/wps/ubicacion_zona')
 
-f = Dataset('wrfout_d01_2007-02-04_00:00:00', 'r') # Read es para leer
+f = Dataset('wrfout_d01_2007-02-04_17:00:00', 'r')# Read es para leer
+
 
 #Función para extracción de los valores de los pixeles de cada capa 
 

@@ -95,8 +95,9 @@ hora_4['day_1'] = hora_4.date.dt.day
 
 os.chdir('/media/edwin/disco2/gfs/wps')
 
+#pdb.set_trace()
     
-for j in hora_4.index[[216,144,335,101,102,103,104,105,106,107,108,109,405,53,139,140,396,244,141,142]]: # se quita el primero y el último para poder tomar 6 horas antes y poder hacer la simulación del último día sin errores, ya que la simulación se hace con los datos del día hasta la primera hora del degundo día
+for j in hora_4.index[355:360]: # se quita el primero y el último para poder tomar 6 horas antes y poder hacer la simulación del último día sin errores, ya que la simulación se hace con los datos del día hasta la primera hora del degundo día
     print(j)
     try:
         os.mkdir('/media/edwin/disco2/gfs/wps/'+str(j))
@@ -130,7 +131,6 @@ for j in hora_4.index[[216,144,335,101,102,103,104,105,106,107,108,109,405,53,13
     os.popen('ln -s ~/wrf_b/wrf/WPS/ungrib/Variable_Tables/Vtable.GFS Vtable')
     os.popen('ln -s ~/wrf_b/wrf/WPS/geogrid/GEOGRID.TBL_igac GEOGRID.TBL')
     os.popen('ln -s ~/wrf_b/wrf/WPS/metgrid/METGRID.TBL .')
-    os.popen('ln -s ~/wrf_b/wrf/WRFV3/run/* .')
     os.popen('ln -s ~/wrf_b/wrf/WRFV3/run/* .')
 
     f = open('/media/edwin/disco2/gfs/wps/'+str(j)+'/namelist.wps', 'w')
@@ -223,11 +223,9 @@ for j in hora_4.index[[216,144,335,101,102,103,104,105,106,107,108,109,405,53,13
     
     os.chdir('/media/edwin/disco2/gfs/wps/'+str(j))
     fechas_grb = base_unida2[(base_unida2.date >= hora_4.date[j]) & (base_unida2.date <= (hora_4.date[j]+ pd.Timedelta('1 days')))]
-
-    # Condicional para no tener en cuenta las fechas incompletas
+    
     if len(fechas_grb) < 5:
         continue
-    
     link_ini = './link_grib.csh /media/edwin/disco2/gfs/2006_2007/{'
     for kk in fechas_grb.file_1:
         link_ini += kk+','
@@ -251,7 +249,7 @@ for j in hora_4.index[[216,144,335,101,102,103,104,105,106,107,108,109,405,53,13
     while open('log.txt', 'r').read()[-77:-67] != 'Successful':
         time.sleep(10)
     
-    os.system('spd-say "End process 1"')
+    os.system('spd-say "End process 3"')
         
     os.popen('ls | grep -v -e met_em -e namelist.wps -e log.txt | xargs rm')
         

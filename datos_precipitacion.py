@@ -13,6 +13,7 @@ Adicionalmente se realizó una gráfica para buscar el mínimo de temperatura re
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import pdb
 #os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col/')
 #lista_1 = os.listdir()
 #esta_list = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/lr_est_auto.csv')
@@ -99,7 +100,7 @@ plt.close()
 
 
 # para el 2014
-Fechas de las gráficas
+# Fechas de las gráficas
 inicio_1 = pd.to_datetime('20140829 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
 fin_1 = pd.to_datetime('20140902 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
 #Líneas debajo
@@ -168,21 +169,17 @@ plt.close()
 ########################################
 
 #para el 201508
-inicio_1 = pd.to_datetime('20150824 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-fin_1 = pd.to_datetime('20150828 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+inicio_1 = pd.to_datetime('20150827 12:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+fin_1 = pd.to_datetime('20150830 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
 #Líneas debajo
 fecha_inicio = pd.to_datetime('20140830 03:40:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-fecha_final = pd.to_datetime('20140830 05:30:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+fecha_final = pd.to_datetime('20140829 05:30:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
 
 #Lineas de arriba
-l1 = pd.to_datetime('20150824 10:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-l2 = pd.to_datetime('20150824 16:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-l3 = pd.to_datetime('20150825 10:30:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-l4 = pd.to_datetime('20150825 16:30:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-l5 = pd.to_datetime('20150826 8:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-l6 = pd.to_datetime('20150826 14:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-l7 = pd.to_datetime('20150827 8:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-l8 = pd.to_datetime('20150827 11:30:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+l5 = pd.to_datetime('20150828 8:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+l6 = pd.to_datetime('20150828 11:30:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+l7 = pd.to_datetime('20150829 8:30:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+l8 = pd.to_datetime('20150829 16:25:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
 
 
 base_validada_2 = base_validada_tmp[(base_validada_tmp.date > inicio_1) & (base_validada_tmp.date < fin_1)]
@@ -195,7 +192,7 @@ plt.xlabel('Fecha - Hora')
 plt.ylabel('Temperatura °C')
 plt.xticks(rotation=90)
 # líneas de arriba
-plt.vlines(x=[ l1, l2, l3, l4, l5, l6, l7, l8], ymin=15, ymax=25, linestyle = ':', color = 'black' )
+plt.vlines(x=[l5, l6, l7, l8], ymin=16, ymax=24, linestyle = ':', color = 'black' )
 # líneas de abajo
 #plt.vlines(x=[fecha_inicio, fecha_final], ymin=-5, ymax=5, linestyle = '--', color = 'black' )
 

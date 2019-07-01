@@ -97,7 +97,7 @@ os.chdir('/media/edwin/disco2/gfs/wps')
 
 #pdb.set_trace()
     
-for j in hora_4.index[389:400]: # se quita el primero y el último para poder tomar 6 horas antes y poder hacer la simulación del último día sin errores, ya que la simulación se hace con los datos del día hasta la primera hora del degundo día
+for j in hora_4.index[193:201]: # se quita el primero y el último para poder tomar 6 horas antes y poder hacer la simulación del último día sin errores, ya que la simulación se hace con los datos del día hasta la primera hora del degundo día
     print(j)
     try:
         os.mkdir('/media/edwin/disco2/gfs/wps/'+str(j))
@@ -223,6 +223,9 @@ for j in hora_4.index[389:400]: # se quita el primero y el último para poder to
     
     os.chdir('/media/edwin/disco2/gfs/wps/'+str(j))
     fechas_grb = base_unida2[(base_unida2.date >= hora_4.date[j]) & (base_unida2.date <= (hora_4.date[j]+ pd.Timedelta('1 days')))]
+
+    if len(fechas_grb) < 5:
+        continue
     
     link_ini = './link_grib.csh /media/edwin/disco2/gfs/2006_2007/{'
     for kk in fechas_grb.file_1:

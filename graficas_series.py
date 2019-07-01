@@ -24,7 +24,7 @@ def lista_nombres(base):
 
 
 #for pp in ['200702', '201408', '201508', '201509', '201602', '201712']:
-for pp in ['201602', '201712']:
+for pp in ['201508']:
     print(pp)
 
     os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/tablas_estaciones_dominios/tablas_series_'+pp) # se para en la carpeta
