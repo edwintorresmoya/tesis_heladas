@@ -448,7 +448,6 @@ estacion_1 = pd.DataFrame({'date':[]})
 base_1 = pd.DataFrame()
 for uu in file_list:
     if 'tmp_2m.csv' in uu:
-        uu = 'v_21206990_tmp_2m.csv' #Estación automática Tibaitatá está funcionando sólo para una estación 
         print(uu)
         cod_1 = uu[2:10]
         estacion_1 = pd.read_csv(uu)
@@ -736,122 +735,138 @@ for uu in file_list:
                 print(nombre_var)
                 #Plot de las temperaturas totales
                 estacion_3 = estacion_3[-estacion_3.hora_n.isnull()]
-                estacion_3.hora_n = estacion_3.hora_n.astype(int)
-                for ooo in base_3.columns.unique():
-                    if ooo == 'p_total':
-                        
-                        
-                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)].hora, estacion_3[(estacion_3.val_tmp == 0)].tmp_2m, markersize=5, color='gray'
-                        estacion_3[(estacion_3.val_tmp == 0)].boxplot(by='hora_n', column='tmp_2m')
-                        print(len(estacion_3[(estacion_3.val_tmp == 0)]), 'total de las estaciones')
-                        plt.xlabel('Hora')
-                        plt.ylabel(nombre_var)
-                        plt.xticks(rotation=90)
-                        plt.title('')
-                        plt.suptitle('')
-                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_1.png' ,dpi = 100)
-                        plt.close()
-                
-                
-                
-                #Plot de las temperaturas sin las heladas
-                for ooo in base_3.columns.unique():
-                    if ooo == 'p_sin_hel':
-                        
-                        
-                        #plt.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)].tmp_2m, markersize=5, color='gray')
-                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)].boxplot(by='hora_n', column='tmp_2m')
-                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)]), 'temperaturas sin las heladas')
-                        plt.xlabel('Hora')
-                        plt.ylabel(nombre_var)
-                        plt.xticks(rotation=90)
-                        plt.title('')
-                        plt.suptitle('')
-                       
+                fig = plt.figure()
+                ax = fig.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+                ax.plot(estacion_3[estacion_3.val_tmp == 0].groupby(estacion_3.hora_n).mean()[['tmp_2m']].index.tolist(), 
+                        estacion_3[estacion_3.val_tmp == 0].groupby(estacion_3.hora_n).mean()[['tmp_2m']], label = 'Todos los días', color = 'g')
+                ax.plot(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 1)].groupby(estacion_3.hora_n).mean()[['tmp_2m']].index.tolist(), 
+                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 1)].groupby(estacion_3.hora_n).mean()[['tmp_2m']], label = 'Días con heladas', color = 'b')
+                ax.plot(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].groupby(estacion_3.hora_n).mean()[['tmp_2m']].index.tolist(), 
+                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].groupby(estacion_3.hora_n).mean()[['tmp_2m']], label = 'Días con altas temperaturas', color = 'r')
+                ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+                ax.set_xlabel('Hora')
+                ax.set_ylabel(nombre_var)
 
+                plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_100.png' ,dpi = 100)
+                print('hola')
 
-                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_2.png' ,dpi = 100)
-                        plt.close()
-                
-                
-                
-                #Plot de las temperaturas en la helada
-                for ooo in base_3.columns.unique():
-                    if ooo == 'p_helada':
-                        
-                        
-                        
-                        #ax.plot_date(estacion_3[(estacion_3.heladas == 1)].hora, estacion_3[(estacion_3.heladas == 1)].tmp_2m, markersize=5, color='gray')
-                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 1)].boxplot(by='hora_n', column='tmp_2m')
-                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 1)]), 'temperaturas en la helada')
-                        plt.xlabel('Hora')
-                        plt.ylabel(nombre_var)
-                        plt.xticks(rotation=90)
-                        plt.title('')
-                        plt.suptitle('')
-
-                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_3.png' ,dpi = 100)
-                        plt.close()        
-                
-                #Plot de las temperaturas antes de la helada
-                for ooo in base_3.columns.unique():
-                    if ooo == 'p_antes':
-                        
-                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)].tmp_2m, markersize=5, color='gray')
-                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)].boxplot(by='hora_n', column='tmp_2m')
-                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)]), 'temperaturas antes de la helada')
-                        plt.xlabel('Hora')
-                        plt.ylabel(nombre_var)
-                        plt.xticks(rotation=90)
-                        plt.title('')
-                        plt.suptitle('')
-
-
-
-                        
-                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_4.png' ,dpi = 100)
-                        plt.close()
-                
-                
-                #Plot de las altas temperaturas altas
-                for ooo in base_3.columns.unique():
-                    if ooo == 'p_altas':
-                        
-                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].tmp_2m, markersize=5, color='gray')
-                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].boxplot(by='hora_n', column='tmp_2m')
-                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)]), 'temperaturas altas')
-                        plt.xlabel('Hora')
-                        plt.ylabel(nombre_var)
-                        plt.xticks(rotation=90)
-                        plt.title('')
-                        plt.suptitle('')
-
-
-
-                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_5.png' ,dpi = 100)
-                        plt.close()
-                
-                
-                #Plot de las temperaturas antes de la helada
-                for ooo in base_3.columns.unique():
-                    if ooo == 'p_altas_antes':
-                        
-                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas_antes == 1)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas_antes == 1)].tmp_2m, markersize=5, color='gray')
-
-                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas_antes == 1)].boxplot(by='hora_n', column='tmp_2m')
-                        plt.xlabel('Hora')
-                        plt.ylabel(nombre_var)
-                        plt.xticks(rotation=90)
-                        plt.title('')
-                        plt.suptitle('')
-
-
-
-                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_6.png' ,dpi = 100)
-                        plt.close()
-
-
-#base_1.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/resumen_todas_var_con_heladas_20190129.csv')
-#base_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/resumen_todas_var_con_heladas_20190129.csv')
-
-
+#                estacion_3[estacion_3.val_tmp == 0].groupby(estacion_3.hora_n).mean()[['tmp_2m']]
+#                estacion_3.hora_n = estacion_3.hora_n.astype(int)
+#                for ooo in base_3.columns.unique():
+#                    if ooo == 'p_total':
+#                        
+#                        
+#                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)].hora, estacion_3[(estacion_3.val_tmp == 0)].tmp_2m, markersize=5, color='gray'
+#                        estacion_3[(estacion_3.val_tmp == 0)].boxplot(by='hora_n', column='tmp_2m')
+#                        print(len(estacion_3[(estacion_3.val_tmp == 0)]), 'total de las estaciones')
+#                        plt.xlabel('Hora')
+#                        plt.ylabel(nombre_var)
+#                        plt.xticks(rotation=90)
+#                        plt.title('')
+#                        plt.suptitle('')
+#                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_1.png' ,dpi = 100)
+#                        plt.close()
+#                
+#                
+#                
+#                #Plot de las temperaturas sin las heladas
+#                for ooo in base_3.columns.unique():
+#                    if ooo == 'p_sin_hel':
+#                        
+#                        
+#                        #plt.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)].tmp_2m, markersize=5, color='gray')
+#                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)].boxplot(by='hora_n', column='tmp_2m')
+#                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 0)]), 'temperaturas sin las heladas')
+#                        plt.xlabel('Hora')
+#                        plt.ylabel(nombre_var)
+#                        plt.xticks(rotation=90)
+#                        plt.title('')
+#                        plt.suptitle('')
+#                       
+#
+#
+#                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_2.png' ,dpi = 100)
+#                        plt.close()
+#                
+#                
+#                
+#                #Plot de las temperaturas en la helada
+#                for ooo in base_3.columns.unique():
+#                    if ooo == 'p_helada':
+#                        
+#                        
+#                        
+#                        #ax.plot_date(estacion_3[(estacion_3.heladas == 1)].hora, estacion_3[(estacion_3.heladas == 1)].tmp_2m, markersize=5, color='gray')
+#                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 1)].boxplot(by='hora_n', column='tmp_2m')
+#                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas == 1)]), 'temperaturas en la helada')
+#                        plt.xlabel('Hora')
+#                        plt.ylabel(nombre_var)
+#                        plt.xticks(rotation=90)
+#                        plt.title('')
+#                        plt.suptitle('')
+#
+#                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_3.png' ,dpi = 100)
+#                        plt.close()        
+#                
+#                #Plot de las temperaturas antes de la helada
+#                for ooo in base_3.columns.unique():
+#                    if ooo == 'p_antes':
+#                        
+#                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)].tmp_2m, markersize=5, color='gray')
+#                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)].boxplot(by='hora_n', column='tmp_2m')
+#                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.heladas_antes == 1)]), 'temperaturas antes de la helada')
+#                        plt.xlabel('Hora')
+#                        plt.ylabel(nombre_var)
+#                        plt.xticks(rotation=90)
+#                        plt.title('')
+#                        plt.suptitle('')
+#
+#
+#
+#                        
+#                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_4.png' ,dpi = 100)
+#                        plt.close()
+#                
+#                
+#                #Plot de las altas temperaturas altas
+#                for ooo in base_3.columns.unique():
+#                    if ooo == 'p_altas':
+#                        
+#                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].tmp_2m, markersize=5, color='gray')
+#                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)].boxplot(by='hora_n', column='tmp_2m')
+#                        print(len(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas == 1)]), 'temperaturas altas')
+#                        plt.xlabel('Hora')
+#                        plt.ylabel(nombre_var)
+#                        plt.xticks(rotation=90)
+#                        plt.title('')
+#                        plt.suptitle('')
+#
+#
+#
+#                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_5.png' ,dpi = 100)
+#                        plt.close()
+#                
+#                
+#                #Plot de las temperaturas antes de la helada
+#                for ooo in base_3.columns.unique():
+#                    if ooo == 'p_altas_antes':
+#                        
+#                        #ax.plot_date(estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas_antes == 1)].hora, estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas_antes == 1)].tmp_2m, markersize=5, color='gray')
+#
+#                        estacion_3[(estacion_3.val_tmp == 0)&(estacion_3.altas_antes == 1)].boxplot(by='hora_n', column='tmp_2m')
+#                        plt.xlabel('Hora')
+#                        plt.ylabel(nombre_var)
+#                        plt.xticks(rotation=90)
+#                        plt.title('')
+#                        plt.suptitle('')
+#
+#
+#
+#                        plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/grafica_var_dia/'+str(uu)[2:11]+var_2+'_6.png' ,dpi = 100)
+#                        plt.close()
+#
+#
+##base_1.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/resumen_todas_var_con_heladas_20190129.csv')
+##base_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/resumen_todas_var_con_heladas_20190129.csv')
+#
+#

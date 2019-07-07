@@ -29,8 +29,8 @@ import pdb
 
 base_1 = pd.DataFrame()
 lista_1 = pd.DataFrame(columns = ['Codigo','caso','dominio'])
-for j in ['200702', '201408', '201508', '201509']:
-#for j in ['200702', '201509', '201408']:
+#for j in ['200702', '201408', '201508', '201509']:
+for j in ['200702', '201509', '201408']:
     #j = '200702'
     #j = '201408'
     #j = '201508'

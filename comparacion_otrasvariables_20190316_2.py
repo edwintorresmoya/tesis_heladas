@@ -376,3 +376,4 @@ for pp in ['201508']:
             fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
             plt.close()
         
+        

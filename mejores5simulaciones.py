@@ -34,7 +34,8 @@ from funciones import un_busca_cod
 #21206980
 
 base_1 = pd.DataFrame()
-for j in ['200702', '201509', '201408', '201508']:
+#for j in ['200702', '201509', '201408', '201508']:
+for j in ['200702', '201509', '201408']:
     #'200702', 
 #for j in ['200702', '201509', '201408']:
     #j = '201408'
@@ -50,13 +51,16 @@ for j in ['200702', '201509', '201408', '201508']:
         recep_t.tipo_1 = recep_t.tipo_1.str[2:]
         recep_t = recep_t[recep_t.tipo_1 != 'ideam-mejor']
     
-    for i in recep_t.cod_1.unique():
-        if (j == '201408'):
-            if (i in [21206980.0, 35025080.0, 35035130.0]): # Se descarta estas estaciones porque los datos de la estación ya que posee pocos valores. 
-                # /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas_temp_simulaciones <-- Acá están las gráficas
-                # /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica <-- Acá están las gráficas
-                #print('Caso 2')
-                continue
+    for i in recep_t.cod_1.unique():#[24015110, 21206790, 21206930, 21206990, 35035130, 35085080]:#
+        if i == 35085080:
+            continue
+        [24015110, 21206790, 21206930, 21206990, 35035130, 35085080]
+        #if (j == '201408'):
+        #    if (i in [21206980.0, 35025080.0, 35035130.0]): # Se descarta estas estaciones porque los datos de la estación ya que posee pocos valores. 
+        #        # /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas_temp_simulaciones <-- Acá están las gráficas
+        #        # /media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica <-- Acá están las gráficas
+        #        #print('Caso 2')
+        #        continue
         
         #if (j == '201508'):
         #    if (i in [21201200.0, 21205791.0, 21205012.0, 21206920.0, 35035130.0]):
@@ -107,4 +111,4 @@ for j in ['200702', '201509', '201408', '201508']:
 
 #base_con1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/mejores5simulaciones_condicional.csv')
 
-#print(pd.crosstab(base_1.tipo_1, columns='count').to_latex())
+print(pd.crosstab(base_1.tipo_1, columns='count').to_latex())

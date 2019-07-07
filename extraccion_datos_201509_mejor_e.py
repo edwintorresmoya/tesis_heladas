@@ -36,11 +36,12 @@ os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extra
 #resumen = pd.concat([resumen1, mejores2])
 
 resumen1 = pd.read_pickle('resumen_simulaciones_201509.pickle')# Son los archivos de la priera extracción
-mejores1 = pd.read_pickle('extraccion_icm_con_nmrse.pickle') # En esta línea van los valores con la corrección con NRMSE
-mejores2 = pd.read_pickle('ext_imc3_20190515.pickle') #Archivo donde viene la parametrización de physics 3
+mejores = pd.read_pickle('ext_icm-icm_3.pickle')
+#mejores1 = pd.read_pickle('extraccion_icm_con_nmrse.pickle') # En esta línea van los valores con la corrección con NRMSE
+#mejores2 = pd.read_pickle('ext_imc3_20190515.pickle') #Archivo donde viene la parametrización de physics 3
 #mejores2 = pd.read_pickle('ext_mejores_3.pickle') # En este están los llamdados cu_14 y cu_5
 #mejores3 = pd.read_pickle('extraccion_tiempo_20190214_1.pickle') # En estos están los que la profe propone
-mejores = pd.concat([mejores1, mejores2])
+#mejores = pd.concat([mejores1, mejores2])
 condi = mejores.fecha.str.contains('201509')
 condi[0] = False
 mejores2 = mejores[condi]

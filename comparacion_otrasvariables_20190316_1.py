@@ -14,6 +14,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import pdb
+from matplotlib.pyplot import figure
 
 def lista_nombres(base):
         base2 = pd.DataFrame(list(base))
@@ -59,17 +60,22 @@ mejores = pd.concat([mejores0, mejores1, mejores2])
 mejores = mejores[-mejores.fecha.isnull()]
 
 
-#for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
-for pp in ['201508']:
+for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
     print(pp)
     
-    for varia_1, pp_col, pp_val, pp_col_wrf, var_y in zip(['_hum_2m.csv','_val_rad.csv', '_precip_1.csv', '_td.csv', '_wb.csv', '_vel_vi10.csv'],# nombre de las bases
-                              ['hum_2m', 'rad_1', 'precip_1', 'Td', 'wb', 'vel_vi10'],# Nombre de las columnas en las bases
-                              ['val_hum','val_rad', 'val_prec', 'val_td', 'val_wb', 'val_vv'],# Nombre de las validaciones
-                              ['humedad','radiacion','rain', 'dewpoint', 'wetbulb', 'vel_viento'],# Nombre de las variables en WRF
-                              ['Humedad %', r'$Radiación W/m^2$', 'Precipitación mm', '°C', '°C', 'm/s']):#,'_precip_1.csv']
+    for varia_1, pp_col, pp_val, pp_col_wrf, var_y in zip(['_val_dir.csv', '_hum_2m.csv','_val_rad.csv', '_precip_1.csv', '_td.csv', '_wb.csv', '_vel_vi10.csv'],# nombre de las bases
+                              ['dir_viento', 'hum_2m', 'rad_1', 'precip_1', 'Td', 'wb', 'vel_vi10'],# Nombre de las columnas en las bases
+                              ['val_dir', 'val_hum','val_rad', 'val_prec', 'val_td', 'val_wb', 'val_vv'],# Nombre de las validaciones
+                              [['u10','v10'], 'humedad','radiacion','rain', 'dewpoint', 'wetbulb', 'vel_viento'],# Nombre de las variables en WRF
+                              ['Dirección', 'Humedad %', r'$Radiación W/m^2$', 'Precipitación mm', '°C', '°C', 'm/s']):#,'_precip_1.csv']
 
         os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios')
+        
+        ## Usado para realizar sólo el análisis de la variable de dirección del viento
+        if varia_1 == '_val_dir.csv':
+            print('salto')
+            continue
+
         
         #resumen_1 = pd.read_pickle('resumen_tiempo_20181124.pickle')
         #resumen_2 = pd.read_pickle('resumen_tiempo_20181124_2.pickle')
@@ -163,7 +169,7 @@ for pp in ['201508']:
             recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/simulacion_mejor_'+pp+'.csv')
         else:
 
-            if (varia_1 == '_td.csv') | (varia_1 == '_wb.csv') | (varia_1 == '_vel_vi10.csv'):
+            if (varia_1 == '_td.csv') | (varia_1 == '_wb.csv') | (varia_1 == '_vel_vi10.csv') | (varia_1 == '_val_dir.csv'):
                 recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/otras_variables/mejores_var_'+pp+'_hum_2m.csv') 
             else:
                 recoleccion_minim_1 = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/otras_variables/mejores_var_'+pp+varia_1)                    
@@ -239,7 +245,8 @@ for pp in ['201508']:
 
             
             fig = plt.figure()
-            ax = fig.add_axes([0.1, 0.2, 0.65, 0.78])
+            ax = fig.add_axes([0.05, 0.2, 0.8, 0.78])
+            fig.set_size_inches(12,5)
             #fig.rcParams["figure.figsize"] = (7,7.5)       
             for i in ['ideam-colombia', 'ideam-icm_3','ideam-icm',]:
                 print(i) 
@@ -264,6 +271,9 @@ for pp in ['201508']:
                     
                     #desvest_const_1 = tmp_real.tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
                     
+                    if pp_col_wrf == ['u10', 'v10']:
+                        resumen_back['dir_vi'] = angulo(resumen_back.u10, resumen_back.v10)
+                        pp_col_wrf = 'dir_vi'
                     tmp_model = resumen_back[(resumen_back.fecha == i) & (resumen_back.cod == j) & (resumen_back.date_1.str.slice(0,3) == kk)].sort_values('date')[['date',pp_col_wrf, 'date_1']]
                     comparacion = pd.merge(tmp_real, tmp_model, on='date', how='inner')
     
@@ -276,4 +286,4 @@ for pp in ['201508']:
     
                     ## Esta línea se usa para generar las tablas usadas para la comparación de los datos &&&
                     comparacion.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas/'+pp+'_'+str(j)[:-2]+'_'+cod_2+'_'+kk+pp_col_wrf+'.csv')
-        
+
