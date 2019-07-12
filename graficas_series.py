@@ -19,6 +19,12 @@ def lista_nombres(base):
         base2 = pd.DataFrame(list(base))
         return(base2)
         
+def cm2inch(*tupl):
+    inch = 2.54
+    if isinstance(tupl[0], tuple):
+        return tuple(i/inch for i in tupl[0])
+    else:
+        return tuple(i/inch for i in tupl)
 
     
 
@@ -41,8 +47,8 @@ for pp in ['200702', '201408', '201508', '201509', '201602', '201712']:
         lista_col = []
         
         fig = plt.figure()
-        ax = fig.add_axes([0.05, 0.2, 0.8, 0.78])
-        fig.set_size_inches(12,5)
+        fig = plt.figure(figsize = cm2inch(30,8))
+        ax = fig.add_axes([0.1, 0.30, 0.75, 0.67])
         for i in ['ideam-colombia', 'ideam-icm_3', 'ideam-icm']:
             
             lista_col.append('tmp_2m')

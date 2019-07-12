@@ -41,6 +41,13 @@ def angulo(uu, vv):
 
     return theta_base
 
+def cm2inch(*tupl):
+    inch = 2.54
+    if isinstance(tupl[0], tuple):
+        return tuple(i/inch for i in tupl[0])
+    else:
+        return tuple(i/inch for i in tupl)
+
 
 #mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables.pickle')
 #mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables_1.pickle')
@@ -72,7 +79,7 @@ for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
         os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios')
         
         ## Usado para realizar sólo el análisis de la variable de dirección del viento
-        if varia_1 == '_val_dir.csv':
+        if varia_1 != '_val_dir.csv':
             print('salto')
             continue
 
@@ -244,9 +251,8 @@ for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
             
 
             
-            fig = plt.figure()
-            ax = fig.add_axes([0.05, 0.2, 0.8, 0.78])
-            fig.set_size_inches(12,5)
+            fig = plt.figure(figsize = cm2inch(30,8))
+            ax = fig.add_axes([0.1, 0.30, 0.75, 0.67])
             #fig.rcParams["figure.figsize"] = (7,7.5)       
             for i in ['ideam-colombia', 'ideam-icm_3','ideam-icm',]:
                 print(i) 
@@ -285,5 +291,96 @@ for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
         
     
                     ## Esta línea se usa para generar las tablas usadas para la comparación de los datos &&&
-                    comparacion.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas/'+pp+'_'+str(j)[:-2]+'_'+cod_2+'_'+kk+pp_col_wrf+'.csv')
+                    #comparacion.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/comparacion_grafica_otras_var/tablas/'+pp+'_'+str(j)[:-2]+'_'+cod_2+'_'+kk+pp_col_wrf+'.csv')
 
+                    #Usado para poder sacar la desciación estándar de los datos más cercanos a la realidad.
+                    #para_desv = tmp_real[(tmp_real.date > fecha_min[indice]) & (tmp_real.date < fecha_max[indice])]
+                    #para_desv_2 = pd.merge(result, para_desv, on='date', how='inner')
+                    #desvest_const = para_desv_2.tmp_2m.std() # Saca la desviación estándar de los valores de las estaciones automáticas a partir de los días
+                    #print(desvest_const)
+                           
+    
+                    if i == 'ideam-colombia':
+                        type_1 = '-.'
+                        color_1 = 'gray'
+                        if kk == 'd02':
+                            marker_1 = 'p'
+                        else:
+                            marker_1 = "^"
+                        label_1 = 'ideam-colombia'
+	
+                    if i == 'ideam-icm_3':
+                        type_1 = '--'
+                        color_1 = 'midnightblue'
+                        if kk == 'd02':
+                            marker_1 = 'p'
+                        else:
+                            marker_1 = "^"
+                        label_1 = 'icm-mp_physics 3'
+                    
+                    if i == 'ideam-icm':
+                        type_1 = '--'
+                        color_1 = 'darkorange'
+                        if kk == 'd02':
+                            marker_1 = 'p'
+                        else:
+                            marker_1 = "^"
+                        label_1 = 'icm'
+	                    
+                        
+                    
+                    
+                    if varia_1 == '_hum_2m.csv':
+                        comparacion.humedad = (comparacion.humedad * 100)
+                        if comparacion.humedad.max() > 100:
+                            comparacion.humedad = np.where(comparacion['humedad'] > 100, 100, comparacion['humedad'])
+                            #print(comparacion.humedad)
+                            #comparacion[comparacion.humedad > 100]
+                            #tmp_model[tmp_model.humedad > 1]
+                            #print(resumen_back[(resumen_back.fecha == i) & (resumen_back.cod == j) & (resumen_back.date_1.str.slice(0,3) == kk) & (resumen_back.humedad > 1)][['T2', 'q2', 'psfc', 'humedad']])
+                            #relhum(t = (8.428406 + 237.15), p = 75149.328125, r = 0.009366)
+                            ## Página https://www.rotronic.com/en/humidity_measurement-feuchtemessung-mesure_de_l_humidite/humidity-calculator-feuchterechner-mr
+
+
+                    if varia_1 == '_val_rad.csv':
+                        ### Estoy editando estos valores para poder insertar NaN en la Columna de comparacion[pp_col_wrf]
+                        
+                        base_p = pd.DataFrame({'date':[], 'algo':[]})
+                        ini_date = comparacion.date.min()
+                        fin_date = comparacion.date.max()
+                        lap = pd.to_timedelta('1 hours')
+
+                        while ini_date <= fin_date:
+                            base_p2 = pd.DataFrame({'date':[ini_date], 'algo':[np.NaN]})
+                            base_p = pd.concat([base_p, base_p2])
+                            ini_date += lap
+                        
+                        comparacion = pd.merge(comparacion, base_p, on = 'date', how='outer')
+                        comparacion = comparacion.sort_values('date')
+
+                        ax.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
+                    else:
+                        ax.plot_date(comparacion.date, comparacion[pp_col_wrf], color = color_1, linestyle = '-', marker = marker_1, label =label_1+' '+kk)
+                    
+                    
+                    
+        
+            if pp_col == 'precip_1':
+                base_precip =[]
+                for p_ix in range(0,(len(comparacion[pp_col]))):
+                    #print(p_ix)
+                    base_precip.append(comparacion[pp_col][:(p_ix + 1 )].sum())
+                
+                comparacion[pp_col] = base_precip                    
+            
+            ax.plot_date(comparacion.date, comparacion[pp_col], '-', color = 'k', label = 'Estación automática')
+            
+            
+            ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size':6})
+            ax.set_xlabel('Fecha - Hora')
+            ax.set_ylabel(var_y) 
+            plt.xticks(rotation=90)
+            fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(40,20))
+            plt.close()
+        
+        

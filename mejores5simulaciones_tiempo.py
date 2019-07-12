@@ -66,6 +66,8 @@ for j in ['200702', '201509', '201408']:
 #        #recep_t = recep_t[recep_t.tipo_1 != 'ideam-mejor']
     
     for i in recep_t.cod_1.unique():
+        if i == 35085080:
+            continue
 #        if (j == '201408'):
 #            pass
 #            if (i in [21206980.0, 35025080]):

@@ -41,6 +41,13 @@ def angulo(uu, vv):
     return theta_base
 
 
+def cm2inch(*tupl):
+    inch = 2.54
+    if isinstance(tupl[0], tuple):
+        return tuple(i/inch for i in tupl[0])
+    else:
+        return tuple(i/inch for i in tupl)
+
 #mejores2 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables.pickle')
 #mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_otrasvariables_1.pickle')
 ##mejores1 = pd.read_pickle('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extraccion_dominios/ext_mejores_2.pickle')
@@ -60,7 +67,7 @@ mejores = mejores[-mejores.fecha.isnull()]
 
 
 #for pp in ['201602', '201712','200702', '201408', '201508', '201509']:
-for pp in ['201508']:
+for pp in ['200702']:
     print(pp)
     
     for varia_1, pp_col, pp_val, pp_col_wrf, var_y in zip(['_hum_2m.csv','_val_rad.csv', '_precip_1.csv', '_td.csv', '_wb.csv', '_vel_vi10.csv'],# nombre de las bases
@@ -238,8 +245,8 @@ for pp in ['201508']:
             
 
             
-            fig = plt.figure()
-            ax = fig.add_axes([0.1, 0.2, 0.65, 0.78])
+            fig = plt.figure(figsize = cm2inch(30,8))
+            ax = fig.add_axes([0.1, 0.30, 0.75, 0.67])
             #fig.rcParams["figure.figsize"] = (7,7.5)       
             for i in ['ideam-colombia', 'ideam-icm_3','ideam-icm',]:
                 print(i) 
@@ -373,7 +380,7 @@ for pp in ['201508']:
             ax.set_xlabel('Fecha - Hora')
             ax.set_ylabel(var_y) 
             plt.xticks(rotation=90)
-            fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(20,20))
+            fig.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/comparacion_graficas_otras_var/'+pp+'_'+str(j)[:-2]+'_'+pp_col_wrf+'.png' ,dpi = 100, figsize=(40,20))
             plt.close()
         
         

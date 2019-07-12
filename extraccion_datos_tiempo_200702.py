@@ -43,9 +43,13 @@ os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Extra
 #resumen_1n = pd.concat([resumen_1, resumen_2])
 #resumen = pd.concat([resumen_1n, resumen_3])
 
-resumen1 = pd.read_pickle('ext_otros_tiempos.pickle')# Datos de la extracción del tiempo para icm
-resumen1n = pd.read_pickle('ext_tiempo_imc3_20190517_2.pickle')# Datos de la extracción de los datos para la icm_3 solo para el caso del 2007
-resumen = pd.concat([resumen1n, resumen1])
+resumen1 = pd.read_pickle('ext_otros_tiempos.pickle')# Estos son los datos extraídos del 20190708 el archivo original se llama "ext_icm-icm_3"
+pdb.set_trace()
+condi = resumen1.fecha.str.contains('/distancia/')
+resumen = resumen1[condi]
+
+#resumen1n = pd.read_pickle('ext_tiempo_imc3_20190517_2.pickle')# Datos de la extracción de los datos para la icm_3 solo para el caso del 2007
+#resumen = pd.concat([resumen1n, resumen1])
 #resumen2 = pd.read_pickle('ext_otros_tiempos.pickle')# Extracción de los datos de las simulaciones 2, 3, 4
 #resumen2 = resumen2[~resumen2.fecha.isnull()]
 #
@@ -101,6 +105,7 @@ resumen.fecha = resumen.fecha.replace('/scr/hercules1san/meteoro/edwin/wrf/resul
 resumen.fecha = resumen.fecha.replace('/scr/hercules1san/meteoro/edwin/wrf/resultados/distancia/020400/', 'Simulación 2')#6
 resumen.fecha = resumen.fecha.replace('/scr/hercules1san/meteoro/edwin/wrf/resultados/distancia/020406/', 'Simulación 1')#0
 resumen.fecha.unique()
+pdb.set_trace()
 
 #resumen.fecha = resumen.fecha.replace('/scr/hercules1san/meteoro/edwin/wrf/resultados/distancia/013018/', 'Simulación 1')#108
 #resumen.fecha = resumen.fecha.replace('/scr/hercules1san/meteoro/edwin/wrf/resultados/distancia/013118/', 'Simulación 2')#84
