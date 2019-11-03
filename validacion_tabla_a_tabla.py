@@ -36,8 +36,6 @@ vari = ['cod', 'date', 'precip-10min', 'hum_2m', 'Rad-gl', 'tmp_2m', 'tmp_2m_min
 
 #Carga de los datos
 
-os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_2005')
-lista_estaciones_2 = pd.DataFrame(list(os.listdir()))
 #i = '21206990.csv'
 estaciones = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/catalogo_est_4326.csv')
 
@@ -770,17 +768,17 @@ lista_total = os.listdir()
 lista_codigos = pd.DataFrame({'a':os.listdir()}).a.str[2:10].unique()
 lista_var = pd.DataFrame({'a':os.listdir()}).a.str[11:-4].unique()
 
-def union_variables:
-    for i in lista_codigos:
-        
-        for j in lista_var:
-            print(i, j)
-            
-            if not 'v_'+i+'_'+j+'.csv' in lista_total:
-                continue
-            base = pd.read_csv('v_'+i+'_'+j+'.csv')
-            
-            base.
-            
+# def union_variables:
+#     for i in lista_codigos:
+#         
+#         for j in lista_var:
+#             print(i, j)
+#             
+#             if not 'v_'+i+'_'+j+'.csv' in lista_total:
+#                 continue
+#             base = pd.read_csv('v_'+i+'_'+j+'.csv')
+#             
+#             base.
+#             
 
 

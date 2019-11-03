@@ -16,7 +16,7 @@ def busca_cod(base_1, col_cod='cod'):
     #Función creada para buscar los nombres de las estaciones automáticas o convencionales a partír del código
     #tmp_tabla = busca_cod(tmp_tabla, 'cod')
     #El código de la base a usar debe ser numérico
-    base_1[col_cod] = base_1[col_cod].convert_objects(convert_numeric=True)
+    base_1[col_cod] = pd.to_numeric(base_1[col_cod])
     lista_estaciones = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/est_usadas_lista.csv')
     lista_estaciones.columns.values[0] = 'cod_1'
     lista_estaciones.columns = lista_estaciones.columns.str.strip()
@@ -34,7 +34,7 @@ def busca_cod_coordenadas(base_1, col_cod='cod'):
     #Función creada para buscar los nombres de las estaciones automáticas o convencionales a partír del código
     #tmp_tabla = busca_cod(tmp_tabla, 'cod')
     #El código de la base a usar debe ser numérico
-    base_1[col_cod] = base_1[col_cod].convert_objects(convert_numeric=True)
+    base_1[col_cod] = pd.to_numeric(base_1[col_cod])
     lista_estaciones = pd.read_csv('/media/edwin/Downloads/CATALOGO_ESTACIONES_IDEAM_V10_AGOSTO2017.csv')
     lista_estaciones.columns.values[1] = 'cod_1'
     lista_estaciones.columns = lista_estaciones.columns.str.strip()

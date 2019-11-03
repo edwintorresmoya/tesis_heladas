@@ -18,6 +18,7 @@ import pandas as pd
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+import pdb
 #import plotly.plotly as py
 import matplotlib.gridspec as gridspect
 #import datetime
@@ -64,7 +65,8 @@ ideam_con = pd.DataFrame({'indice':[1,2,3,4,5,7,8,9],
     
 
 for j in est_zon:
-#j = 21206190
+    pdb.set_trace()
+    j = 21205420
     estacion = ideam_rs_3_nona[ideam_rs_3_nona.cod == j]
     if len(estacion) > 10:
         
@@ -113,11 +115,11 @@ for j in est_zon:
             plt.stackplot(stackplot_1.index, stackplot_1.data, stackplot_1.missin_data,
                           colors = ['gray','silver'],
                           labels = ['Datos', 'No-datos'])
-            plt.xlabel('año')
+            plt.xlabel('Año')
             plt.ylabel('Frecuencia')
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_1'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_1'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             
             
@@ -126,15 +128,15 @@ for j in est_zon:
             
             stackplot_2 = estacion_na.groupby(estacion_na.date.dt.month).sum()[['data', 'missin_data', 'sum']]
             
-            plt.stackplot(stackplot_2.index, stackplot_2.data, stackplot_2.missin_data,
+            stackplot_2['mes'] = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+            plt.stackplot(stackplot_2.mes, stackplot_2.data, stackplot_2.missin_data,
                           colors = ['gray','silver'],
                           labels = ['Datos', 'No-datos'])
-            plt.xlabel('mes')
+            plt.xlabel('Mes')
             plt.ylabel('Frecuencia')
-            plt.xticks(np.arange(1,13))
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_2'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_2'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             
             
@@ -191,22 +193,22 @@ for j in est_zon:
             plt.ylabel('Frecuencia')
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_3'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_3'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             
             
             #Plots de los saltos = 4 mensuales
             
-            plt.stackplot(stackplot_3.index, stackplot_3.spikes,
+            stackplot_3['mes'] = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+            plt.stackplot(stackplot_3.mes, stackplot_3.spikes,
                           colors = ['gray'],
                           labels = ['Saltos'])
             
             
-            plt.xlabel('mes')
+            plt.xlabel('Mes')
             plt.ylabel('Frecuencia')
-            plt.xticks(np.arange(1,13))
             plt.legend()
             
-            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_4'+'.png', figsize=(20,10) ,dpi = 199)
+            plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/validacion_convencionales/'+str(j)+'_'+str(ideam_con[ideam_con.indice == i].iloc[0][1])+'_4'+'.png', figsize=(20,10) ,dpi = 199)
             plt.close()
             

@@ -1,7 +1,7 @@
 
 import pandas as pd
 import numpy as np
-import os
+import os, pdb
 import matplotlib.pyplot as plt
 from matplotlib import style
 import matplotlib.gridspec as gridspect
@@ -14,202 +14,202 @@ def lista_nombres(base):
 os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_2005')
 lista_estaciones_2 = pd.DataFrame(list(os.listdir()))
 
-base = pd.read_csv('21206990.csv') # Estación Tibaitata automática
-
-#Creación de una sola columna de datos de temperatura
-a = base[-base.tmp_2m.isnull()][['date','tmp_2m']]
-a.columns = ['date','tmp_2m']
-b = base[base.tmp_2m.isnull()& -base.tmp_2m_min.isnull()][['date','tmp_2m_min']]
-b.columns = ['date', 'tmp_2m']
-c = base[base.tmp_2m.isnull()& base.tmp_2m_min.isnull() & -base.tmp_2m_max.isnull()][['date','tmp_2m_max']]
-c.columns = ['date','tmp_2m']
-
-n_tmp = pd.concat([a,b,c])
-
-base_2 = pd.merge(left=base, right=n_tmp, on='date', how='outer')
-
-#Validación de los datos por límites extremos
-base_3 = base_2[base_2.tmp_2m_y.notnull()]
-base_3 = base_3[(base_3.tmp_2m_y < 50) & (base_3.tmp_2m_y > -30)].reset_index(drop=True)
-base_3.date = pd.to_datetime(base_3.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
-base_3.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_2005/base_3.csv')
-############################ Gráfica para la determinación de las estaciones que tienen mejor comportamiento
-
-
-os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_validado_20180522')
-for i in os.listdir():
-    print(i)
-    base = pd.read_csv(i)
-    base.date = pd.to_datetime(base.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
-    plt.plot_date(base.date, base.tmp_2m)
-    plt.title(i)
-    plt.legend(loc='upper right')
-    plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas/crudas/' + i +'crudas.jpg', figsize=(20,10) ,dpi = 199)
-    plt.close()
-    
-    
-    base_3 = base[base.tmp_2m.notnull()][base.range == 0][base.tmp_2mspikes == 0][base.tmp_2m_dif == 0][base.tmp_2m_roll_1 == 0]
-    
-    plt.plot_date(base_3.date, base_3.tmp_2m)
-    plt.title(i)
-    
-    plt.axhline(y=(base_3.tmp_2m.mean() + 2*base_3.tmp_2m.std()), color = 'black')
-    plt.axhline(y=(base_3.tmp_2m.mean() - 2*base_3.tmp_2m.std()), color = 'black')
-    plt.axhline(y=(base_3.tmp_2m.mean() + 3*base_3.tmp_2m.std()), color = 'r')
-    plt.axhline(y=(base_3.tmp_2m.mean() - 3*base_3.tmp_2m.std()), color = 'r')
-    plt.axhline(y=(base_3.tmp_2m.mean() + 3.5*base_3.tmp_2m.std()), color = 'navy')
-    plt.axhline(y=(base_3.tmp_2m.mean() - 3.5*base_3.tmp_2m.std()), color = 'navy')
-    plt.axhline(y=(base_3.tmp_2m.mean() + 4*base_3.tmp_2m.std()), color = 'goldenrod')
-    plt.axhline(y=(base_3.tmp_2m.mean() - 4*base_3.tmp_2m.std()), color = 'goldenrod')
-    plt.legend(loc='upper right')
-    plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas/' + i +'.jpg', figsize=(20,10) ,dpi = 199)
-    plt.close()
-    
-    
-    base_3['dia'] = base_3.date.dt.to_period('D')
-    plt.plot_date(base_3.date, base_3.tmp_2m)
-    plt.title(i)
-    
-    max_med = base_3.groupby(['dia'])['tmp_2m'].max().median()
-    max_sd = base_3.groupby(['dia'])['tmp_2m'].max().std()
-
-    min_med = base_3.groupby(['dia'])['tmp_2m'].min().median()
-    min_sd = base_3.groupby(['dia'])['tmp_2m'].min().std()
-    
-    
-    #plt.plot_date(base_3.date, base_3.tmp_2m)
-    plt.axhline(y=(max_med), color = 'black')
-    plt.axhline(y=(max_med + max_sd), color = 'r')
-    plt.axhline(y=(max_med + (2.5 * max_sd)), color = 'r')
-    plt.axhline(y=(max_med + (max_sd*3)), color = 'goldenrod')
-    
-    plt.axhline(y=(min_med), color = 'black')
-    plt.axhline(y=(min_med - min_sd), color = 'r')
-    plt.axhline(y=(min_med - (2.5 * min_sd)), color = 'r')
-    plt.axhline(y=(min_med - (min_sd*3)), color = 'goldenrod')
-
-    plt.legend(loc='upper right')
-    plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas/max/' + i +'.jpg', figsize=(20,10) ,dpi = 199)
-    plt.close()
-    
-    base_3 = np.NaN 
-    
-    
-    
-
-
-os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_validado_20180522')
-#base = pd.read_csv('21206990_tmp_2m.csv')
-
-
-base = pd.read_csv('21206960_tmp_2m.csv')
-
-base.date = pd.to_datetime(base.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
-base_3 = base[base.tmp_2m.notnull()][base.range == 0][base.tmp_2mspikes == 0][base.tmp_2m_dif == 0][base.tmp_2m_roll_1 == 0]
-base_3.date = pd.to_datetime(base_3.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
-base['dia'] = base_3.date.dt.to_period('D')
-base.groupby(['dia'])['tmp_2m'].max()
-
-
-max_med = base.groupby(['dia'])['tmp_2m'].max().median()
-max_sd = base.groupby(['dia'])['tmp_2m'].max().std()
-
-min_med = base.groupby(['dia'])['tmp_2m'].min().median()
-min_sd = base.groupby(['dia'])['tmp_2m'].min().std()
-
-plt.plot_date(base_3.date, base_3.tmp_2m)
-plt.axhline(y=(max_med), color = 'black')
-plt.axhline(y=(max_med + max_sd), color = 'r')
-plt.axhline(y=(max_med + (2.5 * max_sd)), color = 'r')
-plt.axhline(y=(max_med + (max_sd*3)), color = 'goldenrod')
-
-plt.axhline(y=(min_med), color = 'black')
-plt.axhline(y=(min_med - min_sd), color = 'r')
-plt.axhline(y=(min_med - (2.5 * min_sd)), color = 'r')
-plt.axhline(y=(min_med - (min_sd*3)), color = 'goldenrod')
-
-base[-base.tmp_2m.notnull()] #Usado para quitar los NA
-base[base.range == 1] #Cuando el rando es igual a 1 esto significa que los datos está fuera de los límites
-base[base.tmp_2mspikes == 1] #Cuando se presenta un spike se reporta como 1
-#Inversos
-
-base[base.tmp_2m.notnull()] #Usado para quitar los NA
-base[base.range == 0] #Cuando el rando es igual a 1 esto significa que los datos está fuera de los límites
-base[base.tmp_2mspikes == 0] #Cuando se presenta un spike se reporta como 1
-base[base.tmp_2m_dif == 0] #Cuando se presenta un spike se reporta como 1
-
- 
-base_3 = base
-plt.plot_date(base_3.date, base_3.tmp_2m)
- 
- 
-base_3 = base[base.tmp_2m.notnull()]
-plt.plot_date(base_3.date, base_3.tmp_2m)
- 
-base_3 = base[base.tmp_2m.notnull()][base.range == 0]
-plt.plot_date(base_3.date, base_3.tmp_2m)
- 
-
-base_3 = base[base.tmp_2m.notnull()][base.range == 0][base.tmp_2mspikes == 0][base.tmp_2m_dif == 0][base.tmp_2m_roll_1 == 0]
-
-##Buscar la ultima desviación estándar
-
-
-base_3.tmp_2m
-
-plt.plot_date(base_3.date, base_3.tmp_2m)
-plt.axhline(y=(base_3.tmp_2m.mean() + 3*base_3.tmp_2m.std()), color = 'r')
-plt.axhline(y=(base_3.tmp_2m.mean() - 3*base_3.tmp_2m.std()), color = 'r')
-plt.hlines(y=(base_3.tmp_2m.mean), xmin=(base_3.date.min()), xmax=(base_3.date.max()))
-plt.vlines(x=base_hist[base_hist.year == ii].TS.mean() , ymin=0, ymax=3000, color = c)
-plt.vlines(x=base_hist[base_hist.year == ii].TS.mean() , ymin=0, ymax=3000, color = c)
-inicio_1 = pd.to_datetime('2008/09/11 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-fin_1 = pd.to_datetime('2008/09/13 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
-
-
-
-#Bajas temperaturas
-
-
-resume = base_3[base_3.tmp_2m < 0][['tmp_2m', 'date']]
-n_f = pd.DatetimeIndex(resume.date)
-resume['year'] = n_f.year
-resume['month'] = n_f.month
-resume['day'] = n_f.day
-resume['val'] = 1
-
-eventos = resume.groupby(['year', 'month', 'day'])['val'].sum()
-os.chdir('/home/edwin/Downloads/basura2')
-#eventos.to_csv('eventos.csv')
-
-
-#Altas temperaturas mayores a 20°C
+#base = pd.read_csv('21206990.csv') # Estación Tibaitata automática
 #
-
-resume2 = base_3[base_3.tmp_2m > 25][['tmp_2m', 'date']]
-n_f = pd.DatetimeIndex(resume2.date)
-resume2['year'] = n_f.year 
-resume2['month'] = n_f.month
-resume2['day'] = n_f.day
-resume2['val'] = 1
-
-eventos_altas = resume2.groupby(['year', 'month', 'day'])['val'].sum()
-eventos_altas
-os.chdir('/home/edwin/Downloads/basura2')
-#eventos.to_csv('eventos_altas.csv')
-
-#gra_tiem('20150907','20150909','sal_20180522') # Fecha no usada
-
-
-
-
-
-
-
-
-
-
-
+##Creación de una sola columna de datos de temperatura
+#a = base[-base.tmp_2m.isnull()][['date','tmp_2m']]
+#a.columns = ['date','tmp_2m']
+#b = base[base.tmp_2m.isnull()& -base.tmp_2m_min.isnull()][['date','tmp_2m_min']]
+#b.columns = ['date', 'tmp_2m']
+#c = base[base.tmp_2m.isnull()& base.tmp_2m_min.isnull() & -base.tmp_2m_max.isnull()][['date','tmp_2m_max']]
+#c.columns = ['date','tmp_2m']
+#
+#n_tmp = pd.concat([a,b,c])
+#
+#base_2 = pd.merge(left=base, right=n_tmp, on='date', how='outer')
+#
+##Validación de los datos por límites extremos
+#base_3 = base_2[base_2.tmp_2m_y.notnull()]
+#base_3 = base_3[(base_3.tmp_2m_y < 50) & (base_3.tmp_2m_y > -30)].reset_index(drop=True)
+#base_3.date = pd.to_datetime(base_3.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
+#base_3.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_2005/base_3.csv')
+############################# Gráfica para la determinación de las estaciones que tienen mejor comportamiento
+#
+#
+#os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_validado_20180522')
+#for i in os.listdir():
+#    print(i)
+#    base = pd.read_csv(i)
+#    base.date = pd.to_datetime(base.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
+#    plt.plot_date(base.date, base.tmp_2m)
+#    plt.title(i)
+#    plt.legend(loc='upper right')
+#    plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas/crudas/' + i +'crudas.jpg', figsize=(20,10) ,dpi = 199)
+#    plt.close()
+#    
+#    
+#    base_3 = base[base.tmp_2m.notnull()][base.range == 0][base.tmp_2mspikes == 0][base.tmp_2m_dif == 0][base.tmp_2m_roll_1 == 0]
+#    
+#    plt.plot_date(base_3.date, base_3.tmp_2m)
+#    plt.title(i)
+#    
+#    plt.axhline(y=(base_3.tmp_2m.mean() + 2*base_3.tmp_2m.std()), color = 'black')
+#    plt.axhline(y=(base_3.tmp_2m.mean() - 2*base_3.tmp_2m.std()), color = 'black')
+#    plt.axhline(y=(base_3.tmp_2m.mean() + 3*base_3.tmp_2m.std()), color = 'r')
+#    plt.axhline(y=(base_3.tmp_2m.mean() - 3*base_3.tmp_2m.std()), color = 'r')
+#    plt.axhline(y=(base_3.tmp_2m.mean() + 3.5*base_3.tmp_2m.std()), color = 'navy')
+#    plt.axhline(y=(base_3.tmp_2m.mean() - 3.5*base_3.tmp_2m.std()), color = 'navy')
+#    plt.axhline(y=(base_3.tmp_2m.mean() + 4*base_3.tmp_2m.std()), color = 'goldenrod')
+#    plt.axhline(y=(base_3.tmp_2m.mean() - 4*base_3.tmp_2m.std()), color = 'goldenrod')
+#    plt.legend(loc='upper right')
+#    plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas/' + i +'.jpg', figsize=(20,10) ,dpi = 199)
+#    plt.close()
+#    
+#    
+#    base_3['dia'] = base_3.date.dt.to_period('D')
+#    plt.plot_date(base_3.date, base_3.tmp_2m)
+#    plt.title(i)
+#    
+#    max_med = base_3.groupby(['dia'])['tmp_2m'].max().median()
+#    max_sd = base_3.groupby(['dia'])['tmp_2m'].max().std()
+#
+#    min_med = base_3.groupby(['dia'])['tmp_2m'].min().median()
+#    min_sd = base_3.groupby(['dia'])['tmp_2m'].min().std()
+#    
+#    
+#    #plt.plot_date(base_3.date, base_3.tmp_2m)
+#    plt.axhline(y=(max_med), color = 'black')
+#    plt.axhline(y=(max_med + max_sd), color = 'r')
+#    plt.axhline(y=(max_med + (2.5 * max_sd)), color = 'r')
+#    plt.axhline(y=(max_med + (max_sd*3)), color = 'goldenrod')
+#    
+#    plt.axhline(y=(min_med), color = 'black')
+#    plt.axhline(y=(min_med - min_sd), color = 'r')
+#    plt.axhline(y=(min_med - (2.5 * min_sd)), color = 'r')
+#    plt.axhline(y=(min_med - (min_sd*3)), color = 'goldenrod')
+#
+#    plt.legend(loc='upper right')
+#    plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/graficas/max/' + i +'.jpg', figsize=(20,10) ,dpi = 199)
+#    plt.close()
+#    
+#    base_3 = np.NaN 
+#    
+#    
+#    
+#
+#
+#os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/hydras3_validado_20180522')
+##base = pd.read_csv('21206990_tmp_2m.csv')
+#
+#
+#base = pd.read_csv('21206960_tmp_2m.csv')
+#
+#base.date = pd.to_datetime(base.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
+#base_3 = base[base.tmp_2m.notnull()][base.range == 0][base.tmp_2mspikes == 0][base.tmp_2m_dif == 0][base.tmp_2m_roll_1 == 0]
+#base_3.date = pd.to_datetime(base_3.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
+#base['dia'] = base_3.date.dt.to_period('D')
+#base.groupby(['dia'])['tmp_2m'].max()
+#
+#
+#max_med = base.groupby(['dia'])['tmp_2m'].max().median()
+#max_sd = base.groupby(['dia'])['tmp_2m'].max().std()
+#
+#min_med = base.groupby(['dia'])['tmp_2m'].min().median()
+#min_sd = base.groupby(['dia'])['tmp_2m'].min().std()
+#
+#plt.plot_date(base_3.date, base_3.tmp_2m)
+#plt.axhline(y=(max_med), color = 'black')
+#plt.axhline(y=(max_med + max_sd), color = 'r')
+#plt.axhline(y=(max_med + (2.5 * max_sd)), color = 'r')
+#plt.axhline(y=(max_med + (max_sd*3)), color = 'goldenrod')
+#
+#plt.axhline(y=(min_med), color = 'black')
+#plt.axhline(y=(min_med - min_sd), color = 'r')
+#plt.axhline(y=(min_med - (2.5 * min_sd)), color = 'r')
+#plt.axhline(y=(min_med - (min_sd*3)), color = 'goldenrod')
+#
+#base[-base.tmp_2m.notnull()] #Usado para quitar los NA
+#base[base.range == 1] #Cuando el rando es igual a 1 esto significa que los datos está fuera de los límites
+#base[base.tmp_2mspikes == 1] #Cuando se presenta un spike se reporta como 1
+##Inversos
+#
+#base[base.tmp_2m.notnull()] #Usado para quitar los NA
+#base[base.range == 0] #Cuando el rando es igual a 1 esto significa que los datos está fuera de los límites
+#base[base.tmp_2mspikes == 0] #Cuando se presenta un spike se reporta como 1
+#base[base.tmp_2m_dif == 0] #Cuando se presenta un spike se reporta como 1
+#
+# 
+#base_3 = base
+#plt.plot_date(base_3.date, base_3.tmp_2m)
+# 
+# 
+#base_3 = base[base.tmp_2m.notnull()]
+#plt.plot_date(base_3.date, base_3.tmp_2m)
+# 
+#base_3 = base[base.tmp_2m.notnull()][base.range == 0]
+#plt.plot_date(base_3.date, base_3.tmp_2m)
+# 
+#
+#base_3 = base[base.tmp_2m.notnull()][base.range == 0][base.tmp_2mspikes == 0][base.tmp_2m_dif == 0][base.tmp_2m_roll_1 == 0]
+#
+###Buscar la ultima desviación estándar
+#
+#
+#base_3.tmp_2m
+#
+#plt.plot_date(base_3.date, base_3.tmp_2m)
+#plt.axhline(y=(base_3.tmp_2m.mean() + 3*base_3.tmp_2m.std()), color = 'r')
+#plt.axhline(y=(base_3.tmp_2m.mean() - 3*base_3.tmp_2m.std()), color = 'r')
+#plt.hlines(y=(base_3.tmp_2m.mean), xmin=(base_3.date.min()), xmax=(base_3.date.max()))
+#plt.vlines(x=base_hist[base_hist.year == ii].TS.mean() , ymin=0, ymax=3000, color = c)
+#plt.vlines(x=base_hist[base_hist.year == ii].TS.mean() , ymin=0, ymax=3000, color = c)
+#inicio_1 = pd.to_datetime('2008/09/11 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+#fin_1 = pd.to_datetime('2008/09/13 00:00:00', format ='%Y%m%d %H:%M:%S', errors='coerce')
+#
+#
+#
+##Bajas temperaturas
+#
+#
+#resume = base_3[base_3.tmp_2m < 0][['tmp_2m', 'date']]
+#n_f = pd.DatetimeIndex(resume.date)
+#resume['year'] = n_f.year
+#resume['month'] = n_f.month
+#resume['day'] = n_f.day
+#resume['val'] = 1
+#
+#eventos = resume.groupby(['year', 'month', 'day'])['val'].sum()
+#os.chdir('/home/edwin/Downloads/basura2')
+##eventos.to_csv('eventos.csv')
+#
+#
+##Altas temperaturas mayores a 20°C
+##
+#
+#resume2 = base_3[base_3.tmp_2m > 25][['tmp_2m', 'date']]
+#n_f = pd.DatetimeIndex(resume2.date)
+#resume2['year'] = n_f.year 
+#resume2['month'] = n_f.month
+#resume2['day'] = n_f.day
+#resume2['val'] = 1
+#
+#eventos_altas = resume2.groupby(['year', 'month', 'day'])['val'].sum()
+#eventos_altas
+#os.chdir('/home/edwin/Downloads/basura2')
+##eventos.to_csv('eventos_altas.csv')
+#
+##gra_tiem('20150907','20150909','sal_20180522') # Fecha no usada
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #############Convencional Datos de las estaciones convencionales
 
 path = '/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam'
@@ -234,7 +234,7 @@ conv_zona = ideam_rs_3_nona[ideam_rs_3_nona.cod.isin(cod_conv.cod)]
 
 conv_zona = pd.read_csv('datos_con_zona_csv')
 conv_zona.date = pd.to_datetime(conv_zona.date, format ='%Y%m%d %H:%M:%S', errors='coerce')
-
+pdb.set_trace()
 #
 #
 
@@ -464,7 +464,7 @@ conv_tiba.date = pd.to_datetime(conv_tiba.date, format ='%Y%m%d %H:%M:%S', error
 
 conv_zona.tipo.unique() # list of unique values
 ###
-
+pdb.set_trace()
 conv_zona_min = conv_zona[(conv_zona.tipo == 8)] # Valores mínimos
 
 conv_zona_max = conv_zona[(conv_zona.tipo == 2)] # Valores máximos

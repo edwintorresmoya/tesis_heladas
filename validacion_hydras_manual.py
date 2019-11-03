@@ -13,6 +13,7 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 from matplotlib import style
+import pdb
 
 def lista_nombres(base):
     base2 = pd.DataFrame(list(base))
@@ -131,5 +132,32 @@ corpo4.min_50cm.mean()
 corpo4.min_1m.mean()
 corpo4.min_2m.mean()
 
+corpo4.min_5cm.median()
+corpo4.min_10cm.median()
+corpo4.min_50cm.median()
+corpo4.min_1m.median()
+corpo4.min_2m.median()
 
 
+pdb.set_trace()
+
+corpo4 = corpo4[corpo4['min_2m.1'] < 80]
+
+corpo4.columns.values[24] = '5 cm'
+corpo4.columns.values[25] = '10 cm'
+corpo4.columns.values[26] = '50 cm'
+corpo4.columns.values[27] = '100 cm'
+corpo4.columns.values[29] = '200 cm'
+
+
+#corpo4[['min_5cm','min_10cm','min_50cm','min_1m', 'min_2m.1']].boxplot()
+corpo4[['min_2m.1','min_1m','min_50cm','min_10cm','min_5cm']].boxplot()
+plt.xlabel('Altura')
+plt.ylabel('Temperatura °C')
+plt.title('')
+plt.suptitle('')
+plt.savefig('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/graph/boxplot_t_min_conv.png')
+
+
+pdb.set_trace()
+print('hola')

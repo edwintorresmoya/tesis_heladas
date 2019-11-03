@@ -11,6 +11,56 @@ import matplotlib.dates as mdates
 
 ###Como obtener las gráficas fig 2a
 
+def table1():
+    ### Usado para crear la tabla 1 de Prabha
+    aaa = 0
+    tabla_resum = pd.DataFrame()
+    ## Lista de los marcadores
+    lista_marcadores = ".",",","o","v","^","<",">","1","2","3","4","8","s","p","P","*","h","H","+","x","X","D","d","|","_"
+    start = timer()
+    #Gráfica de las heladas que se presentaron cada año sólo tiene en cuenta las estaciones automáticas
+
+    os.chdir('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/datos_ideam/validados_col_col/')
+    lista_archivos = pd.DataFrame({'col_1':os.listdir()})
+    lista_tmp = lista_archivos[lista_archivos.col_1.str.contains('tmp_2m')]
+    
+    #Loop entre cada uno de los archivos de temperatura
+    fig = plt.figure()
+    ax = fig.add_axes([0.1, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+
+    fig2 = plt.figure()
+    ax2 = fig2.add_axes([0.12, 0.1, 0.6, 0.75])# 0.1 es el corrimiento y 0.6 y 0.75 son las escalas
+    for i in lista_tmp.col_1:
+        print(i)
+        base = pd.read_csv(i)
+        base = base[base.val_tmp == 0]
+        if len(base)<10:
+            continue
+        else:
+            aaa += 1
+            print('conteo ',aaa)
+        base.date = pd.to_datetime(base.date)
+        base = base[(base.date.dt.year == 2007)|(base.date.dt.year == 2014)|(base.date.dt.year == 2015)]
+
+###########
+
+        base['hel_1'] = np.where(base.tmp_2m < 0, 1, 0) # Si la temperatura es menor a 0 entonces será 1 para ser sumado
+        base['altas_1'] = np.where(base.tmp_2m > 25, 1, 0) # Si la temperatura es mayor a 25 entonces será 1 para ser sumado
+        base['ymd_1'] = base.date.dt.year*10000 + base.date.dt.month*100+base.date.dt.day
+        tabla_resum1 = pd.DataFrame({'cod':[i[2:10]], 'min_1':[base.tmp_2m.min()], 'max_1':[base.tmp_2m.max()], 'ave_1':[base.tmp_2m.mean()], 'ndias_helada':[base.groupby(base.ymd_1).max()[['hel_1']].sum()[0]], 'ndias_altas':[base.groupby(base.ymd_1).max()[['altas_1']].sum()][0]})
+        tabla_resum = pd.concat([tabla_resum, tabla_resum1])
+    pdb.set_trace()
+    tabla_resum = busca_cod(tabla_resum)
+    tabla_cober = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/tabla_coberturas.shp.csv')
+    tabla_fin1 = pd.merge(tabla_resum, tabla_cober, on='cod', how='outer')
+    altura_alos = pd.read_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/estaciones_altura_20180905.csv')
+    tabla_fin = pd.merge(tabla_fin1, altura_alos, on='cod', how = 'inner')
+    
+    tabla_fin.to_csv('/media/edwin/6F71AD994355D30E/Edwin/Maestría Meteorologia/Tesis/Tesis_Edwin_20190226/prabha/table_1.csv')
+table1()
+
+
+##########
 #def grafica2a():
 #    aaa = 0
 #    ## Lista de los marcadores
